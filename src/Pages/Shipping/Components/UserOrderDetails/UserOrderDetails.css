@@ -1,0 +1,211 @@
+/* ===== والد اصلی ===== */
+.order-details {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f8f9fa;
+}
+
+/* === Navbar سفارش === */
+.order-details__navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-details__back-btn {
+  text-decoration: none;
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.order-details__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.order-id {
+  font-family: monospace;
+  margin: 0 0.5rem;
+}
+
+.order-date {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* === جزئیات مرسوله === */
+.order-details__shipment {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.shipment__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.shipment__item {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.shipment__label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.shipment__value {
+  color: #555;
+}
+
+.shipment__btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #0d6efd;
+  border-radius: 6px;
+  background: transparent;
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.shipment__btn:hover {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.shipment__total {
+  flex: 1 1 100%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* === مراحل سفارش === */
+.order-details__steps {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.order-details__steps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-details__steps-carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.step--active {
+  opacity: 1;
+}
+
+.step img {
+  width: 40px;
+  margin-bottom: 0.25rem;
+}
+
+.step span {
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* === جدول سفارشات === */
+.order-details__table {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.order-details__table-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.order-product {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.order-product__img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.order-product__details span {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.btn-repeat,
+.btn-review {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-repeat {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.btn-review {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* === ریسپانسیو === */
+@media (max-width: 768px) {
+  .shipment__item {
+    flex: 1 1 100%;
+  }
+
+  .order-details__steps-carousel {
+    gap: 0.5rem;
+  }
+}

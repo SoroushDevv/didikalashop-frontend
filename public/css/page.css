@@ -1,0 +1,197 @@
+/* ------------ Start Page */
+
+.page p {
+    color: #666;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 40px;
+}
+
+.page-cover {
+    width: 100%;
+    height: 400px;
+    background: url(../img/theme/page-cover.jpg) top no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .6)), to(rgba(0, 0, 0, .6))), url(../files/page-cover.jpg) top no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url(../img/theme/page-cover.jpg) top no-repeat;
+    background-size: cover;
+    margin-top: -23px;
+}
+
+.page-cover .page-cover-title h1 {
+    padding: 70px 0 50px;
+    font-size: 37px;
+    line-height: 1.189;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    text-align: center;
+}
+
+.page-cover .form-ui form {
+    padding: 20px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.page-cover .form-ui form .form-row input {
+    width: 70%;
+    margin: 0 0 0 10px;
+}
+
+.page-cover .form-ui form .form-row button {
+    width: 27%;
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+}
+
+.info-page-cats {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+}
+
+.info-page-cats .info-page-cat {
+    padding: 25px;
+    border-radius: 25px;
+    margin-bottom: 1rem;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.info-page-cats .info-page-cat:hover .info-page-cat-title {
+    font-weight: bold;
+}
+
+.info-page-cats .info-page-cat a {
+    display: block;
+    width: 100%;
+    height: 150px;
+    text-align: center;
+}
+
+.info-page-cats .info-page-cat .info-page-cat-icon {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.info-page-cats .info-page-cat img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.info-page-cats .info-page-cat span.info-page-cat-title {
+    font-size: 14px;
+    color: #000;
+    transition: all .2s ease;
+}
+
+.page .filter-product .card {
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+}
+
+.page .filter-product .card .card-header {
+    margin-bottom: 15px;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+}
+
+.page .filter-product .card:not(:first-of-type) .card-header:first-child {
+    border-radius: 10px;
+}
+
+.page .filter-product .card-body {
+    padding: 0 25px 25px;
+    margin-bottom: 10px;
+}
+
+.page .filter-product p {
+    list-style: unset;
+    margin-bottom: 0;
+}
+
+.page ul {
+    list-style: none;
+    padding-right: 30px;
+}
+
+.page ul li {
+    font-size: 13px;
+    color: #3abaf4;
+    font-weight: bold;
+}
+
+.page-question-not-found {
+    background: url(../img/theme/page-cover-faq.jpg) no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .6)), to(rgba(0, 0, 0, .6))), url(../img/theme/page-cover-faq.jpg) no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url(../img/theme/page-cover-faq.jpg) no-repeat;
+    height: 405px;
+    background-size: cover;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    border-radius: 25px;
+    -webkit-box-shadow: 0 12px 12px 0 hsla(0, 0%, 71%, .11);
+    box-shadow: 0 12px 12px 0 hsla(0, 0%, 71%, .11);
+    padding: 30px 20px;
+}
+
+.page-question-not-found-text {
+    font-size: 30px;
+    line-height: 2.1;
+    letter-spacing: -1px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 30px;
+    width: 100%;
+}
+
+.page-question-not-found img {
+    display: block;
+    margin: 0 auto 40px;
+}
+
+.page-question-not-found .btn {
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+}
+
+.page-question-not-found .page-contact-option-text {
+    display: inline-block;
+    font-size: 17px;
+    line-height: 1.294;
+    color: #fff;
+    font-weight: 700;
+}
+
+.content-faq-question p {
+    color: #666;
+    font-size: 18px;
+    text-align: justify;
+    line-height: 40px;
+}
+
+.content-faq-question span {
+    color: #2980b9;
+}
+
+.content-faq-question img {
+    display: block;
+    max-width: 100%;
+    margin: 1.5rem auto;
+}
+
+/* End Page------------ */

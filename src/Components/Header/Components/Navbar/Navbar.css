@@ -1,0 +1,227 @@
+
+
+/* ================== Bottom Navbar ================== */
+.bottom-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 998;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.nav-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* آیتم‌های لیست */
+.bottom-header .list-item {
+
+  padding: 16px 10px;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+}
+.bottom-header .list-item:hover {
+color: #fa256c;
+
+}
+.header-cart-tab {
+    padding: 16px 10px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 6px;
+    list-style-type: none;
+    color: inherit;
+
+
+}
+.header-cart-tab:hover {
+  color: #fa256c;
+}
+
+
+/* حالت scroll شده */
+.bottom-header.scrolled {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+/* کانتینر داخلی */
+.bottom-header .main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+/* منو اصلی */
+.bottom-header .nav-main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bottom-header .list-items_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0 !important;
+}
+
+
+.bottom-header .list-items_container .header-cart-tab .header-cart-tab-wrapper{
+position: relative;
+}
+
+
+/* لینک‌های منو */
+.bottom-header .list-item a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* دسته‌بندی کالاها */
+.bottom-header .category-list {
+  position: relative;
+}
+
+
+/* MegaMenu */
+.bottom-header .mega-menu__wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px; /* می‌تونید تغییر بدید */
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  display: none; /* پیش‌فرض مخفی */
+  z-index: 2000;
+}
+
+.bottom-header .category-list:hover .mega-menu__wrapper {
+  display: block;
+}
+
+/* آیتم‌های داخل MegaMenu */
+.bottom-header .mega-menu__wrapper ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bottom-header .mega-menu__wrapper li {
+  padding: 6px 0;
+}
+
+.bottom-header .mega-menu__wrapper li a {
+  color: #555;
+  font-size: 14px;
+}
+
+.bottom-header .mega-menu__wrapper li a:hover {
+  color: var(--primary);
+}
+
+/* آیکون سبد خرید */
+.bottom-header .cart--wrapper {
+  position: relative;
+}
+
+.bottom-header .cart--wrapper .count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-cart-info {
+  min-width: 180px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    position: absolute;
+}
+
+/* LocalOrders */
+.bottom-header .cart--wrapper:hover .local-orders {
+  display: block;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 2000;
+}
+
+/* Sub-list داخلی (در صورت وجود) */
+.bottom-header .sub-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 10px;
+  min-width: 200px;
+  z-index: 2000;
+}
+
+.bottom-header .list-item:hover .sub-list {
+  display: block;
+}
+
+/* موبایل و تبلت */
+@media (max-width: 992px) {
+  .bottom-header .main-menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bottom-header .list-item {
+    margin: 4px 0;
+  }
+
+  .bottom-header .mega-menu__wrapper {
+    width: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,367 @@
+/* تب‌بندی ساده */
+.tab-cart-page .nav-tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.tab-cart-page .nav-link {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .18s ease;
+}
+
+.tab-cart-page .nav-link.active {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--soft-shadow);
+  border-color: var(--border);
+}
+
+/* کارت محتوا سبد */
+.table-responsive.checkout-content {
+  background: transparent;
+  padding: 0;
+}
+
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  margin-bottom: 12px;
+}
+
+.checkout-header--express {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff, #fbfdfe);
+  box-shadow: var(--soft-shadow);
+  border: 1px solid var(--border);
+}
+
+.checkout-header-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.checkout-header-extra-info {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* لیست آیتم‌ها */
+.cart-items-dd-k {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.cart-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(10, 24, 47, 0.03);
+}
+
+/* تصویر محصول */
+.item-thumbnail {
+  width: 110px;
+  flex: 0 0 110px;
+}
+
+.item-thumbnail img {
+  width: 100%;
+  height: 82px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  border: 1px solid #f1f3f5;
+}
+
+/* اطلاعات محصول */
+.item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.item-title h2 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.item-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.item-detail {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.item-detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.item-detail li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.item-detail li span {
+  color: var(--muted);
+}
+
+/* چیپ رنگ */
+.ColorChip,
+.color-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+/* تعداد و حذف */
+.item-quantity--item-price {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: black;
+}
+
+/* num-block */
+.num-block {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.num-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  min-width: 110px;
+  justify-content: center;
+
+}
+
+.num-in .in-num {
+  width: 44px;
+  text-align: center;
+  border: 0;
+  font-weight: 700;
+  background: transparent;
+}
+
+.num-in .plus,
+.num-in .minus {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 6px;
+  transition: background .12s ease;
+  color: black;
+
+}
+
+.num-in .plus:hover,
+.num-in .minus:hover {
+  background: rgba(14, 165, 164, 0.06);
+}
+
+.num-in .minus.dis {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* دکمه حذف */
+.item-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.item-remove-btn svg {
+  font-size: 18px;
+    transition: all ease 250ms;
+
+}
+.item-remove-btn:hover  svg{
+  font-size: 18px;
+  color: red;
+  transition: all ease 250ms;
+}
+
+/* قیمت */
+.item-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.item-price .text-sm {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* قیمت اصلی خط‌خورده */
+.original-price {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-top: 6px;
+}
+
+/* بخش سایدبار خلاصه */
+.w-res-sidebar {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 18px;
+  align-self: flex-start;
+}
+
+.CheckoutSummary,
+.checkout-summary-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  border: 1px solid var(--border);
+  box-shadow: var(--soft-shadow);
+}
+
+/* حالت خالی بودن سبد */
+.text-center {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 0;
+  font-weight: 600;
+}
+
+/* تب فعال/پنهان */
+.tab-pane.fade {
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.tab-pane.show.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* ریسپانسیو */
+@media (max-width: 991px) {
+  .item-thumbnail {
+    width: 92px;
+    flex: 0 0 92px;
+  }
+
+  .num-in {
+    min-width: 90px;
+  }
+
+  .checkout-header--express {
+    padding: 10px;
+  }
+
+  .w-res-sidebar {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cart-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .item-quantity--item-price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sticky-sidebar {
+    position: static;
+  }
+
+  .item-thumbnail img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+  }
+}
+
+/* افکت‌های کوچک برای دسترسی */
+.item-remove-btn:focus,
+.nav-link:focus,
+.plus:focus,
+.minus:focus {
+  outline: 3px solid rgba(14, 165, 164, 0.12);
+  outline-offset: 2px;
+}
+
+/* کلاس کمکی برای نمایش قیمت فارسی‌شده (در صورت نیاز) */
+.price-rtl {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* کمینه‌سازی اندازه فونت در صفحاتی که فشرده‌اند */
+.small-ui {
+  font-size: 13px;
+}

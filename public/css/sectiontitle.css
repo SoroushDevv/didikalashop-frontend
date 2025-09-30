@@ -1,0 +1,100 @@
+/* ------------ Start Section-Title */
+
+.section-title {
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 0;
+}
+
+.title-wide::after {
+    content: '';
+    background-color: #d9e1eb;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 16px;
+}
+
+.no-after-title-wide::after {
+    display: none;
+}
+
+.title-wide a,
+.title-wide h2 {
+    color: #6f7479;
+    line-height: 33px;
+}
+
+.title-wide h2 {
+    font-size: 20px;
+    height: 33px;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    padding-right: 40px;
+    padding-left: 10px;
+}
+
+.text-sm-title h2 {
+    font-size: 16px;
+}
+
+.title-wide h2:after,
+.title-wide h2:before {
+    content: '';
+}
+
+.title-wide h2:before {
+    background: url(../img/theme/title-circles.png) left no-repeat;
+    display: block;
+    position: absolute;
+    right: -20px;
+    top: 11px;
+    height: 14px;
+    width: 32px;
+    margin-right: 13px;
+    height: 14px;
+    width: 32px;
+}
+
+.no-title-wide-before h2 {
+    padding-right: 10px;
+}
+
+.no-title-wide-before h2::before {
+    background: none;
+}
+
+.title-wide a {
+    display: block;
+    position: relative;
+    float: left;
+    padding: 0 10px;
+    margin: 4px;
+    height: 33px;
+    background-color: #edf0f5;
+    color: #f7858d;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 100;
+}
+
+.title-wide a::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: -28px;
+    width: 28px;
+    height: 2px;
+    background-color: #edf0f5;
+}
+
+.section-title p {
+    margin: -10px 40px 0;
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* End Section-Title------------ */

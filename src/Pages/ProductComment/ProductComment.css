@@ -1,0 +1,10 @@
+.comments-title-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.comments-title-container .comments-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-right:10px ;
+}

@@ -1,0 +1,53 @@
+/* والد اصلی */
+.return-section {
+  max-width: 900px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "IRANSans", sans-serif;
+}
+
+/* عنوان هر بخش */
+.return-section__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* باکس محتوا */
+.return-section__box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* پیام وضعیت */
+.return-section__message {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+/* فاصله بخش درخواست مرجوعی */
+.return-section__request,
+.return-section__history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ریسپانسیو */
+@media (max-width: 600px) {
+  .return-section {
+    padding: 0.75rem;
+  }
+
+  .return-section__title {
+    font-size: 1.1rem;
+  }
+}

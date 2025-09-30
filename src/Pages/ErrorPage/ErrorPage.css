@@ -1,0 +1,16 @@
+/* ------------ Start Error-Page */
+
+.error-page h1 {
+    color: #4a5f73;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.error-page img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+}
+
+/* End Error-Page------------ */

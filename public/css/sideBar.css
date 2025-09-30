@@ -1,0 +1,93 @@
+/* ----------------- Start Sidebar */
+
+.sidebar-banner {
+    padding: 0;
+    text-align: center;
+    box-shadow: none;
+    background: 0 0;
+    margin: 2px 0 15px 0;
+}
+
+.sidebar-banner img {
+    border-radius: 10px;
+}
+
+/* End Sidebar----------------- */
+
+/* ----------------- Start Main-Slider */
+.main-slider {
+    border-radius: 8px;
+    margin-bottom: 2px;
+    height: 329px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.main-slider-cs {
+    height: auto;
+    overflow: hidden;
+}
+
+#main-slider-res {
+    height: auto;
+}
+
+.main-slider .carousel-indicators li {
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    margin-left: 6px;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+    background: rgba(255, 255, 255, .75);
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.main-slider .carousel-indicators li.active {
+    background: #fff;
+    width: 40px;
+    border-radius: 25px;
+}
+
+.main-slider .carousel-control-next {
+    left: 0;
+    right: auto;
+    font-size: 45px;
+}
+
+.main-slider .carousel-control-prev {
+    right: 0;
+    left: auto;
+    font-size: 45px;
+}
+
+.main-slider .carousel-inner {
+    height: 100%;
+}
+
+.main-slider .carousel-inner .carousel-item {
+    height: 100%;
+}
+
+.main-slider-slide {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease-in-out;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#main-slider-res .main-slider-slide img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* End Main-Slider------------ */

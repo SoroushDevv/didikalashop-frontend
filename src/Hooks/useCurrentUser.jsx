@@ -1,0 +1,46 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { getAuthToken } from "../Utils/AuthUtils";
+
+export const useCurrentUser = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(1)
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      setLoading(true);
+      try {
+        const token = getAuthToken();
+        console.log("token:", token);
+
+        if (!token) {
+          setCurrentUser(null);
+          return;
+        }
+
+        // 📌 گرفتن همه کاربران
+        const response = await axios.get("http://localhost:8000/api/users");
+        console.log("response : ", response)
+        const users = response.data;
+        console.log("users : ", users)
+
+
+        const user = users.find((u) => u.token === token);
+        console.log("user : ", user)
+        setCurrentUser(user || null);
+      } catch (err) {
+        console.error("erooor:", err);
+        setError(err.message || "Failed to fetch user");
+        setCurrentUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrentUser();
+  }, [refreshKey]);
+
+  const refreshData = () => setRefreshKey((prev) => prev + 1)
+  return { currentUser, loading, error, refreshData };
+};

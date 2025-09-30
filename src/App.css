@@ -1,0 +1,173 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* کل ارتفاع صفحه */
+  direction: rtl;
+}
+
+input, button {
+  border: 0 ;
+  padding: 0 ;
+}
+
+a {
+  color: inherit;
+}
+
+.main-wrapper {
+  flex: 1; /* محتوای وسط صفحه فضای باقی‌مانده رو پر کنه */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0; /* padding داخلی لازم نیست */
+
+}
+
+.main-content-wrapper {
+  flex: 1; /* بین هدر و فوتر رو پر کنه */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* محتوا از بالا شروع بشه */
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content-wrapper.scrolled {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px; 
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+
+footer {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.logo {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+
+.row {
+  margin-left: 0 !important;
+}
+:root {
+  /* رنگ اصلی (Primary) */
+  --primary: #f7858da4; /* رنگ اصلی با شفافیت */
+  --primary-solid: #f7858d; /* نسخه بدون شفافیت */
+  --primary-light: #f9a7b0; /* روشن‌تر */
+  --primary-lighter: #fbc7ce; /* خیلی روشن */
+  --primary-dark: #d96673; /* تیره‌تر */
+  --primary-darker: #b54554; /* خیلی تیره */
+
+  /* رنگ‌های مکمل (Secondary) */
+  --secondary: #6b7280; /* خاکستری ملایم */
+  --secondary-light: #9ca3af; /* خاکستری روشن */
+  --secondary-dark: #4b5563; /* خاکستری تیره */
+
+  /* رنگ‌های مشکی و سیاه */
+  --black: #000000; /* مشکی خالص */
+  --black-light: #1f2937; /* مشکی ملایم (خاکستری خیلی تیره) */
+  --black-lighter: #374151; /* خاکستری تیره‌تر */
+
+  /* پس‌زمینه (Background) */
+  --bg: #ffffff; /* سفید برای لایت مود */
+  --bg-surface: #f9fafb; /* پس‌زمینه سطوح (کارت‌ها، پنل‌ها) */
+  --bg-surface-hover: #f3f4f6; /* هاور روی سطوح */
+  --bg-muted: #e5e7eb; /* پس‌زمینه کم‌رنگ */
+  --bg-accent: var(--primary-lighter); /* پس‌زمینه برجسته با تنالیته روشن رنگ اصلی */
+
+  /* متن (Text) */
+  --text-primary: #111827; /* متن اصلی (تقریباً مشکی) */
+  --text-secondary: #4b5563; /* متن ثانویه (خاکستری) */
+  --text-muted: #6b7280; /* متن کم‌رنگ */
+  --text-accent: var(--primary-dark); /* متن برجسته با تنالیته تیره رنگ اصلی */
+  --text-on-primary: #ffffff; /* متن روی رنگ اصلی (سفید) */
+  --text-on-black: #ffffff; /* متن روی مشکی (سفید) */
+
+  /* حاشیه (Border) */
+  --border: #d1d5db; /* حاشیه پیش‌فرض */
+  --border-light: #e5e7eb; /* حاشیه روشن */
+  --border-dark: #9ca3af; /* حاشیه تیره */
+  --border-accent: var(--primary); /* حاشیه با رنگ اصلی */
+
+  /* سایه (Shadow) */
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-accent: 0 4px 6px -1px rgba(247, 133, 141, 0.2); /* سایه با تنالیته رنگ اصلی */
+
+  /* رنگ‌های خطا، موفقیت و هشدار */
+  --error: #dc2626; /* قرمز برای خطا */
+  --success: #16a34a; /* سبز برای موفقیت */
+  --warning: #d97706; /* نارنجی برای هشدار */
+  --info: #0284c7; /* آبی برای اطلاعات */
+
+  /* شفافیت (Opacity) */
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-50: 0.5;
+  --opacity-80: 0.8;
+
+  /* فاصله‌گذاری (Spacing) */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+
+  /* شعاع حاشیه (Border Radius) */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 1rem; /* 16px */
+}
+
+/* دارک مود */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* پس‌زمینه (Background) */
+    --bg-dark: #1f2937; /* خاکستری تیره برای دارک مود */
+    --bg-surface-dark: #374151; /* سطوح در دارک مود */
+    --bg-surface-hover-dark: #4b5563; /* هاور روی سطوح */
+    --bg-muted-dark: #6b7280; /* پس‌زمینه کم‌رنگ */
+    --bg-accent-dark: var(--primary-darker); /* پس‌زمینه برجسته با تنالیته تیره رنگ اصلی */
+
+    /* متن (Text) */
+    --text-primary-dark: #f9fafb; /* متن اصلی (تقریباً سفید) */
+    --text-secondary-dark: #d1d5db; /* متن ثانویه (خاکستری روشن) */
+    --text-muted-dark: #9ca3af; /* متن کم‌رنگ */
+    --text-accent-dark: var(--primary-light); /* متن برجسته با تنالیته روشن رنگ اصلی */
+    --text-on-primary-dark: #ffffff; /* متن روی رنگ اصلی (سفید) */
+    --text-on-black-dark: #ffffff; /* متن روی مشکی (سفید) */
+
+    /* حاشیه (Border) */
+    --border-dark: #4b5563; /* حاشیه پیش‌فرض */
+    --border-light-dark: #6b7280; /* حاشیه روشن */
+    --border-dark-dark: #374151; /* حاشیه تیره */
+    --border-accent-dark: var(--primary-light); /* حاشیه با تنالیته روشن رنگ اصلی */
+
+    /* سایه (Shadow) */
+    --shadow-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    --shadow-sm-dark: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-lg-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+    --shadow-accent-dark: 0 4px 6px -1px rgba(247, 133, 141, 0.3); /* سایه با تنالیته رنگ اصلی */
+  }
+}

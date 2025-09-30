@@ -1,0 +1,69 @@
+/* بخش والد منوی پروفایل */
+.profile-menu-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: "IRANSans", sans-serif;
+  color: #333;
+}
+
+/* برچسب عنوان */
+.profile-menu-section .menu-label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.profile-menu-section .menu-label span {
+  display: inline-block;
+  color: #444;
+}
+
+/* ساختار لیست منو */
+.profile-menu-section .profile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-menu-section .profile-menu ul li {
+  margin-bottom: 8px;
+}
+
+/* لینک‌های منو */
+.profile-menu-section .profile-menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #000; 
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* آیکون‌های لینک */
+.profile-menu-section .profile-menu ul li a svg {
+  font-size: 20px;
+  color: #fa256c; 
+  transition: color 0.25s;
+}
+
+/* متن داخل لینک */
+.profile-menu-section .profile-menu ul li a span {
+  font-size: 0.95rem;
+}
+
+/* حالت هاور یا اکتیو */
+.profile-menu-section .profile-menu ul li a:hover,
+.profile-menu-section .profile-menu ul li a.active {
+  background: #fa256c;
+  color: #fff;
+}
+
+.profile-menu-section .profile-menu ul li a:hover svg,
+.profile-menu-section .profile-menu ul li a.active svg {
+  color: #fff;
+}

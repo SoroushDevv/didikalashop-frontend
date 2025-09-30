@@ -1,0 +1,55 @@
+.error-message {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #ffe6e6; /* رنگ پس‌زمینه قرمز روشن برای خطا */
+  color: #d32f2f; /* رنگ متن قرمز تیره */
+  border: 1px solid #d32f2f; /* حاشیه قرمز */
+  border-radius: 8px; /* گوشه‌های گرد */
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin: 10px 0; /* فاصله از بالا و پایین */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* سایه ملایم */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* فاصله بین آیکون و متن */
+  transition: all 0.3s ease; /* انیمیشن برای تغییرات */
+}
+
+.error-message::before {
+  content: "\26A0";
+  font-size: 18px;
+  color: #d32f2f;
+}
+
+/* انیمیشن ظاهر شدن */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* استایل برای حالت‌های پاسخ‌گویی */
+@media (max-width: 576px) {
+  .error-message {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}
+
+/* حالت hover برای تعامل (اختیاری) */
+/* .error-message:hover {
+  background-color: #ffd4d4; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+} */

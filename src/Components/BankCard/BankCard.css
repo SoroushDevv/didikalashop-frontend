@@ -1,0 +1,79 @@
+.bank-card__container {
+  margin: 15px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bank-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 360px;
+  background: linear-gradient(135deg, #2e86de, #54a0ff);
+  border-radius: 20px;
+  color: #fff;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bank-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.bank-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bank-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.bank-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-number {
+  margin: 30px 0 15px 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.6);
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  outline: none;
+  letter-spacing: 3px;
+}
+
+.card-number::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.card-holder {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.delete-card-btn {
+  width: auto;
+  height: auto;
+  background: #e74c3c;
+  border: none;
+  padding: 4px 10px !important;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-card-btn:hover {
+  background: #c0392b;
+}

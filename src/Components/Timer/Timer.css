@@ -1,0 +1,40 @@
+.discount-timer {
+  text-align: center;
+  font-family: 'Vazir', sans-serif;
+  direction: rtl;
+}
+
+.timer-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.timer-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.timer-box {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timer-box span:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.timer-box span:last-child {
+  font-size: 1rem;
+  color: #555;
+}

@@ -1,0 +1,69 @@
+
+/* ------------ Start Suggestion-Slider */
+
+.product-carousel.carousel-md .item {
+    margin-bottom: 20px;
+}
+
+.widget-suggestion .widget-suggestion-title {
+    margin-bottom: 10px;
+}
+
+.widget-suggestion .widget-suggestion-title img {
+    max-width: 100%;
+}
+
+.widget-suggestion #progressBar {
+    height: 1px;
+    background: #e0e1e2;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.widget-suggestion .slide-progress {
+    box-shadow: 0 0 8px 0 rgba(255, 138, 138, .5);
+    border-top-style: solid;
+    border-width: 0;
+    border-top-width: 1px;
+    border-color: #f7858d;
+    position: absolute;
+    width: 0;
+    right: 0;
+    top: 0;
+    max-width: 100%;
+    display: inline-block;
+    animation: progressbar 10s ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.widget-suggestion .owl-dots {
+    margin-top: 0 !important;
+    text-align: center;
+}
+
+.widget-suggestion .owl-dot {
+    outline: none;
+}
+
+.widget-suggestion .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 5px 4px;
+    background: #ddd;
+    display: block;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+    -webkit-transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.widget-suggestion .owl-dot.active span,
+.widget-suggestion .owl-dot:hover span {
+    background: #f7858d;
+}
+
+.widget-suggestion .owl-dot.active span {
+    width: 30px;
+}
+
+/* End Suggestion-Slider------------ */

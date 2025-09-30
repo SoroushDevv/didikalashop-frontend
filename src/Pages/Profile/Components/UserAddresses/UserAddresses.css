@@ -1,0 +1,129 @@
+/* ===== والد اصلی ===== */
+.address-conatiner {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  font-family: "IRANSans", sans-serif;
+  background-color: #fff;
+}
+
+/* ===== هدر و دکمه ایجاد آدرس ===== */
+.address-header {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.add-new-address-btn {
+  background-color: #f7858d;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.add-new-address-btn:hover {
+  background-color: #e06c78;
+}
+
+/* ===== لیست کارت‌ها ===== */
+.address-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ===== کارت هر آدرس ===== */
+.address-card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.3s ease;
+}
+
+.address-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== محتوای کارت ===== */
+.address-card .card-content {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-content .address-type {
+  display: inline-block;
+  background-color: #f7858d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.card-content .user-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.card-content .address-details,
+.card-content .postal-code,
+.card-content .created-at {
+  font-size: 14px;
+  color: #666;
+}
+
+.card-content .created-at {
+  font-size: 12px;
+  color: #999;
+}
+
+/* ===== دکمه‌های کارت ===== */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 12px 16px;
+}
+
+.card-actions .edit-btn,
+.card-actions .delete-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-actions .edit-btn {
+  background-color: #fff;
+  color: #f7858d;
+  border: 1px solid #f7858d;
+}
+
+.card-actions .edit-btn:hover {
+  background-color: #f7858d;
+  color: #fff;
+}
+
+.card-actions .delete-btn {
+  background-color: #fff;
+  color: #e53935;
+  border: 1px solid #e53935;
+}
+
+.card-actions .delete-btn:hover {
+  background-color: #e53935;
+  color: #fff;
+}

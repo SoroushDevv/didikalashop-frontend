@@ -1,0 +1,105 @@
+/* کارت فرم */
+.edit-address-card {
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  border-radius: 12px;
+  background-color: #fff;
+  position: relative;
+  direction: rtl;      /* راست‌چین کل محتوا */
+  text-align: right;   /* متن‌ها راست‌چین */
+  font-family: "Vazir", sans-serif;
+}
+
+/* عنوان فرم */
+.edit-address-title {
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0 20px 0;
+}
+
+/* فرم */
+.edit-address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ردیف دو ستونه (شهر و کدپستی) */
+.edit-address-row-two-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.edit-address-row-half {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .edit-address-row-half {
+    width: 48%;
+  }
+}
+
+/* دکمه‌ها */
+.edit-address-actions {
+  display: flex;
+  justify-content: flex-end; /* دکمه‌ها سمت راست */
+  gap: 10px;
+  padding: 12px 0 0 0;
+}
+
+/* --- راست‌چین کردن TextField و Label --- */
+
+/* متن داخل Input */
+.edit-address-card .MuiInputBase-input {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Label های TextField */
+.edit-address-card .MuiInputLabel-root {
+  text-align: right;
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* legend داخل Outlined Input */
+.edit-address-card .MuiOutlinedInput-root legend {
+  float: right;
+  text-align: right;
+}
+
+/* Notched outline بدون تغییر */
+.edit-address-card .MuiOutlinedInput-notchedOutline {
+  border-radius: 8px;
+}
+/* راست‌چین کردن Select و متن داخل آن */
+.edit-address-select .MuiSelect-select {
+    text-align: right;      /* متن انتخاب شده راست‌چین */
+    padding-right: 15px;    /* فاصله سمت راست */
+    direction: rtl;         /* راست به چپ */
+}
+
+/* راست‌چین کردن Label بالای Select */
+.edit-address-select .MuiInputLabel-root {
+    text-align: right;
+    left: auto !important;
+    right: 0 !important;
+}
+
+/* legend برای Outlined */
+.edit-address-select .MuiOutlinedInput-root legend {
+    float: right;
+    text-align: right;
+}
+.submit-changes-button {
+    padding: 10px !important;
+}
+.cancel-changes-button {
+    padding: 10px  !important;
+    border: 1px solid rgba(255, 0, 0, 0.362);
+}

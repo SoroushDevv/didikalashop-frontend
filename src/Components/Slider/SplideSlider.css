@@ -1,0 +1,60 @@
+/* ریشه‌ی کل اسلایدر */
+.custom-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  direction: rtl; /* برای اطمینان از راست‌چین */
+
+}
+
+/* اسلایدر اصلی */
+.custom-carousel {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* هر اسلاید */
+.custom-carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+/* محتوای داخل اسلاید */
+.custom-carousel-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* تصویر پیش‌فرض */
+.custom-carousel-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* دکمه‌های فلش Splide */
+.custom-carousel .splide__arrow {
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background 0.3s;
+}
+.custom-carousel .splide__arrow:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+/* نقاط ناوبری (pagination) */
+.custom-carousel .splide__pagination__page {
+  background: #bbb;
+  transition: background 0.3s;
+}
+.custom-carousel .splide__pagination__page.is-active {
+  background: #333;
+}

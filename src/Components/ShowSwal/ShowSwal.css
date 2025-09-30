@@ -1,0 +1,4 @@
+.swal2-cancel,.swal2-confirm {
+    padding: 5px 10px !important;
+    width: 70px;
+}

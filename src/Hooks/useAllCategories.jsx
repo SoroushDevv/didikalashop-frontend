@@ -1,0 +1,32 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const useAllCategories = () => {
+  const [categories, setProductCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true);
+      try {
+        // دریافت دسته‌بندی‌ها
+        const response = await axios.get("http://localhost:8000/api/categories");
+        console.log("categories: ", response.data);
+        
+        setProductCategories(response.data);
+      } catch (err) {
+        console.error("Error fetching categories:", err.message);
+        setError(err.message || "Failed to fetch categories");
+        setProductCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  return { categories, loading, error };
+};
+
+export default useAllCategories;

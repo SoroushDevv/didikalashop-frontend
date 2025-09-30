@@ -1,0 +1,150 @@
+.shipping-section {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+  .checkout-sidebar {
+    width: 300px;
+  }
+}
+/* ریشه کل صفحه ارسال */
+.shipping-content {
+  flex: 3;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  direction: rtl;
+  font-family: inherit;
+  background: #fafafa;
+}
+
+/* عنوان‌ها */
+.shipping-content .shipping-section-title,
+.shipping-content .shipping-title {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  font-size: 10px;
+}
+
+/* بخش آدرس */
+.shipping-content .address-section {
+  margin-bottom: 24px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* مودال افزودن آدرس */
+.shipping-content .address-section .add-address-modal .modal-content {
+  border-radius: 12px;
+}
+.shipping-content .address-section .add-address-modal .modal-close {
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+}
+
+/* اطلاعات تماس */
+.shipping-content .address-section .checkout-contact {
+  margin-top: 12px;
+}
+.shipping-content .address-section .checkout-contact .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+.shipping-content .address-section .checkout-contact .contact-list li {
+  margin-bottom: 8px;
+}
+.shipping-content .address-section .checkout-contact .contact-list .contact-name,
+.shipping-content .address-section .checkout-contact .contact-list .contact-phone,
+.shipping-content .address-section .checkout-contact .contact-list .contact-postal,
+.shipping-content .address-section .checkout-contact .contact-list .contact-address {
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+/* دکمه افزودن آدرس */
+.shipping-content .address-section .checkout-contact .add-address-btn button {
+  background-color: #1976d2;
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.shipping-content .address-section .checkout-contact .add-address-btn .add-icon {
+  margin-right: 6px;
+}
+
+/* فرم ارسال */
+.shipping-content .shipping-form {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.shipping-content .shipping-form .shipping-methods {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.shipping-content .shipping-form .shipping-methods .shipping-radio-option label {
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+/* محصولات */
+.shipping-content .shipping-form .checkout-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.shipping-content .shipping-form .checkout-products .shipping-product-item {
+  background: #fefefe;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+.shipping-content .shipping-form .checkout-products .shipping-product-item img {
+  width: 100%;
+  height: auto;
+}
+.shipping-content .shipping-form .checkout-products .shipping-product-item .product-info {
+  padding: 8px;
+}
+.shipping-content .shipping-form .checkout-products .shipping-product-item .product-info .product-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 8px 0 4px;
+}
+.shipping-content .shipping-form .checkout-products .shipping-product-item .product-info .product-desc {
+  font-size: 14px;
+  color: #555;
+}
+
+/* بخش فاکتور */
+.shipping-content .shipping-form .shipping-invoice {
+  margin-top: 24px;
+}
+.shipping-content .shipping-form .shipping-invoice .invoice-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* دکمه‌های پایانی */
+.shipping-content .shipping-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  cursor: pointer;
+}
+.shipping-content .shipping-actions a {
+  text-decoration: none;
+}

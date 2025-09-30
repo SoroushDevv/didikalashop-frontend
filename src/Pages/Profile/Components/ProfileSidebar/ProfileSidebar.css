@@ -1,0 +1,154 @@
+/* والد اصلی */
+.profile-sidebar {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 10px;
+    font-family: "IRANSans", sans-serif;
+    color: #333;
+}
+
+/* کارت اصلی */
+.profile-sidebar .profile-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    ;
+}
+
+/* هدر */
+.profile-sidebar .profile-card .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* بخش بالایی هدر */
+.profile-sidebar .profile-card .profile-header .profile-header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* آواتار */
+.profile-sidebar .profile-card .profile-header .profile-header-top .profile-avatar{
+    height: 100%;
+    width: auto;
+}
+
+.profile-sidebar .profile-card .profile-header .profile-header-top .profile-avatar img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fa256c;
+    box-shadow: 0 0 6px rgba(76, 110, 245, 0.4);
+}
+
+/* اطلاعات کاربر */
+.profile-sidebar .profile-card .profile-header .profile-header-top .profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile-sidebar .profile-card .profile-header .profile-header-top .profile-info .profile-username {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.profile-sidebar .profile-card .profile-header .profile-header-top .profile-info .profile-phone {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 4px;
+}
+
+/* امتیاز */
+.profile-sidebar .profile-card .profile-header .profile-score {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.profile-sidebar .profile-card .profile-header.score .score-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.profile-sidebar .profile-card .profile-header.score .score-value {
+    font-weight: 700;
+    color: #4c6ef5;
+}
+
+/* اکشن‌ها */
+.profile-sidebar .profile-card .profile-header .profile-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.profile-sidebar .profile-card .profile-header .profile-actions div a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fa256c;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    gap: 4px;
+     border-radius: 12px;
+ 
+    
+}
+.profile-header .profile-actions .action-item {
+   
+    transition: all ease 250ms;
+}
+.profile-header .profile-actions .action-item:hover {
+    color: #fff;
+    border-bottom:1px solid #fa256c;
+
+    transition: all ease 250ms;
+}
+.profile-sidebar .profile-card .profile-header .profile-actions div a span{
+font-size: 12px;
+white-space: none;
+color: #000;
+}
+
+
+.profile-sidebar .profile-card .profile-header .profile-actions div a i {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* بنر */
+.profile-sidebar .sidebar-banner img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* منوی پروفایل */
+.profile-sidebar .menu {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+

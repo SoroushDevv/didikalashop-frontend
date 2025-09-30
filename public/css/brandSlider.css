@@ -1,0 +1,58 @@
+/* ------------ Start Brand-Slider */
+
+.brand-slider .item img {
+    max-height: 70%;
+    max-width: 70%;
+}
+
+.brand-slider .owl-nav {
+    margin-top: 0;
+}
+
+.brand-slider .owl-nav button {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    line-height: 37px !important;
+    text-align: center;
+    outline: none;
+    -webkit-box-shadow: 0 8px 9px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 8px 9px 0 rgba(0, 0, 0, .05);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.brand-slider .owl-nav button.owl-next,
+.brand-slider .owl-nav button.owl-prev {
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 40px;
+    color: #6a6a6a;
+}
+
+.brand-slider .owl-nav button.owl-next {
+    left: -15px;
+    cursor: pointer;
+}
+
+.brand-slider .owl-nav button.owl-prev {
+    right: -15px;
+    cursor: pointer;
+}
+
+.brand-slider .owl-nav button.owl-next:hover,
+.brand-slider .owl-nav button.owl-prev:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.brand-slider .owl-nav button.disabled {
+    opacity: 0 !important;
+}
+
+/* End Brand-Slider------------ */

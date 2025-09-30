@@ -1,0 +1,235 @@
+/* ------------ Start Widget */
+
+.widget-banner a {
+    display: block;
+}
+
+.widget-banner img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.widget-search {
+    position: relative;
+}
+
+.widget-search input {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-right: 7px;
+    font-size: 13px;
+    background-color: #fafdfb;
+    border: 1px solid #f3f3f3;
+    border-radius: 7px;
+    outline: none;
+}
+
+.widget-search input::placeholder {
+    font-size: 12px;
+}
+
+.widget-search button.btn-search-widget {
+    position: absolute;
+    left: 0;
+    width: 35px;
+    height: 40px;
+    background-color: #f7858d;
+    border: 0;
+    border-radius: 7px 0 0 7px;
+    outline: none;
+}
+
+.widget-search button.btn-search-widget img {
+    max-width: 100%;
+}
+
+.filter-product .card {
+    border-radius: 10px;
+    border: 1px solid #f3f3f3;
+}
+
+.filter-product .card .card-header {
+    background-color: #fff;
+}
+
+.filter-product .card .card-header button {
+    font-size: 14px;
+}
+
+.filter-product .card .card-header button i {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-color: #edf0f5;
+    border-radius: 50%;
+    font-size: 25px;
+    text-align: center;
+    color: #f7858d;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+
+.filter-product .card .card-header button[aria-expanded="true"] i {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.filter-product .card .card-body .custom-control {
+    padding-left: 0;
+}
+
+.filter-product .card .card-body .filter-color {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 7px;
+    margin-left: 6px;
+    border: 1px solid #f2f2f2;
+    position: absolute;
+    left: 0;
+}
+
+.parent-switcher {
+    position: relative;
+}
+
+.parent-switcher .ui-statusswitcher {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.parent-switcher .ui-statusswitcher input[type=checkbox] {
+    visibility: hidden;
+    position: absolute;
+}
+
+.parent-switcher .ui-statusswitcher-slider {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 21px;
+    border-radius: 29px;
+    border: 1px solid #8c8c8c;
+    background: #e5e5e5;
+    transition: .15s ease-in;
+}
+
+.parent-switcher input[type=checkbox]:checked+.ui-statusswitcher-slider {
+    background-color: #f7858d;
+    border-color: #f7858d;
+}
+
+.parent-switcher .ui-statusswitcher-slider-toggle {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: 1px solid #959595;
+    transition: all .4s ease;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.parent-switcher input[type=checkbox]:checked+.ui-statusswitcher-slider span {
+    right: 21px;
+}
+
+.parent-switcher .label-switcher {
+    margin-right: 50px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.noUi-target {
+    border: 0;
+    border-radius: 0;
+    background-color: #e7e7e7;
+    box-shadow: none
+}
+
+.noUi-horizontal {
+    height: .1875rem
+}
+
+.noUi-horizontal .noUi-handle {
+    top: -6px;
+    left: -.375rem;
+    width: 15px;
+    height: 15px;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: none
+}
+
+.noUi-handle:after,
+.noUi-handle:before {
+    display: none;
+}
+
+.noUi-horizontal .noUi-handle::before {
+    display: none
+}
+
+.noUi-horizontal .noUi-handle.noUi-handle-lower {
+    background-color: #f7858d
+}
+
+.noUi-horizontal .noUi-handle.noUi-handle-upper {
+    background-color: #f7858d
+}
+
+.noUi-horizontal .noUi-handle:focus {
+    outline: none
+}
+
+html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
+    right: -.375rem;
+    left: auto
+}
+
+.ui-range-slider-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.875rem
+}
+
+.ui-range-slider-footer>.column:last-child {
+    padding-right: .9375rem;
+    text-align: right
+}
+
+.ui-range-values {
+    display: inline-block
+}
+
+.ui-range-values .ui-range-value-min,
+.ui-range-values .ui-range-value-max {
+    display: inline-block;
+    font-size: .875rem;
+    font-weight: bold
+}
+
+.ui-range-values .ui-range-label {
+    display: inline-block;
+    margin-right: .125rem;
+    color: #8c8c8c;
+    font-size: .75rem;
+    font-weight: 600
+}
+
+.noUi-connect {
+    background: #f7858d !important;
+}
+
+/* End Widget------------ */

@@ -1,0 +1,230 @@
+/* ------------ Start Product-Card */
+
+.product-card {
+    position: relative;
+    background-color: #fff;
+    padding-top: .75rem;
+    padding-bottom: 1.625rem;
+    margin: 10px;
+    border-radius: 8px;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    -webkit-box-shadow: 0 2px 6px 0 rgba(51, 73, 94, 0.15);
+    box-shadow: 0 2px 6px 0 rgba(51, 73, 94, 0.15);
+}
+
+.product-card .product-head {
+    padding: 0 .9375rem .5rem;
+}
+
+.rating-stars {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.rating-stars i {
+    display: inline-block;
+    margin-left: -7px;
+    color: #bfbfbf;
+    font-size: .875rem;
+}
+
+.rating-stars i.active {
+    color: #ffd800;
+}
+
+.discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.discount span {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #fff;
+    background: #f7858d;
+    border-radius: 15px 15px 0 15px;
+}
+
+.product-card .product-thumb {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card .product-thumb::before {
+    background-color: #fff;
+    opacity: 0.5;
+    top: 0;
+    bottom: 0;
+    content: '';
+    left: -130%;
+    position: absolute;
+    width: 200px;
+    box-shadow: 0 0 100px #fff;
+    -webkit-transform: skew(-20deg);
+    transform: skew(-20deg);
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+
+.product-card:hover .product-thumb::before {
+    left: 200%;
+}
+
+.product-card .product-thumb>img {
+    display: block;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.product-card .product-card-body {
+    padding: 0 1.25rem;
+    position: relative;
+}
+
+.product-card .product-card-body .add-to-compare {
+    position: absolute;
+    top: -45px;
+    left: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: all .1s ease;
+}
+
+.product-card:hover .product-card-body .add-to-compare {
+    opacity: 1;
+}
+
+.product-card .product-card-body .add-to-compare .custom-control {
+    padding-left: 0;
+}
+
+.product-card .product-card-body .add-to-compare .custom-control-label {
+    padding-right: 20px;
+}
+
+.product-card .product-meta {
+    display: block;
+    margin-bottom: .5rem;
+    color: rgba(140, 140, 140, 0.75);
+    font-size: .75rem;
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-transition: color .25s;
+    transition: color .25s;
+}
+
+.product-card .product-meta:hover {
+    color: #404040;
+}
+
+.product-card .product-title {
+    margin: .75rem 0 .125rem;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    min-height: 60px;
+}
+
+.product-card .product-title>a {
+    -webkit-transition: color .3s;
+    transition: color .3s;
+    color: #f7858d;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+}
+
+.product-card .product-title>a:hover {
+    color: #f44336;
+}
+
+.product-card .product-price {
+    display: block;
+    color: #404040;
+    font-weight: bold;
+}
+
+.hover-effect-img {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-effect-img::before {
+    background-color: white;
+    opacity: 0.5;
+    top: 0;
+    bottom: 0;
+    content: '';
+    left: -100%;
+    position: absolute;
+    width: 200px;
+    box-shadow: 0 0 100px white;
+    -webkit-transform: skew(-20deg);
+    transform: skew(-20deg);
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+
+.card-row:hover .hover-effect-img::before {
+    left: 200%;
+}
+
+.search-amazing-content {
+    padding-top: 65px;
+}
+
+.search-amazing-tab .product-card {
+    padding-top: 40px;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+}
+
+.btn-filter-sidebar {
+    background-color: #e0e0e0;
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+.promotion-badge {
+    width: 100%;
+    height: 29px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 17px;
+    color: #f7858d;
+    border-bottom: 1px solid #f7858d;
+    position: absolute;
+    top: 10px;
+}
+
+.promotion-badge.not-available {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+.product-card .promotion-badge {
+    font-size: 16px;
+}
+
+.search-amazing-tab .discount {
+    top: 42px;
+}
+
+/* End Product-Card------------ */
