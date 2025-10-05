@@ -33,7 +33,8 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
       onNavbarHeightChange(listItemRef.current.offsetHeight)
     }
 
-    if(mainMenuRef.current) {
+    if (mainMenuRef.current) {
+      console.log("main menu ref :", mainMenuRef.current.offsetLeft)
       setOffsetLeft(mainMenuRef.current.offsetLeft)
     }
 
@@ -89,30 +90,31 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
             </Link>
           </div>
           <div class="header-cart-tab"
-           onMouseEnter={() => {
+            onMouseEnter={() => {
               setShowUserBasket(true)
             }}
             onMouseLeave={() => setShowUserBasket(false)}
-            >
-            <div class="nav-item-wrapper header-cart-tab-wrapper" >
+          >
+            <div className="cart-tab">
               {isAuth ? (
                 <>
-                  <div  >
-                    <span class="label-dropdown">سبد خرید</span>
-                    <ShoppingCartIcon />
-                    <span class="count" style={{ color: "white" }}>{orders ? orders.length : 0}</span>
+                  <div className="cart-tab__trigger">
+                    <span className="cart-tab__label">سبد خرید</span>
+                    <ShoppingCartIcon className="cart-tab__icon" />
+                    <span className="cart-tab__count">{orders ? orders.length : 0}</span>
                   </div>
-                  {showUserBasket && <LocalOrders height={offsetHeight} offLeft={offsetLeft} />}
+                  {showUserBasket && (
+                    <LocalOrders height={offsetHeight} offLeft={offsetLeft} />
+                  )}
                 </>
               ) : (
-                <>
-                  <Link to="/error">
-                    <span class="label-dropdown">سبد خرید</span>
-                    <ShoppingCartIcon />
-                  </Link>
-                </>
+                <div className="cart-tab__trigger">
+                  <Link to="/cart" className="cart-tab__label">سبد خرید</Link>
+                  <ShoppingCartIcon className="cart-tab__icon" />
+                </div>
               )}
             </div>
+
           </div>
         </nav>
       </div>

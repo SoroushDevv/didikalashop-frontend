@@ -59,7 +59,7 @@ function AppContent() {
           {React.cloneElement(router, { isAuthenticatedState })}
         </div>
 
-        <Footer isAuthenticated={isAuthenticatedState} top={mainContentHeight + value} />
+        <Footer isAuthenticated={isAuthenticatedState} top={mainContentHeight ? mainContentHeight + value : "100vh"} />
       </div>
     </div>
   );

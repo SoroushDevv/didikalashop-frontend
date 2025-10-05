@@ -71,18 +71,19 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
   };
 
   return (
-    <div className="container nav-container">
-      <div className="topbar" ref={topbarRef}>
-        <div className="topbar-wrapper">
-          <div className="col-lg-2 col-md-3 col-6">
+    <div className="container main-container">
+      <div className="nav-container">
+        <div className="topbar" ref={topbarRef}>
+          <div className="topbar-wrapper">
+            {/* لوگو */}
             <div className="logo-area">
               <Link to="/">
                 <img src="/img/logo.png" alt="didikala" />
               </Link>
             </div>
-          </div>
-          <div className="col-lg-6 col-md-5 hidden-sm">
-            <div className="search-area dt-sl">
+
+            {/* سرچ */}
+            <div className="search-area">
               <form className="search" onSubmit={handleSearchSubmit}>
                 <input
                   type="text"
@@ -91,119 +92,126 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 <i className="far fa-search search-icon"></i>
+
                 {searchValue && (
                   <button
-                    className="close-search-result"
+                    className="close-search"
                     type="button"
                     onClick={handleClearSearch}
                   >
                     <SearchOutlinedIcon />
                   </button>
                 )}
+
                 {showResults && (
-                  <div className="search-result">
-                    {loading ? (
-                      <p className="text-center">در حال بارگذاری...</p>
-                    ) : error ? (
-                      <p className="text-center text-danger">{error}</p>
-                    ) : searchResults.length > 0 ? (
-                      <ul>
-                        {searchResults.map((product) => (
-                          <li key={product.id}>
-                            <Link
-                              to="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handleResultClick(product);
-                              }}
-                            >
-                              {product.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-center">محصولی یافت نشد</p>
-                    )}
-                  </div>
+                  <>
+                    <div
+                      className="backdrop"
+                      onClick={() => setShowResults(false)} // کلیک بکنی، لیست بسته میشه
+                    ></div>
+
+                    <div className="search-result">
+                      {loading ? (
+                        <p className="text-center">در حال بارگذاری...</p>
+                      ) : error ? (
+                        <p className="text-center text-danger">{error}</p>
+                      ) : searchResults.length > 0 ? (
+                        <ul className="search-result-list">
+                          {searchResults.map((product) => (
+                            <li className="search-result-item" key={product.id}>
+                              <Link
+                                to="#"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleResultClick(product);
+                                }}
+                              >
+                                {product.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-center">محصولی یافت نشد</p>
+                      )}
+                    </div>
+                  </>
                 )}
               </form>
             </div>
-          </div>
-          <div className="col-md-4 col-6 topbar-left"
-            onMouseEnter={() => setShowDropDownMenu(true)}
-          >
-            {!isAuth ? (
-              <div className="register-button">
-                <button>
-                  <Link to="/login">ثبت نام / ورود</Link>
-                </button>
-              </div>
-            ) : (
-              <div className="top-bar-nav-item_container">
-                <div
-                  className="top-bar-nav-item account"
 
-                >
+            {/* منو حساب کاربری */}
+            <div
+              className="topbar-account_area"
+              onMouseEnter={() => setShowDropDownMenu(true)}
+              onMouseLeave={() => setShowDropDownMenu(false)}
+            >
+              {!isAuth ? (
+                <div className="topbar-register_wrapper">
+                  <button className="topbar-register_button">
+                    <Link to="/login">ثبت نام / ورود</Link>
+                  </button>
+                </div>
+              ) : (
+                <div className="topbar-account_menu">
                   <button
                     type="button"
-                    className="nav-link account-toggle"
+                    className="topbar-account_toggle"
                     aria-haspopup="true"
                     aria-expanded={showDropdownMenu}
                   >
-                    <span className="label-dropdown">حساب کاربری</span>
-                    <AccountCircleIcon />
+                    <span className="topbar-account_label">حساب کاربری</span>
+                    <AccountCircleIcon className="topbar-account_icon" />
                   </button>
 
-                  {showDropdownMenu && (
-                    <div className="top-bar-dropdown-menu"
-                      onMouseLeave={() => setShowDropDownMenu(false)}
+                  <div
+                    className={`topbar-account_dropdown ${showDropdownMenu ? "show" : ""}`}
+                  >
+                    <Link to="/profile" className="topbar-account_item">
+                      <PersonOutlinedIcon /> پروفایل
+                    </Link>
+
+                    <Link
+                      to="/profile/comments"
+                      className="topbar-account_item topbar-account_message"
                     >
-                      <Link to="/profile" className="dropdown-item">
-                        <PersonOutlinedIcon /> پروفایل
-                      </Link>
+                      <div className="message-icon">
+                        <EmailOutlinedIcon />
+                      </div>
+                      <span className="message-badge">0</span>
+                      پیغام‌ها
+                    </Link>
 
-                      <Link to="/profile/comments" className="dropdown-item message-item">
-                        <div className="message">
-                          <EmailOutlinedIcon />
-                        </div>
-                        <span className="float-left badge badge-light message-badge">0</span>
-                        پیغام‌ها
-                      </Link>
+                    <Link to="/profile/user-info" className="topbar-account_item">
+                      <EditOutlinedIcon /> ویرایش حساب کاربری
+                    </Link>
 
-                      <Link to="/profile/user-info" className="dropdown-item">
-                        <EditOutlinedIcon /> ویرایش حساب کاربری
-                      </Link>
+                    <div className="topbar-account_divider" role="presentation"></div>
 
-                      <div className="dropdown-divider" role="presentation"></div>
-
-                      <Link
-                        className="dropdown-item"
-                        to="/"
-                        onClick={() => {
-                          removeAuthToken();
-                          removeLocalStorage("authToken");
-                          removeLocalStorage("orders");
-                          localStorage.setItem("cart", []);
-                          window.location.reload();
-                        }}
-                      >
-                        <LogoutOutlinedIcon /> خروج
-                      </Link>
-                    </div>
-                  )}
-
-
+                    <Link
+                      className="topbar-account_item"
+                      to="/"
+                      onClick={() => {
+                        removeAuthToken();
+                        removeLocalStorage("authToken");
+                        removeLocalStorage("orders");
+                        localStorage.setItem("cart", []);
+                        window.location.reload();
+                      }}
+                    >
+                      <LogoutOutlinedIcon /> خروج
+                    </Link>
+                  </div>
                 </div>
+              )}
+            </div>
 
-              </div>
-
-            )}
           </div>
         </div>
       </div>
-
     </div>
+
+
 
   );
 }

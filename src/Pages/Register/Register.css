@@ -28,9 +28,16 @@
   margin-bottom: 1.5rem;
 }
 
+.register-page .register-card .header .logo {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
 .register-page .register-card .header .logo img {
   max-width: 150px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .register-page .register-card .header .title {
@@ -107,7 +114,7 @@
   outline: none;
   border-color: #e11d48;
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(59,130,246,0.1);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
 .register-page .register-card .form-wrapper .form-group .error-msg {
@@ -118,9 +125,13 @@
 
 /* چک باکس قوانین */
 .register-page .register-card .form-wrapper .form-check {
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 0.85rem;
   color: #555;
+}
+
+.register-page .register-card .form-wrapper .form-check .law-check-input {
+  margin-left: 0.5rem;
 }
 
 .register-page .register-card .form-wrapper .form-check a {
@@ -170,6 +181,7 @@
   color: #e11d48;
   text-decoration: none;
   font-weight: 500;
+  margin: 0 10px;
 }
 
 .register-page .register-card .footer a:hover {

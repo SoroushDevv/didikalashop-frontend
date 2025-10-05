@@ -141,21 +141,23 @@ export default function LocalOrders({ height, offLeft }) {
   const localOrders = JSON.parse(localStorage.getItem("orders")) || [];
   const hasLocalOrders = localOrders.length > 0;
 
+  console.log("height : ",height)
+  console.log("off left:",offLeft)
   return (
-    <div className="header-cart-info" style={{ position: "absolute", top: height, left: offLeft }}>
+    <div className="navbar-cart-info" >
       {loading && <div className="text-center loading">در حال دریافت داده‌ها...</div>}
       {error && <ErrorMessage msg={`داده ها در راه مانده اند .`} />}
       {!loading && !error && (
         <>
-          <div className="header-cart-info-header">
-            <Link to="/cart" className="header-cart-info-link">
+          <div className="navbar-cart-info-link_container">
+            <Link to="/cart" className="navbar-cart-info-link">
               <span>مشاهده سبد خرید</span>
             </Link>
-            <div className="header-cart-info-count">{orders.length} کالا</div>
+            <div className="navbar-cart-info-count">{orders.length} کالا</div>
 
           </div>
           <ul
-            className="header-basket-list"
+            className="navbar-basket-list"
             tabIndex="1"
             style={{ overflow: 'hidden', outline: 'none' }}
           >
@@ -167,29 +169,29 @@ export default function LocalOrders({ height, offLeft }) {
                   className="cart-item"
                   key={order.orderId || 'null'}
                 >
-                  <div className="header-basket-list-item">
-                    <div className="header-basket-list-item-content">
-                      <Link to={`/productDetail/${order.product.title}`} className="header-basket-list-item-title">
+                  <div className="navbar-basket-list-item">
+                    <div className="navbar-basket-list-item-content">
+                      <Link to={`/productDetail/${order.product.title}`} className="navbar-basket-list-item-title">
                         {order.product.title || 'عنوان محصول'}
                       </Link>
-                      <div className="header-basket-list-item-footer">
-                        <div className="header-basket-list-item-props">
-                          <span className="header-basket-list-item-props-item">
+                      <div className="navbar-basket-list-item-footer">
+                        <div className="navbar-basket-list-item-props">
+                          <span className="navbar-basket-list-item-props-item">
                             <ColorChip color={order.color} />
                           </span>
-                          <span className="header-basket-list-item-props-item">
+                          <span className="navbar-basket-list-item-props-item">
                             {(order.price || 0).toLocaleString()} تومان
                           </span>
-                          <span className="header-basket-list-item-props-item">
+                          <span className="navbar-basket-list-item-props-item">
                             {order.quantity} x
                           </span>
                         </div>
                       </div>
-                      <button className="header-basket-list-item-remove" onClick={() => handleRemoveItem(order.orderId)}>
+                      <button className="navbar-basket-list-item-remove" onClick={() => handleRemoveItem(order.orderId)}>
                         <DeleteOutlinedIcon />
                       </button>
                     </div>
-                    <div className="header-basket-list-item-image">
+                    <div className="navbar-basket-list-item-image">
                       <img
                         src={`/img/products/${order.product.img || 'test'}`}
                         alt={order.product.title || 'عنوان محصول'}
@@ -200,25 +202,25 @@ export default function LocalOrders({ height, offLeft }) {
               ))
             )}
           </ul>
-          <div className="header-cart-info-footer">
-            <div className="header-cart-info-total">
-              <span className="header-cart-info-total-text">مبلغ قابل پرداخت:</span>
-              <p className="header-cart-info-total-amount">
-                <span className="header-cart-info-total-amount-number">
+          <div className="navbar-cart-info-footer">
+            <div className="navbar-cart-info-total">
+              <span className="navbar-cart-info-total-text">مبلغ قابل پرداخت:</span>
+              <p className="navbar-cart-info-total-amount">
+                <span className="navbar-cart-info-total-amount-number">
                   {payableAmount.toLocaleString()} <span>تومان</span>
                 </span>
               </p>
             </div>
-            <div className="header-cart-info-actions">
+            <div className="navbar-cart-info-actions">
               <button
-                className="header-cart-info-submit submit-cart header-cart-info_btn"
+                className="navbar-cart-info-submit submit-cart navbar-cart-info_btn"
               >
                 <Link to={orders.length ? "/cart" : "#"}>
                   ثبت سفارش
                 </Link>
               </button>
               <button
-                className="header-cart-info-clear header-cart-info_btn"
+                className="navbar-cart-info-clear navbar-cart-info_btn"
                 onClick={handleClearCart}
               >
                 خالی کردن سبد

@@ -8,8 +8,8 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   max-width: 600px;
-  margin: 0 auto;
   font-family: "IRANSans", sans-serif;
+  width: 100%;
 }
 
 /* ===== Header & Title ===== */
@@ -107,7 +107,7 @@
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin: 10px auto 1.5rem;
+  margin: 20px 0;
   font-family: "IRANSans", sans-serif;
 }
 
@@ -236,6 +236,100 @@
   font-size: 1rem;
   margin-top: 1rem;
 }
+
+
+/* والد اصلی */
+.discount-section {
+  display: flex;
+  justify-content: start;
+  margin-top: 2rem;
+}
+
+/* کارت کد تخفیف */
+.discount-section .discount-card {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+/* عنوان بخش */
+.discount-section .discount-card .discount-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.discount-section .discount-card .discount-title h2 {
+  font-size: 1.2rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* آیکن کمک */
+.discount-section .discount-card .discount-title .discount-help {
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.discount-section .discount-card .discount-title .discount-help:hover {
+  color: #000;
+}
+
+/* توضیحات زیر عنوان */
+.discount-section .discount-card .discount-description {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+/* فرم ورودی */
+.discount-section .discount-card .discount-form {
+  display: flex;
+  justify-content: center;
+}
+
+.discount-section .discount-card .discount-form .discount-input-group {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+/* ورودی */
+.discount-section .discount-card .discount-form .discount-input-group .discount-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.discount-section .discount-card .discount-form .discount-input-group .discount-input:focus {
+  border-color: #007bff;
+}
+
+/* دکمه */
+.discount-section .discount-card .discount-form .discount-input-group .discount-submit-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.discount-section .discount-card .discount-form .discount-input-group .discount-submit-btn:hover {
+  background: #0056b3;
+}
+
 
 /* ===== واکنش‌گرا ===== */
 @media (max-width: 480px) {

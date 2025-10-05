@@ -59,6 +59,7 @@ export default function Shipping() {
     useEffect(() => {
         if (!currentUser) return;
 
+        console.log("current user : ", currentUser)
         const token = getAuthToken();
 
         const fetchUserAddresses = async () => {
@@ -98,16 +99,10 @@ export default function Shipping() {
         }
 
         fetchUserAddresses();
+
     }, [isModalOpen, loading, currentUser]);
 
-
     const handleSaveAddress = (addressData) => {
-
-
-
-        console.log("addressdata : ", addressData)
-
-
 
         setNewAddress(addressData.fullAddress)
         setNewPostalCode(addressData.postalCode)
@@ -131,6 +126,10 @@ export default function Shipping() {
         setIsModalOpen(false)
     }
 
+
+
+    console.log("user addresses : ", userAddresses)
+console.log("use current user :", currentUser)
     return (
         <div className='container'>
             <div className="shipping-section">

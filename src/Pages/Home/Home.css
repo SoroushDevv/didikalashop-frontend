@@ -66,21 +66,20 @@
 }
 
 /* ===== پیشنهادات کناری ===== */
-.home-grid-item {
-  padding: 0 0.5rem;
-}
+
 
 .home-widget-suggestion {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  padding: 1rem;
+ 
 }
 
 .home-widget-suggestion-title img {
   max-width: 100%;
   display: block;
-  margin-bottom: 1rem;
+  margin:1rem 0;
+  
 }
 
 .home-progress-bar {
@@ -128,9 +127,9 @@
   border-radius: 12px;
 }
 
-.home-brand-slider-title {
+.home-brand-slider .home-brand-slider-title {
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
 }

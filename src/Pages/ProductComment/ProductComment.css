@@ -39,6 +39,12 @@
 }
 
 /* ===== فرم کامنت ===== */
+.product-comment_section .comment-section {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
 .product-comment_section .comment-section .comment-form {
   margin-bottom: 2rem;
 }

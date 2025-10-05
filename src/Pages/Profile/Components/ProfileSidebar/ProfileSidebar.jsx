@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import ProfileMenu from "../ProfileMenuSection/ProfileMenu";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { removeAuthToken } from "../../../../Utils/AuthUtils";
@@ -13,6 +13,7 @@ import "./ProfileSidebar.css"
 export default function ProfileSidebar() {
   const { currentUser, loading, error } = useCurrentUser();
 
+  const Navigate = useNavigate()
   console.log(currentUser)
   if (loading) {
     return <div>در حال بارگذاری...</div>;
@@ -25,7 +26,11 @@ export default function ProfileSidebar() {
   }
 
 
+ const handleUserExit = () => {
 
+  localStorage.removeItem("authToken")
+  Navigate("/")
+ }
 
 
 
@@ -61,10 +66,7 @@ export default function ProfileSidebar() {
 
               <a
                 href="#"
-                onClick={() => {
-                  removeLocalStorage("authToken");
-                  Navigate("/");
-                }}
+                onClick={() => handleUserExit()}
               >
                <LogoutIcon/>
                <span>خروج از حساب</span>

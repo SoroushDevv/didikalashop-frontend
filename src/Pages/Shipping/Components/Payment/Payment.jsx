@@ -119,6 +119,7 @@ function Payment() {
 
         if (!codeDetails) {
           showSwal({ title: 'اطلاعاتی برای این کد وجود ندارد', text: '', icon: 'info' });
+          setCodeValue("")
           return false;
         }
 
@@ -282,53 +283,48 @@ function Payment() {
               </div>
             </div>
 
-            <div className="row mt-4">
-              <div className="col-sm-6 col-12">
-                <div className="dt-sn dt-sn--box pt-3 pb-3 px-res-1">
-                  <div className="section-title text-sm-title title-wide no-after-title-wide mb-0">
-                    <h2>
-                      استفاده از کد تخفیف دیجی‌کالا
-                      <span
-                        className="help-sn"
-                        data-toggle="tooltip"
-                        data-html="true"
-                        data-placement="bottom"
-                        title="<div class='help-container is-left'><div class='help-arrow'></div><p class='help-text'>بعد از نهایی شدن سفارش کد تخفیف را ثبت نمایید. بعد از ثبت کد تخفیف امکان بازگشت و یا تغییر سبد وجود نخواهد داشت. در صورت تغییر سفارش، کد تخفیف از بین خواهد رفت و امکان اعمال مجدد آن وجود ندارد</p></div>"
-                      >
-                        <span className="mdi mdi-information-outline"></span>
-                      </span>
-                    </h2>
-                  </div>
-                  <p>با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ قابل پرداخت” کسر می‌شود.</p>
-                  <div className="form-ui">
-                    <form action="">
-                      <div className="row text-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className="col-xl-8 col-lg-12 px-0">
-                          <div className="form-row">
-                            <input
-                              onChange={(e) => setCodeValue(e.target.value)}
-                              value={codeValue}
-                              type="text"
-                              className="input-ui pr-2"
-                              placeholder=" کد تخفیف ..."
-                            />
-                          </div>
-                        </div>
-                        <div className="col-xl-4 col-lg-12 px-0">
-                          <button
-                            onClick={(e) => checkCode(e)}
-                            className="btn btn-primary mt-res-1 offer-submit-button"
-                            style={{ padding: '5px 10px !important' }}
-                          >
-                            ثبت کد تخفیف
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+            <div className="discount-section">
+              <div className="discount-card">
+                <div className="discount-title">
+                  <h2>
+                    استفاده از کد تخفیف
+                    <span
+                      className="discount-help"
+                      data-toggle="tooltip"
+                      data-html="true"
+                      data-placement="bottom"
+                      title="<div class='help-container is-left'><div class='help-arrow'></div><p class='help-text'>بعد از نهایی شدن سفارش کد تخفیف را ثبت نمایید. بعد از ثبت کد تخفیف امکان بازگشت و یا تغییر سبد وجود نخواهد داشت. در صورت تغییر سفارش، کد تخفیف از بین خواهد رفت و امکان اعمال مجدد آن وجود ندارد</p></div>"
+                    >
+                      <span className="mdi mdi-information-outline"></span>
+                    </span>
+                  </h2>
                 </div>
+
+                <p className="discount-description">
+                  با ثبت کد تخفیف، مبلغ کد تخفیف از "مبلغ قابل پرداخت" کسر می‌شود.
+                </p>
+
+                <form className="discount-form" onSubmit={(e) => e.preventDefault()}>
+                  <div className="discount-input-group">
+                    <input
+                      type="text"
+                      className="discount-input"
+                      placeholder="کد تخفیف ..."
+                      value={codeValue}
+                      onChange={(e) => setCodeValue(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="discount-submit-btn"
+                      onClick={(e) => checkCode(e)}
+                    >
+                      ثبت کد تخفیف
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
+
           </div>
           <div className=" sticky-sidebar">
             <CheckoutSummary submitButtonTitle="پرداخت" submitButtonURL="/complete-payment" getOffVlueTrigger={updateTrigger} />

@@ -29,8 +29,9 @@
 /* لیست اسلایدها */
 .carousel-container .category-carousel_wrapper .splide__list {
   display: flex;
-  flex-wrap: nowrap; /* جلوگیری از شکستن خط */
-  transition: transform 0.4s ease; /* اسلاید ملایم */
+  gap: 10px;
+  flex-wrap: nowrap; 
+  transition: transform 0.4s ease;
  
 }
 

@@ -33,6 +33,7 @@ color: #fa256c;
 
 }
 .header-cart-tab {
+  position: relative;
     padding: 16px 10px;
     cursor: pointer;
     font-weight: 500;
@@ -84,8 +85,91 @@ color: #fa256c;
 }
 
 
-.bottom-header .list-items_container .header-cart-tab .header-cart-tab-wrapper{
-position: relative;
+/* ===== Parent Container ===== */
+.cart-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ===== Trigger (label + icon + count) ===== */
+.cart-tab__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.cart-tab__trigger:hover {
+  background-color: rgba(255, 77, 79, 0.1);
+}
+
+/* ===== Label ===== */
+.cart-tab__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cart-tab__trigger:hover .cart-tab__label {
+  color: #ff4d4f;
+}
+
+/* ===== Icon ===== */
+.cart-tab__icon {
+  color: #ff4d4f;
+  font-size: 22px !important;
+  transition: transform 0.2s ease;
+}
+
+.cart-tab__trigger:hover .cart-tab__icon {
+  transform: scale(1.1);
+}
+
+/* ===== Count Badge ===== */
+.cart-tab__count {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  background-color: #ff4d4f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(255, 77, 79, 0.6);
+}
+
+/* ===== Dropdown basket (LocalOrders) ===== */
+.cart-tab .local-orders {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  background-color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 280px;
+  margin-top: 8px;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 
@@ -163,7 +247,7 @@ position: relative;
   justify-content: center;
 }
 
-.header-cart-info {
+/* .header-cart-info {
   min-width: 180px;
     background: #fff;
     border: 1px solid #ddd;
@@ -172,7 +256,7 @@ position: relative;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     z-index: 999;
     position: absolute;
-}
+} */
 
 /* LocalOrders */
 .bottom-header .cart--wrapper:hover .local-orders {

@@ -182,7 +182,7 @@ export default function Register() {
                       type="checkbox"
                       name="laws"
                       id="laws"
-                      className="custom-control-input"
+                      className="law-check-input"
                     />
                     <label className="custom-control-label" htmlFor="laws">
                       <a href="#">حریم خصوصی</a> و <a href="#">شرایط و قوانین</a> را خوانده‌ام و می‌پذیرم.
@@ -206,7 +206,7 @@ export default function Register() {
           {/* --- Footer --- */}
           <div className="footer">
             قبلا ثبت نام کرده‌اید؟
-            <Link to="/login" className="ml-2">ورود</Link>
+            <Link to="/login" className="ml-2 mr-2">ورود</Link>
           </div>
         </div>
       </div>
