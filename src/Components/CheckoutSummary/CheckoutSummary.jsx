@@ -20,6 +20,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { styled } from '@mui/material/styles';
 import { useCart } from './../../Contexts/CartContext';
 import axios from 'axios';
+import { getAuthToken } from '../../Utils/AuthUtils';
 
 // Styled components
 const SidebarContainer = styled(Box)(({ theme }) => ({
@@ -102,7 +103,7 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
 
     calculateTotalPrice();
     calculateTotalDiscount();
-  }, [JSON.stringify(orders)]); // استفاده از JSON.stringify برای تشخیص تغییرات داخلی orders
+  }, [JSON.stringify(orders)]);
 
   // محاسبه payableAmount
   useEffect(() => {
@@ -117,15 +118,19 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
   const submitHandler = (e) => {
     e.preventDefault()
 
+    const token = getAuthToken()
     const orders = JSON.parse(localStorage.getItem("orders"))
-localStorage.setItem("offValue", 0)
-    console.log("ordersss:",orders)
-
-    
-    const res = axios.post("http://localhost:8000/api/orders",)
-  
+    localStorage.setItem("offValue", 0)
+    console.log("ordersss:", orders)
 
 
+    const res = axios.post("http://localhost:8000/api/orders",orders,{
+    headers:{
+      Authorization: `bearer ${token}`
+    }
+    })
+
+    console.log("res data :", res.data)
 
     triggerUpdate()
   }
