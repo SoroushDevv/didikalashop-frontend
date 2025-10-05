@@ -100,7 +100,7 @@ export default function SingleProductSearch() {
   const { orders, setOrders, loading, error, triggerUpdate } = useCart();
   const { currentUser, loading: userLoading, error: userError } = useCurrentUser();
   const { products, loading: productsLoading, error: productsError } = useAllProducts();
-  const { productTitle : encodedTitle } = useParams();
+  const { productTitle: encodedTitle } = useParams();
   const navigate = useNavigate();
   const [similarProducts, setSimilarProducts] = useState([]);
   const [product, setProduct] = useState(null);
@@ -113,13 +113,13 @@ export default function SingleProductSearch() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-       
-        const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
-        
 
-      
+        const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
+
+
+
         const filteredProduct = products.find((product) => product.title === title);
-       
+
 
 
         if (!filteredProduct) {
@@ -172,7 +172,7 @@ export default function SingleProductSearch() {
       return { success: false, error: 'لیست محصولات معتبر نیست' };
     }
 
-    console.log("productsssssssss:",products)
+    console.log("productsssssssss:", products)
     const product = products.find((p) => p.title === title);
 
     if (!product || !product.title || !userId || !product.price || quantity <= 0 || quantity === null) {
@@ -214,7 +214,7 @@ export default function SingleProductSearch() {
         icon: 'success',
       });
     } else {
-      console.log("product product product product:",product)
+      console.log("product product product product:", product)
       const newOrder = {
         orderId: uuidv4(),
         productID: product.id,
@@ -374,7 +374,7 @@ export default function SingleProductSearch() {
                         />
                       ))}
                     </div>
-                
+
                   </Box>
                 )}
                 {product.count > 0 && (
@@ -382,37 +382,41 @@ export default function SingleProductSearch() {
                     <Typography variant="body2" sx={{ mr: 2, fontSize: '18px', padding: '5px' }}>
                       تعداد :
                     </Typography>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={() => handleIncrease()}
-                      disabled={localQuantity >= product.count}
-                      sx={{ minWidth: '30px', border: '1px solid #000 !important' }}
-                    >
-                      +
-                    </Button>
-                    <input
-                      type="number"
-                      value={localQuantity}
-                      onChange={handleQuantityChange}
-                      style={{
-                        width: '50px',
-                        textAlign: 'center',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                      }}
-                      min="1"
-                      max={product.count}
-                    />
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={() => handleDecrease()}
-                      disabled={localQuantity <= 1}
-                      sx={{ minWidth: '30px', border: '1px solid #000 !important' }}
-                    >
-                      -
-                    </Button>
+                    <Box className="quantity-change_container">
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => handleIncrease()}
+                        disabled={localQuantity >= product.count}
+                        sx={{ minWidth: '30px' }}
+                      >
+                        +
+                      </Button>
+                      <input
+                        type="number"
+                        value={localQuantity}
+                        onChange={handleQuantityChange}
+                        style={{
+                          width: '50px',
+                          textAlign: 'center',
+                        
+                        }}
+                        min="1"
+                        max={product.count}
+                        readOnly
+                      />
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => handleDecrease()}
+                        disabled={localQuantity <= 1}
+                        sx={{ minWidth: '30px' }}
+                      >
+                        -
+                      </Button>
+
+                    </Box>
+
                   </Box>
                 )}
                 <Button

@@ -194,26 +194,25 @@ export default function Cart() {
 
 
   return (
-    <main className="main-content dt-sl mb-3">
+    <main className="main-content">
       <div className="container main-container">
-        <div className="row mx-0">
-          <div className="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-2">
-            <nav className="tab-cart-page">
-              <div className="nav nav-tabs border-bottom" id="nav-tab" role="tablist">
-                <button
-                  className={`nav-item nav-link d-inline-flex w-auto ${activeTab === 'orders' ? 'active' : ''
-                    }`}
-                  onClick={() => setActiveTab('orders')}
-                  role="tab"
-                  aria-controls="nav-home"
-                  aria-selected={activeTab === 'orders'}
-                >
-                  سبد خرید
-                  <span className="count-cart">{orders.length}</span>
-                </button>
-              </div>
-            </nav>
-          </div>
+       
+          <nav className="tab-cart-page">
+            <div className="nav-tabs border-bottom p-2" id="nav-tab" role="tablist">
+              <button
+                className={`card-tab-button ${activeTab === 'orders' ? 'active' : ''
+                  }`}
+                onClick={() => setActiveTab('orders')}
+                role="tab"
+                aria-controls="nav-home"
+                aria-selected={activeTab === 'orders'}
+              >
+                سبد خرید
+                <span className="count-cart" style={{margin:"5px"}}>{orders.length}</span>
+              </button>
+            </div>
+          </nav>
+
           <div className="col-12">
             <div className="tab-content" id="nav-tabContent">
               {/* تب سبد خرید */}
@@ -325,7 +324,7 @@ export default function Cart() {
                                         </div>
                                         <button
                                           className="item-remove-btn mr-2"
-                                          style={{margin:"10px 0"}}
+                                          style={{ margin: "10px 0" }}
                                           onClick={() =>
                                             removeItem(item.productID, item.color)
                                           }
@@ -336,7 +335,7 @@ export default function Cart() {
                                       </div>
                                       <div className="item-price">
                                         {item.price}
-                                        <span className="text-sm mr-1" style={{margin:"0 10px"}}>تومان</span>
+                                        <span className="text-sm mr-1" style={{ margin: "0 10px" }}>تومان</span>
                                         {item.discountPercent > 0 && (
                                           <div className="original-price">
                                             قیمت اصلی:{' '}
@@ -365,7 +364,7 @@ export default function Cart() {
               </div>
             </div>
           </div>
-        </div>
+        
       </div>
     </main>
   );

@@ -6,6 +6,34 @@
   padding: 0 4px;
 }
 
+.card-tab-title .card-tab-button {
+  margin: 5px;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* هاور */
+.card-tab-title .card-tab-button:hover {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* وقتی اکتیو هست */
+.card-tab-title .card-tab-button.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
 .tab-cart-page .nav-link {
   background: transparent;
   border: 1px solid transparent;
@@ -118,9 +146,10 @@
   padding: 0;
   margin: 0 0 12px 0;
   display: flex;
+  flex-direction: column;
   gap: 12px;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: start;
 }
 
 .item-detail li {
@@ -164,7 +193,7 @@
 }
 
 /* num-block */
-.num-block {
+.item-quantity .num-block {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--border);
@@ -173,7 +202,7 @@
   background: #fff;
 }
 
-.num-in {
+.item-quantity .num-in {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -183,7 +212,7 @@
 
 }
 
-.num-in .in-num {
+.item-quantity .num-in .in-num {
   width: 44px;
   text-align: center;
   border: 0;
@@ -201,7 +230,7 @@
   cursor: pointer;
   user-select: none;
   border-radius: 6px;
-  transition: background .12s ease;
+  transition: all ease .12s;
   color: black;
 
 }

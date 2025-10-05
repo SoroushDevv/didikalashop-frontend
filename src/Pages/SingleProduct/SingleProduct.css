@@ -35,3 +35,67 @@ overflow: hidden;
     display: flex;
     flex-wrap: nowrap;
 }
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: black;
+}
+
+/* num-block */
+.item-quantity .num-block {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.item-quantity .num-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  min-width: 110px;
+  justify-content: center;
+
+}
+
+.item-quantity .num-in .in-num {
+  width: 44px;
+  text-align: center;
+  border: 0;
+  font-weight: 700;
+  background: transparent;
+}
+
+.num-in .plus,
+.num-in .minus {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 6px;
+  transition: background .12s ease;
+  color: black;
+
+}
+
+.num-in .plus:hover,
+.num-in .minus:hover {
+  background: rgba(14, 165, 164, 0.06);
+}
+
+.num-in .minus.dis {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.quantity-change_container {
+    border: 1px solid #1e1e1e7c;
+    border-radius: 10px;
+    padding: 5px;
+}
