@@ -35,6 +35,12 @@ import CategoryResults from "./Pages/CategoryResults/CategoryResults";
 import IncredibleOffers from "./Pages/IncredibleOffers/IncredibleOffers"
 import MostSales from "./Pages/MostSales/MostSales"
 
+
+
+
+
+
+
 let routes = [
     { path: "/", element: <Home /> },
 

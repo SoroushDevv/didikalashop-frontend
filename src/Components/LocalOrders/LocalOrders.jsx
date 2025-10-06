@@ -7,6 +7,7 @@ import ShowSwal from '../../Components/ShowSwal/ShowSwal';
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { Box } from '@mui/material';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import { Co2Sharp } from '@mui/icons-material';
 
 // دیکشنری نگاشت رنگ‌های فارسی به کد هگز
 const colorMap = {
@@ -62,16 +63,27 @@ const ColorChip = ({ color }) => {
 };
 
 export default function LocalOrders({ height, offLeft }) {
-  const { orders, setOrders, loading, error, triggerUpdate } = useCart();
+  const { order, setOrder, loading, error, triggerUpdate } = useCart();
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [payableAmount, setPayablAmount] = useState(0);
   const [localOff, setLocalOff] = useState(localStorage.getItem("offValue"))
-  // محاسبه مبلغ کل با استفاده از discountedPrice
+
+
+
+  useEffect(() => {
+
+    if(!order.items) {
+      console.log("order items vojood nadarad")
+      return;
+    }
+
+    console.log("order items:",order.items)
+  },[])
 
   useEffect(() => {
     const calculatePrices = () => {
-      if (!orders || !Array.isArray(orders) || orders.length === 0) {
+      if (!order || !Array.isArray(order.items) || order.items.length === 0) {
         setTotalPrice(0);
         setTotalDiscount(0);
         setPayablAmount(0);
@@ -79,13 +91,13 @@ export default function LocalOrders({ height, offLeft }) {
       }
 
       // محاسبه کل قیمت بدون تخفیف
-      const totalPrice = orders.reduce(
+      const totalPrice = order.items.reduce(
         (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
         0
       );
 
-      // محاسبه کل تخفیف
-      const totalDiscount = orders.reduce(
+   
+      const totalDiscount = order.items.reduce(
         (sum, item) =>
           sum +
           ((item.price || 0) * (item.product?.discount || 0) / 100) * (item.quantity || 1),
@@ -95,7 +107,7 @@ export default function LocalOrders({ height, offLeft }) {
       const localOffValue = localStorage.getItem("offValue")
       setLocalOff(localOffValue)
 
-      // محاسبه مبلغ قابل پرداخت
+   
       const payableAmount = totalPrice - (totalDiscount + localOffValue);
 
       setTotalPrice(totalPrice);
@@ -103,32 +115,28 @@ export default function LocalOrders({ height, offLeft }) {
       setPayablAmount(payableAmount);
     };
 
-
-
     calculatePrices();
-  }, [orders, localOff]);
+  }, [order.items, localOff]);
 
   // بررسی خالی بودن محصولات
   useEffect(() => {
-    if (orders.length === 0) {
-      setTotalPrice(0); // در صورت عدم وجود محصولات، قیمت صفر می‌شود
+    if (order.items.length === 0) {
+      setTotalPrice(0); 
       setPayablAmount(0);
     }
-  }, [orders]);
+  }, [order.items]);
 
-  // تابع حذف آیتم
   const handleRemoveItem = (orderID) => {
-    const updatedCart = orders.filter((order) => order.orderId !== orderID);
+    const updatedCart = order.items.filter((order) => order.orderId !== orderID);
     console.log(updatedCart);
-    localStorage.setItem('orders', JSON.stringify(updatedCart));
-    setOrders(updatedCart);
+    localStorage.setItem('order', JSON.stringify(updatedCart));
+    setOrder(updatedCart);
     triggerUpdate();
   };
 
-  // تابع حذف کل سبد
   const handleClearCart = () => {
-    localStorage.removeItem('orders');
-    setOrders([]);
+    localStorage.removeItem('order');
+    setOrder([]);
     triggerUpdate();
     ShowSwal({
       title: 'موفقیت',
@@ -137,12 +145,10 @@ export default function LocalOrders({ height, offLeft }) {
     });
   };
 
-  // بررسی وجود محصولات در localStorage
-  const localOrders = JSON.parse(localStorage.getItem("orders")) || [];
+  const localOrders = JSON.parse(localStorage.getItem("order")) || [];
   const hasLocalOrders = localOrders.length > 0;
 
-  console.log("height : ",height)
-  console.log("off left:",offLeft)
+
   return (
     <div className="navbar-cart-info" >
       {loading && <div className="text-center loading">در حال دریافت داده‌ها...</div>}
@@ -153,7 +159,7 @@ export default function LocalOrders({ height, offLeft }) {
             <Link to="/cart" className="navbar-cart-info-link">
               <span>مشاهده سبد خرید</span>
             </Link>
-            <div className="navbar-cart-info-count">{orders.length} کالا</div>
+            <div className="navbar-cart-info-count">{order.items.length} کالا</div>
 
           </div>
           <ul
@@ -161,10 +167,10 @@ export default function LocalOrders({ height, offLeft }) {
             tabIndex="1"
             style={{ overflow: 'hidden', outline: 'none' }}
           >
-            {orders.length === 0 ? (
+            {order.items.length === 0 ? (
               <ErrorMessage msg="سبد خرید شما خالی است" />
             ) : (
-              orders.map((order) => (
+              order.items.map((order) => (
                 <li
                   className="cart-item"
                   key={order.orderId || 'null'}
@@ -215,7 +221,7 @@ export default function LocalOrders({ height, offLeft }) {
               <button
                 className="navbar-cart-info-submit submit-cart navbar-cart-info_btn"
               >
-                <Link to={orders.length ? "/cart" : "#"}>
+                <Link to={order.items.length ? "/cart" : "#"}>
                   ثبت سفارش
                 </Link>
               </button>

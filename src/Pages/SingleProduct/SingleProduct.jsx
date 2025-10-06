@@ -20,6 +20,8 @@ import ShowSwal from '../../Components/ShowSwal/ShowSwal';
 import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import { useCart } from './../../Contexts/CartContext';
 import { v4 as uuidv4 } from 'uuid';
+import { VolcanoSharp } from '@mui/icons-material';
+import { json } from 'express';
 
 // دیکشنری نگاشت رنگ‌های فارسی به کد هگز
 const colorMap = {
@@ -96,8 +98,8 @@ const ProductCard = styled(Box)(({ theme }) => ({
   border: `0px solid ${theme.palette.divider}`,
 }));
 
-export default function SingleProductSearch() {
-  const { orders, setOrders, loading, error, triggerUpdate } = useCart();
+export default function SingleProduct() {
+  const { order, setOrder, loading, error, triggerUpdate } = useCart();
   const { currentUser, loading: userLoading, error: userError } = useCurrentUser();
   const { products, loading: productsLoading, error: productsError } = useAllProducts();
   const { productTitle: encodedTitle } = useParams();
@@ -108,7 +110,7 @@ export default function SingleProductSearch() {
   const [localQuantity, setLocalQuantity] = useState(1);
 
 
-
+  console.log("order in single product:", order)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -116,10 +118,7 @@ export default function SingleProductSearch() {
 
         const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
 
-
-
-        const filteredProduct = products.find((product) => product.title === title);
-
+        const filteredProduct = products?.find((product) => product.title === title);
 
 
         if (!filteredProduct) {
@@ -154,96 +153,128 @@ export default function SingleProductSearch() {
 
   useEffect(() => {
     if (product && selectedColor) {
-      const existingOrder = orders.find(
+      const existingOrder = order?.find(
         (order) => order.productID === product.id && order.color === selectedColor
       );
       setLocalQuantity(existingOrder ? existingOrder.quantity : 1);
     }
-  }, [product, selectedColor, orders]);
+  }, [product, selectedColor, order]);
 
-  const handleAddToCart = (title, userId, quantity, color) => {
+  const handleAddToCart = async (mainProduct, user, quantity, color) => {
+    try {
+      // لاگ برای دیباگ
+      console.log("user:", user);
+      console.log("product:", mainProduct);
+      console.log("color:", color);
 
-    if (!products || !Array.isArray(products)) {
-      ShowSwal({
-        title: 'خطا',
-        text: 'لیست محصولات معتبر نیست',
-        icon: 'error',
-      });
-      return { success: false, error: 'لیست محصولات معتبر نیست' };
-    }
+      // بررسی معتبر بودن کاربر
+      if (!user?.id) {
+        ShowSwal({
+          title: "خطا",
+          text: "ابتدا وارد حساب کاربری خود شوید",
+          icon: "error",
+        });
+        return;
+      }
 
-    console.log("productsssssssss:", products)
-    const product = products.find((p) => p.title === title);
+      // بررسی معتبر بودن محصول
+      if (!mainProduct?.id || !mainProduct?.price) {
+        ShowSwal({
+          title: "خطا",
+          text: "محصول معتبر نیست",
+          icon: "error",
+        });
+        return;
+      }
 
-    if (!product || !product.title || !userId || !product.price || quantity <= 0 || quantity === null) {
-      ShowSwal({
-        title: 'خطا',
-        text: 'اطلاعات محصول یا کاربر نامعتبر است',
-        icon: 'error',
-      });
-      return { success: false, error: 'اطلاعات محصول یا کاربر نامعتبر است' };
-    }
+      // بررسی انتخاب رنگ
+      if (!color) {
+        ShowSwal({
+          title: "خطا",
+          text: "لطفاً رنگ محصول را انتخاب کنید",
+          icon: "error",
+        });
+        return;
+      }
 
-    if (product.colors && product.colors.length > 0 && !color) {
-      ShowSwal({
-        title: 'خطا',
-        text: 'لطفاً یک رنگ انتخاب کنید',
-        icon: 'error',
-      });
-      return { success: false, error: 'رنگ انتخاب نشده است' };
-    }
+      // گرفتن سفارش فعلی از state
 
-    const orderIndex = orders.findIndex(
-      (order) => order.productID === title && order.color === color
-    );
+      const loaclOrder = JSON.parse(localStorage.getItem("order"))
 
-    const discount = product.discount || 0;
-    const discountedPrice = product.price * (1 - product.discountPercent / 100);
-    const payablePrice = discountedPrice * quantity;
+      let activeOrder = loaclOrder && loaclOrder.isActive && loaclOrder.userID === user.id ? loaclOrder : null;
 
-    let updatedOrders;
-    if (orderIndex !== -1) {
-      updatedOrders = orders.map((order, index) =>
-        index === orderIndex
-          ? { ...order, quantity, payablePrice }
-          : order
+      // اگر سفارش وجود نداشت، ایجاد سفارش جدید
+      if (!activeOrder) {
+        activeOrder = {
+          orderId: uuidv4(),
+          userID: user.id,
+          date: new Date().toISOString().split("T")[0],
+          hour: new Date().toTimeString().split(" ")[0],
+          isActive: true,
+          items: [],
+        };
+        console.log("🆕 سفارش جدید ساخته شد:", activeOrder);
+      }
+
+      // بررسی اینکه محصول در سفارش موجود هست یا نه
+      const existingItemIndex = activeOrder.items.findIndex(
+        item => item.productID === mainProduct.id && item.color === color
       );
-      ShowSwal({
-        title: 'موفقیت',
-        text: 'سبد خرید به‌روزرسانی شد',
-        icon: 'success',
-      });
-    } else {
-      console.log("product product product product:", product)
-      const newOrder = {
-        orderId: uuidv4(),
-        productID: product.id,
-        userID: userId,
-        price: product.price,
-        discount: discount,
-        payablePrice: payablePrice,
-        quantity: quantity,
-        date: new Date().toISOString().split('T')[0],
-        hour: new Date().toTimeString().slice(0, 8),
-        color: color || null,
-        product,
-      };
-      updatedOrders = [...orders, newOrder];
-      ShowSwal({
-        title: 'سفارش ثبت شد',
-        text: 'محصول با موفقیت به سبد خرید اضافه شد',
-        icon: 'success',
-      });
-    }
 
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
-    setOrders(updatedOrders);
-    if (triggerUpdate) {
-      triggerUpdate();
-    }
+      const discountedPrice = mainProduct.price * (1 - (mainProduct.discountPercent || 0) / 100);
+      const payablePrice = discountedPrice * quantity;
 
-    return { success: true, data: updatedOrders[orderIndex !== -1 ? orderIndex : updatedOrders.length - 1] };
+      if (existingItemIndex !== -1) {
+        // اگر محصول موجود بود، quantity و قیمت به‌روزرسانی شود
+        activeOrder.items[existingItemIndex] = {
+          ...activeOrder.items[existingItemIndex],
+          quantity,
+          payablePrice,
+        };
+
+        ShowSwal({
+          title: "به‌روزرسانی شد",
+          text: "محصول در سبد خرید به‌روزرسانی شد",
+          icon: "success",
+        });
+      } else {
+        // اضافه کردن محصول جدید به سفارش
+        activeOrder.items.push({
+          productID: mainProduct.id,
+          color,
+          quantity,
+          price: mainProduct.price,
+          payablePrice,
+          product: mainProduct,
+        });
+
+        ShowSwal({
+          title: "افزوده شد",
+          text: "محصول به سبد خرید اضافه شد",
+          icon: "success",
+        });
+      }
+
+      // چون فقط یک سفارش داریم، کل state سفارش را با activeOrder جایگزین می‌کنیم
+      setOrder(activeOrder);
+      localStorage.setItem("order", JSON.stringify(activeOrder));
+      triggerUpdate && triggerUpdate();
+
+      console.log("🛒 سبد خرید به‌روز شد:", activeOrder);
+
+      return { success: true, order: activeOrder };
+    } catch (error) {
+      console.error("❌ خطا در افزودن به سبد خرید:", error);
+      ShowSwal({
+        title: "خطا",
+        text: "در افزودن محصول به سبد خرید خطایی رخ داد",
+        icon: "error",
+      });
+      return { success: false, error: error.message };
+    }
   };
+
+
 
   const handleIncrease = () => {
     if (!product) return;
@@ -300,7 +331,7 @@ export default function SingleProductSearch() {
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
-    const existingOrder = orders.find(
+    const existingOrder = order?.items?.find(
       (order) => order.productID === product?.id && order.color === color
     );
     setLocalQuantity(existingOrder ? existingOrder.quantity : 1);
@@ -316,7 +347,7 @@ export default function SingleProductSearch() {
   const colors = product?.colors ? product.colors : [];
   // لاگ برای دیباگ رنگ‌ها
   console.log('Parsed colors:', colors);
-  const isInCart = orders.some(
+  const isInCart = order?.items?.some(
     (order) => order.productID === product.id && order.color === selectedColor
   );
 
@@ -399,7 +430,7 @@ export default function SingleProductSearch() {
                         style={{
                           width: '50px',
                           textAlign: 'center',
-                        
+
                         }}
                         min="1"
                         max={product.count}
@@ -425,7 +456,7 @@ export default function SingleProductSearch() {
                   sx={{ mt: 2 }}
                   className="add-to-cart-button"
                   disabled={product.count === 0 || !currentUser?.id}
-                  onClick={() => handleAddToCart(product.title, currentUser.id, localQuantity, selectedColor)}
+                  onClick={() => handleAddToCart(product, currentUser, localQuantity, selectedColor)}
                 >
                   {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
                 </Button>
