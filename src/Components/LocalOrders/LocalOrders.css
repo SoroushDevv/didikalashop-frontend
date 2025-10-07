@@ -1,253 +1,217 @@
-/* ریشه سبد خرید هدر */
-.navbar-cart-info {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: flex;
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    width: 300px;
-    min-height: 300px;
-    padding: 15px 20px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    font-family: inherit;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    /* حالت‌های عمومی */
-    .loading {
-        text-align: center;
-        padding: 1rem;
-        color: #666;
-        font-size: 0.9rem;
-    }
+/* ==============================
+   Cart Dropdown Styles
+============================== */
+.cart-dropdown {
+  width: 360px;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
 }
 
-.navbar-cart-tab {
-    position: relative;
+/* --- Header --- */
+.cart-dropdown .cart-dropdown-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
 }
 
-/* --- هدر بالا --- */
-.navbar-cart-info-link_container {
-    width: 100%;
-    padding: 10px 0;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #1e1e1e79;
-
-    .navbar-cart-info-link {
-        text-decoration: none;
-        color: #007bff;
-        font-size: 0.9rem;
-        transition: color 0.2s;
-
-        &:hover {
-            color: #0056b3;
-        }
-    }
-
-    .navbar-cart-info-count {
-        font-size: 0.85rem;
-        color: #444;
-        background: #f5f5f5;
-        padding: 2px 8px;
-        border-radius: 12px;
-    }
+.cart-dropdown .cart-dropdown-header-link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* --- لیست آیتم‌ها --- */
-.navbar-basket-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-height: 260px;
-    overflow-y: auto;
-    width: 100%;
-    border: none;
-
-    .cart-item {
-        border-bottom: 1px solid #eee;
-        padding: 0.75rem 0.5rem;
-        display: flex;
-        flex-direction: column;
-
-        .navbar-basket-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 0.75rem;
-
-            /* محتوای سمت متن */
-            .navbar-basket-list-item-content {
-                flex: 1;
-                position: relative;
-
-                .navbar-basket-list-item-title {
-                    text-decoration: none;
-                    font-size: 0.95rem;
-                    font-weight: 600;
-                    color: #333;
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    transition: color 0.2s;
-
-                    &:hover {
-                        color: #007bff;
-                    }
-                }
-
-                .navbar-basket-list-item-footer {
-                    .navbar-basket-list-item-props {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 0.5rem;
-                        font-size: 0.85rem;
-                        color: #555;
-
-                        .navbar-basket-list-item-props-item {
-                            display: inline-flex;
-                            align-items: center;
-                            gap: 0.3rem;
-                        }
-                    }
-                }
-
-                .navbar-basket-list-item-remove {
-                    background: none;
-                    border: none;
-                    color: #ff4d4f;
-                    cursor: pointer;
-                    transition: transform 0.2s;
-
-                    &:hover {
-                        transform: scale(1.1);
-                    }
-                }
-            }
-
-            /* تصویر محصول */
-            .navbar-basket-list-item-image {
-                width: 64px;
-                height: 64px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                overflow: hidden;
-                flex-shrink: 0;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
-    }
+.cart-dropdown .cart-dropdown-link {
+  font-weight: 500;
+  color: #1976d2;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* --- فوتر پایین --- */
-.navbar-cart-info-footer {
-    margin-top: 1rem;
-    flex-direction: column;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 1px solid #1e1e1e79;
-    padding: 10px 0;
-    width: 100%;
-
-    .navbar-cart-info-total {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-
-
-        .navbar-cart-info-total-text {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .navbar-cart-info-total-amount {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #222;
-
-            .navbar-cart-info-total-amount-number {
-                color: #000;
-            }
-        }
-    }
-
-    .navbar-cart-info-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.5rem;
-
-        .navbar-cart-info_btn {
-            padding: 8px 16px;
-            background-color: #ff4d4f;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-
-        .navbar-cart-info_btn {
-            text-decoration: none;
-        }
-
-        .navbar-cart-info-clear {
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: #ff4d4f;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-
-            a {
-                color: #fff;
-                text-decoration: none;
-            }
-
-            &:hover {
-                background-color: #e6373a;
-            }
-        }
-
-        .submit-cart {
-            background-color: #28a745;
-
-            &:hover {
-                background-color: #218838;
-            }
-        }
-
-        .submit-cart a {
-            color: inherit;
-            text-decoration: none;
-        }
-    }
+.cart-dropdown .cart-dropdown-link:hover {
+  color: #0d47a1;
 }
 
-/* اسکرول بار سفارشی برای لیست */
-.navbar-basket-list::-webkit-scrollbar {
-    width: 6px;
+.cart-dropdown .cart-dropdown-count {
+  background-color: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
 }
 
-.navbar-basket-list::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
+/* --- List --- */
+.cart-dropdown .cart-dropdown-list {
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
 }
 
-.navbar-basket-list::-webkit-scrollbar-track {
-    background: #f5f5f5;
+/* --- Item --- */
+.cart-dropdown .cart-dropdown-item {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.cart-dropdown .cart-dropdown-item:hover {
+  background-color: #fafafa;
+}
+
+/* --- Item Wrapper --- */
+.cart-dropdown .cart-dropdown-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* --- Content --- */
+.cart-dropdown .cart-dropdown-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-dropdown .cart-dropdown-item-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cart-dropdown .cart-dropdown-item-title:hover {
+  color: #1976d2;
+}
+
+/* --- Footer --- */
+.cart-dropdown .cart-dropdown-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-dropdown .cart-dropdown-item-props {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+}
+
+.cart-dropdown .cart-dropdown-item-prop {
+  font-size: 13px;
+  color: #555;
+}
+
+/* --- Remove Button --- */
+.cart-dropdown .cart-dropdown-item-remove {
+  background: transparent;
+  border: none;
+  color: #d32f2f;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+
+.cart-dropdown .cart-dropdown-item-remove:hover {
+  color: #b71c1c;
+}
+
+/* --- Image --- */
+.cart-dropdown .cart-dropdown-item-image img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* --- Footer --- */
+.cart-dropdown .cart-dropdown-footer {
+  border-top: 1px solid #eee;
+  padding: 15px 20px;
+  background-color: #fafafa;
+}
+
+/* --- Total --- */
+.cart-dropdown .cart-dropdown-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cart-dropdown .cart-dropdown-total-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.cart-dropdown .cart-dropdown-total-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* --- Actions --- */
+.cart-dropdown .cart-dropdown-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.cart-dropdown .cart-dropdown-btn {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cart-dropdown .submit-cart {
+  background-color: #1976d2;
+  
+}
+.cart-dropdown .submit-cart a {
+   color: #fff; 
+   text-decoration: none;
+}
+.cart-dropdown .submit-cart:hover {
+  background-color: #0d47a1;
+}
+
+.cart-dropdown .clear-cart {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.cart-dropdown .clear-cart:hover {
+  background-color: #e0e0e0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .cart-dropdown {
+    width: 95%;
+  }
+  .cart-dropdown .cart-dropdown-item-image img {
+    width: 50px;
+    height: 50px;
+  }
+  .cart-dropdown .cart-dropdown-btn {
+    font-size: 13px;
+  }
 }

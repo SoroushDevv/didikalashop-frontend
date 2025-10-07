@@ -38,6 +38,14 @@ function useLocalStorage(key, initialValue) {
     }
   }, [trigger, key]); // حذف initialValue از وابستگی‌ها
 
+  useEffect(() => {
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setValue(Array.isArray(parsed) ? parsed : initialValue);
+    }
+  }, [key]);
+
   const setLocalValue = (newValue) => {
     setLoading(true);
     try {
