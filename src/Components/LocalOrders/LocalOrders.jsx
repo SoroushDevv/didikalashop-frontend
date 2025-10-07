@@ -60,7 +60,7 @@ const ColorChip = ({ color }) => {
 
 export default function LocalOrders() {
   const { order, setOrder, loading, error } = useCart();
-  const [userOrder,setUserOrder] = useState(null)
+  const [userOrder, setUserOrder] = useState(null)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [payableAmount, setPayableAmount] = useState(0);
@@ -71,10 +71,10 @@ export default function LocalOrders() {
 
     const localOrder = JSON.parse(localStorage.getItem("order"))
 
-    if(localOrder){
+    if (localOrder) {
       setUserOrder(localOrder)
     }
-  },[])
+  }, [])
   // ✅ همگام‌سازی order از context
   useEffect(() => {
     if (loading || error) return;
@@ -96,7 +96,7 @@ export default function LocalOrders() {
       (sum, item) =>
         sum +
         ((item.price || 0) * (item.product?.discount || 0) / 100) *
-          (item.quantity || 1),
+        (item.quantity || 1),
       0
     );
 
@@ -137,97 +137,97 @@ export default function LocalOrders() {
   if (error) return <ErrorMessage msg="داده‌ها در راه مانده‌اند" />;
 
 
- if(userOrder == null) return;
+  if (userOrder == null) return;
 
- console.log("user order :",userOrder)
- const items = userOrder?.items || []
+  console.log("user order :", userOrder)
+  const items = userOrder?.items || []
 
 
 
 
   return (
-  <div className="cart-dropdown">
-  <div className="cart-dropdown-header">
-    <div className="cart-dropdown-header-link-container">
-      <Link to="/cart" className="cart-dropdown-link">
-        <span>مشاهده سبد خرید</span>
-      </Link>
-      <div className="cart-dropdown-count">{items.length} کالا</div>
-    </div>
-  </div>
+    <div className="cart-dropdown">
+      <div className="cart-dropdown-header">
+        <div className="cart-dropdown-header-link-container">
+          <Link to="/cart" className="cart-dropdown-link">
+            <span>مشاهده سبد خرید</span>
+          </Link>
+          <div className="cart-dropdown-count">{items.length} کالا</div>
+        </div>
+      </div>
 
-  <ul className="cart-dropdown-list" tabIndex="1">
-    {items.length === 0 ? (
-      <ErrorMessage msg="سبد خرید شما خالی است" />
-    ) : (
-      items.map((item) => (
-        <li className="cart-dropdown-item" key={item.productID}>
-          <div className="cart-dropdown-item-wrapper">
-            <div className="cart-dropdown-item-content">
-              <Link
-                to={`/productDetail/${item.product.title}`}
-                className="cart-dropdown-item-title"
-              >
-                {item.product.title || "عنوان محصول"}
-              </Link>
+      <ul className="cart-dropdown-list" tabIndex="1">
+        {items.length === 0 ? (
+          <ErrorMessage msg="سبد خرید شما خالی است" />
+        ) : (
+          items.map((item) => (
+            <li className="cart-dropdown-item" key={item.productID}>
+              <div className="cart-dropdown-item-wrapper">
+                <div className="cart-dropdown-item-content">
+                  <Link
+                    to={`/productDetail/${item.product.title}`}
+                    className="cart-dropdown-item-title"
+                  >
+                    {item.product.title || "عنوان محصول"}
+                  </Link>
 
-              <div className="cart-dropdown-item-footer">
-                <div className="cart-dropdown-item-props">
-                  <span className="cart-dropdown-item-prop">
-                    <ColorChip color={item.color} />
-                  </span>
-                  <span className="cart-dropdown-item-prop">
-                    {(item.price || 0).toLocaleString()} تومان
-                  </span>
-                  <span className="cart-dropdown-item-prop">
-                    {item.quantity} ×
-                  </span>
+                  <div className="cart-dropdown-item-footer">
+                    <div className="cart-dropdown-item-props">
+                      <span className="cart-dropdown-item-prop">
+                        <ColorChip color={item.color} />
+                      </span>
+                      <span className="cart-dropdown-item-prop">
+                        {(item.price || 0).toLocaleString()} تومان
+                      </span>
+                      <span className="cart-dropdown-item-prop">
+                        {item.quantity} ×
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    className="cart-dropdown-item-remove"
+                    onClick={() => handleRemoveItem(item.productID)}
+                  >
+                    <DeleteOutlinedIcon />
+                  </button>
+                </div>
+
+                <div className="cart-dropdown-item-image">
+                  <img
+                    src={`/img/products/${item.product.img || "test"}`}
+                    alt={item.title || "عنوان محصول"}
+                  />
                 </div>
               </div>
+            </li>
+          ))
+        )}
+      </ul>
 
-              <button
-                className="cart-dropdown-item-remove"
-                onClick={() => handleRemoveItem(item.productID)}
-              >
-                <DeleteOutlinedIcon />
-              </button>
-            </div>
+      <div className="cart-dropdown-footer">
+        <div className="cart-dropdown-total">
+          <span className="cart-dropdown-total-text">مبلغ قابل پرداخت:</span>
+          <p className="cart-dropdown-total-amount">
+            <span className="cart-dropdown-total-number">
+              {payableAmount.toLocaleString()} <span>تومان</span>
+            </span>
+          </p>
+        </div>
 
-            <div className="cart-dropdown-item-image">
-              <img
-                src={`/img/products/${item.product.img || "test"}`}
-                alt={item.title || "عنوان محصول"}
-              />
-            </div>
-          </div>
-        </li>
-      ))
-    )}
-  </ul>
-
-  <div className="cart-dropdown-footer">
-    <div className="cart-dropdown-total">
-      <span className="cart-dropdown-total-text">مبلغ قابل پرداخت:</span>
-      <p className="cart-dropdown-total-amount">
-        <span className="cart-dropdown-total-number">
-          {payableAmount.toLocaleString()} <span>تومان</span>
-        </span>
-      </p>
+        <div className="cart-dropdown-actions">
+          <button className="cart-dropdown-btn submit-cart">
+            <Link to={items.length ? "/cart" : "#"}>ثبت سفارش</Link>
+          </button>
+          <button
+            className="cart-dropdown-btn clear-cart"
+            onClick={handleClearCart}
+          >
+            خالی کردن سبد
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div className="cart-dropdown-actions">
-      <button className="cart-dropdown-btn submit-cart">
-        <Link to={items.length ? "/cart" : "#"}>ثبت سفارش</Link>
-      </button>
-      <button
-        className="cart-dropdown-btn clear-cart"
-        onClick={handleClearCart}
-      >
-        خالی کردن سبد
-      </button>
-    </div>
-  </div>
-</div>
 
   );
 }

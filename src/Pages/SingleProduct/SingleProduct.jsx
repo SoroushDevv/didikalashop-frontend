@@ -125,7 +125,7 @@ export default function SingleProduct() {
     setLocalQuantity(existingItem ? existingItem.quantity : 1);
   }, [product, selectedColor, order]);
 
-  // 🛒 افزودن یا آپدیت به سبد خرید
+
   const handleAddToCart = () => {
     if (!currentUser?.id) {
       return ShowSwal({
@@ -141,17 +141,19 @@ export default function SingleProduct() {
       return ShowSwal({ title: 'خطا', text: 'رنگ را انتخاب کنید', icon: 'error' });
     }
 
+    console.log("order  befor check:", order)
     const activeOrder = order?.isActive && order?.userID === currentUser.id
       ? { ...order }
       : {
-          orderId: uuidv4(),
-          userID: currentUser.id,
-          date: new Date().toISOString().split('T')[0],
-          hour: new Date().toTimeString().split(' ')[0],
-          isActive: true,
-          items: [],
-        };
+        orderId: uuidv4(),
+        userID: currentUser.id,
+        date: new Date().toISOString().split('T')[0],
+        hour: new Date().toTimeString().split(' ')[0],
+        isActive: true,
+        items: [],
+      };
 
+    console.log("active order :", activeOrder)
     const existingIndex = activeOrder.items.findIndex(
       item => item.productID === product.id && item.color === selectedColor
     );
@@ -165,6 +167,10 @@ export default function SingleProduct() {
         quantity: localQuantity,
         payablePrice,
       };
+
+      localStorage.setItem("order", JSON.stringify(activeOrder))
+      triggerUpdate();
+
       ShowSwal({ title: 'به‌روزرسانی شد', text: 'محصول به‌روزرسانی شد', icon: 'success' });
     } else {
       activeOrder.items.push({
@@ -175,11 +181,15 @@ export default function SingleProduct() {
         payablePrice,
         product,
       });
+      localStorage.setItem("order", JSON.stringify(activeOrder))
+      triggerUpdate();
+
       ShowSwal({ title: 'افزوده شد', text: 'محصول به سبد خرید اضافه شد', icon: 'success' });
     }
 
+    console.log("active order in else :", activeOrder)
     setOrder(activeOrder);
-    triggerUpdate && triggerUpdate();
+    triggerUpdate();
   };
 
   const handleQuantityChange = (type) => {
@@ -199,67 +209,67 @@ export default function SingleProduct() {
   );
 
   return (
-<Box className="single-product-section dt-sl" sx={{ padding: 3 }}>
-  <div className="single-product-container container">
-    <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
-      <Link underline="hover" color="inherit" href="/">خانه</Link>
-      <Typography color="text.primary">{product.title}</Typography>
-    </Breadcrumbs>
+    <Box className="single-product-section dt-sl">
+      <div className="single-product-container container">
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+          <Link underline="hover" color="inherit" href="/">خانه</Link>
+          <Typography color="text.primary">{product.title}</Typography>
+        </Breadcrumbs>
 
-    <Grid container spacing={3} className="single-product_wrapper">
-      <Grid item xs={12} md={6}>
-        <div className="product-details-card">
-          <Typography variant="h4" className="product-title">{product.title}</Typography>
-          <Typography variant="h6" className="product-price">
-            قیمت: {product.price.toLocaleString()} تومان
-          </Typography>
+        <Grid container spacing={3} className="single-product_wrapper">
+          <Grid item xs={12} md={6}>
+            <div className="product-details-card">
+              <Typography variant="h4" className="product-title">{product.title}</Typography>
+              <Typography variant="h6" className="product-price">
+                قیمت: {product.price.toLocaleString()} تومان
+              </Typography>
 
-          {product.colors?.length > 0 && (
-            <div className="product-color-selector">
-              <Typography variant="body2" className="color-label">انتخاب رنگ:</Typography>
-              <div className="color-options">
-                {product.colors.map((color, i) => (
-                  <ColorChip
-                    key={i}
-                    color={color}
-                    isSelected={selectedColor === color}
-                    onClick={() => setSelectedColor(color)}
-                  />
-                ))}
+              {product.colors?.length > 0 && (
+                <div className="product-color-selector">
+                  <Typography variant="body2" className="color-label">انتخاب رنگ:</Typography>
+                  <div className="color-options">
+                    {product.colors.map((color, i) => (
+                      <ColorChip
+                        key={i}
+                        color={color}
+                        isSelected={selectedColor === color}
+                        onClick={() => setSelectedColor(color)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="quantity-control">
+                <Button onClick={() => handleQuantityChange('increase')}>+</Button>
+                <Typography>{localQuantity}</Typography>
+                <Button onClick={() => handleQuantityChange('decrease')}>-</Button>
               </div>
+
+              <Button
+                variant="contained"
+                color="error"
+                className="add-to-cart-button"
+                disabled={product.count === 0}
+                onClick={handleAddToCart}
+              >
+                {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
+              </Button>
             </div>
-          )}
+          </Grid>
 
-          <div className="quantity-control">
-            <Button onClick={() => handleQuantityChange('increase')}>+</Button>
-            <Typography>{localQuantity}</Typography>
-            <Button onClick={() => handleQuantityChange('decrease')}>-</Button>
-          </div>
+          <Grid item xs={12} md={6}>
+            <div className="product-image-wrapper">
+              <ProductImage src={`/img/products/${product.img}`} alt={product.title} />
+            </div>
+          </Grid>
+        </Grid>
+      </div>
 
-          <Button
-            variant="contained"
-            color="error"
-            className="add-to-cart-button"
-            disabled={product.count === 0}
-            onClick={handleAddToCart}
-          >
-            {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
-          </Button>
-        </div>
-      </Grid>
-
-      <Grid item xs={12} md={6}>
-        <div className="product-image-wrapper">
-          <ProductImage src={`/img/products/${product.img}`} alt={product.title} />
-        </div>
-      </Grid>
-    </Grid>
-  </div>
-
-  <div className="product-comment-section">
-    <ProductComment product={product} />
-  </div>
-</Box>
+      <div className="product-comment-section">
+        <ProductComment product={product} />
+      </div>
+    </Box>
 
   );
 }

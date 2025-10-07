@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useLocalStorage from "../Hooks/useLocalStorage";
 
 const CartContext = createContext();
@@ -16,6 +16,8 @@ export const CartProvider = ({ children }) => {
   const [order, setLocalValue, { loading, error, trigger }] =
     useLocalStorage("order", defaultOrder);
 
+  const [initialized, setInitialized] = useState(false);
+
   const setOrder = (newOrderPart) => {
     setLocalValue((prevOrder) => ({
       ...prevOrder,
@@ -26,11 +28,19 @@ export const CartProvider = ({ children }) => {
     }));
   };
 
+  // 🌀 بارگذاری اولیه از localStorage
   useEffect(() => {
-    trigger(); // sync اولیه از localStorage
+    (async () => {
+      await trigger(); // همگام‌سازی اولیه با localStorage
+      setInitialized(true); // فقط بعد از sync اولیه مقداردهی مجاز میشه
+    })();
   }, []);
 
-  console.log("order in useCart : ", order)
+  // تا زمانی که مقدار از localStorage لود نشده هیچی نده
+  if (!initialized || loading) return null;
+
+  console.log("✅ order loaded from localStorage:", order);
+
   return (
     <CartContext.Provider
       value={{ order, setOrder, loading, error, triggerUpdate: trigger }}

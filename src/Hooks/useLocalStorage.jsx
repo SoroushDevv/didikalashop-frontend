@@ -4,53 +4,56 @@ function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     try {
       const item = localStorage.getItem(key);
-      const parsed = item ? JSON.parse(item) : initialValue;
-      return Array.isArray(parsed) ? parsed : initialValue;
+      if (!item) return initialValue;
+
+      const parsed = JSON.parse(item);
+      // نوع داده باید مشابه مقدار پیش‌فرض باشد
+      if (typeof parsed === typeof initialValue) {
+        return parsed;
+      }
+      return initialValue;
     } catch (error) {
       console.error('Error reading from localStorage:', error);
       return initialValue;
     }
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [trigger, setTrigger] = useState(0);
 
-  // خواندن دوباره از localStorage وقتی trigger تغییر می‌کنه
+  // خواندن دوباره از localStorage وقتی trigger تغییر می‌کند
   useEffect(() => {
     setLoading(true);
     try {
       const item = localStorage.getItem(key);
-      const parsed = item ? JSON.parse(item) : initialValue;
-      const newValue = Array.isArray(parsed) ? parsed : initialValue;
-      // فقط اگه داده تغییر کرده state رو به‌روزرسانی کن
-      setValue((prev) => {
-        if (JSON.stringify(prev) !== JSON.stringify(newValue)) {
-          return newValue;
-        }
-        return prev;
-      });
+      if (!item) return;
+
+      const parsed = JSON.parse(item);
+      if (typeof parsed === typeof initialValue) {
+        setValue((prev) => {
+          if (JSON.stringify(prev) !== JSON.stringify(parsed)) {
+            return parsed;
+          }
+          return prev;
+        });
+      }
       setError(null);
     } catch (error) {
-      setError('خطا در بارگذاری داده‌های سبد خرید');
       console.error('Error reading from localStorage:', error);
+      setError('خطا در بارگذاری داده‌ها');
     } finally {
       setLoading(false);
     }
-  }, [trigger, key]); // حذف initialValue از وابستگی‌ها
+  }, [trigger, key]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      setValue(Array.isArray(parsed) ? parsed : initialValue);
-    }
-  }, [key]);
-
+  // نوشتن در localStorage
   const setLocalValue = (newValue) => {
     setLoading(true);
     try {
-      const valueToStore = Array.isArray(newValue) ? newValue : initialValue;
-      // فقط اگه داده تغییر کرده state و localStorage رو به‌روزرسانی کن
+      const valueToStore =
+        newValue instanceof Function ? newValue(value) : newValue;
+
       if (JSON.stringify(value) !== JSON.stringify(valueToStore)) {
         setValue(valueToStore);
         localStorage.setItem(key, JSON.stringify(valueToStore));
@@ -58,44 +61,37 @@ function useLocalStorage(key, initialValue) {
       }
       setError(null);
     } catch (error) {
-      setError('خطا در ذخیره‌سازی سبد خرید');
       console.error('Error writing to localStorage:', error);
+      setError('خطا در ذخیره‌سازی داده');
     } finally {
       setLoading(false);
     }
   };
 
-  // گوش دادن به تغییرات localStorage در تب‌های دیگر
+  // همگام‌سازی بین تب‌ها
   useEffect(() => {
     const handleStorageChange = (event) => {
-      if (event.key === key) {
-        setLoading(true);
+      if (event.key === key && event.newValue) {
         try {
-          const parsed = event.newValue ? JSON.parse(event.newValue) : initialValue;
-          const newValue = Array.isArray(parsed) ? parsed : initialValue;
-          // فقط اگه داده تغییر کرده state رو به‌روزرسانی کن
-          setValue((prev) => {
-            if (JSON.stringify(prev) !== JSON.stringify(newValue)) {
-              return newValue;
-            }
-            return prev;
-          });
-          setTrigger((prev) => prev + 1);
-          setError(null);
+          const parsed = JSON.parse(event.newValue);
+          if (typeof parsed === typeof initialValue) {
+            setValue(parsed);
+            setTrigger((prev) => prev + 1);
+          }
         } catch (error) {
-          setError('خطا در همگام‌سازی تغییرات سبد خرید');
-          console.error('Error parsing storage event:', error);
-        } finally {
-          setLoading(false);
+          console.error('Error syncing localStorage:', error);
         }
       }
     };
-
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
-  }, [key]); // حذف initialValue از وابستگی‌ها
+  }, [key]);
 
-  return [value, setLocalValue, { loading, error, trigger: () => setTrigger((prev) => prev + 1) }];
+  return [
+    value,
+    setLocalValue,
+    { loading, error, trigger: () => setTrigger((prev) => prev + 1) },
+  ];
 }
 
 export default useLocalStorage;
