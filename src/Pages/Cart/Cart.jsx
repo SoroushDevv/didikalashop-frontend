@@ -62,18 +62,18 @@ const ColorChip = ({ color }) => {
 
 export default function Cart() {
 
-  const { orders, setOrders, loading, error } = useCart();
+  const { order, setOrder, loading, error, triggerUpdate } = useCart();
   const [activeTab, setActiveTab] = useState('orders');
   const [nextListItems, setNextListItems] = useState([]);
 
 
   // محاسبه مبالغ
-  const totalAmount = orders.reduce(
+  const totalAmount = order.items.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  const totalDiscount = orders.reduce(
+  const totalDiscount = order.items.reduce(
     (total, item) =>
       total +
       (item.price * item.quantity - ((item.price - (item.price * (item.product.discountPercent / 100)))).toLocaleString()),
@@ -87,39 +87,40 @@ export default function Cart() {
 
 
   const increaseQuantity = (productID, color) => {
-    const item = orders.find(
+    const item = order.items.find(
       (item) => item.productID === productID && item.color === color
     );
+
     if (!item) {
-      ShowSwal({
+      return ShowSwal({
         title: 'خطا',
         text: 'سفارش با این محصول یافت نشد',
         icon: 'error',
       });
-      return;
     }
 
-    // چک کردن موجودی
     if (item.quantity >= item.product.count) {
-      ShowSwal({
+      return ShowSwal({
         title: 'خطا',
         text: 'موجودی محصول کافی نیست',
         icon: 'error',
       });
-      return;
     }
 
-    setOrders(
-      orders.map((order) =>
-        order.productID === productID && order.color === color
-          ? { ...order, quantity: order.quantity + 1 }
-          : order
-      )
-    );
+    setOrder({
+      ...order,
+      items: order.items.map((item) =>
+        item.productID === productID && item.color === color
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ),
+    });
+
   };
 
+
   const decreaseQuantity = (productID, color) => {
-    const item = orders.find(
+    const item = order.items.find(
       (item) => item.productID === productID && item.color === color
     );
     if (!item) {
@@ -131,241 +132,239 @@ export default function Cart() {
       return;
     }
 
-    if (item.quantity <= 1) {
-      setOrders(
-        orders.filter(
+
+    setOrder({
+      ...order,
+      items: order.items.map((item) =>
+        item.productID === productID && item.color === color
+          ? {
+            ...item,
+            quantity: Math.max(1, item.quantity - 1),
+          }
+          : item
+      ),
+    });
+
+};
+
+console.log("orders: ", order.items)
+const removeItem = (productID, color) => {
+  ShowSwal({
+    title: 'آیا از حذف این محصول اطمینان دارید؟',
+    text: '',
+    icon: 'warning',
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'بله',
+    cancelButtonText: 'خیر',
+    onConfirm: () => {
+      setOrder({
+        ...order,
+        items : order.items.filter(
           (order) => !(order.productID === productID && order.color === color)
         )
+      }
+        
       );
       ShowSwal({
-        title: 'موفقیت',
-        text: 'سفارش از سبد خرید حذف شد',
+        title: 'آیتم با موفقیت حذف شد',
+        text: '',
         icon: 'success',
       });
-      return;
-    }
-
-    setOrders(
-      orders.map((order) =>
-        order.productID === productID && order.color === color
-          ? { ...order, quantity: order.quantity - 1 }
-          : order
-      )
-    );
-  };
-
-  console.log("orders: ", orders)
-  const removeItem = (productID, color) => {
-    ShowSwal({
-      title: 'آیا از حذف این محصول اطمینان دارید؟',
-      text: '',
-      icon: 'warning',
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'بله',
-      cancelButtonText: 'خیر',
-      onConfirm: () => {
-        setOrders(
-          orders.filter(
-            (order) => !(order.productID === productID && order.color === color)
-          )
-        );
-        ShowSwal({
-          title: 'آیتم با موفقیت حذف شد',
-          text: '',
-          icon: 'success',
-        });
-      },
-    });
-  };
+    },
+  });
+};
 
 
-  const addAllToCart = () => {
-    setOrders([...orders, ...nextListItems]);
-    setNextListItems([]);
-  };
+const addAllToCart = () => {
+  setOrder([...order.items, ...nextListItems]);
+  setNextListItems([]);
+};
 
-  if (loading) {
-    return <div className="text-center loading">در حال دریافت داده‌ها...</div>;
-  }
-  if (error) {
-    return <div className="text-center error">خطا: {error}</div>;
-  }
+if (loading) {
+  return <div className="text-center loading">در حال دریافت داده‌ها...</div>;
+}
+if (error) {
+  return <div className="text-center error">خطا: {error}</div>;
+}
 
 
-  return (
-    <main className="main-content">
-      <div className="container main-container">
-       
-          <nav className="tab-cart-page">
-            <div className="nav-tabs border-bottom p-2" id="nav-tab" role="tablist">
-              <button
-                className={`card-tab-button ${activeTab === 'orders' ? 'active' : ''
-                  }`}
-                onClick={() => setActiveTab('orders')}
-                role="tab"
-                aria-controls="nav-home"
-                aria-selected={activeTab === 'orders'}
-              >
-                سبد خرید
-                <span className="count-cart" style={{margin:"5px"}}>{orders.length}</span>
-              </button>
-            </div>
-          </nav>
+return (
+  <main className="main-content">
+    <div className="container main-container">
 
-          <div className="col-12">
-            <div className="tab-content" id="nav-tabContent">
-              {/* تب سبد خرید */}
-              <div
-                className={`tab-pane fade ${activeTab === 'orders' ? 'show active' : ''
-                  }`}
-                id="nav-home"
-                role="tabpanel"
-                aria-labelledby="nav-home-tab"
-              >
-                <div className="row">
-                  <div className="col-xl-9 col-lg-8 col-12 px-0">
-                    <div className="table-responsive checkout-content dt-sl">
-                      <div className="checkout-header checkout-header--express">
-                        <span className="checkout-header-title">ارسال عادی</span>
-                        <span className="checkout-header-extra-info">
-                          ({orders.length} کالا)
-                        </span>
-                      </div>
-                      <div className="checkout-section-content-dd-k">
-                        <div className="cart-items-dd-k">
-                          {orders.length === 0 ? (
-                            <p className="text-center">سبد خرید خالی است</p>
-                          ) : (
-                            orders.map((item) => (
-                              <div
-                                className="cart-item py-4 px-3"
-                                key={`${item.productID}-${item.color}`}
-                              >
-                                <div className="item-thumbnail">
+      <nav className="tab-cart-page">
+        <div className="nav-tabs border-bottom p-2" id="nav-tab" role="tablist">
+          <button
+            className={`card-tab-button ${activeTab === 'orders' ? 'active' : ''
+              }`}
+            onClick={() => setActiveTab('orders')}
+            role="tab"
+            aria-controls="nav-home"
+            aria-selected={activeTab === 'orders'}
+          >
+            سبد خرید
+            <span className="count-cart" style={{ margin: "5px" }}>{order.items.length}</span>
+          </button>
+        </div>
+      </nav>
+
+      <div className="col-12">
+        <div className="tab-content" id="nav-tabContent">
+          {/* تب سبد خرید */}
+          <div
+            className={`tab-pane fade ${activeTab === 'orders' ? 'show active' : ''
+              }`}
+            id="nav-home"
+            role="tabpanel"
+            aria-labelledby="nav-home-tab"
+          >
+            <div className="row">
+              <div className="col-xl-9 col-lg-8 col-12 px-0">
+                <div className="table-responsive checkout-content dt-sl">
+                  <div className="checkout-header checkout-header--express">
+                    <span className="checkout-header-title">ارسال عادی</span>
+                    <span className="checkout-header-extra-info">
+                      ({order.items.length} کالا)
+                    </span>
+                  </div>
+                  <div className="checkout-section-content-dd-k">
+                    <div className="cart-items-dd-k">
+                      {order.items.length === 0 ? (
+                        <p className="text-center">سبد خرید خالی است</p>
+                      ) : (
+                        order.items.map((item) => (
+                          <div
+                            className="cart-item py-4 px-3"
+                            key={`${item.productID}-${item.color}`}
+                          >
+                            <div className="item-thumbnail">
+                              <a href="#">
+                                <img
+                                  src={
+                                    `/img/products/${item.product.img}` ||
+                                    '/placeholder.png'
+                                  }
+                                  alt={item.product.title || 'محصول'}
+                                />
+                              </a>
+                            </div>
+                            <div className="item-info flex-grow-1">
+                              <div className="item-title">
+                                <h2>
                                   <a href="#">
-                                    <img
-                                      src={
-                                        `/img/products/${item.product.img}` ||
-                                        '/placeholder.png'
-                                      }
-                                      alt={item.product.title || 'محصول'}
-                                    />
+                                    {item.product.title || 'بدون نام'}
                                   </a>
-                                </div>
-                                <div className="item-info flex-grow-1">
-                                  <div className="item-title">
-                                    <h2>
-                                      <a href="#">
-                                        {item.product.title || 'بدون نام'}
-                                      </a>
-                                    </h2>
-                                  </div>
-                                  <div className="item-detail">
-                                    <ul>
-                                      <li>
-                                        <ColorChip color={item.color} />
-                                      </li>
-                                      <li>
-                                        <i className="far fa-shield-check text-muted"></i>
-                                        <span>گارانتی ۱۸ ماهه</span>
-                                      </li>
-                                      <li>
-                                        <i className="far fa-store-alt text-muted"></i>
-                                        <span>نام فروشنده</span>
-                                      </li>
-                                      <li>
-                                        <i className="far fa-clipboard-check text-primary"></i>
-                                        <span>موجود در انبار</span>
-                                      </li>
-                                      {item.discountPercent > 0 && (
-                                        <li>
-                                          <span>تخفیف:</span>
-                                          <span>
-                                            {item.discountPercent}% (
-                                            {(
-                                              (item.price - (item.price * (item.discountPercent / 100)))
-                                            ).toLocaleString()}{' '}
-                                            تومان)
-                                          </span>
-                                        </li>
-                                      )}
-                                    </ul>
-                                    <div className="item-quantity--item-price">
-                                      <div className="item-quantity">
-                                        <div className="num-block">
-                                          <div className="num-in">
-                                            <span
-                                              className="plus"
-                                              onClick={() =>
-                                                increaseQuantity(
-                                                  item.productID,
-                                                  item.color
-                                                )
-                                              }
-                                            >+</span>
-                                            <input
-                                              type="text"
-                                              className="in-num"
-                                              value={item.quantity}
-                                              readOnly
-                                            />
-                                            <span
-                                              className={`minus ${item.quantity === 1 ? 'dis' : ''
-                                                }`}
-                                              onClick={() =>
-                                                decreaseQuantity(
-                                                  item.productID,
-                                                  item.color
-                                                )
-                                              }
-                                            >-</span>
-                                          </div>
-                                        </div>
-                                        <button
-                                          className="item-remove-btn mr-2"
-                                          style={{ margin: "10px 0" }}
-                                          onClick={() =>
-                                            removeItem(item.productID, item.color)
+                                </h2>
+                              </div>
+                              <div className="item-detail">
+                                <ul>
+                                  <li>
+                                    <ColorChip color={item.color} />
+                                  </li>
+                                  <li>
+                                    <i className="far fa-shield-check text-muted"></i>
+                                    <span>گارانتی ۱۸ ماهه</span>
+                                  </li>
+                                  <li>
+                                    <i className="far fa-store-alt text-muted"></i>
+                                    <span>نام فروشنده</span>
+                                  </li>
+                                  <li>
+                                    <i className="far fa-clipboard-check text-primary"></i>
+                                    <span>موجود در انبار</span>
+                                  </li>
+                                  {item.discountPercent > 0 && (
+                                    <li>
+                                      <span>تخفیف:</span>
+                                      <span>
+                                        {item.discountPercent}% (
+                                        {(
+                                          (item.price - (item.price * (item.discountPercent / 100)))
+                                        ).toLocaleString()}{' '}
+                                        تومان)
+                                      </span>
+                                    </li>
+                                  )}
+                                </ul>
+                                <div className="item-quantity--item-price">
+                                  <div className="item-quantity">
+                                    <div className="num-block">
+                                      <div className="num-in">
+                                        <span
+                                          className="plus"
+                                          onClick={() => {
+                                            console.log("product id :", item.productID)
+                                            increaseQuantity(
+                                              item.productID,
+                                              item.color
+                                            )
                                           }
-                                        >
-                                          <DeleteOutlineOutlinedIcon />
-                                          حذف
-                                        </button>
-                                      </div>
-                                      <div className="item-price">
-                                        {item.price}
-                                        <span className="text-sm mr-1" style={{ margin: "0 10px" }}>تومان</span>
-                                        {item.discountPercent > 0 && (
-                                          <div className="original-price">
-                                            قیمت اصلی:{' '}
-                                            {(item.price * item.quantity).toLocaleString()}{' '}
-                                            تومان
-                                          </div>
-                                        )}
+
+                                          }
+                                        >+</span>
+                                        <input
+                                          type="text"
+                                          className="in-num"
+                                          value={item.quantity}
+                                          readOnly
+                                        />
+                                        <span
+                                          className={`minus ${item.quantity === 1 ? 'dis' : ''
+                                            }`}
+                                          onClick={() =>
+                                            decreaseQuantity(
+                                              item.productID,
+                                              item.color
+                                            )
+                                          }
+                                        >-</span>
                                       </div>
                                     </div>
+                                    <button
+                                      className="item-remove-btn mr-2"
+                                      style={{ margin: "10px 0" }}
+                                      onClick={() =>
+                                        removeItem(item.productID, item.color)
+                                      }
+                                    >
+                                      <DeleteOutlineOutlinedIcon />
+                                      حذف
+                                    </button>
+                                  </div>
+                                  <div className="item-price">
+                                    {item.price}
+                                    <span className="text-sm mr-1" style={{ margin: "0 10px" }}>تومان</span>
+                                    {item.discountPercent > 0 && (
+                                      <div className="original-price">
+                                        قیمت اصلی:{' '}
+                                        {(item.price * item.quantity).toLocaleString()}{' '}
+                                        تومان
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
-                            ))
-                          )}
-                        </div>
-                      </div>
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-4 col-12 w-res-sidebar sticky-sidebar">
-                    <CheckoutSummary
-                      totalDiscount={totalDiscount}
-                      totalAmount={totalAmount}
-                    />
                   </div>
                 </div>
               </div>
+              <div className="col-xl-3 col-lg-4 col-12 w-res-sidebar sticky-sidebar">
+                <CheckoutSummary
+                  totalDiscount={totalDiscount}
+                  totalAmount={totalAmount}
+                />
+              </div>
             </div>
           </div>
-        
+        </div>
       </div>
-    </main>
-  );
+
+    </div>
+  </main>
+);
 }

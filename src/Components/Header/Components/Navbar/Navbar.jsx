@@ -16,7 +16,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
   const navbarRef = useRef(null)
   const listItemRef = useRef(null)
   const mainMenuRef = useRef(null)
-  const { orders, setOrders, triggerUpdate } = useCart();
+  const { order, setOrder, triggerUpdate } = useCart();
   const { categories, laoding: categoriesLoading, error: categoriesError } = useProductCategories()
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCategoryHovered, setIsCategoryHovered] = useState(false);
@@ -101,7 +101,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
                   <div className="cart-tab__trigger">
                     <span className="cart-tab__label">سبد خرید</span>
                     <ShoppingCartIcon className="cart-tab__icon" />
-                    <span className="cart-tab__count">{orders ? orders.length : 0}</span>
+                    <span className="cart-tab__count">{order?.items.length ? order?.items.length : 0 }</span>
                   </div>
                   {showUserBasket && (
                     <LocalOrders height={offsetHeight} offLeft={offsetLeft} />

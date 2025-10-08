@@ -19,24 +19,30 @@ export const CartProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false);
 
   const setOrder = (newOrderPart) => {
-    setLocalValue((prevOrder) => ({
-      ...prevOrder,
+    const updatedOrder = {
+      ...order,
       ...newOrderPart,
       items: Array.isArray(newOrderPart.items)
         ? newOrderPart.items
-        : prevOrder.items,
-    }));
+        : order.items,
+    }
+
+
+
+    setLocalValue(updatedOrder);
   };
 
-  // 🌀 بارگذاری اولیه از localStorage
   useEffect(() => {
     (async () => {
-      await trigger(); // همگام‌سازی اولیه با localStorage
-      setInitialized(true); // فقط بعد از sync اولیه مقداردهی مجاز میشه
+      await trigger();
+      setInitialized(true);
     })();
   }, []);
 
-  // تا زمانی که مقدار از localStorage لود نشده هیچی نده
+  useEffect(() => {
+    localStorage.setItem('order', JSON.stringify(order));
+  }, [order]);
+  
   if (!initialized || loading) return null;
 
   console.log("✅ order loaded from localStorage:", order);

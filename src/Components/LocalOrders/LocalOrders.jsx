@@ -59,7 +59,7 @@ const ColorChip = ({ color }) => {
 };
 
 export default function LocalOrders() {
-  const { order, setOrder, loading, error } = useCart();
+  const { order, setOrder, loading, error,triggerUpdate } = useCart();
   const [userOrder, setUserOrder] = useState(null)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
@@ -116,6 +116,7 @@ export default function LocalOrders() {
 
     const updatedOrder = { ...order, items: updatedItems };
     setOrder(updatedOrder);
+    triggerUpdate()
     ShowSwal({
       title: "محصول حذف شد",
       text: "محصول از سبد خرید حذف گردید.",
@@ -126,6 +127,7 @@ export default function LocalOrders() {
   // ✅ خالی کردن سبد خرید
   const handleClearCart = () => {
     setOrder({ ...order, items: [] });
+    triggerUpdate()
     ShowSwal({
       title: "سبد خالی شد",
       text: "سبد خرید با موفقیت خالی شد.",
