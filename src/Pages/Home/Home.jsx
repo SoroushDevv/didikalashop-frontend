@@ -20,6 +20,7 @@ import {
 } from "../../datas";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -79,7 +80,7 @@ export default function Home() {
 
   if (loading) {
 
-    return <div>در حال بارگذاری...</div>;
+    return <CircularProgress size={"3rem"}/>;
 
   }
 

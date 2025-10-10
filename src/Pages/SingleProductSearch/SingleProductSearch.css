@@ -1,32 +1,158 @@
-.single-product-container {
-    display: flex;
-    height: 600px;
-    justify-content: center;
-    flex-wrap: nowrap !important;
+.single-product-section {
+  background-color: #fff;
+  padding: 2rem 0;
 }
-.single-product-container .product-item {
-min-width: 50% !important;
-height: 100%;
-border-radius: 10px;
-overflow: hidden;
-}
-.product-image {
-    transition: transform 0.3s ease-in-out;
 
+.single-product-section .single-product-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.product-image:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
 
+.single-product-section .MuiBreadcrumbs-root {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
 }
-.product-image img {
-    height: 100% !important;
 
+.single-product-section .single-product_wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 2rem;
 }
-.add-to-cart-button {
-    padding: 8px 10px !important;
+
+.single-product-section .product-details-card {
+  background: #fafafa;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-width: 380px;
 }
-.color-container  {
-    display: flex;
-    flex-wrap: nowrap;
+
+.single-product-section .product-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.single-product-section .product-price {
+  color: #d32f2f;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.single-product-section .product-color-selector {
+  margin-bottom: 1.5rem;
+}
+
+.single-product-section .product-color-selector .color-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.single-product-section .product-color-selector .color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.single-product-section .product-color-selector .color-options .color-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+
+.single-product-section .product-color-selector .color-options .color-chip:hover {
+  transform: scale(1.05);
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .color-circle {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  flex-shrink: 0; 
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .color-circle.selected {
+  transform: scale(1.1);
+  border-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .check-icon {
+  position: absolute;
+  font-size: 16px;
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .check-icon.dark {
+  color: #000;
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .check-icon.light {
+  color: #fff;
+}
+
+.single-product-section .product-color-selector .color-options .color-chip .color-name {
+  font-size: 0.9rem;
+  color: #333;
+  user-select: none;
+}
+
+.single-product-section .quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.single-product-section .quantity-control button {
+  min-width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  transition: all ease 0.3s;
+}
+
+.single-product-section .quantity-control button:hover {
+  background: #eee;
+}
+
+.single-product-section .add-to-cart-button {
+  width: 100%;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.75rem 0;
+}
+
+.single-product-section .product-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 100%;
+}
+
+.single-product-section .product-image-wrapper img {
+  max-width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.single-product-section .product-comment-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
 }

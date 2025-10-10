@@ -75,123 +75,82 @@ export default function BlogsPage() {
   }
 
   return (
-    <Box component="section" sx={{ py: 8, bgcolor: "background.default", pt: 10 }}>
-      <Container>
-        {/* متن بالا */}
-        <Box textAlign="center" mb={6} maxWidth="md" mx="auto">
-          <Typography variant="h4" component="h2" fontWeight={600} gutterBottom>
-            آخرین مقالات وبلاگ
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            اینجا می‌تونی جدیدترین مطالب درمورد محصولات فروشگاه رو بخونی و همیشه بروز باشی.
-          </Typography>
-        </Box>
-
-        {/* گرید کارت‌ها */}
-        {loading && <Typography>در حال بارگذاری...</Typography>}
-        {error && <Typography color="error">{error}</Typography>}
-
-
-        <Grid container spacing={2} mb={4} className="blog-tabs_container" justifyContent={"center"}>
-          <Grid item xs={2}  className="blog-tab-link_wrapper">
-            <NavLink
-              onClick={() => handleFilterBlogs("همه")}
-              to={`/blogs/همه`}
-              className={({ isActive }) => (isActive ? "active-tab" : "tab")}
-            >
-              همه
-            </NavLink>
-          </Grid>
-          {categories.map((cat, idx) => (
-            <Grid item xs={2} key={idx} className="blog-tab-link_wrapper">
-              <NavLink
-                onClick={() => handleFilterBlogs(cat)}
-                to={`/blogs/${cat}`}
-                className={({ isActive }) => (isActive ? "active-tab" : "tab")}
-              >
-                {cat}
-              </NavLink>
-            </Grid>
-          ))}
-
-        </Grid>
-        <Grid container spacing={3} justifyContent={"center"} >
-          {
-            !loading &&
-            !error &&
-
-            filteredBlogs.map((blog) => (
-
-              <Grid item key={blog.id} xs={6} sm={4} md={2} >
-                <Card
-
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    transition: "0.3s",
-                    "&:hover": { boxShadow: 6, transform: "translateY(-4px)" },
-                  }}
-                >
-                  {/* تصویر */}
-                  <CardMedia
-                    component="img"
-                    image={`/img/blogs/${blog.cover_image}`}
-                    alt={blog.title}
-                    sx={{ height: 200, objectFit: "cover" }}
-                  />
-
-                  {/* هدر */}
-                  <CardHeader
-                    title={
-                      <Typography
-                        component={Link}
-                        to={`/blogs/${blog.slug}`}
-                        sx={{
-                          textDecoration: "none",
-                          color: "text.primary",
-                          fontWeight: 600,
-                          fontSize: "1.1rem",
-                          "&:hover": { color: "primary.main" },
-                        }}
-                      >
-                        {blog.title}
-                      </Typography>
-                    }
-                  />
-
-                  {/* خلاصه متن */}
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ lineHeight: 1.6 }}
-                    >
-                      {blog.summary ||
-                        blog.content?.slice(0, 120) + "..." ||
-                        "بدون توضیحات"}
-                    </Typography>
-                  </CardContent>
-
-                  {/* لینک پایین */}
-                  <CardActions>
-                    <NavLink
-                      to={`/blog-details/${blog.id}`}
-                      size="small"
-                      component={Link}
-                      sx={{ fontWeight: 500 }}
-                      className={"blog-detail_button"}
-                    >
-                      ادامه مطلب
-                    </NavLink>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-        </Grid>
-      </Container>
+  <Box component="section" className="blog-section">
+  <Container>
+    {/* متن بالا */}
+    <Box className="blog-header">
+      <Typography variant="h4" component="h2" className="blog-title">
+        آخرین مقالات وبلاگ
+      </Typography>
+      <Typography variant="body1" className="blog-subtitle">
+        اینجا می‌تونی جدیدترین مطالب درمورد محصولات فروشگاه رو بخونی و همیشه بروز باشی.
+      </Typography>
     </Box>
+
+    {/* تب‌های فیلتر */}
+    <Grid container spacing={2} mb={4} className="blog-tabs">
+      <Grid item xs={2} className="blog-tab-item">
+        <NavLink
+          onClick={() => handleFilterBlogs("همه")}
+          to={`/blogs/همه`}
+          className={({ isActive }) => (isActive ? "tab active" : "tab")}
+        >
+          همه
+        </NavLink>
+      </Grid>
+
+      {categories.map((cat, idx) => (
+        <Grid item xs={2} key={idx} className="blog-tab-item">
+          <NavLink
+            onClick={() => handleFilterBlogs(cat)}
+            to={`/blogs/${cat}`}
+            className={({ isActive }) => (isActive ? "tab active" : "tab")}
+          >
+            {cat}
+          </NavLink>
+        </Grid>
+      ))}
+    </Grid>
+
+    {/* گرید کارت‌ها */}
+    <Grid container spacing={3} justifyContent="center" className="blog-grid">
+      {!loading &&
+        !error &&
+        filteredBlogs.map((blog) => (
+          <Grid item key={blog.id} xs={6} sm={4} md={2} className="blog-card-item">
+            <Card className="blog-card">
+              <CardMedia
+                component="img"
+                image={`/img/blogs/${blog.cover_image}`}
+                alt={blog.title}
+                className="blog-card-image"
+              />
+
+              <CardHeader
+                title={
+                  <Typography component={Link} to={`/blogs/${blog.slug}`} className="blog-card-title">
+                    {blog.title}
+                  </Typography>
+                }
+              />
+
+              <CardContent className="blog-card-content">
+                <Typography variant="body2" className="blog-card-summary">
+                  {blog.summary || blog.content?.slice(0, 120) + "..." || "بدون توضیحات"}
+                </Typography>
+              </CardContent>
+
+              <CardActions className="blog-card-footer">
+                <NavLink to={`/blog-details/${blog.id}`} className="blog-detail-link">
+                  ادامه مطلب
+                </NavLink>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+    </Grid>
+  </Container>
+</Box>
+
   )
 }

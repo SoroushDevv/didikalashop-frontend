@@ -41,37 +41,22 @@ const ColorChip = ({ color, isSelected, onClick }) => {
   const lightColors = ['#FFFFFF', '#FFFF00', '#FF69B4', '#C0C0C0', 'transparent'];
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+   <Box className="color-chip">
       <div
+        className={`color-circle ${isSelected ? "selected" : ""}`}
+        style={{ backgroundColor: hexColor }}
         onClick={onClick}
-        style={{
-          backgroundColor: hexColor,
-          border: `2px solid ${isSelected ? '#000' : '#ccc'}`,
-          width: 32,
-          height: 32,
-          borderRadius: '50%',
-          cursor: 'pointer',
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'transform 0.2s ease-in-out, border-color 0.2s ease-in-out',
-          transform: isSelected ? 'scale(1.1)' : 'scale(1)',
-          boxShadow: isSelected ? '0 2px 4px rgba(0,0,0,0.3)' : 'none',
-          position: 'relative'
-        }}
         title={color}
       >
         {isSelected && (
           <CheckOutlinedIcon
-            style={{
-              color: lightColors.includes(hexColor) ? '#000' : '#fff',
-              fontSize: 16,
-              position: 'absolute',
-            }}
+            className={`check-icon ${lightColors.includes(hexColor) ? "dark" : "light"}`}
           />
         )}
       </div>
-      <Typography variant="body2">{color}</Typography>
+      <Typography variant="body2" className="color-name">
+        {color}
+      </Typography>
     </Box>
   );
 };

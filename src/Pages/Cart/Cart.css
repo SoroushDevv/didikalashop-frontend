@@ -86,6 +86,8 @@
 /* لیست آیتم‌ها */
 .cart-items-dd-k {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: var(--gap);
 }
@@ -165,16 +167,14 @@
 }
 
 /* چیپ رنگ */
-.ColorChip,
-.color-chip {
-  width: 18px;
+.item-detail_list .color-chip_item .color-chip {
+ width: 18px;
   height: 18px;
   border-radius: 50%;
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
-
 /* تعداد و حذف */
 .item-quantity--item-price {
   display: flex;
@@ -331,6 +331,26 @@
 .tab-pane.show.active {
   opacity: 1;
   transform: none;
+}
+.return-home_btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4f46e5; /* بنفش ملایم */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  width: fit-content; /* یا عدد ثابت مثل 120px */
+}
+
+.return-home_btn:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ریسپانسیو */

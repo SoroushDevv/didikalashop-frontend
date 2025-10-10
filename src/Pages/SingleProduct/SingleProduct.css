@@ -107,3 +107,47 @@
   padding-top: 2rem;
   border-top: 1px solid #eee;
 }
+.color-options .color-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+
+.color-options .color-chip .color-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.color-options .color-chip .color-circle.selected {
+  transform: scale(1.1);
+  border-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.color-options .color-chip .check-icon {
+  position: absolute;
+  font-size: 16px;
+}
+
+.color-options .color-chip .check-icon.dark {
+  color: #000;
+}
+
+.color-options .color-chip .check-icon.light {
+  color: #fff;
+}
+
+.color-options .color-chip .color-name {
+  font-size: 0.9rem;
+  color: #333;
+}

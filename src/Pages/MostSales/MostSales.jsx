@@ -3,14 +3,14 @@ import "./MostSales.css"
 import { useState, useEffect, useCallback, useMemo } from "react";
 import useAllProducts from "./../../Hooks/useAllProducts";
 import {
-    Box,
-    Typography,
-    Rating,
-    Card,
-    CardMedia,
-    CardContent,
-    Chip,
-    Button,
+  Box,
+  Typography,
+  Rating,
+  Card,
+  CardMedia,
+  CardContent,
+  Chip,
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
@@ -19,71 +19,71 @@ import useAllCategories from "./../../Hooks/useAllCategories";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const ProductCard = styled(Card)(({ theme }) => ({
-    minWidth: 200,
-    height: "fit-content",
-    margin: theme.spacing(1),
-    textAlign: "center",
-    boxShadow: theme.shadows[3],
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.background.paper,
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+  minWidth: 200,
+  height: "fit-content",
+  margin: theme.spacing(1),
+  textAlign: "center",
+  boxShadow: theme.shadows[3],
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.background.paper,
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
 }));
 
 const DiscountChip = styled(Chip)(({ theme }) => ({
-    width: "20px",
-    backgroundColor: "#f86b75",
-    color: theme.palette.common.white,
-    fontWeight: "bold",
-    fontSize: "0.8rem",
-    "& span": {
-        margin: 0,
-        padding: "2px 8px",
-    },
-    zIndex: 1,
+  width: "20px",
+  backgroundColor: "#f86b75",
+  color: theme.palette.common.white,
+  fontWeight: "bold",
+  fontSize: "0.8rem",
+  "& span": {
+    margin: 0,
+    padding: "2px 8px",
+  },
+  zIndex: 1,
 }));
 
 const StrikethroughPrice = styled(Typography)(({ theme }) => ({
-    textDecoration: "line-through",
-    color: theme.palette.text.secondary,
-    fontSize: "0.9rem",
-    marginRight: theme.spacing(1),
+  textDecoration: "line-through",
+  color: theme.palette.text.secondary,
+  fontSize: "0.9rem",
+  marginRight: theme.spacing(1),
 }));
 
 const DiscountedPrice = styled(Typography)(({ theme }) => ({
-    color: "#f86b75",
-    fontWeight: "bold",
-    fontSize: "0.9rem",
+  color: "#f86b75",
+  fontWeight: "bold",
+  fontSize: "0.9rem",
 }));
 
 export default function MostSales({ sorting }) {
-    const Navigate = useNavigate();
-    const { categories } = useAllCategories()
-    const { category } = useParams();
-    const { products, loading, error } = useAllProducts();
-    const [filteredProducts, setFilteredProducts] = useState([])
+  const Navigate = useNavigate();
+  const { categories } = useAllCategories()
+  const { category } = useParams();
+  const { products, loading, error } = useAllProducts();
+  const [filteredProducts, setFilteredProducts] = useState([])
 
-    console.log(products)
-    const filteredItems = useMemo(() => {
-        if (!products || products.length === 0) return [];
+  console.log(products)
+  const filteredItems = useMemo(() => {
+    if (!products || products.length === 0) return [];
 
-        return products.filter((product) => product.count >= 50)
-    }, [products]);
+    return products.filter((product) => product.count >= 50)
+  }, [products]);
 
- 
-    const topSellingItems = useMemo(() => {
-        return [...filteredItems]
-            .sort((a, b) => (b.count || 0) - (a.count || 0))
-            .slice(0, 10);
-    }, [filteredItems]);
 
- 
-    return (
-    <div className="search-results">
-      <div className="container">
-        <Typography variant="h5" className="search-title" style={{margin:"10px 0"}}>
+  const topSellingItems = useMemo(() => {
+    return [...filteredItems]
+      .sort((a, b) => (b.count || 0) - (a.count || 0))
+      .slice(0, 10);
+  }, [filteredItems]);
+
+
+  return (
+    <div className="container">
+      <div className="most-sale_results">
+        <Typography variant="h5" className="search-title most-sale_title" style={{ margin: "10px 0" }}>
           {category && category !== "all" ? `دسته بندی: ${category}` : "پرفروش‌ترین‌ها"}
         </Typography>
 
@@ -132,7 +132,7 @@ export default function MostSales({ sorting }) {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
-                      minHeight:"200px",
+                      minHeight: "200px",
                       padding: 1,
                     }}
                     className="most-sale-card_content"
@@ -207,7 +207,7 @@ export default function MostSales({ sorting }) {
                       size="small"
                       className="edit-button"
                       sx={{ mt: 1 }}
-                      onClick={() => Navigate(`/productDetail/${product.title}`)}  
+                      onClick={() => Navigate(`/productDetail/${product.title}`)}
                     >
                       خرید
                     </Button>

@@ -66,7 +66,7 @@ const ColorChip = ({ color }) => {
 };
 
 function Payment() {
-  const { orders, setOrders, loading, error, triggerUpdate: trigger } = useCart();
+  const { order, setOrder, loading, error, triggerUpdate: trigger } = useCart();
   const [isExpanded, setIsExpanded] = useState(false);
   const [total, setTotal] = useState(0);
   const [offerValue, setOfferValue] = useState(0);
@@ -79,13 +79,13 @@ function Payment() {
   useEffect(() => {
 
 
-    const totalPrice = orders.reduce((sum, item) => {
+    const totalPrice = order.items.reduce((sum, item) => {
       const price = Number(item?.payablePrice) || 0;
       return sum + price;
     }, 0);
 
     setTotal(totalPrice);
-  }, [orders, trigger]);
+  }, [order.items, trigger]);
 
   const updateOffer = async (offId) => {
     try {
@@ -233,7 +233,7 @@ function Payment() {
                         <div class="checkout-summary__summary-text">
                           <LocalShippingOutlinedIcon class="checkout-summary__icon" />
                           <p class="checkout-summary__date">پنج‌شنبه ۱۶ مرداد-بازه ۹ - ۲۲</p>
-                          <span class="checkout-summary__item-count">{orders.length} کالا</span>
+                          <span class="checkout-summary__item-count">{order.items.length} کالا</span>
                         </div>
                         <span class="checkout-summary__method">ارسال عادی</span>
                       </div>
@@ -253,7 +253,7 @@ function Payment() {
                   </AccordionSummary>
                   <AccordionDetails class="checkout-summary__accordion-details">
                     <List class="checkout-summary__list">
-                      {orders.map((order) => (
+                      {order.items.map((order) => (
                         <div class="checkout-summary__product" key={order.orderId}>
                           <div class="checkout-summary__product-item">
                             <div class="checkout-summary__thumbnail">

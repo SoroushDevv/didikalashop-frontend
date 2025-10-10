@@ -1,5 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import './SingleProductSearch.css';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -7,78 +8,64 @@ import {
   Link,
   Button,
   Grid,
-} from "@mui/material";
-import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
-import StarRating from "../../Components/Rating/StarRating";
-import { styled } from "@mui/material/styles";
-import "./SingleProductSearch.css";
-import useAllProducts from "../../Hooks/useAllProducts";
-import ProductComment from "../ProductComment/ProductComment";
-import ProductCarousel from "../../Components/ProductCarousel/ProductCarousel";
-import ShowSwal from "../../Components/ShowSwal/ShowSwal";
-import { useCurrentUser } from "../../Hooks/useCurrentUser";
-import { useCart } from "./../../Contexts/CartContext";
-import { v4 as uuidv4 } from "uuid";
+} from '@mui/material';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import StarRating from '../../Components/Rating/StarRating';
+import { styled } from '@mui/material/styles';
+import useAllProducts from '../../Hooks/useAllProducts';
+import ProductComment from '../ProductComment/ProductComment';
+import ShowSwal from '../../Components/ShowSwal/ShowSwal';
+import { useCurrentUser } from '../../Hooks/useCurrentUser';
+import { useCart } from './../../Contexts/CartContext';
+import { v4 as uuidv4 } from 'uuid';
 
-// دیکشنری رنگ‌ها
+// 🎨 رنگ‌ها
 const colorMap = {
-  مشکی: "#000000",
-  سفید: "#FFFFFF",
-  آبی: "#0000FF",
-  قرمز: "#FF0000",
-  نقره‌ای: "#C0C0C0",
-  خاکستری: "#808080",
-  زرد: "#FFFF00",
-  صورتی: "#FF69B4",
-  قهوه‌ای: "#A52A2A",
-  شفاف: "transparent",
-  چندرنگ: "#FFFFFF",
-  بنفش: "#800080",
-  سبز: "#008000",
+  'مشکی': '#000000',
+  'سفید': '#FFFFFF',
+  'آبی': '#0000FF',
+  'قرمز': '#FF0000',
+  'نقره‌ای': '#C0C0C0',
+  'خاکستری': '#808080',
+  'زرد': '#FFFF00',
+  'صورتی': '#FF69B4',
+  'قهوه‌ای': '#A52A2A',
+  'شفاف': 'transparent',
+  'چندرنگ': '#FFFFFF',
+  'بنفش': '#800080',
+  'سبز': '#008000'
 };
 
 const ColorChip = ({ color, isSelected, onClick }) => {
-  const hexColor = colorMap[color] || "#FFFFFF";
-  const lightColors = ["#FFFFFF", "#FFFF00", "#FF69B4", "#C0C0C0", "transparent"];
+  const hexColor = colorMap[color] || '#FFFFFF';
+  const lightColors = ['#FFFFFF', '#FFFF00', '#FF69B4', '#C0C0C0', 'transparent'];
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+   <Box className="color-chip">
       <div
+        className={`color-circle ${isSelected ? "selected" : ""}`}
+        style={{ backgroundColor: hexColor }}
         onClick={onClick}
-        style={{
-          backgroundColor: hexColor,
-          border: `2px solid ${isSelected ? "#000" : "#ccc"}`,
-          width: 32,
-          height: 32,
-          borderRadius: "50%",
-          cursor: "pointer",
-          position: "relative",
-          transition: "transform 0.2s ease-in-out",
-          transform: isSelected ? "scale(1.1)" : "scale(1)",
-          boxShadow: isSelected ? "0 2px 4px rgba(0,0,0,0.3)" : "none",
-        }}
         title={color}
       >
         {isSelected && (
           <CheckOutlinedIcon
-            style={{
-              color: lightColors.includes(hexColor) ? "#000" : "#fff",
-              fontSize: 16,
-              position: "absolute",
-            }}
+            className={`check-icon ${lightColors.includes(hexColor) ? "dark" : "light"}`}
           />
         )}
       </div>
-      <Typography variant="body2">{color}</Typography>
+      <Typography variant="body2" className="color-name">
+        {color}
+      </Typography>
     </Box>
   );
 };
 
-const ProductImage = styled("img")({
-  width: "100%",
-  minHeight: "100%",
-  objectFit: "cover",
-});
+const ProductImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  minHeight: '100%',
+  objectFit: 'cover',
+}));
 
 const ProductCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -86,238 +73,188 @@ const ProductCard = styled(Box)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-export default function SingleProductSearch() {
+export default function SingleProduct() {
   const { order, setOrder, loading, error, triggerUpdate } = useCart();
   const { currentUser } = useCurrentUser();
-  const { products } = useAllProducts();
+  const { products, loading: productsLoading } = useAllProducts();
   const { productTitle: encodedTitle } = useParams();
-  const navigate = useNavigate();
-
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [localQuantity, setLocalQuantity] = useState(1);
-  const [colors, setColors] = useState([]);
 
-  // بارگذاری محصول
+  // 🟢 دریافت محصول بر اساس عنوان
   useEffect(() => {
-    if (products.length === 0) return;
-    const productTitle = encodedTitle ? decodeURIComponent(encodedTitle) : null;
-    const found = products.find((p) => p.title === productTitle);
-    if (!found) {
-      ShowSwal({ title: "خطا", text: "محصول یافت نشد", icon: "error" });
-      return;
+    if (!products?.length) return;
+
+    const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
+    const foundProduct = products.find(p => p.title === title);
+    if (foundProduct) {
+      setProduct(foundProduct);
+      setSelectedColor(foundProduct.colors?.[0] || null);
+      setLocalQuantity(1);
+    } else {
+      ShowSwal({
+        title: 'خطا',
+        text: 'محصول یافت نشد',
+        icon: 'error',
+      });
     }
-    setProduct(found);
-    setColors(found.colors || []);
-    setSelectedColor(found.colors?.[0] || null);
   }, [encodedTitle, products]);
 
-  // بررسی مقدار قبلی محصول در order
+  // 🟡 اگر محصول در سبد بود، مقدار quantity رو از order بگیر
   useEffect(() => {
-    if (!order || !product) return;
-    const existingItem = order?.items?.find(
-      (item) => item.productID === product.id && item.color === selectedColor
+    if (!order || !product || !selectedColor) return;
+    const existingItem = order.items?.find(
+      item => item.productID === product.id && item.color === selectedColor
     );
     setLocalQuantity(existingItem ? existingItem.quantity : 1);
-  }, [order, product, selectedColor]);
+  }, [product, selectedColor, order]);
 
-  // افزودن یا بروزرسانی محصول در order
+
   const handleAddToCart = () => {
     if (!currentUser?.id) {
-      ShowSwal({ title: "خطا", text: "ابتدا وارد حساب شوید", icon: "error" });
-      return;
+      return ShowSwal({
+        title: 'خطا',
+        text: 'ابتدا وارد حساب کاربری شوید',
+        icon: 'error',
+      });
+    }
+    if (!product?.id) {
+      return ShowSwal({ title: 'خطا', text: 'محصول معتبر نیست', icon: 'error' });
     }
     if (!selectedColor) {
-      ShowSwal({ title: "خطا", text: "لطفاً رنگ را انتخاب کنید", icon: "error" });
-      return;
+      return ShowSwal({ title: 'خطا', text: 'رنگ را انتخاب کنید', icon: 'error' });
     }
 
-    const discount = product.discount || 0;
-    const discountedPrice = product.price * (1 - discount / 100);
-    const payablePrice = discountedPrice * localQuantity;
-
-    // اگر سفارش فعال نداریم → بساز
-    let currentOrder = order;
-    if (!currentOrder) {
-      const now = new Date();
-      currentOrder = {
+    console.log("order  befor check:", order)
+    const activeOrder = order?.isActive && order?.userID === currentUser.id
+      ? { ...order }
+      : {
         orderId: uuidv4(),
         userID: currentUser.id,
-        date: now.toISOString().split("T")[0],
-        hour: now.toTimeString().split(" ")[0],
+        date: new Date().toISOString().split('T')[0],
+        hour: new Date().toTimeString().split(' ')[0],
         isActive: true,
         items: [],
       };
-    }
 
-    // بررسی وجود محصول در سفارش
-    const existingIndex = currentOrder.items.findIndex(
-      (item) => item.productID === product.id && item.color === selectedColor
+    console.log("active order :", activeOrder)
+    const existingIndex = activeOrder.items.findIndex(
+      item => item.productID === product.id && item.color === selectedColor
     );
 
-    let updatedItems;
+    const discountedPrice = product.price * (1 - (product.discountPercent || 0) / 100);
+    const payablePrice = discountedPrice * localQuantity;
+
     if (existingIndex !== -1) {
-      updatedItems = currentOrder.items.map((item, index) =>
-        index === existingIndex
-          ? { ...item, quantity: localQuantity, payablePrice }
-          : item
-      );
-      ShowSwal({
-        title: "به‌روزرسانی",
-        text: "محصول در سبد خرید به‌روزرسانی شد",
-        icon: "success",
-      });
-    } else {
-      const newItem = {
-        productID: product.id,
+      activeOrder.items[existingIndex] = {
+        ...activeOrder.items[existingIndex],
         quantity: localQuantity,
-        color: selectedColor,
-        price: product.price,
-        discount,
         payablePrice,
       };
-      updatedItems = [...currentOrder.items, newItem];
-      ShowSwal({
-        title: "موفقیت",
-        text: "محصول به سبد خرید اضافه شد",
-        icon: "success",
+
+      localStorage.setItem("order", JSON.stringify(activeOrder))
+      triggerUpdate();
+
+      ShowSwal({ title: 'به‌روزرسانی شد', text: 'محصول به‌روزرسانی شد', icon: 'success' });
+    } else {
+      activeOrder.items.push({
+        productID: product.id,
+        color: selectedColor,
+        quantity: localQuantity,
+        price: product.price,
+        payablePrice,
+        product,
       });
+      localStorage.setItem("order", JSON.stringify(activeOrder))
+      triggerUpdate();
+
+      ShowSwal({ title: 'افزوده شد', text: 'محصول به سبد خرید اضافه شد', icon: 'success' });
     }
 
-    const updatedOrder = { ...currentOrder, items: updatedItems };
-    setOrder(updatedOrder);
-    localStorage.setItem("order", JSON.stringify(updatedOrder));
-    if (triggerUpdate) triggerUpdate();
+    console.log("active order in else :", activeOrder)
+    setOrder(activeOrder);
+    triggerUpdate();
   };
 
-  const handleIncrease = () => {
-    if (localQuantity < product.count) setLocalQuantity(localQuantity + 1);
-    else
-      ShowSwal({
-        title: "خطا",
-        text: "موجودی کافی نیست",
-        icon: "error",
-      });
+  const handleQuantityChange = (type) => {
+    if (!product) return;
+    if (type === 'increase' && localQuantity < product.count) {
+      setLocalQuantity(prev => prev + 1);
+    } else if (type === 'decrease' && localQuantity > 1) {
+      setLocalQuantity(prev => prev - 1);
+    }
   };
 
-  const handleDecrease = () => {
-    if (localQuantity > 1) setLocalQuantity(localQuantity - 1);
-    else
-      ShowSwal({
-        title: "خطا",
-        text: "حداقل تعداد ۱ است",
-        icon: "error",
-      });
-  };
+  if (loading || productsLoading) return <Typography>در حال بارگذاری...</Typography>;
+  if (!product) return <Typography>محصول یافت نشد</Typography>;
 
-  if (!product) return <Typography>در حال بارگذاری...</Typography>;
-
-  const isInCart =
-    order?.items?.some(
-      (item) => item.productID === product.id && item.color === selectedColor
-    ) || false;
+  const isInCart = order?.items?.some(
+    item => item.productID === product.id && item.color === selectedColor
+  );
 
   return (
-    <>
-      <Box className="single-product dt-sl" sx={{ padding: 3 }}>
-        <div className="container">
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
-            <Link underline="hover" color="inherit" href="/">
-              خانه
-            </Link>
-            <Link
-              underline="hover"
-              color="inherit"
-              href={`/search/${product.categoryID || "all"}`}
-            >
-              {product.categoryID || "همه محصولات"}
-            </Link>
-            <Typography color="text.primary">{product.title}</Typography>
-          </Breadcrumbs>
+    <Box className="single-product-section dt-sl">
+      <div className="single-product-container container">
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+          <Link underline="hover" color="inherit" href="/">خانه</Link>
+          <Typography color="text.primary">{product.title}</Typography>
+        </Breadcrumbs>
 
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <ProductCard>
-                <Typography variant="h4" gutterBottom>
-                  {product.title}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                  {product.productDesc || "توضیحات محصول در دسترس نیست."}
-                </Typography>
-                <StarRating score={product.popularity} readOnly />
-                <Typography variant="h6" sx={{ mb: 1 }}>
-                  قیمت: {product.price.toLocaleString()} تومان
-                </Typography>
-                <Typography variant="h6" sx={{ mb: 1 }}>
-                  موجودی: {product.count > 0 ? product.count : "ناموجود"}
-                </Typography>
+        <Grid container spacing={3} className="single-product_wrapper">
+          <Grid item xs={12} md={6}>
+            <div className="product-details-card">
+              <Typography variant="h4" className="product-title">{product.title}</Typography>
+              <Typography variant="h6" className="product-price">
+                قیمت: {product.price.toLocaleString()} تومان
+              </Typography>
 
-                {colors.length > 0 && (
-                  <Box sx={{ mb: 2 }}>
-                    <Typography variant="body2" sx={{ mb: 1 }}>
-                      انتخاب رنگ:
-                    </Typography>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "12px",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      {colors.map((color, index) => (
-                        <ColorChip
-                          key={index}
-                          color={color}
-                          isSelected={selectedColor === color}
-                          onClick={() => setSelectedColor(color)}
-                        />
-                      ))}
-                    </div>
-                  </Box>
-                )}
+              {product.colors?.length > 0 && (
+                <div className="product-color-selector">
+                  <Typography variant="body2" className="color-label">انتخاب رنگ:</Typography>
+                  <div className="color-options">
+                    {product.colors.map((color, i) => (
+                      <ColorChip
+                        key={i}
+                        color={color}
+                        isSelected={selectedColor === color}
+                        onClick={() => setSelectedColor(color)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                {product.count > 0 && (
-                  <Box sx={{ mb: 2, display: "flex", alignItems: "center" }}>
-                    <Typography variant="body2" sx={{ mr: 2 }}>
-                      تعداد:
-                    </Typography>
-                    <Button onClick={handleIncrease}>+</Button>
-                    <input
-                      type="number"
-                      value={localQuantity}
-                      onChange={(e) => setLocalQuantity(Number(e.target.value))}
-                      style={{
-                        width: "50px",
-                        textAlign: "center",
-                        border: "1px solid #ccc",
-                      }}
-                    />
-                    <Button onClick={handleDecrease}>-</Button>
-                  </Box>
-                )}
+              <div className="quantity-control">
+                <Button onClick={() => handleQuantityChange('increase')}>+</Button>
+                <Typography>{localQuantity}</Typography>
+                <Button onClick={() => handleQuantityChange('decrease')}>-</Button>
+              </div>
 
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={handleAddToCart}
-                  disabled={product.count === 0 || !currentUser?.id}
-                >
-                  {isInCart ? "به‌روزرسانی سبد" : "افزودن به سبد خرید"}
-                </Button>
-              </ProductCard>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <ProductImage
-                src={`/img/products/${product.img}`}
-                alt={product.title}
-              />
-            </Grid>
+              <Button
+                variant="contained"
+                color="error"
+                className="add-to-cart-button"
+                disabled={product.count === 0}
+                onClick={handleAddToCart}
+              >
+                {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
+              </Button>
+            </div>
           </Grid>
-        </div>
-      </Box>
 
-      <ProductComment product={product} />
-    </>
+          <Grid item xs={12} md={6}>
+            <div className="product-image-wrapper">
+              <ProductImage src={`/img/products/${product.img}`} alt={product.title} />
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+
+      <div className="product-comment-section">
+        <ProductComment product={product} />
+      </div>
+    </Box>
+
   );
 }

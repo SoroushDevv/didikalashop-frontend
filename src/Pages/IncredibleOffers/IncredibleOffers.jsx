@@ -70,88 +70,95 @@ export default function IncredibleOffers() {
     }, [products, offs]);
 
     return (
-        <div className="search-results">
-            <div className="container">
+        <div className="container">
+            <div className="incredible-offer_results">
                 {loading ? (
                     <Typography className="text-center">در حال بارگذاری...</Typography>
                 ) : error ? (
                     <Typography className="text-center text-danger">{error}</Typography>
                 ) : filteredItems.length > 0 ? (
-                    <Box className="row">
-                        {filteredItems.map(product => {
-                            const discount = product.discountPercent
-                            const discountedPrice = discount
-                                ? Math.round(product.price * (1 - discount.percent / 100))
-                                : null;
+                    <>
+                        <Typography variant="h5" className=" incredible-offer_title" style={{ margin: "10px 0" }}>
+                            {"پر تخفیف ها"}
+                        </Typography>
+                        <Box className="row">
+                            {filteredItems.map(product => {
+                                const discount = product.discountPercent
+                                const discountedPrice = discount
+                                    ? Math.round(product.price * (1 - discount.percent / 100))
+                                    : null;
 
-                            return (
-                                <Box className="col-md-4 col-sm-6 mb-4" key={product.id}>
-                                    <ProductCard className="product-card_container">
-                                        <Box className="mui-card-top-content" marginBottom={"15px"}>
-                                            <Rating
-                                                name={`rating-${product.id}`}
-                                                value={product.popularity || 0}
-                                                readOnly
-                                                precision={1}
-                                                className="product-rating"
-                                            />
-                                            {product.discountPercent && <DiscountChip className="discount-chip" label={`%${product.discountPercent}`} />}
-                                        </Box>
-
-                                        <CardMedia
-                                            component="img"
-                                            height="180"
-
-                                            image={product.img ? `/img/products/${product.img}` : "/img/products/default-product-pic.png"}
-                                            alt={product.title || product.name}
-                                            className="product-image"
-                                            style={{objectFit:"contain"}}
-                                        />
-
-                                        <CardContent
-                                            className="incredible-offer-card_content"
-                                            sx={{ flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 1,marginTop:3 }}
-                                        >
-                                            <Typography
-                                                variant="body1"
-                                                className="product-title"
-                                                sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-                                            >
-                                                <a href={`/productDetail/${product.title}`}>{product.title || product.name}</a>
-                                            </Typography>
-
-                                            <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "start", alignItems: "start", minHeight: 60 }}>
-                                                {discountedPrice ? (
-                                                    <>
-                                                        <div>
-                                                            <Typography variant="body2" color="black">قیمت :</Typography>
-                                                            <StrikethroughPrice>{product.price.toLocaleString("fa-IR")} تومان</StrikethroughPrice>
-                                                        </div>
-                                                        <div>
-                                                            <Typography variant="body2" color="black">قیمت با تخفیف:</Typography>
-                                                            <DiscountedPrice>{discountedPrice.toLocaleString("fa-IR")} تومان</DiscountedPrice>
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <Typography variant="body2" color="black">{product.price.toLocaleString("fa-IR")} تومان</Typography>
-                                                )}
+                                return (
+                                    <Box className="col-md-4 col-sm-6 mb-4" key={product.id}>
+                                        <ProductCard className="product-card_container">
+                                            <Box className="mui-card-top-content" marginBottom={"15px"}>
+                                                <Rating
+                                                    name={`rating-${product.id}`}
+                                                    value={product.popularity || 0}
+                                                    readOnly
+                                                    precision={1}
+                                                    className="product-rating"
+                                                />
+                                                {product.discountPercent && <DiscountChip className="discount-chip" label={`%${product.discountPercent}`} />}
                                             </Box>
 
-                                            <Button
-                                                className="edit-button"
-                                                variant="outlined"
-                                                size="small"
-                                                onClick={() => Navigate(`/productDetail/${product.title}`)}
-                                            >
-                                                خرید
-                                            </Button>
+                                            <CardMedia
+                                                component="img"
+                                                height="180"
 
-                                        </CardContent>
-                                    </ProductCard>
-                                </Box>
-                            );
-                        })}
-                    </Box>
+                                                image={product.img ? `/img/products/${product.img}` : "/img/products/default-product-pic.png"}
+                                                alt={product.title || product.name}
+                                                className="product-image"
+                                                style={{ objectFit: "contain" }}
+                                            />
+
+                                            <CardContent
+                                                className="incredible-offer-card_content"
+                                                sx={{ flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 1, marginTop: 3 }}
+                                            >
+                                                <Typography
+                                                    variant="body1"
+                                                    className="product-title"
+                                                    sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                                                >
+                                                    <a href={`/productDetail/${product.title}`}>{product.title || product.name}</a>
+                                                </Typography>
+
+                                                <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "start", alignItems: "start", minHeight: 60 }}>
+                                                    {discountedPrice ? (
+                                                        <>
+                                                            <div>
+                                                                <Typography variant="body2" color="black">قیمت :</Typography>
+                                                                <StrikethroughPrice>{product.price.toLocaleString("fa-IR")} تومان</StrikethroughPrice>
+                                                            </div>
+                                                            <div>
+                                                                <Typography variant="body2" color="black">قیمت با تخفیف:</Typography>
+                                                                <DiscountedPrice>{discountedPrice.toLocaleString("fa-IR")} تومان</DiscountedPrice>
+                                                            </div>
+                                                        </>
+                                                    ) : (
+                                                        <Typography variant="body2" color="black">{product.price.toLocaleString("fa-IR")} تومان</Typography>
+                                                    )}
+                                                </Box>
+
+                                                <Button
+                                                    className="edit-button"
+                                                    variant="outlined"
+                                                    size="small"
+                                                    onClick={() => Navigate(`/productDetail/${product.title}`)}
+                                                >
+                                                    خرید
+                                                </Button>
+
+                                            </CardContent>
+                                        </ProductCard>
+                                    </Box>
+                                );
+                            })}
+                        </Box>
+                    </>
+
+
                 ) : (
                     <ErrorMessage msg="محصولی یافت نشد" />
                 )}

@@ -13,6 +13,7 @@ import { DiscountProvider } from './Contexts/DiscountContext';
 
 function AppContent() {
 
+  let router = useRoutes(routes);
   const mainContentRef = useRef(null)
   const [value, setValue] = useState(0)
   const [mainContentHeight, setMainContentHeight] = useState(null)
@@ -20,7 +21,6 @@ function AppContent() {
   const { isAuthenticatedState } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  let router = useRoutes(routes);
   const noHeaderRoutes = ['/login', '/register'];
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function AppContent() {
     setValue(value)
   }
 
-
+  console.log("value :" ,value)
   return (
     <div className="App">
       <div className="main-wrapper">

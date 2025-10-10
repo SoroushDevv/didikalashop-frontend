@@ -1,5 +1,3 @@
-
-
 .title-breadcrumb-special {
   margin-bottom: 40px;
 }
@@ -147,7 +145,7 @@
   margin-left: 8px;
   padding: 4px 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .comments-likes button:hover {

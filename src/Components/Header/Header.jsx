@@ -15,7 +15,9 @@ export default function Header({ handleHeight, onSendData }) {
   });
 
   useMemo(() => {
+    console.log("topbar height + navbarHeight :" , topbarHeight + " " + navbarHeight)
     const sum = topbarHeight + navbarHeight
+    console.log("sum of heights :", sum)
     onSendData(sum)
   }, [topbarHeight, navbarHeight])
 

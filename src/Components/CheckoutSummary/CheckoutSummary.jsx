@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -21,6 +22,9 @@ import { styled } from '@mui/material/styles';
 import { useCart } from './../../Contexts/CartContext';
 import axios from 'axios';
 import { getAuthToken } from '../../Utils/AuthUtils';
+import ShowSwal from '../ShowSwal/ShowSwal';
+
+
 
 // Styled components
 const SidebarContainer = styled(Box)(({ theme }) => ({
@@ -62,7 +66,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش', submitButtonURL = '/shipping', getOffVlueTrigger }) => {
-  const { orders, triggerUpdate } = useCart();
+  const { order, triggerUpdate } = useCart();
+  const Navigate = useNavigate()
   // const [trigger,setTrigger] =useState(0)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
@@ -77,8 +82,8 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
 
   useEffect(() => {
     const calculateTotalPrice = () => {
-      if (orders && orders.length > 0) {
-        const total = orders.reduce(
+      if (order && order.items.length > 0) {
+        const total = order.items.reduce(
           (sum, item) => sum + (parseInt(item.price) || 0) * (parseInt(item.quantity) || 0),
           0
         );
@@ -89,12 +94,12 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
     };
 
     const calculateTotalDiscount = () => {
-      if (!orders || !Array.isArray(orders) || orders.length === 0) {
+      if (!order || !Array.isArray(order.items) || order.items.length === 0) {
         setTotalDiscount(0);
         return;
       }
 
-      const totalDiscount = orders.reduce(
+      const totalDiscount = order.items.reduce(
         (sum, item) => sum + (parseInt(item.discount) || 0) * (parseInt(item.quantity) || 0),
         0
       );
@@ -103,7 +108,7 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
 
     calculateTotalPrice();
     calculateTotalDiscount();
-  }, [JSON.stringify(orders)]);
+  }, [order.items]);
 
   // محاسبه payableAmount
   useEffect(() => {
@@ -115,55 +120,82 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
     calculatePayableAmount();
   }, [totalPrice, totalDiscount, offValue]);
 
-  const submitHandler = (e) => {
-    e.preventDefault()
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-    const token = getAuthToken()
-    const orders = JSON.parse(localStorage.getItem("orders"))
-    localStorage.setItem("offValue", 0)
-    console.log("ordersss:", orders)
+    const token = getAuthToken();
+    const order = JSON.parse(localStorage.getItem("order"));
+    localStorage.setItem("offValue", 0);
 
+    console.log("📦 order being sent:", order);
 
-    const res = axios.post("http://localhost:8000/api/orders",orders,{
-    headers:{
-      Authorization: `bearer ${token}`
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/orders",
+        order,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("✅ Response data:", res.data);
+      ShowSwal({
+        title: "سفارش با موفقیت ثبت شد",
+        text: "",
+        icon: "success",
+        onConfirm:() => {
+
+          localStorage.setItem("finalledOrder",JSON.stringify(order))
+          localStorage.setItem("order", [])
+
+          Navigate("/complete-payment")
+        } 
+      });
+
+      triggerUpdate();
+    } catch (err) {
+      console.error("❌ Error submitting order:", err);
+      ShowSwal({
+        title: "خطا در ارسال سفارش",
+        text: err.response?.data?.message || err.message,
+        icon: "error",
+      });
     }
-    })
+  };
 
-    console.log("res data :", res.data)
-
-    triggerUpdate()
-  }
 
   return (
     <SidebarContainer>
-      {orders && orders.length > 0 ? (
+      {order && order.items.length > 0 ? (
         <SummaryPaper elevation={0}>
           <Typography variant="h6" style={{ textAlign: 'center' }}>
             خلاصه سبد شما
           </Typography>
           <List>
-            {orders.map((order) => (
-              <ListItem key={order.orderId}>
+            {order.items.map((item) => (
+              <ListItem key={item.orderId}>
                 <ListItemText
                   style={{ textAlign: 'start' }}
-                  primary={order.product?.title || 'محصول بدون نام'}
+                  primary={item.product?.title || 'محصول بدون نام'}
                   secondary={
                     <Box style={{ textAlign: 'start' }}>
                       <Typography variant="body2">
-                        تعداد: {parseInt(order.quantity) || 0}
+                        تعداد: {parseInt(item.quantity) || 0}
                       </Typography>
                       <Typography variant="body2">
-                        قیمت واحد: {(parseInt(order.price) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+                        قیمت واحد: {(parseInt(item.price) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
                       </Typography>
-                      {order.discount > 0 && (
+                      {item.discount > 0 && (
                         <Typography variant="body2" color="error.main">
-                          تخفیف: {(parseInt(order.discount) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+                          تخفیف: {(parseInt(item.discount) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
                         </Typography>
                       )}
-                      {order.color && (
+                      {item.color && (
                         <Typography variant="body2">
-                          رنگ: {order.color}
+                          رنگ: {item.color}
                         </Typography>
                       )}
                       <Typography variant="body2">

@@ -14,7 +14,7 @@ import useProductCategories from "../../../../Hooks/useAllCategories";
 export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
 
   const navbarRef = useRef(null)
-  const listItemRef = useRef(null)
+  const navContainerRef = useRef(null)
   const mainMenuRef = useRef(null)
   const { order, setOrder, triggerUpdate } = useCart();
   const { categories, laoding: categoriesLoading, error: categoriesError } = useProductCategories()
@@ -27,10 +27,10 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
 
   useEffect(() => {
 
-    if (listItemRef.current) {
+    if (navContainerRef.current) {
 
-      setOffsetHeight(listItemRef.current.offsetHeight)
-      onNavbarHeightChange(listItemRef.current.offsetHeight)
+      setOffsetHeight(navContainerRef.current.offsetHeight)
+      onNavbarHeightChange(navContainerRef.current.offsetHeight)
     }
 
     if (mainMenuRef.current) {
@@ -66,7 +66,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
       ref={navbarRef}
       style={{ position: "absolute", top: topbarHeight }}
     >
-      <div class="container nav-container">
+      <div class="container nav-container" ref={navContainerRef}>
         <nav class="nav-main-menu " ref={mainMenuRef}>
           <div class="list-items_container hidden-sm">
             <Link to="#" className="list-item category-list"
@@ -76,7 +76,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
               <span className="category-name">دسته‌بندی کالاها</span>
               <MegaMenu isCategoryHovered={isCategoryHovered} topHeight={offsetHeight} />
             </Link>
-            <Link to="/incredible-offers" class="list-item" ref={listItemRef}>
+            <Link to="/incredible-offers" class="list-item" >
               پر تخفیف ترین ها
             </Link>
             <Link to="/most-sales" class="list-item">

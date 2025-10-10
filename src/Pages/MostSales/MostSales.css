@@ -1,9 +1,10 @@
-.search-results {
+.most-sale_results {
     width: 100%;
     flex: 1;
     /* اجازه بده وسط صفحه پر بشه */
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
 }
 
 .search-results .container {
@@ -34,11 +35,38 @@
 .mui-card-top-content .discount-chip {
     width: 60px;
 }
+
 .most-sale-card_content {
     text-align: right;
 }
-.most-sale-card_content p a{
-text-decoration: none;
-color: inherit;
 
+.most-sale-card_content p a {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.most-sale_results .most-sale_title {
+    font-family: "Vazir", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    text-align: right;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
+    margin: 15px 0;
+}
+
+/* خط زیر عنوان */
+.most-sale_results .most-sale_title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6f00, #ff9100);
+    border-radius: 2px;
+    transition: width 0.3s ease;
 }

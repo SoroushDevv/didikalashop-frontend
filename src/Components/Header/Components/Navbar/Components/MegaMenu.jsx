@@ -49,7 +49,7 @@ const MegaMenu = ({ isCategoryHovered, topHeight, rightOffset }) => {
 
   console.log("rightt space :", rightOffset)
   return (
-    <div className={`mega-menu_wrapper ${isCategoryHovered ? "visible" : ""}`} style={{ top: topHeight }}>
+    <div className={`mega-menu_wrapper ${isCategoryHovered ? "visible" : ""}`} >
       <div
         className={`mega-menu_container`}
         onMouseLeave={() => setHoveredCategory(null)}

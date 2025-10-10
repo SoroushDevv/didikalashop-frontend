@@ -161,8 +161,8 @@ export default function CategoryResults({ sorting }) {
 
   console.log("filtered products:", filteredItems)
   return (
-    <div className="search-results dt">
-      <div className="container">
+    <div className="container">
+      <div className="search-results dt">
         <Typography variant="h5" className="category-title">
           {category && category !== "all" ? `دسته بندی: ${category}` : ""}
         </Typography>
