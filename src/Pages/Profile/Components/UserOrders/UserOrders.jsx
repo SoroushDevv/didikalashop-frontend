@@ -16,141 +16,196 @@ import ShowSwal from "../../../../Components/ShowSwal/ShowSwal";
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 import Products from "../../../Products/Products";
 import useUserOrders from "../../../../Hooks/useUserOrders";
-
-// TabPanel کامپوننت کمکی
-function TabPanel({ children, value, index }) {
-  return value === index ? <Box sx={{ pt: 2 }}>{children}</Box> : null;
-}
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
+import useAllProducts from "../../../../Hooks/useAllProducts";
 
 export default function OrdersPage() {
   const [tab, setTab] = useState(0);
-  const { currentUser } = useCurrentUser();
-  const[userOrders,setUserOrders] = useState([])
-  const {orders,loading,error} = useUserOrders()
+  const { userOrders, userOrdersloading, userOrdersError } = useUserOrders()
+  const { products, loading, error } = useAllProducts()
 
 
   const handleChange = (e, newValue) => setTab(newValue);
-
-  // فیلتر سفارش‌ها برای کاربر فعلی
-  useEffect(() => {
-
-    const handleUpdateUserOrders = () => {
-
-
-      const purchasedOrders = JSON.parse(localStorage.getItem("purchasedOrders"))
-
-      if (!currentUser) return;
-
-
-      purchasedOrders ? setUserOrders(purchasedOrders) : setUserOrders([])
-
-    }
-    handleUpdateUserOrders()
-
-  }, [currentUser, loading]);
 
 
   // فیلتر سفارش‌ها بر اساس تب
   const activeOrders = userOrders.filter((o) => o.isActive === 1);
   const deliveredOrders = userOrders.filter((o) => o.isActive === 0);
 
+  console.log("active user :", activeOrders)
+  console.log("delivered user :", deliveredOrders)
 
+
+  console.log("products:", products)
   return (
-   <div className="orders-section">
-  {/* تب‌ها */}
-  <div className="orders-section__tabs">
-    <button className={`orders-section__tab ${tab === 0 ? "active" : ""}`} onClick={() => setTab(0)}>
-      جاری
-    </button>
-    <button className={`orders-section__tab ${tab === 1 ? "active" : ""}`} onClick={() => setTab(1)}>
-      تحویل شده
-    </button>
-  </div>
+    <div className="orders-section">
 
-  {/* TabPanel جاری */}
-  {tab === 0 && (
-    <div className="orders-section__panel">
-      {activeOrders.length > 0 ? (
-        activeOrders.map((order) => (
-          <div className="order-card" key={order.id}>
-            <div className="order-card__header">
-              <p className="order-card__date">
-                {typeof order.date === "string" && order.date.includes("T")
-                  ? order.date.split("T")[0]
-                  : new Date(order.date).toISOString().split("T")[0]} - {order.hour}
-              </p>
-            </div>
 
-            <div className="order-card__body">
-              <div className="order-card__info">
-                <p>کد سفارش: {order.id}</p>
-                <p>تعداد: {order.quantity}</p>
-                <p>رنگ: {order.color}</p>
-              </div>
-              <p className="order-card__price">{order.price.toLocaleString("fa-IR")} تومان</p>
-            </div>
+      <div className="orders-section__tabs">
+        <button className={`orders-section__tab ${tab === 0 ? "active" : ""}`} onClick={() => setTab(0)}>
+          جاری
+        </button>
+        <button className={`orders-section__tab ${tab === 1 ? "active" : ""}`} onClick={() => setTab(1)}>
+          تحویل شده
+        </button>
+      </div>
 
-            <div className="order-card__footer">
-              <button className="order-card__button" onClick={() => ShowSwal({ title: "فاکتور صادر نشده است ", text: "برای پیگیری به پشتیبانی تیکت بزنید :)", icon: "info" })}>
-                مشاهده فاکتور
-              </button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"}/>
+
+      {tab === 0 && (
+        <div className="orders-section__panel">
+          <ul class="order-list">
+            {activeOrders.length > 0 ? (
+              activeOrders.map((order) => (
+
+                <li class="order-card">
+                  <a href={`/profile/orders/${order.orderID}`} class="order-link">
+                    <div class="order-header">
+                      <div class="order-status">
+                        <LoopOutlinedIcon />
+                        <span>جاری</span>
+                      </div>
+                      <div class="order-chevron">
+                        <svg>
+
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div class="order-details">
+                      <div class="order-date">{order.date.split("T")[0]}</div>
+                      <div class="order-code">کد سفارش: {order.orderID}</div>
+                      <div class="order-price">
+                        مبلغ کل سفارش: <span>
+                          {order.items.reduce((sum, item) => {
+                            return sum + item.price
+                          }, 0)}
+                        </span>
+                        <span class="toman-icon">
+                          تومان
+                        </span>
+                      </div>
+                      <div class="order-points">
+                        <img src="/img//svg/club-point.svg" alt="امتیاز" />
+                        <span>امتیاز دیدی کلاب: ۲۹</span>
+                      </div>
+                    </div>
+
+                    <div class="order-products">
+                      <div className="product-item">
+                        {order.items.map((item) => {
+                          const product = products.find((p) => p.id === item.productID);
+                          return (
+                            <img
+                            style={{margin:"0 10px"}}
+                              key={item.productID}
+                              src={product ? `/img/products/${product.img}` : "#"}
+                              alt={product ? product.name : "محصول"}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div class="order-footer">
+                      <a href="/profile/orders/invoice/order/284805123/" class="invoice-link">
+                        <svg>
+
+                        </svg>
+                        <span>مشاهده فاکتور</span>
+                      </a>
+                    </div>
+                  </a>
+                </li>
+
+
+              ))
+            ) : (
+              <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"} />
+            )}
+          </ul>
+        </div>
+      )}
+
+
+      {tab === 1 && (
+        <div className="orders-section__panel delivered-panel">
+          <ul class="order-list">
+            {deliveredOrders.length > 0 ? (
+              deliveredOrders.map((order) => (
+
+                <li class="order-card">
+                  <a href="/profile/orders/284805123/" class="order-link">
+                    <div class="order-header">
+                      <div class="order-status">
+                        <CheckCircleOutlinedIcon />
+                        <span>تحویل شده</span>
+                      </div>
+                      <div class="order-chevron">
+                        <svg>
+
+                        </svg>
+                      </div>
+                    </div>
+
+
+                    <div class="order-details">
+                      <div class="order-date">{order.date.split("T")[0]}</div>
+                      <div class="order-code">کد سفارش: {order.orderID}</div>
+                      <div class="order-price">
+                        مبلغ کل سفارش: <span>
+                          {order.items.reduce((sum, item) => {
+                            return sum + item.price
+                          }, 0)}
+                        </span>
+                        <span class="toman-icon">
+                          تومان
+                        </span>
+                      </div>
+                      <div class="order-points">
+                        <img src="/img//svg/club-point.svg" alt="امتیاز" />
+                        <span>امتیاز دیدی کلاب: ۲۹</span>
+                      </div>
+                    </div>
+
+                    <div class="order-products">
+                      <div className="product-item">
+                        {order.items.map((item) => {
+                          const product = products.find((p) => p.id === item.productID);
+                          return (
+                            <img
+                            style={{margin:"0 10px"}}
+                              key={item.productID}
+                              src={product ? `/img/products/${product.img}` : "#"}
+                              alt={product ? product.name : "محصول"}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div class="order-footer">
+                      <a href="/profile/orders/invoice/order/284805123/" class="invoice-link">
+                        <svg>
+
+                        </svg>
+                        <span>مشاهده فاکتور</span>
+                      </a>
+                    </div>
+                  </a>
+                </li>
+
+
+              ))
+            ) : (
+              <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"} />
+            )}
+          </ul>
+        </div>
       )}
     </div>
-  )}
+  )
 
-  {/* TabPanel تحویل شده */}
-  {tab === 1 && (
-    <div className="orders-section__panel">
-      {deliveredOrders.length > 0 ? (
-        deliveredOrders.map((order) => (
-          <div className="order-card" key={order.id}>
-            <div className="order-card__header">
-              <p className="order-card__date">
-                {typeof order.date === "string" && order.date.includes("T")
-                  ? order.date.split("T")[0]
-                  : new Date(order.date).toISOString().split("T")[0]} - {order.hour}
-              </p>
-            </div>
 
-            <div className="order-card__body">
-              <div className="order-card__info">
-                <p>کد سفارش: {order.id}</p>
-                <p>تعداد: {order.quantity}</p>
-                <p>رنگ: {order.color}</p>
-              </div>
 
-              <div className="order-card__image-wrapper">
-                {Products.map((product) =>
-                  product.id === order.productID ? (
-                    <img
-                      key={product.id}
-                      src={order.image || "/placeholder.png"}
-                      alt={order.color}
-                      className="order-card__image"
-                    />
-                  ) : null
-                )}
-              </div>
-
-              <p className="order-card__price">{order.price.toLocaleString("fa-IR")} تومان</p>
-            </div>
-
-            <div className="order-card__footer">
-              <button className="order-card__button">مشاهده فاکتور</button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"}/>
-      )}
-    </div>
-  )}
-</div>
-
-  );
 }

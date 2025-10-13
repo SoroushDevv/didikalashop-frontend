@@ -117,7 +117,7 @@ export default function LoginPage() {
                             className="custom-control-input"
                             id="customCheck3"
                           />
-                          <label className="custom-control-label" htmlFor="customCheck3">
+                          <label className="custom-control-label" htmlFor="customCheck3" style={{margin:"0 10px"}}>
                             مرا به خاطر بسپار
                           </label>
                         </div>
@@ -140,7 +140,7 @@ export default function LoginPage() {
                 <div className="form-footer mt-3">
                   <div>
                     <span className="font-weight-bold">کاربر جدید هستید؟</span>
-                    <Link to="/register" className="mr-3 mt-2">
+                    <Link to="/register" className="mr-3 mt-2" style={{margin:"0 10px"}}>
                       ثبت نام در دیدیکالا
                     </Link>
                   </div>
