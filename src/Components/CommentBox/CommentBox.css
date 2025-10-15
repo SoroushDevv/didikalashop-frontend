@@ -1,4 +1,3 @@
-/* ===== 3️⃣ هر کامنت تکی ===== */
 .comment-card {
     max-width: 350px;
     min-width: 350px;
@@ -22,7 +21,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* --- هدر کارت --- */
 .comment-card .MuiCardHeader-root {
     padding: 0.75rem 1rem;
 }
@@ -32,17 +30,14 @@
     font-size: 1rem;
 }
 
-/* --- جداکننده --- */
 .comment-card .MuiDivider-root {
     margin: 0 1rem;
 }
 
-/* --- محتوای کارت --- */
 .comment-card .MuiCardContent-root {
     padding: 1rem;
 }
 
-/* --- تصویر محصول --- */
 .comment-card .comment-card__image {
     width: 100px;
     max-height: 200px;
@@ -52,7 +47,6 @@
     display: block;
 }
 
-/* --- متن کامنت --- */
 .comment-card .comment-card__text {
     font-size: 0.95rem;
     line-height: 1.6;

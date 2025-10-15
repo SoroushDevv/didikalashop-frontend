@@ -2,16 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// ایجاد Context
 const AuthContext = createContext();
 
-// AuthProvider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // اطلاعات کاربر (مثل username و token)
-  const [loading, setLoading] = useState(true); // وضعیت لودینگ برای بررسی اولیه
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
 
-  // بررسی توکن ذخیره‌شده در localStorage هنگام بارگذاری اولیه
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     const storedUser = localStorage.getItem("user");
@@ -22,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // تابع ثبت‌نام
   const register = async (userData) => {
     try {
       const response = await axios.post(
@@ -47,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // تابع ورود (در صورت نیاز به endpoint ورود)
+
   const login = async (username, password) => {
     try {
       const response = await axios.post("http://localhost:8000/api/users/login", {
@@ -72,7 +68,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // تابع خروج
   const logout = () => {
     setUser(null);
     localStorage.removeItem("authToken");
@@ -81,7 +76,6 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
-  // مقادیر ارائه‌شده توسط Context
   const value = {
     user,
     loading,
@@ -93,7 +87,7 @@ export const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// هوک برای استفاده از AuthContext
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

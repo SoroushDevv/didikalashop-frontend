@@ -1,18 +1,16 @@
 import { useState, useCallback } from 'react';
 import { Map, Marker, Popup } from 'react-map-gl';
-import '@fontsource/vazirmatn'; // ایمپورت فونت Vazirmatn
+import '@fontsource/vazirmatn'; 
 
-// کامپوننت اصلی برای انتخاب آدرس
 function MapPicker({ onAddressChange }) {
   const [viewport, setViewport] = useState({
-    latitude: 35.6892, // مختصات تهران
+    latitude: 35.6892,
     longitude: 51.3890,
     zoom: 12,
   });
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [address, setAddress] = useState('');
 
-  // دریافت آدرس فارسی با Mapbox Geocoding API
   const getAddress = useCallback(async (lng, lat) => {
     try {
       const response = await fetch(
@@ -36,16 +34,15 @@ function MapPicker({ onAddressChange }) {
     }
   }, []);
 
-  // مدیریت کلیک روی نقشه
   const handleMapClick = useCallback(
     async (event) => {
-      if (!event.lngLat) return; // جلوگیری از خطا در صورت عدم وجود lngLat
+      if (!event.lngLat) return; 
       const { lng, lat } = event.lngLat;
       setSelectedLocation({ lng, lat });
       setViewport((prev) => ({ ...prev, latitude: lat, longitude: lng }));
       const fetchedAddress = await getAddress(lng, lat);
       if (onAddressChange) {
-        onAddressChange(fetchedAddress); // فقط آدرس متنی ارسال می‌شود
+        onAddressChange(fetchedAddress); 
       }
     },
     [getAddress, onAddressChange]
@@ -101,7 +98,6 @@ function MapPicker({ onAddressChange }) {
   );
 }
 
-// کامپوننت والد برای استفاده از MapPicker
 function IranMap() {
   const [savedAddress, setSavedAddress] = useState('');
 

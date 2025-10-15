@@ -34,8 +34,7 @@ export default function Shipping() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [trigger, setTrigger] = useState(0)
     const [fetchLoading, setFetchLoading] = useState(false)
-
-
+    const [localAddress,setLocalAddress] = useState(null)
 
 
 
@@ -126,10 +125,10 @@ export default function Shipping() {
         setIsModalOpen(false)
     }
 
+    const handleSelectNewAddress = (value) => {
+        localStorage.setItem("shippingAddress",JSON.stringify(value))
+    }
 
-
-    console.log("user addresses : ", userAddresses)
-console.log("use current user :", currentUser)
     return (
         <div className='container'>
             <div className="shipping-section">
@@ -158,13 +157,22 @@ console.log("use current user :", currentUser)
                                     <span className="contact-name">{currentUser.firstname} {currentUser.lastname}</span>
                                 </li>
                                 <li>
-                                    شماره تماس: <span className="contact-phone">{currentUser.phone}</span><br />
-                                    کد پستی: <span className="contact-postal">
+                                    شماره تماس: <span className="contact-phone">{currentUser.phone}</span>
+                                    <br />
+                                    کد پستی:
+                                    <span className="contact-postal">
                                         {userAddresses?.length > 0 ? userAddresses[0].postalCode : "--"}
-                                    </span><br />
-                                    آدرس: <span className="contact-address">
-                                        {userAddresses?.length > 0 ? userAddresses[0].address : "آدرس یافت نشد"}
                                     </span>
+                                    <br />
+                                        <label for="select">ادرس مورد نظر انتخاب کنید:</label> 
+                                    <select id="address" name="address" className='user-addresses' onChange={(event) => handleSelectNewAddress(event.target.value)}>
+                                        {userAddresses && userAddresses.map((address) => (
+                                            <option value={address.address} className='contact-address' >
+                                                {address.address}
+                                            </option>
+                                        ))}
+                                    </select >
+
                                 </li>
                             </ul>
                             <div className="add-address-btn">
@@ -182,7 +190,8 @@ console.log("use current user :", currentUser)
                         </div>
                         <div className="shipping-methods">
                             <div className="radio-option shipping-radio-option">
-                                <input type="radio" name="shipping" id="normal-shipping" value="normal"
+                                <input type="radio" name="shipping" id="normal-shipping" value="normal" 
+                                
                                     onChange={(e) => {
                                         localStorage.setItem("shippingMethod", e.target.value)
                                         setShippingMethod(e.target.value)
@@ -197,23 +206,6 @@ console.log("use current user :", currentUser)
                                     }} />
                                 <label htmlFor="express-shipping">اکسپرس</label>
                             </div>
-                        </div>
-
-                        <div className="shipping-products-title shipping-title">
-                            <h2>محصولات ارسالی</h2>
-                        </div>
-
-                        <div className="checkout-products">
-                            {localCart?.map((item, indx) => (
-                                <div key={indx} className="product-item shipping-product-item">
-                                    <img src={`/img/products/${item.product.img}`} alt={item.product.title} />
-                                    <div className="product-info">
-                                        <h3 className="product-title">{item.product.title}</h3>
-                                        <p className="product-desc">{item.product.productDesc}</p>
-                                        <div className="product-price"> ... </div>
-                                    </div>
-                                </div>
-                            ))}
                         </div>
 
                         <CheckoutTimes />

@@ -1,4 +1,3 @@
-/* لینک‌های داخل div > span > a */
 div span a {
   color: #2563eb;
   text-decoration: none;
@@ -14,7 +13,6 @@ div span a:focus {
   transform: translateY(-2px);
 }
 
-/* کانتینر اصلی */
 .checkout-times-container {
   display: flex;
   flex-direction: column;
@@ -25,15 +23,7 @@ div span a:focus {
    border-radius: 12px;
 }
 
-/* حالت واکنش‌گرا */
-@media (max-width: 880px) {
-  .checkout-times-container {
-    grid-template-columns: 1fr;
-  }
-}
 
-/* تب‌ها */
-/* ریشه کلی */
 .checkout-tabs-wrapper {
   width: 100%;
   padding: 1rem;
@@ -46,21 +36,19 @@ div span a:focus {
   font-family: "Segoe UI", sans-serif;
 }
 
-/* استایل خود تب‌ها */
 .checkout-tabs-wrapper .checkout-tabs {
   border-bottom: 1px solid #e5e5e5;
   display: flex;
   justify-content: space-between;
 }
 
-/* آیتم هر تب */
 .checkout-tabs-wrapper .checkout-tab-item {
   min-width: 80px;
   padding: 0.5rem 1rem;
   color: #555;
   font-weight: 500;
   text-transform: none;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease, all 0.3s ease;
 }
 
 .checkout-tabs-wrapper .checkout-tab-item.Mui-selected {
@@ -69,7 +57,6 @@ div span a:focus {
   border-radius: 8px 8px 0 0;
 }
 
-/* رادیوگروپ بازه زمانی */
 .checkout-tabs-wrapper .checkout-time-slots {
   margin-top: 1rem;
   display: flex;
@@ -81,20 +68,18 @@ div span a:focus {
   background: #f9f9f9;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .checkout-tabs-wrapper .checkout-time-slot:hover {
   background: #eef6ff;
 }
 
-/* حالت انتخابی رادیو */
 .checkout-tabs-wrapper .checkout-time-slot .MuiRadio-root.Mui-checked + span {
   color: #0a84ff;
   font-weight: 600;
 }
 
-/* لیست بازه‌های زمانی */
 .checkout-time-slots {
   display: grid;
   gap: 10px;
@@ -115,8 +100,6 @@ div span a:focus {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
-/* گزینه‌های ارسال */
-/* کانتینر اصلی بخش ارسال */
 .checkout-shipping-section {
   width: 100%;
   padding: 1.5rem;
@@ -129,19 +112,17 @@ div span a:focus {
   font-family: "Segoe UI", sans-serif;
 }
 
-/* گروه رادیویی گزینه‌های ارسال */
 .checkout-shipping-options {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* هر آیتم ارسال */
 .checkout-shipping-item {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   background: #fafafa;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition: border-color 0.3s ease, all 0.3s ease;
   padding: 0.75rem;
   cursor: pointer;
 }
@@ -151,19 +132,16 @@ div span a:focus {
   background: #f5faff;
 }
 
-/* کنترل رادیو و محتوا */
 .checkout-shipping-radio {
   width: 100%;
   align-items: flex-start;
   margin: 0;
 }
 
-/* دایره رادیو */
 .shipping-radio-input {
   margin-right: 0.75rem;
 }
 
-/* محتوا داخل هر گزینه */
 .checkout-shipping-content {
   display: flex;
   flex-direction: column;
@@ -181,7 +159,6 @@ div span a:focus {
   color: #333;
 }
 
-/* لیست زیرعنوان */
 .checkout-shipping-sublist {
   padding-left: 0;
   margin: 0;
@@ -193,7 +170,6 @@ div span a:focus {
   font-size: 0.9rem;
   color: #555;
 }
-/* کارت اصلی فاکتور */
 .checkout-invoice-card {
   background: #ffffff;
   border-radius: 14px;
@@ -204,14 +180,12 @@ div span a:focus {
   margin: 0 auto;
 }
 
-/* محتوای داخل کارت */
 .checkout-invoice-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* عنوان اصلی فاکتور */
 .checkout-invoice-title {
   font-size: 1.6rem;
   font-weight: 700;
@@ -219,13 +193,11 @@ div span a:focus {
   text-align: center;
 }
 
-/* خط جداکننده */
 .checkout-invoice-divider {
   margin-bottom: 1rem;
   border-color: #e0e0e0;
 }
 
-/* زیرعنوان‌ها */
 .checkout-invoice-subtitle {
   font-size: 1.1rem;
   font-weight: 600;
@@ -234,7 +206,6 @@ div span a:focus {
   margin-bottom: 0.3rem;
 }
 
-/* لیست اطلاعات تحویل */
 .checkout-invoice-delivery-list,
 .checkout-invoice-shipping-list {
   padding-left: 0;
@@ -252,7 +223,6 @@ div span a:focus {
 .checkout-invoice-shipping-list li {
     text-align: start;
 }
-/* آیتم‌های لیست */
 
 .checkout-invoice-delivery-item,
 .checkout-invoice-shipping-item {
@@ -267,9 +237,13 @@ div span a:focus {
   border-bottom: none;
 }
 
-/* حالت Hover روی آیتم‌ها */
 .checkout-invoice-delivery-item:hover,
 .checkout-invoice-shipping-item:hover {
   background: #f5faff;
 }
 
+@media (max-width: 880px) {
+  .checkout-times-container {
+    grid-template-columns: 1fr;
+  }
+}

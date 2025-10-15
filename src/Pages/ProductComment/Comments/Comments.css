@@ -276,17 +276,12 @@
   color: #fff;
   transition: all ease 250ms;
   border: 1px solid #1976d2 !important;
-
 }
 .btn-submit:hover {
   background-color: #1976d2;
   color: #fff;
   transition: all ease 250ms;
-
 }
-
-
-
 .btn-submit:disabled {
   opacity: 0.5;
   cursor: not-allowed;

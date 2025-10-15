@@ -1,4 +1,3 @@
-/* والد اصلی */
 .favorites-empty {
   display: flex;
   flex-direction: column;
@@ -11,14 +10,12 @@
   gap: 1.5rem;
 }
 
-/* پیام خالی */
 .favorites-empty__message {
   font-size: 1rem;
   color: #777;
   margin: 0;
 }
 
-/* دکمه خانه */
 .favorites-empty__button {
   display: inline-block;
   padding: 0.6rem 2rem;
@@ -34,7 +31,6 @@
   background-color: #0056b3;
 }
 
-/* ریسپانسیو موبایل */
 @media (max-width: 600px) {
   .favorites-empty {
     padding: 2rem 1rem;

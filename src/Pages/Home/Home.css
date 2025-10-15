@@ -1,4 +1,3 @@
-/* ===== ساختار اصلی ===== */
 .main-content {
   background-color: #f8f8f8;
   padding: 2rem 0;
@@ -10,7 +9,7 @@
   padding: 0 1rem;
 }
 
-/* ===== اسلایدر بالای صفحه ===== */
+
 .home-top-slider {
   display: flex;
   gap: 1rem;
@@ -26,14 +25,14 @@
   overflow: hidden;
 }
 
-/* ===== اسلایدر اصلی ===== */
+
 .home-main-slider {
   flex: 1;
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* ===== عنوان سکشن‌ها ===== */
+
 .home-title-item {
   margin-bottom: 1rem;
 }
@@ -60,12 +59,11 @@
   text-decoration: underline;
 }
 
-/* ===== کاروسل محصولات ===== */
 .home-product-carousel {
   margin-bottom: 2rem;
 }
 
-/* ===== پیشنهادات کناری ===== */
+
 
 
 .home-widget-suggestion {
@@ -97,7 +95,6 @@
   transition: width 3s linear;
 }
 
-/* ===== بنرهای میانی ===== */
 .home-slider-section {
   margin-top: 2rem;
 }
@@ -111,7 +108,7 @@
   overflow: hidden;
 }
 
-/* ===== پیشنهاد تیمی ===== */
+
 .home-team-suggestion {
   margin-top: 2rem;
   background: #fff;
@@ -119,7 +116,6 @@
   padding: 1rem;
 }
 
-/* ===== برند اسلایدر ===== */
 .home-brand-slider {
   margin-top: 2rem;
   background: #fff;
@@ -134,7 +130,6 @@
   text-align: center;
 }
 
-/* ===== ریسپانسیو ===== */
 @media (max-width: 992px) {
   .home-top-slider {
     flex-direction: column;

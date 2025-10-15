@@ -1,7 +1,6 @@
 .most-sale_results {
     width: 100%;
     flex: 1;
-    /* اجازه بده وسط صفحه پر بشه */
     display: flex;
     flex-direction: column;
     padding: 10px 0;
@@ -58,7 +57,6 @@
     margin: 15px 0;
 }
 
-/* خط زیر عنوان */
 .most-sale_results .most-sale_title::after {
     content: "";
     position: absolute;

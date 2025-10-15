@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* کل ارتفاع صفحه */
+  min-height: 100vh; 
   direction: rtl;
 }
 
@@ -15,19 +15,19 @@ a {
 }
 
 .main-wrapper {
-  flex: 1; /* محتوای وسط صفحه فضای باقی‌مانده رو پر کنه */
+  flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0; /* padding داخلی لازم نیست */
+  padding: 0; 
 
 }
 
 .main-content-wrapper {
-  flex: 1; /* بین هدر و فوتر رو پر کنه */
+  flex: 1; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* محتوا از بالا شروع بشه */
+  justify-content: flex-start; 
   align-items: center;
   min-height: 100vh;
   width: 100%;

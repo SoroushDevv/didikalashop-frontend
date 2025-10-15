@@ -1,11 +1,9 @@
-/* ===== والد اصلی ===== */
 .recent-products {
   max-width: 1200px;
   padding: 0 1rem;
   background: #f9fafb;
 }
 
-/* === هدر بخش === */
 .recent-products__header {
   margin-bottom: 1.5rem;
 }
@@ -18,17 +16,13 @@
   color: #333;
 }
 
-/* === لیست محصولات === */
 .recent-products__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
-/* === آیتم تکی === */
-.recent-products__item {}
 
-/* === کارت محصول افقی === */
 .recent-products__card {
   display: flex;
   align-items: flex-start;
@@ -43,7 +37,6 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* === تصویر محصول === */
 .recent-products__thumb img {
   width: 120px;
   height: auto;
@@ -51,7 +44,6 @@
   object-fit: cover;
 }
 
-/* === محتوای کارت === */
 .recent-products__content {
   flex: 1;
   margin-left: 1rem;
@@ -60,7 +52,6 @@
   justify-content: space-between;
 }
 
-/* --- عنوان --- */
 .recent-products__title h3 {
   font-size: 1rem;
   font-weight: 600;
@@ -68,19 +59,16 @@
   margin: 0 0 0.5rem;
 }
 
-/* --- امتیاز --- */
 .recent-products__rating {
   margin-bottom: 0.5rem;
 }
 
-/* --- قیمت --- */
 .recent-products__price span {
   font-size: 1rem;
   font-weight: 700;
   color: #28a745;
 }
 
-/* --- دکمه‌ها --- */
 .recent-products__buttons {
   margin-top: 0.75rem;
   display: flex;

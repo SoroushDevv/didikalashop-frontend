@@ -57,8 +57,7 @@ export default function UserOrders({ orders, rowsPerPage = 5, showPagination = t
     navigate(`/profile/order-details/${id}`);
   };
 
-  // فرض می‌کنیم قیمت محصول از جایی دیگر (مثلاً هوک یا پراپ) دریافت شده است
-  // برای ساده‌سازی، فرض می‌کنیم هر سفارش فقط یک محصول دارد و قیمت آن از جدول products می‌آید
+
   const displayedOrders = showPagination
     ? orders.slice(page * currentRowsPerPage, page * currentRowsPerPage + currentRowsPerPage)
     : orders.slice(0, rowsPerPage);
@@ -95,13 +94,12 @@ export default function UserOrders({ orders, rowsPerPage = 5, showPagination = t
           <TableBody>
             {displayedOrders.length > 0 ? (
               displayedOrders.map((order, index) => {
-                // فرض می‌کنیم قیمت محصول از جایی دیگر در دسترس است
-                // برای محاسبه، باید productID را با جدول products مطابقت دهیم
-                // اینجا فرض می‌کنیم قیمت محصول به صورت دستی یا از API گرفته شده
-                const productPrice = 100000; // این باید از جدول products گرفته شود
-                const totalAmount = productPrice; // قیمت کل (بدون تخفیف)
-                const payableAmount = Math.round(totalAmount * (1 - order.percent / 100)); // قیمت با تخفیف
-                const status = order.isActive ? "فعال" : "غیرفعال"; // تبدیل isActive به وضعیت
+ 
+        
+                const productPrice = 100000; 
+                const totalAmount = productPrice; 
+                const payableAmount = Math.round(totalAmount * (1 - order.percent / 100)); 
+                const status = order.isActive ? "فعال" : "غیرفعال";
 
                 return (
                   <TableRow

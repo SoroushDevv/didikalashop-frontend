@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Snackbar, Alert, LinearProgress, Slide, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
-// تابع برای انیمیشن اسلاید
 const TransitionSlide = (props) => <Slide {...props} direction="up" />;
 
 const SnackBar = ({
@@ -21,28 +20,27 @@ const SnackBar = ({
   anchorOrigin = { vertical: 'top', horizontal: 'right' },
   transition = TransitionSlide,
   progressHeight = 4,
-  progressSteps = 100, // تعداد مراحل کاهش progress
+  progressSteps = 100, 
 }) => {
   const [progress, setProgress] = useState(100);
 
-  // تنظیم severity و رنگ‌ها بر اساس isSuccess
   const severity = isSuccess ? 'success' : 'error';
-  const progressColor = isSuccess ? '#4CAF50' : '#D32F2F'; // سبز برای موفقیت، قرمز برای خطا
-  const defaultBackgroundColor = isSuccess ? '#E8F5E9' : '#FEE4E2'; // سبز روشن برای موفقیت، قرمز روشن برای خطا
-  const defaultBorderColor = isSuccess ? '#4CAF50' : '#F44336'; // سبز برای موفقیت، قرمز برای خطا
-  const defaultTextColor = isSuccess ? '#2E7D32' : '#B71C1C'; // سبز تیره برای موفقیت، قرمز تیره برای خطا
+  const progressColor = isSuccess ? '#4CAF50' : '#D32F2F';
+  const defaultBackgroundColor = isSuccess ? '#E8F5E9' : '#FEE4E2'; 
+  const defaultBorderColor = isSuccess ? '#4CAF50' : '#F44336'; 
+  const defaultTextColor = isSuccess ? '#2E7D32' : '#B71C1C'; 
 
   useEffect(() => {
     if (open) {
-      const intervalTime = autoHideDuration / progressSteps; // زمان هر مرحله
-      const decrement = 100 / progressSteps; // مقدار کاهش در هر مرحله
+      const intervalTime = autoHideDuration / progressSteps; 
+      const decrement = 100 / progressSteps; 
 
       const timer = setInterval(() => {
         setProgress((prev) => {
           if (prev <= 0) {
             clearInterval(timer);
             if (typeof onClose === 'function') {
-              onClose(); // فقط وقتی پیشرفت به صفر رسید بسته بشه
+              onClose(); 
             }
             return 0;
           }
@@ -52,7 +50,7 @@ const SnackBar = ({
 
       return () => clearInterval(timer);
     } else {
-      setProgress(100); // ریست پیشرفت وقتی اسنک‌بار بسته می‌شه
+      setProgress(100); 
     }
   }, [open, autoHideDuration, onClose, progressSteps]);
 
@@ -61,7 +59,7 @@ const SnackBar = ({
       open={open}
       onClose={(event, reason) => {
         if (reason === 'clickaway') {
-          return; // از بسته شدن با کلیک خارج از اسنک‌بار جلوگیری می‌کنیم
+          return; 
         }
         if (typeof onClose === 'function') {
           onClose();

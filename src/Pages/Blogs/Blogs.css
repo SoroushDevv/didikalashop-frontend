@@ -1,4 +1,3 @@
-/* ====== بخش اصلی بلاگ ====== */
 .blog-section {
   background-color: var(--mui-palette-background-default);
   padding: 80px 0 100px;
@@ -6,7 +5,6 @@
   font-family: "Vazir", sans-serif;
 }
 
-/* --- تیتر بالای بخش --- */
 .blog-section .blog-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -27,7 +25,6 @@
   line-height: 1.8;
 }
 
-/* --- تب‌ها (دسته‌بندی‌ها) --- */
 .blog-section .blog-tabs {
   display: flex;
   justify-content: center;
@@ -58,14 +55,12 @@
   color: #fff;
 }
 
-/* --- گرید کارت‌ها --- */
 .blog-section .blog-grid {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-/* --- کارت بلاگ --- */
 .blog-section .blog-card {
   height: 100%;
   border-radius: 16px;
@@ -81,13 +76,11 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* --- تصویر کارت --- */
 .blog-section .blog-card .blog-card-image {
   height: 200px;
   object-fit: cover;
 }
 
-/* --- عنوان کارت --- */
 .blog-section .blog-card .blog-card-title {
   text-decoration: none;
   color: #222;
@@ -100,14 +93,12 @@
   color: #f7858d;
 }
 
-/* --- خلاصه متن کارت --- */
 .blog-section .blog-card .blog-card-summary {
   color: #555;
   line-height: 1.7;
   font-size: 0.9rem;
 }
 
-/* --- پایین کارت (لینک ادامه مطلب) --- */
 .blog-section .blog-card .blog-card-footer {
   padding: 0 16px 16px;
 }

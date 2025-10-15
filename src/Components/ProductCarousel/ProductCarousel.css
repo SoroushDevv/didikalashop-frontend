@@ -1,6 +1,3 @@
-/* =======================
-   Product Carousel CSS (Hierarchical)
-   ======================= */
 
 .product-carousel-wrapper {
   margin: 0;
@@ -145,7 +142,6 @@
     }
   }
 
-  /* Splide arrows */
   .splide__arrow {
     background: #f7858d;
     width: 40px;

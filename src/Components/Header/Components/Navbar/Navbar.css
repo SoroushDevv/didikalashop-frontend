@@ -250,9 +250,7 @@
   display: block;
 }
 
-/* 📱 Responsive Breakpoints */
 
-/* تبلت‌ها و نمایشگرهای متوسط */
 @media (max-width: 992px) {
   .bottom-header .main-container {
     flex-direction: column;
@@ -286,7 +284,6 @@
   }
 }
 
-/* موبایل‌های کوچک */
 @media (max-width: 600px) {
   .bottom-header {
     position: fixed;
@@ -306,7 +303,7 @@
   }
 
   .cart-tab__label {
-    display: none; /* فقط آیکون در موبایل */
+    display: none; 
   }
 
   .cart-tab__icon {

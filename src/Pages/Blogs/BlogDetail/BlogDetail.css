@@ -61,7 +61,6 @@
   object-fit: cover;
 }
 
-/* متن و لیست ها */
 .content-desc ul,
 .content-desc ol {
   padding-left: 20px;
@@ -80,7 +79,6 @@
   font-size: 1rem;
 }
 
-/* کامنت‌ها */
 .comments-area {
   margin-top: 40px;
 }
@@ -119,7 +117,6 @@
   background-color: #2563eb;
 }
 
-/* نظرات */
 .comment-list li {
   margin-bottom: 20px;
   background-color: #f3f4f6;
@@ -153,7 +150,6 @@
   color: #fff;
 }
 
-/* سایدبار */
 .sidebar .widget-posts,
 .sidebar .category-list,
 .sidebar .tag-list {
@@ -211,7 +207,6 @@
   color: #fff;
 }
 
-/* ریسپانسیو */
 @media (max-width: 992px) {
   .sidebar {
     margin-top: 30px;

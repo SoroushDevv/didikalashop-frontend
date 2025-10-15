@@ -1,4 +1,3 @@
-/* استایل‌های کلی */
 .mega-menu_wrapper {
   position: absolute;
   top: 100%;
@@ -14,7 +13,6 @@
   font-family: "Vazir", sans-serif;
 }
 
-/* لیست دسته‌بندی‌ها */
 .categories-list {
   width: 250px;
   height: 400px;
@@ -74,7 +72,6 @@
   color: inherit;
 }
 
-/* محتوای زیرمنو */
 .mega-menu__content {
   width: 600px;
   height: 500px;
@@ -129,16 +126,6 @@
   padding-right: 10px;
 }
 
-/* .section-title::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1px;
-  height: 100%;
-  border: 1px solid red;
-  } */
-
 .section-items {
   list-style: none;
   padding: 0;
@@ -165,7 +152,6 @@
   max-width: 100vh;
 }
 
-/* مخفی کردن مگامنو وقتی هوور نیست */
 .mega-menu__container:not(.visible) .categories-list,
 .mega-menu__container:not(.visible) .mega-menu__content {
   display: none;

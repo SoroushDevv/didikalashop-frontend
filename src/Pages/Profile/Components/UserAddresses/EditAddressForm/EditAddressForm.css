@@ -1,4 +1,3 @@
-/* کارت فرم */
 .edit-address-card {
   max-width: 600px;
   width: 90%;
@@ -8,26 +7,23 @@
   border-radius: 12px;
   background-color: #fff;
   position: relative;
-  direction: rtl;      /* راست‌چین کل محتوا */
-  text-align: right;   /* متن‌ها راست‌چین */
+  direction: rtl;     
+  text-align: right;  
   font-family: "Vazir", sans-serif;
 }
 
-/* عنوان فرم */
 .edit-address-title {
   text-align: center;
   font-weight: bold;
   margin: 10px 0 20px 0;
 }
 
-/* فرم */
 .edit-address-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* ردیف دو ستونه (شهر و کدپستی) */
 .edit-address-row-two-columns {
   display: flex;
   justify-content: space-between;
@@ -44,54 +40,45 @@
   }
 }
 
-/* دکمه‌ها */
 .edit-address-actions {
   display: flex;
-  justify-content: flex-end; /* دکمه‌ها سمت راست */
+  justify-content: flex-end; 
   gap: 10px;
   padding: 12px 0 0 0;
 }
 
-/* --- راست‌چین کردن TextField و Label --- */
 
-/* متن داخل Input */
 .edit-address-card .MuiInputBase-input {
   text-align: right;
   direction: rtl;
 }
 
-/* Label های TextField */
 .edit-address-card .MuiInputLabel-root {
   text-align: right;
   left: auto !important;
   right: 0 !important;
 }
 
-/* legend داخل Outlined Input */
 .edit-address-card .MuiOutlinedInput-root legend {
   float: right;
   text-align: right;
 }
 
-/* Notched outline بدون تغییر */
 .edit-address-card .MuiOutlinedInput-notchedOutline {
   border-radius: 8px;
 }
-/* راست‌چین کردن Select و متن داخل آن */
 .edit-address-select .MuiSelect-select {
-    text-align: right;      /* متن انتخاب شده راست‌چین */
-    padding-right: 15px;    /* فاصله سمت راست */
-    direction: rtl;         /* راست به چپ */
+    text-align: right;     
+    padding-right: 15px;    
+    direction: rtl;        
 }
 
-/* راست‌چین کردن Label بالای Select */
 .edit-address-select .MuiInputLabel-root {
     text-align: right;
     left: auto !important;
     right: 0 !important;
 }
 
-/* legend برای Outlined */
 .edit-address-select .MuiOutlinedInput-root legend {
     float: right;
     text-align: right;

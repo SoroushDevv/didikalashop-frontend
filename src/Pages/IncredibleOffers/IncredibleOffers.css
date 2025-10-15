@@ -1,7 +1,6 @@
 .search-results {
     width: 100%;
     flex: 1;
-    /* اجازه بده وسط صفحه پر بشه */
     display: flex;
     flex-direction: column;
 }
@@ -60,7 +59,6 @@ color: inherit;
     margin: 15px 0;
 }
 
-/* خط زیر عنوان */
 .incredible-offer_results .incredible-offer_title::after {
     content: "";
     position: absolute;

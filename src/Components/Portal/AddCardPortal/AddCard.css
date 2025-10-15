@@ -1,8 +1,7 @@
-/* ====== Overlay پس‌زمینه مودال ====== */
 .modal-overlay {
   position: fixed;
-  inset: 0; /* top, right, bottom, left = 0 */
-  background: rgba(0, 0, 0, 0.4); /* نیمه شفاف */
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.4); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +9,6 @@
   animation: fadeIn 0.2s ease-in-out;
 }
 
-/* ====== جعبه مودال ====== */
 .modal-content {
   background: #ffffff;
   border-radius: 16px;
@@ -28,7 +26,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ====== عنوان مودال ====== */
 .modal-content h3 {
   font-size: 20px;
   font-weight: 600;
@@ -37,7 +34,6 @@
   text-align: center;
 }
 
-/* ====== اینپوت کارت ====== */
 .card-input {
   padding: 14px 16px !important;
   font-size: 16px;
@@ -56,7 +52,6 @@
   background-color: #ffffff;
 }
 
-/* ====== دکمه تایید ====== */
 .card-button {
     width: 50%;
   background: linear-gradient(90deg, #3b82f6, #2563eb);
@@ -80,7 +75,6 @@
   box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
 }
 
-/* ====== افکت‌های انیمیشن ====== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

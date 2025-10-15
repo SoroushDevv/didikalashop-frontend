@@ -43,7 +43,6 @@
   text-decoration: none;
 }
 
-/* ===== خلاصه سفارش ===== */
 .order-summary {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #eee;
@@ -64,7 +63,6 @@
   font-weight: 600;
 }
 
-/* ===== بخش پرداخت ===== */
 .order-payment {
   padding: 1rem 1.5rem;
   background: #fafafa;
@@ -86,7 +84,6 @@
   font-weight: 600;
 }
 
-/* ===== آیتم‌های سفارش ===== */
 .order-items {
   padding: 1rem 1.5rem;
 }
@@ -146,7 +143,6 @@
   font-weight: bold;
 }
 
-/* ===== دکمه‌ها ===== */
 .order-actions {
   display: flex;
   justify-content: flex-end;

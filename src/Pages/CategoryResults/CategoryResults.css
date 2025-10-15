@@ -7,7 +7,6 @@
 .search-results {
     width: 100%;
     flex: 1;
-    /* اجازه بده وسط صفحه پر بشه */
     display: flex;
     flex-direction: column;
 }
@@ -41,7 +40,3 @@
 .mui-card-top-content .discount-chip {
     width: 60px;
 }
-
-.product-rating {}
-
-.product-image {}

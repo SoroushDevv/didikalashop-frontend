@@ -1,4 +1,3 @@
-/* والد کانتینر */
 .carousel-container {
   width: 100%;
   overflow: hidden;
@@ -6,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* عنوان */
 .carousel-container > .MuiTypography-root {
   text-align: center;
   font-size: 1.2rem;
@@ -14,7 +12,6 @@
   margin-bottom: 1rem;
 }
 
-/* خود اسلایدر */
 .carousel-container .category-carousel_wrapper {
   width: 100%;
   direction: rtl;
@@ -26,7 +23,6 @@
  border-bottom: 1px solid #1e1e1e51;
 }
 
-/* لیست اسلایدها */
 .carousel-container .category-carousel_wrapper .splide__list {
   display: flex;
   gap: 10px;
@@ -35,18 +31,16 @@
  
 }
 
-/* هر اسلاید */
 .carousel-container .category-carousel_wrapper .category-carousel_slide {
-  flex: 0 0 auto; /* جلوگیری از stretch */
-  padding: 0 5px; /* فاصله بین کارت‌ها */
+  flex: 0 0 auto; 
+  padding: 0 5px; 
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  width: calc((100% / 7) - (10px * 6 / 7)); /* تقسیم عرض والد به 7 کارت با gap */
+  width: calc((100% / 7) - (10px * 6 / 7)); 
 }
 
-/* کارت محصول */
 .carousel-container .category-carousel_wrapper .category-carousel-card_wrapper {
   width: 100%;
   min-width: 130px;
@@ -61,13 +55,11 @@
   align-items: center;
 }
 
-/* هاور کارت */
 .carousel-container .category-carousel_wrapper .category-carousel-card_wrapper:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* محتوای کارت */
 .carousel-container .category-carousel_wrapper .category-carousel-card__content {
   padding: 1rem;
   display: flex;
@@ -76,14 +68,12 @@
   min-height: 155px;
 }
 
-/* آیکون */
 .carousel-container .category-carousel_wrapper .category-carousel-card__icon {
   width: 40px;
   height: 40px;
   margin-bottom: 0.5rem;
 }
 
-/* عنوان */
 .carousel-container .category-carousel_wrapper .category-carousel-card__title {
   font-size: 1rem;
   font-weight: 600;
@@ -91,20 +81,18 @@
   word-wrap: break-word;
 }
 
-/* تعداد کالا */
 .carousel-container .category-carousel_wrapper .category-carousel-card__category {
   font-size: 0.85rem;
   color: #00bfd6;
 }
 
-/* ریسپانسیو: کاهش تعداد کارت‌ها در موبایل */
 @media (max-width: 1024px) {
   .carousel-container .category-carousel_wrapper .category-carousel_slide {
-    width: calc((100% / 4) - (10px * 3 / 4)); /* 4 کارت در صفحه */
+    width: calc((100% / 4) - (10px * 3 / 4)); 
   }
 }
 @media (max-width: 768px) {
   .carousel-container .category-carousel_wrapper .category-carousel_slide {
-    width: calc((100% / 2) - 5px); /* 2 کارت در موبایل */
+    width: calc((100% / 2) - 5px); 
   }
 }

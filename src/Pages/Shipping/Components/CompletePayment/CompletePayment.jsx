@@ -10,11 +10,18 @@ import useUserAddresses from "./../../../../Hooks/useUserAddresses"
 export default function CompletePayment() {
   const { currentUser, loading, error } = useCurrentUser();
   const { order } = useCart();
-  const {userAddresses} = useUserAddresses()
+  const { userAddresses } = useUserAddresses()
   const [finalOrder, setFinalOrder] = useState(null);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(null);
   const [isReady, setIsReady] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState(null)
+  const [localOrder,setLocalOrder] = useState(null)
+  useEffect(() => {
 
+    const address = JSON.parse(localStorage.getItem("shippingAddress"))
+
+    setShippingAddress(address)
+  }, [shippingAddress])
   // گرفتن سفارش نهایی از سرور
   useEffect(() => {
     if (!currentUser?.id) return;
@@ -45,8 +52,13 @@ export default function CompletePayment() {
 
   // محاسبه مجموع قیمت سفارش جاری از context
   useEffect(() => {
-    if (order?.items?.length > 0) {
-      const total = order.items.reduce(
+
+    console.log("order:", order)
+    const localOrder = JSON.parse(localStorage.getItem("finalledOrder"))
+
+    setLocalOrder(localOrder)
+    if (localOrder?.items?.length > 0) {
+      const total = localOrder.items.reduce(
         (acc, item) => acc + item.payablePrice * item.quantity,
         0
       );
@@ -56,6 +68,7 @@ export default function CompletePayment() {
 
   if (loading || !isReady) return <p>در حال بارگذاری...</p>;
   if (error) return <p>خطا در دریافت اطلاعات کاربر</p>;
+
 
   return (
     <main className="complete-payment">
@@ -82,8 +95,8 @@ export default function CompletePayment() {
           <section className="details">
             <h4>
               کد سفارش: <span className="highlight-success">
-                  DDC-{finalOrder?.orderID || "----"}
-                </span>
+                DDC-{finalOrder?.orderID || "----"}
+              </span>
             </h4>
             <p class="success-message">سفارش شما تکمیل شد</p>
 
@@ -105,7 +118,7 @@ export default function CompletePayment() {
               <p>
                 مبلغ کل:{" "}
                 <span style={{ margin: "5px 10px" }}>
-                  {totalPrice.toLocaleString()}
+                  {totalPrice ? totalPrice.toLocaleString() : ""}
                 </span>
                 تومان
               </p>
@@ -117,15 +130,15 @@ export default function CompletePayment() {
               </p>
               <p>
                 آدرس:{" "}
-                {userAddresses
-                  ? userAddresses[0].address
+                {shippingAddress
+                  ? shippingAddress
                   : "آدرس کاربر محرمانه است."}
               </p>
             </div>
           </section>
         </div>
 
-     
+
       </div>
     </main>
   );
