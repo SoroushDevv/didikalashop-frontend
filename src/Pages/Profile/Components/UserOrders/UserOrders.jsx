@@ -135,7 +135,7 @@ export default function OrdersPage() {
               deliveredOrders.map((order) => (
 
                 <li class="order-card">
-                  <a href="/profile/orders/284805123/" class="order-link">
+                  <a href={`/profile/orders/${order.orderID}`} class="order-link">
                     <div class="order-header">
                       <div class="order-status">
                         <CheckCircleOutlinedIcon />

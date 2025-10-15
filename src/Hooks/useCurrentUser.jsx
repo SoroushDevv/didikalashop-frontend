@@ -23,7 +23,6 @@ export const useCurrentUser = () => {
         const response = await axios.get("http://localhost:8000/api/users");
         console.log("response : ", response)
         const users = response.data;
-        console.log("users : ", users)
 
 
         const user = users.find((u) => u.token === token);
@@ -42,5 +41,10 @@ export const useCurrentUser = () => {
   }, [refreshKey]);
 
   const refreshData = () => setRefreshKey((prev) => prev + 1)
+
+
+
+  console.log("current user current : ", currentUser)
+
   return { currentUser, loading, error, refreshData };
 };

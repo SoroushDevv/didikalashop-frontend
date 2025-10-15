@@ -11,8 +11,15 @@ const useUserOrders = () => {
   const [userOrdersloading, setOrdersLoading] = useState(true);
   const [userOrdersError, setOrdersError] = useState(null);
   const [refreshKey,setRefreshKey] = useState(0)
+ console.log("curr user:", currentUser)
 
+
+
+
+ 
   useEffect(() => {
+
+   
     const fetchOrders = async () => {
      
 
