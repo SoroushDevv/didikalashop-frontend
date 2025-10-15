@@ -58,13 +58,18 @@
 /* فیلدها */
 .wrapper .auth-wrapper form .form-row {
   position: relative;
+
 }
 
 .wrapper .auth-wrapper form .form-row.with-icon {
   display: flex;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
 }
-
+.wrapper .auth-wrapper form .form-row.with-icon .text-danger{
+ width: 100%;
+}
 .wrapper .auth-wrapper form .form-row.with-icon i {
   position: absolute;
   left: 0.75rem;
@@ -74,7 +79,7 @@
 
 .wrapper .auth-wrapper form .input-ui {
   width: 100%;
-  padding: 0.6rem 2.5rem 0.6rem 0.75rem;
+  padding: 0.6rem 0.7rem 0.6rem 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -82,7 +87,7 @@
 }
 
 .wrapper .auth-wrapper form .input-ui:focus {
-  border-color: #007bff;
+  border-color: #e11d48;
   outline: none;
 }
 
@@ -102,7 +107,7 @@
 
 /* دکمه ورود */
 .wrapper .auth-wrapper form .btn-primary-cm {
-  background: #007bff;
+  background: #e11d48;
   color: #fff;
   border: none;
   padding: 0.75rem;
@@ -113,11 +118,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .wrapper .auth-wrapper form .btn-primary-cm:hover {
-  background: #0056b3;
+  background:  #f50c3e;
 }
 
 /* فوتر فرم */
@@ -128,7 +133,7 @@
 }
 
 .wrapper .auth-wrapper .form-footer a {
-  color: #007bff;
+  color: #e11d48;
   text-decoration: none;
 }
 
@@ -160,7 +165,7 @@
 }
 
 .wrapper .mini-footer .mini-footer-menu li a:hover {
-  color: #007bff;
+  color: #e11d48;
 }
 
 .wrapper .mini-footer .footer-light-text {

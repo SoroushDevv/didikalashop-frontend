@@ -6,14 +6,14 @@ import "./ProfileFirstPageContent.css";
 
 export default function ProfileFirstPageContent() {
   const { currentUser } = useCurrentUser();
-  const { orders = [], loading: ordersLoading, error: ordersError } =
-    useUserOrders(currentUser?.id);
+  const { userOrders = [], loading: ordersLoading, error: ordersError } = useUserOrders();
 
-  const inProgressCount = Array.isArray(orders)
-    ? orders.filter((o) => !!o.isActive).length
+  console.log("orders :" , userOrders)
+  const inProgressCount = Array.isArray(userOrders)
+    ? userOrders.filter((o) => o.isActive).length
     : 0;
-  const deliveredCount = Array.isArray(orders)
-    ? orders.filter((o) => !o.isActive).length
+  const deliveredCount = Array.isArray(userOrders)
+    ? userOrders.filter((o) => !o.isActive).length
     : 0;
 
   return (
@@ -25,7 +25,7 @@ export default function ProfileFirstPageContent() {
             ? "در حال بارگذاری..."
             : ordersError
             ? "خطا در دریافت سفارش‌ها"
-            : `${orders.length} سفارش`}
+            : `${userOrders.length} سفارش`}
         </span>
       </div>
 

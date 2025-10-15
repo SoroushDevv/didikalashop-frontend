@@ -127,7 +127,7 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
     const order = JSON.parse(localStorage.getItem("order"));
     localStorage.setItem("offValue", 0);
 
-    console.log("📦 order being sent:", order);
+    console.log(" order being sent:", order);
 
     try {
       const res = await axios.post(
@@ -146,192 +146,200 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
         title: "سفارش با موفقیت ثبت شد",
         text: "",
         icon: "success",
-        onConfirm:() => {
+        onConfirm: () => {
 
-          localStorage.setItem("finalledOrder",JSON.stringify(order))
-          localStorage.setItem("order", [])
-
-          Navigate("/complete-payment")
-        } 
-      });
-
+          localStorage.setItem("finalledOrder", JSON.stringify(order))
+          localStorage.setItem("order", JSON.stringify({
+            orderId: null,
+            userID: null,
+            date: "",
+            hour: "",
+            isActive: false,
+            items: [],
+          }))
       triggerUpdate();
-    } catch (err) {
-      console.error("❌ Error submitting order:", err);
-      ShowSwal({
-        title: "خطا در ارسال سفارش",
-        text: err.response?.data?.message || err.message,
-        icon: "error",
-      });
+      Navigate("/complete-payment")
+
     }
+      });
+
+
+} catch (err) {
+  console.error("❌ Error submitting order:", err);
+  ShowSwal({
+    title: "خطا در ارسال سفارش",
+    text: err.response?.data?.message || err.message,
+    icon: "error",
+  });
+}
   };
 
 
-  return (
-    <SidebarContainer>
-      {order && order.items.length > 0 ? (
-        <SummaryPaper elevation={0}>
-          <Typography variant="h6" style={{ textAlign: 'center' }}>
-            خلاصه سبد شما
-          </Typography>
-          <List>
-            {order.items.map((item) => (
-              <ListItem key={item.orderId}>
-                <ListItemText
-                  style={{ textAlign: 'start' }}
-                  primary={item.product?.title || 'محصول بدون نام'}
-                  secondary={
-                    <Box style={{ textAlign: 'start' }}>
-                      <Typography variant="body2">
-                        تعداد: {parseInt(item.quantity) || 0}
-                      </Typography>
-                      <Typography variant="body2">
-                        قیمت واحد: {(parseInt(item.price) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-                      </Typography>
-                      {item.discount > 0 && (
-                        <Typography variant="body2" color="error.main">
-                          تخفیف: {(parseInt(item.discount) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-                        </Typography>
-                      )}
-                      {item.color && (
-                        <Typography variant="body2">
-                          رنگ: {item.color}
-                        </Typography>
-                      )}
-                      <Typography variant="body2">
-                        تاریخ: {order.date} | ساعت: {order.hour}
-                      </Typography>
-                    </Box>
-                  }
-                />
-              </ListItem>
-            ))}
-            <Divider sx={{ my: 2 }} />
-            {totalDiscount > 0 && (
-              <ListItem sx={{ color: 'error.main' }}>
-                <ListItemText primary="کل تخفیف" />
-                <Typography variant="body2">
-                  {totalDiscount.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-                </Typography>
-              </ListItem>
-            )}
-            {offValue > 0 && (
-              <ListItem sx={{ color: 'error.main' }}>
-                <ListItemText primary="تخفیف اضافی" />
-                <Typography variant="body2">
-                  {(parseInt(offValue) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-                </Typography>
-              </ListItem>
-            )}
-            <ListItem>
-              <ListItemText
-                primary={
-                  <Box display="flex" alignItems="center">
-                    هزینه ارسال
-                    <Tooltip title="وابسته به آدرس">
-                      <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
-                    </Tooltip>
-                  </Box>
-                }
-              />
-              <Typography variant="body2">وابسته به آدرس</Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary={
-                  <Box display="flex" alignItems="center">
-                    دیدی کالا
-                    <Tooltip title="اطلاعات بیشتر">
-                      <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
-                    </Tooltip>
-                  </Box>
-                }
-              />
-              <Typography variant="body2">
-                <span>۱۵۰+</span> امتیاز
-              </Typography>
-            </ListItem>
-          </List>
-          <Divider sx={{ my: 2 }} />
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1" gutterBottom>
-              سود شما از این خرید:
-            </Typography>
-            <Typography variant="h6" color="primary">
-              {(totalDiscount + (parseInt(offValue) || 0)).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-            </Typography>
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1" gutterBottom>
-              مبلغ قابل پرداخت:
-            </Typography>
-            <Box display="flex" alignItems="start" flexDirection="column" justifyContent="start">
-              {offValue > 0 && (
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{ textDecoration: 'line-through', fontSize: 'smaller' }}
-                >
-                  {totalPrice.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-                </Typography>
-              )}
-              <Typography variant="h6" color="primary">
-                {payableAmount.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
-              </Typography>
-            </Box>
-          </Box>
-          <Link to={submitButtonURL} style={{ textDecoration: 'none' }}>
-            <StyledButton
-              style={{ padding: '5px 10px !important' }}
-              variant="contained"
-              endIcon={<ArrowLeftOutlinedIcon />}
-              onClick={(e) => {
-                if (submitButtonTitle === "پرداخت") {
-                  submitHandler(e)
-                }
-              }}
-            >
-              {submitButtonTitle}
-            </StyledButton>
-          </Link>
-          <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
-            <Typography variant="caption" color="text.secondary">
-              کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل بعدی را تکمیل کنید.
-            </Typography>
-            <Tooltip title="اطلاعات بیشتر">
-              <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
-            </Tooltip>
-          </Box>
-        </SummaryPaper>
-      ) : (
-        <SummaryPaper elevation={0}>
-          <Typography variant="body1">سبد خرید شما خالی است.</Typography>
-        </SummaryPaper>
-      )}
-      <FeaturePaper elevation={0}>
+return (
+  <SidebarContainer>
+    {order && order.items.length > 0 ? (
+      <SummaryPaper elevation={0}>
+        <Typography variant="h6" style={{ textAlign: 'center' }}>
+          خلاصه سبد شما
+        </Typography>
         <List>
+          {order.items.map((item) => (
+            <ListItem key={item.orderId}>
+              <ListItemText
+                style={{ textAlign: 'start' }}
+                primary={item.product?.title || 'محصول بدون نام'}
+                secondary={
+                  <Box style={{ textAlign: 'start' }}>
+                    <Typography variant="body2">
+                      تعداد: {parseInt(item.quantity) || 0}
+                    </Typography>
+                    <Typography variant="body2">
+                      قیمت واحد: {(parseInt(item.price) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+                    </Typography>
+                    {item.discount > 0 && (
+                      <Typography variant="body2" color="error.main">
+                        تخفیف: {(parseInt(item.discount) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+                      </Typography>
+                    )}
+                    {item.color && (
+                      <Typography variant="body2">
+                        رنگ: {item.color}
+                      </Typography>
+                    )}
+                    <Typography variant="body2">
+                      تاریخ: {order.date} | ساعت: {order.hour}
+                    </Typography>
+                  </Box>
+                }
+              />
+            </ListItem>
+          ))}
+          <Divider sx={{ my: 2 }} />
+          {totalDiscount > 0 && (
+            <ListItem sx={{ color: 'error.main' }}>
+              <ListItemText primary="کل تخفیف" />
+              <Typography variant="body2">
+                {totalDiscount.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+              </Typography>
+            </ListItem>
+          )}
+          {offValue > 0 && (
+            <ListItem sx={{ color: 'error.main' }}>
+              <ListItemText primary="تخفیف اضافی" />
+              <Typography variant="body2">
+                {(parseInt(offValue) || 0).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+              </Typography>
+            </ListItem>
+          )}
           <ListItem>
-            <ListItemIcon>
-              <ReplayIcon />
-            </ListItemIcon>
-            <ListItemText primary="هفت روز ضمانت تعویض" />
+            <ListItemText
+              primary={
+                <Box display="flex" alignItems="center">
+                  هزینه ارسال
+                  <Tooltip title="وابسته به آدرس">
+                    <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
+                  </Tooltip>
+                </Box>
+              }
+            />
+            <Typography variant="body2">وابسته به آدرس</Typography>
           </ListItem>
           <ListItem>
-            <ListItemIcon>
-              <CreditCardIcon />
-            </ListItemIcon>
-            <ListItemText primary="پرداخت در محل با کارت بانکی" />
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <LocalShippingIcon />
-            </ListItemIcon>
-            <ListItemText primary="تحویل اکسپرس" />
+            <ListItemText
+              primary={
+                <Box display="flex" alignItems="center">
+                  دیدی کالا
+                  <Tooltip title="اطلاعات بیشتر">
+                    <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
+                  </Tooltip>
+                </Box>
+              }
+            />
+            <Typography variant="body2">
+              <span>۱۵۰+</span> امتیاز
+            </Typography>
           </ListItem>
         </List>
-      </FeaturePaper>
-    </SidebarContainer>
-  );
+        <Divider sx={{ my: 2 }} />
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="subtitle1" gutterBottom>
+            سود شما از این خرید:
+          </Typography>
+          <Typography variant="h6" color="primary">
+            {(totalDiscount + (parseInt(offValue) || 0)).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+          </Typography>
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="subtitle1" gutterBottom>
+            مبلغ قابل پرداخت:
+          </Typography>
+          <Box display="flex" alignItems="start" flexDirection="column" justifyContent="start">
+            {offValue > 0 && (
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                sx={{ textDecoration: 'line-through', fontSize: 'smaller' }}
+              >
+                {totalPrice.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+              </Typography>
+            )}
+            <Typography variant="h6" color="primary">
+              {payableAmount.toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
+            </Typography>
+          </Box>
+        </Box>
+        <Link to={submitButtonURL} style={{ textDecoration: 'none' }}>
+          <StyledButton
+            style={{ padding: '5px 10px !important' }}
+            variant="contained"
+            endIcon={<ArrowLeftOutlinedIcon />}
+            onClick={(e) => {
+              if (submitButtonTitle === "پرداخت") {
+                submitHandler(e)
+              }
+            }}
+          >
+            {submitButtonTitle}
+          </StyledButton>
+        </Link>
+        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
+          <Typography variant="caption" color="text.secondary">
+            کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل بعدی را تکمیل کنید.
+          </Typography>
+          <Tooltip title="اطلاعات بیشتر">
+            <InfoOutlinedIcon fontSize="small" sx={{ ml: 1 }} />
+          </Tooltip>
+        </Box>
+      </SummaryPaper>
+    ) : (
+      <SummaryPaper elevation={0}>
+        <Typography variant="body1">سبد خرید شما خالی است.</Typography>
+      </SummaryPaper>
+    )}
+    <FeaturePaper elevation={0}>
+      <List>
+        <ListItem>
+          <ListItemIcon>
+            <ReplayIcon />
+          </ListItemIcon>
+          <ListItemText primary="هفت روز ضمانت تعویض" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <CreditCardIcon />
+          </ListItemIcon>
+          <ListItemText primary="پرداخت در محل با کارت بانکی" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LocalShippingIcon />
+          </ListItemIcon>
+          <ListItemText primary="تحویل اکسپرس" />
+        </ListItem>
+      </List>
+    </FeaturePaper>
+  </SidebarContainer>
+);
 };
 
 export default CheckoutSummary;

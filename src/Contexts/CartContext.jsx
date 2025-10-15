@@ -13,8 +13,7 @@ const defaultOrder = {
 };
 
 export const CartProvider = ({ children }) => {
-  const [order, setLocalValue, { loading, error, trigger }] =
-    useLocalStorage("order", defaultOrder);
+  const [order, setLocalValue, { loading, error, trigger }] = useLocalStorage("order", defaultOrder);
 
   const [initialized, setInitialized] = useState(false);
 

@@ -1,52 +1,76 @@
 .back-to-top__icon {
-    
-    background-color: #d63384;
-    font-size: 1rem;
-    color: #ffffff;
-    border-radius: 50%;
-    cursor: pointer;
-    margin: 0 0.5rem;
+  background-color: #d63384;
+  font-size: 1rem;
+  color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
 
-}
 .back-to-top {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
+
 .didikala {
-    width: 100%;
-    padding: 20px;
+  width: 100%;
+  padding: 20px;
 }
 
 .didikala ul {
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  align-items: center;
   gap: 10px;
-  margin: 0  !important;
+  margin: 0 !important;
 }
-.didikala ul li{
-font-size: 100px;
-font-weight: 700;
-color: #515050;
 
-cursor: pointer;
-transition: all ease 0.2s;
+.didikala ul li {
+  font-size: 100px;
+  font-weight: 700;
+  color: #515050;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
 
+.didikala ul .kala-letters {
+  font-size: 100px;
+  font-weight: 700;
+  color: #515050;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  list-style-type: none;
 }
-.didikala ul .kala-letters{
-font-size: 100px;
-font-weight: 700;
-color: #515050;
-cursor: pointer;
-transition: all ease 0.3s;
-list-style-type: none;
+
+.didikala ul .kala-letters:hover {
+  font-size: 100px;
+  font-weight: 700;
+  color: rgb(231 78 67);
+  transform: translateY(-10px);
+  cursor: pointer;
+  transition: all ease 0.3s;
 }
-.didikala ul .kala-letters:hover{
-font-size: 100px;
-font-weight: 700;
-color: rgb(231 78 67);
-transform: translateY(-10px);
-cursor: pointer;
-transition: all ease 0.3s;
+
+@media (max-width: 992px) {
+  .didikala ul li,
+  .didikala ul .kala-letters {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .didikala ul {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .didikala ul li,
+  .didikala ul .kala-letters {
+    font-size: 40px;
+    transform: none;
+  }
+  .back-to-top__icon {
+    font-size: 0.9rem;
+    margin: 0 0.3rem;
+  }
 }

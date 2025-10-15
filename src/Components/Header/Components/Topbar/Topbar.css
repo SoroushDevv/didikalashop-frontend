@@ -80,7 +80,6 @@
 .nav-container .search-area .search-result .search-result-item:hover a {
   color: #ff4d4f;
   cursor: pointer;
-
 }
 
 .nav-container .search-area .search-result .search-result-item a {
@@ -88,8 +87,6 @@
   text-decoration: none;
 }
 
-/* ===== حساب کاربری ===== */
-/* ====== والد اصلی بخش حساب ====== */
 .topbar-account_area {
   position: relative;
   display: flex;
@@ -97,7 +94,6 @@
   font-family: "IRANSans", sans-serif;
 }
 
-/* ====== دکمه ثبت نام / ورود ====== */
 .topbar-account_area .topbar-register_wrapper {
   display: flex;
   align-items: center;
@@ -110,7 +106,7 @@
   padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .topbar-account_area .topbar-register_button:hover {
@@ -123,7 +119,6 @@
   font-weight: 500;
 }
 
-/* ====== منوی حساب کاربری ====== */
 .topbar-account_area .topbar-account_menu {
   position: relative;
 }
@@ -144,14 +139,15 @@
 }
 
 .topbar-account_area .topbar-account_icon {
-  color:#ff4d4f;
+  color: #ff4d4f;
   margin-right: 6px;
   font-size: 22px;
 }
-.topbar-account_area .topbar-account_toggle:hover .topbar-account_icon{
- transform: scale(1.1);
+
+.topbar-account_area .topbar-account_toggle:hover .topbar-account_icon {
+  transform: scale(1.1);
 }
-/* ====== منوی بازشونده ====== */
+
 .topbar-account_area .topbar-account_dropdown {
   position: absolute;
   top: 120%;
@@ -173,7 +169,6 @@
   transform: translateY(0);
 }
 
-/* ====== آیتم‌های منو ====== */
 .topbar-account_area .topbar-account_item {
   display: flex;
   align-items: center;
@@ -182,7 +177,7 @@
   color: #333;
   font-size: 14px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .topbar-account_area .topbar-account_item:hover {
@@ -190,7 +185,6 @@
   color: #ff4d4f;
 }
 
-/* ====== پیام‌ها ====== */
 .topbar-account_area .topbar-account_message {
   position: relative;
 }
@@ -204,14 +198,12 @@
   margin-right: 5px;
 }
 
-/* ====== جداکننده ====== */
 .topbar-account_area .topbar-account_divider {
   height: 1px;
   background-color: #f0f0f0;
   margin: 6px 0;
 }
 
-/* بک‌دراپ وقتی نتایج باز میشن */
 .nav-container .backdrop {
   position: fixed;
   top: 0;
@@ -223,21 +215,58 @@
   z-index: 999;
 }
 
-/* نتایج جستجو روی بک‌دراپ */
-.nav-container .search-area .search-result {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  margin-top: 5px;
-  padding: 10px;
-  z-index: 1000;
-  /* بالاتر از بک‌دراپ */
+.register-button_container .header-cart-tab_link span {
+  color: #007bff;
+  text-decoration: none;
 }
-.register-button_container .header-cart-tab_link span{
-color: #007bff;
-text-decoration: none;
+
+
+@media (max-width: 767px) {
+  .nav-container .topbar .topbar-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .nav-container .search-area {
+    margin: 10px 0;
+  }
+
+  .nav-container .search-area .search input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .topbar-account_area {
+    justify-content: space-between;
+  }
+
+  .topbar-account_area .topbar-register_button {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-container .topbar {
+    padding: 10px 15px;
+  }
+
+  .nav-container .search-area {
+    margin: 0 10px;
+  }
+
+  .nav-container .search-area .search input {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-container .topbar {
+    padding: 15px 40px;
+  }
+
+  .nav-container .search-area .search input {
+    font-size: 16px;
+  }
 }

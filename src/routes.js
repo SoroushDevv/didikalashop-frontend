@@ -34,7 +34,7 @@ import ChangePassword from "./Components/changePassword/ChangePassword"
 import CategoryResults from "./Pages/CategoryResults/CategoryResults";
 import IncredibleOffers from "./Pages/IncredibleOffers/IncredibleOffers"
 import MostSales from "./Pages/MostSales/MostSales"
-
+import ProfileOrdersDetails from "./Pages/Profile/Components/ProfileOrdersDetails/ProfileOrdersDetails";
 
 
 
@@ -64,6 +64,8 @@ let routes = [
             { path: "history", element: <UserHistory /> },
             { path: "comments", element: <UserComments /> },
             { path: "orders", element: <UserOrders /> },
+            { path: "orders/:orderId", element: <ProfileOrdersDetails /> },
+
             { path: "change-pass", element: <ChangePassword /> },
         ]
     },

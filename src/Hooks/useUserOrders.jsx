@@ -1,67 +1,59 @@
-// useUserOrders.js
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import ShowSwal from "../Components/ShowSwal/ShowSwal";
 import { getAuthToken } from "../Utils/AuthUtils";
+import { useCurrentUser } from "./useCurrentUser";
+const API_BASE_URL = "http://localhost:8000/api/";
 
-const SOCKET_URL = "http://localhost:8000"; // آدرس بک‌اند
+const useUserOrders = () => {
+  const {currentUser} = useCurrentUser()
+  const [userOrders, setUserOrders] = useState([]);
+  const [userOrdersloading, setOrdersLoading] = useState(true);
+  const [userOrdersError, setOrdersError] = useState(null);
+  const [refreshKey,setRefreshKey] = useState(0)
+ console.log("curr user:", currentUser)
 
-const useUserOrders = (userId) => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const token = getAuthToken()
-  // یک بار سفارش‌ها رو از API بگیریم
-  const fetchOrders = async () => {
+
+
+
  
-    if (!userId) return;
-    setLoading(true);
-    try {
-      const res = await axios.get(
-        `${SOCKET_URL}/api/orders/user/${userId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setOrders(res.data || []);
-    } catch (err) {
-      setError(err.message || "خطا در دریافت سفارش‌ها");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (!userId) return;
 
-    fetchOrders();
+   
+    const fetchOrders = async () => {
+     
 
-    // اتصال به socket
-    const socket = io(SOCKET_URL, {
-      query: { userId },
-      auth: { token: getAuthToken() },
-    });
+      setOrdersLoading(true);
+      try {
+         const token = getAuthToken();
 
-    // وقتی سفارش جدید ساخته شد
-    socket.on("order_created", (newOrder) => {
-      setOrders((prev) => [...prev, newOrder]);
-    });
+         console.log("user id", currentUser.id)
+        const ordersResponse = await axios.get(`http://localhost:8000/api/orders/user/${currentUser.id}`);
 
-    // وقتی سفارش آپدیت شد (مثلاً از active → delivered رفت)
-    socket.on("order_updated", (updatedOrder) => {
-      setOrders((prev) =>
-        prev.map((o) => (o.id === updatedOrder.id ? updatedOrder : o))
-      );
-    });
-
-    // وقتی سفارشی حذف شد
-    socket.on("order_deleted", (orderId) => {
-      setOrders((prev) => prev.filter((o) => o.id !== orderId));
-    });
-
-    return () => {
-      socket.disconnect();
+        const orders = ordersResponse.data || [];
+        console.log("useUserorders : ", orders);
+        setUserOrders(orders);
+        setOrdersError(null);
+      } catch (err) {
+        console.error("Error fetching orders:", err);
+        let errorMessage = err.response?.data?.error || err.message || "خطا در دریافت سفارش ها";
+        if (err.response?.status === 401) {
+          errorMessage = "لطفاً ابتدا وارد حساب کاربری خود شوید";
+        }
+        setOrdersError(errorMessage);
+        setUserOrders([]);
+      } finally {
+        setOrdersLoading(false);
+      }
     };
-  }, [userId]);
-  return { orders, loading, error };
+
+    fetchOrders(); // صدا زدن تابع async
+  }, [currentUser?.id,refreshKey]);
+
+  const handleRefreshKey = () => {setRefreshKey(prev => prev+1)}
+
+  console.log("userOrders::",userOrders)
+  return { userOrders, userOrdersloading, userOrdersError ,handleRefreshKey};
 };
 
 export default useUserOrders;
