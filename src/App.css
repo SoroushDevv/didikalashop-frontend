@@ -54,11 +54,50 @@ footer {
   width: 100%;
 }
 
+/* Responsive Design */
 
+@media (max-width: 480px) {
+  .main-content-wrapper,
+  .main-content {
+    padding: 10px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  .App {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .main-content-wrapper,
+  .main-content {
+    padding: 15px;
+  }
+
+  .App {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .main-content-wrapper,
+  .main-content {
+    padding: 20px 40px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .main-content-wrapper,
+  .main-content {
+    margin: 0 auto;
+  }
+}
 
 
 :root {
-  /* رنگ اصلی (Primary) */
   --primary: #f7858da4; /* رنگ اصلی با شفافیت */
   --primary-solid: #f7858d; /* نسخه بدون شفافیت */
   --primary-light: #f9a7b0; /* روشن‌تر */

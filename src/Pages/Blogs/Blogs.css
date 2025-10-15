@@ -54,7 +54,7 @@
 }
 
 .blog-section .blog-tab-item .tab.active {
-  background-color: #1976d2;
+  background-color: #f7858d;
   color: #fff;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .blog-section .blog-card .blog-card-title:hover {
-  color: #1976d2;
+  color: #f7858d;
 }
 
 /* --- خلاصه متن کارت --- */
@@ -115,10 +115,10 @@
 .blog-section .blog-card .blog-detail-link {
   text-decoration: none;
   font-weight: 500;
-  color: #1976d2;
+  color: #f7858d;
   transition: color 0.2s ease;
 }
 
 .blog-section .blog-card .blog-detail-link:hover {
-  color: #0d47a1;
+  color: #f7858d;
 }

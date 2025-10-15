@@ -1,26 +1,22 @@
 /* Comments.css */
 
-/* ظرف اصلی نظرات */
 .comments-container {
   width: 100%;
   max-width: 800px;
-  /* حداکثر عرض برای خوانایی */
   margin: 0 auto;
 }
 
-/* ظرف هر نظر */
 .comment-container {
   padding: 1.125rem;
-  /* معادل p-4.5 */
   background-color: #f3f4f6;
-  /* رنگ پس‌زمینه روشن */
+
   border-radius: 0.5rem;
-  /* گوشه‌های گرد */
+
   margin-bottom: 1rem;
-  /* فاصله بین نظرات */
+
 }
 
-/* هدر نظر (شامل اطلاعات کاربر و دکمه پاسخ) */
+
 .comment-header {
   display: flex;
   justify-content: space-between;
@@ -28,31 +24,31 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #fff;
-  /* خط جداکننده */
+  
 }
 
-/* اطلاعات کاربر */
+
 .user-info {
   display: flex;
   gap: 0.875rem;
-  /* فاصله بین آواتار و جزئیات */
+  
 }
 
-/* ظرف آواتار */
+
 .user-avatar-container {
   position: relative;
   width: 3.75rem;
-  /* عرض آواتار */
+ 
   height: 3.75rem;
   border: 1px solid #f59e0b;
-  /* حاشیه نارنجی برای نظرات اصلی */
+  
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* تصویر آواتار */
+
 .user-avatar {
   width: 3rem;
   height: 3rem;
@@ -60,7 +56,6 @@
   border-radius: 50%;
 }
 
-/* نشان (badge) روی آواتار */
 .avatar-badge {
   position: absolute;
   top: -0.125rem;
@@ -68,35 +63,33 @@
   width: 1.25rem;
   height: 1.25rem;
   background-color: #f59e0b;
-  /* رنگ نارنجی برای نظرات اصلی */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* آیکون داخل نشان */
+
 .avatar-badge .icon {
   width: 0.875rem;
   height: 0.875rem;
   fill: white;
 }
 
-/* جزئیات کاربر (نام و نقش) */
+
 .user-details {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-/* ظرف نام و نقش */
+
 .user-name-container {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-/* نام کاربر */
 .user-name {
   max-width: 10rem;
   overflow: hidden;
@@ -105,26 +98,23 @@
   font-size: 1rem;
 }
 
-/* نقش کاربر */
 .user-role {
   font-weight: 600;
-  /* معادل font-danaDemiBold */
   font-size: 1rem;
 }
 
-/* تاریخ نظر */
+
 .comment-date {
   font-size: 0.875rem;
-  /* معادل text-sm */
+ 
   color: #4b5563;
-  /* رنگ خاکستری تیره */
+  
 }
 
-/* دکمه پاسخ */
 .reply-btn {
   background: none;
   border: 1px solid rgb(10 151 212 ) !important;
-  /* حاشیه خاکستری */
+
   border-radius: 100%;
   padding: 8px !important;
   cursor: pointer;
@@ -135,14 +125,12 @@
   background-color: #0a97d41a;
 }
 
-/* آیکون پاسخ */
 .icon-reply {
   width: 1.125rem;
   height: 1.125rem;
   fill: #6b7280;
 }
 
-/* متن نظر */
 .comment-text {
   font-size: 1rem;
   word-break: break-word;
@@ -150,18 +138,14 @@
   margin: 0;
 }
 
-/* ظرف پاسخ‌ها */
 .replies-container {
   margin-top: 1rem;
   padding-left: 1.5rem;
-  /* تورفتگی برای پاسخ‌ها */
 }
 
-/* ظرف هر پاسخ */
 .reply-container {
   padding: 1.125rem;
   background-color: #e5e7eb;
-  /* رنگ کمی تیره‌تر برای پاسخ‌ها */
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
@@ -173,7 +157,6 @@
   padding: 10px 0 ;
   border-bottom: 1px solid rgba(0, 0, 0, 0.87);
 }
-/* هدر پاسخ */
 .reply-header {
   display: flex;
   justify-content: space-between;
@@ -183,10 +166,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* نشان پاسخ‌ها */
 .reply-badge {
   background-color: #0ea5e9;
-  /* رنگ آبی برای پاسخ‌ها */
 }
 
 
@@ -345,11 +326,9 @@ background-color: #878a8f53;
 padding: 10px;
 }
 
-/* استایل‌های پاسخ‌گو */
 @media (max-width: 640px) {
   .hidden.sm\:block {
     display: none;
-    /* مخفی کردن آواتار در موبایل */
   }
 
   .comment-container,
@@ -363,25 +342,23 @@ padding: 10px;
   .comment-container,
   .reply-container {
     padding: 1.25rem;
-    /* معادل md:p-5 */
   }
 }
 
-/* استایل برای حالت تاریک (اختیاری) */
 @media (prefers-color-scheme: dark) {
   .comment-container {
     background-color: #1f2937;
-    /* رنگ تیره */
+    
   }
 
   .reply-container {
     background-color: #374151;
-    /* رنگ تیره‌تر برای پاسخ‌ها */
+  
   }
 
   .comment-date {
     color: #9ca3af;
-    /* رنگ خاکستری روشن برای حالت تاریک */
+
   }
 
   .comment-header,

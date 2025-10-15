@@ -166,7 +166,6 @@
   color: var(--muted);
 }
 
-/* چیپ رنگ */
 .item-detail_list .color-chip_item .color-chip {
  width: 18px;
   height: 18px;
@@ -175,7 +174,6 @@
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
-/* تعداد و حذف */
 .item-quantity--item-price {
   display: flex;
   justify-content: space-between;
@@ -192,7 +190,6 @@
   color: black;
 }
 
-/* num-block */
 .item-quantity .num-block {
   display: inline-flex;
   align-items: center;
@@ -245,7 +242,6 @@
   cursor: not-allowed;
 }
 
-/* دکمه حذف */
 .item-remove-btn {
   display: inline-flex;
   align-items: center;
@@ -270,7 +266,6 @@
   transition: all ease 250ms;
 }
 
-/* قیمت */
 .item-price {
   display: flex;
   align-items: center;
@@ -286,7 +281,6 @@
   font-size: 13px;
 }
 
-/* قیمت اصلی خط‌خورده */
 .original-price {
   font-size: 13px;
   color: var(--muted);
@@ -294,7 +288,6 @@
   margin-top: 6px;
 }
 
-/* بخش سایدبار خلاصه */
 .w-res-sidebar {
   padding-left: 12px;
   padding-right: 12px;
@@ -315,7 +308,6 @@
   box-shadow: var(--soft-shadow);
 }
 
-/* حالت خالی بودن سبد */
 .text-center {
   text-align: center;
   color: var(--muted);
@@ -323,7 +315,6 @@
   font-weight: 600;
 }
 
-/* تب فعال/پنهان */
 .tab-pane.fade {
   transition: opacity .18s ease, transform .18s ease;
 }
@@ -335,7 +326,7 @@
 .return-home_btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #4f46e5; /* بنفش ملایم */
+  background-color: #4f46e5; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -344,7 +335,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  width: fit-content; /* یا عدد ثابت مثل 120px */
+  width: fit-content; 
 }
 
 .return-home_btn:hover {
@@ -353,7 +344,23 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ریسپانسیو */
+
+.item-remove-btn:focus,
+.nav-link:focus,
+.plus:focus,
+.minus:focus {
+  outline: 3px solid rgba(14, 165, 164, 0.12);
+  outline-offset: 2px;
+}
+
+.price-rtl {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+.small-ui {
+  font-size: 13px;
+}
 @media (max-width: 991px) {
   .item-thumbnail {
     width: 92px;
@@ -393,24 +400,4 @@
     width: 120px;
     object-fit: cover;
   }
-}
-
-/* افکت‌های کوچک برای دسترسی */
-.item-remove-btn:focus,
-.nav-link:focus,
-.plus:focus,
-.minus:focus {
-  outline: 3px solid rgba(14, 165, 164, 0.12);
-  outline-offset: 2px;
-}
-
-/* کلاس کمکی برای نمایش قیمت فارسی‌شده (در صورت نیاز) */
-.price-rtl {
-  direction: ltr;
-  unicode-bidi: embed;
-}
-
-/* کمینه‌سازی اندازه فونت در صفحاتی که فشرده‌اند */
-.small-ui {
-  font-size: 13px;
 }

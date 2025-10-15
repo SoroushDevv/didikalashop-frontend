@@ -3,11 +3,14 @@ import axios from "axios";
 import "./CompletePayment.css";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { useCart } from "../../../../Contexts/CartContext";
+import useUserAddresses from "./../../../../Hooks/useUserAddresses"
+
+
 
 export default function CompletePayment() {
   const { currentUser, loading, error } = useCurrentUser();
   const { order } = useCart();
-
+  const {userAddresses} = useUserAddresses()
   const [finalOrder, setFinalOrder] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isReady, setIsReady] = useState(false);
@@ -64,10 +67,10 @@ export default function CompletePayment() {
             </div>
             <div className="alert-title">
               <h4>
-                سفارش{" "}
+                سفارش
                 <span className="highlight-success">
-                  DDC-{finalOrder?.orderId || "----"}
-                </span>{" "}
+                  DDC-{finalOrder?.orderID || "----"}
+                </span>
                 با موفقیت ثبت شد.
               </h4>
             </div>
@@ -78,9 +81,11 @@ export default function CompletePayment() {
 
           <section className="details">
             <h4>
-              کد سفارش: <span>{finalOrder?.id}</span>
+              کد سفارش: <span className="highlight-success">
+                  DDC-{finalOrder?.orderID || "----"}
+                </span>
             </h4>
-            <p>سفارش شما تکمیل شد</p>
+            <p class="success-message">سفارش شما تکمیل شد</p>
 
             <div className="info-grid">
               <p>
@@ -112,32 +117,15 @@ export default function CompletePayment() {
               </p>
               <p>
                 آدرس:{" "}
-                {currentUser?.address
-                  ? currentUser.address
+                {userAddresses
+                  ? userAddresses[0].address
                   : "آدرس کاربر محرمانه است."}
               </p>
             </div>
           </section>
         </div>
 
-        <section className="recommend">
-          <div className="section-header">
-            <h2>محصولات پیشنهادی برای شما</h2>
-            <a href="#">مشاهده همه</a>
-          </div>
-          <div className="products">
-            <div className="product-card">
-              <img src="./assets/img/products/07.jpg" alt="مانتو زنانه" />
-              <h5>مانتو زنانه</h5>
-              <span className="price">157,000 تومان</span>
-            </div>
-            <div className="product-card">
-              <img src="./assets/img/products/017.jpg" alt="کت مردانه" />
-              <h5>کت مردانه</h5>
-              <span className="price">199,000 تومان</span>
-            </div>
-          </div>
-        </section>
+     
       </div>
     </main>
   );

@@ -8,7 +8,6 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { Box } from "@mui/material";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 
-// نگاشت رنگ‌ها به کد رنگ
 const colorMap = {
   مشکی: "#000000",
   سفید: "#FFFFFF",
@@ -75,11 +74,10 @@ export default function LocalOrders() {
       setUserOrder(localOrder)
     }
   }, [])
-  // ✅ همگام‌سازی order از context
+
   useEffect(() => {
     if (loading || error) return;
 
-    // محاسبه مبلغ‌ها
     if (!order || !Array.isArray(order.items)) {
       setTotalPrice(0);
       setTotalDiscount(0);
@@ -106,7 +104,6 @@ export default function LocalOrders() {
     setPayableAmount(payable);
   }, [order, loading, error, localOff]);
 
-  // ✅ حذف محصول از سبد
   const handleRemoveItem = (productID) => {
     if (!order?.items?.length) return;
 
@@ -124,7 +121,6 @@ export default function LocalOrders() {
     });
   };
 
-  // ✅ خالی کردن سبد خرید
   const handleClearCart = () => {
     setOrder({ ...order, items: [] });
     triggerUpdate()

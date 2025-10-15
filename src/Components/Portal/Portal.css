@@ -1,4 +1,3 @@
-/* PortalBackdrop.css */
 .portal-backdrop {
   position: fixed;
   top: 0;
@@ -10,10 +9,9 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  direction: rtl; /* ← این خط همه عناصر داخل modal را راست‌چین می‌کند */
-  text-align: right; /* برای متن‌ها */
+  direction: rtl; 
+  text-align: right; 
 }
-
 .edit-address-card {
   max-width: 600px;
   width: 90%;

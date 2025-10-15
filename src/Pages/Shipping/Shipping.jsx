@@ -204,7 +204,7 @@ console.log("use current user :", currentUser)
                         </div>
 
                         <div className="checkout-products">
-                            {localCart.map((item, indx) => (
+                            {localCart?.map((item, indx) => (
                                 <div key={indx} className="product-item shipping-product-item">
                                     <img src={`/img/products/${item.product.img}`} alt={item.product.title} />
                                     <div className="product-info">
