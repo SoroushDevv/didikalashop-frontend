@@ -58,7 +58,7 @@ const ColorChip = ({ color }) => {
 };
 
 export default function LocalOrders() {
-  const { order, setOrder, loading, error,triggerUpdate } = useCart();
+  const { order, setOrder, loading, error, triggerUpdate } = useCart();
   const [userOrder, setUserOrder] = useState(null)
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
@@ -98,9 +98,9 @@ export default function LocalOrders() {
       0
     );
     console.log("order :", order)
-console.log("total:",total)
-console.log("discount:",discount)
-console.log("localOff:",localOff)
+    console.log("total:", total)
+    console.log("discount:", discount)
+    console.log("localOff:", localOff)
     const payable = total - (discount + localOff);
     setTotalPrice(total);
     setTotalDiscount(discount);
@@ -164,45 +164,54 @@ console.log("localOff:",localOff)
           items.map((item) => (
             <li className="cart-dropdown-item" key={item.productID}>
               <div className="cart-dropdown-item-wrapper">
-                <div className="cart-dropdown-item-content">
-                  <Link
-                    to={`/productDetail/${item.product.title}`}
-                    className="cart-dropdown-item-title"
-                  >
-                    {item.product.title || "عنوان محصول"}
-                  </Link>
 
-                  <div className="cart-dropdown-item-footer">
+                <div className="cart-dropdown-item-content">
+                  <div className="cart-dropdown-top">
+                    <div className="cart-dropdown-item-image">
+                      <img
+                        src={`/img/products/${item.product.img || "test"}`}
+                        alt={item.title || "عنوان محصول"}
+                      />
+                    </div>
                     <div className="cart-dropdown-item-props">
+                      <Link
+                        to={`/productDetail/${item.product.title}`}
+                        className="cart-dropdown-item-title"
+                      >
+                        {item.product.productDesc || "عنوان محصول"}
+                      </Link>
+                      
                       <span className="cart-dropdown-item-prop">
                         <ColorChip color={item.color} />
                       </span>
-                      <span className="cart-dropdown-item-prop">
-                        {(item.price * item.quantity|| 0).toLocaleString()} تومان
+                    </div>
+
+                  </div>
+                  <div className="cart-dropdown-item-footer">
+                    <div className="delete-button_container">
+                      <button
+                        className="cart-dropdown-item-remove"
+                        onClick={() => handleRemoveItem(item.productID)}
+                      >
+                        <DeleteOutlinedIcon />
+                      </button>
+                    </div>
+                    <div className="item-price_container">
+                       <span className="cart-dropdown-item-prop discount-amount">
+                        {(item.price * (item.product.discountPercent / 100) || 0).toLocaleString()}<span>تومان</span>
+                        <span className="discount-title">تخفیف</span>
                       </span>
+                      
                       <span className="cart-dropdown-item-prop">
                         {item.quantity} ×
                       </span>
-                       <span className="cart-dropdown-item-prop">
-                        <span className="discount-amount">تخفیف:</span>
-                        {((item.price * item.quantity) - (item.price * (item.product.discountPercent/100))    || 0).toLocaleString()} تومان
+                     <span className="cart-dropdown-item-prop payable-amount">
+                        {(((item.price * item.quantity) - (item.price * (item.product.discountPercent / 100))) || 0).toLocaleString()} تومان
                       </span>
                     </div>
+
+
                   </div>
-
-                  <button
-                    className="cart-dropdown-item-remove"
-                    onClick={() => handleRemoveItem(item.productID)}
-                  >
-                    <DeleteOutlinedIcon />
-                  </button>
-                </div>
-
-                <div className="cart-dropdown-item-image">
-                  <img
-                    src={`/img/products/${item.product.img || "test"}`}
-                    alt={item.title || "عنوان محصول"}
-                  />
                 </div>
               </div>
             </li>
