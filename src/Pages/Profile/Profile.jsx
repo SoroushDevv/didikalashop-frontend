@@ -11,7 +11,6 @@ import ErrorMessage from "./../ErrorMessage/ErrorMessage"
 
 export default function Profile() {
   const { currentUser, loading, error } = useCurrentUser()
-  const [mostSaleProducts, setMostSaleProducts] = useState()
   const [isLogedIn, setIsLogedIn] = useState(isAuthenticated())
 
 
@@ -45,15 +44,7 @@ export default function Profile() {
           <ErrorMessage msg={"برای دیدن داشبورد ابتدا لاگین کنید"} />
         )}
 
-        <section className="recommended-section">
-          <div className="recommended-header">
-            <h2>محصولات پیشنهادی برای شما</h2>
-            <Link to="">مشاهده همه</Link>
-          </div>
-          <div className="recommended-carousel">
-            <SplideProductCarousel products={mostSaleProducts} />
-          </div>
-        </section>
+  
 
       </div>
     </main>

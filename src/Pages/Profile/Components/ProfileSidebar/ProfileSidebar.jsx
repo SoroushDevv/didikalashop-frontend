@@ -43,7 +43,7 @@ export default function ProfileSidebar() {
               <img src="/img/profile-pic/def-avatar.jpg" alt="avatar" />
             </div>
             <div className="profile-info">
-              <span className="profile-username">{currentUser.username}</span>
+              <span className="profile-username">{currentUser?.firstname ? currentUser.firstname + " " + currentUser.lastname : currentUser.username}</span>
               <span className="profile-phone">{currentUser.phone}</span>
             </div>
           </div>

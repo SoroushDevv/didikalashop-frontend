@@ -34,6 +34,7 @@
 .profile-sidebar .profile-card .profile-header .profile-header-top .profile-avatar{
     height: 100%;
     width: auto;
+    flex: 1;
 }
 
 .profile-sidebar .profile-card .profile-header .profile-header-top .profile-avatar img {
@@ -47,10 +48,13 @@
 
 .profile-sidebar .profile-card .profile-header .profile-header-top .profile-info {
     display: flex;
+    flex: 2;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
+    align-items: start;
     gap: 10px;
-    align-items: center;
 }
 
 .profile-sidebar .profile-card .profile-header .profile-header-top .profile-info .profile-username {
