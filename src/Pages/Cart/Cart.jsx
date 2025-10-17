@@ -191,6 +191,7 @@ export default function Cart() {
   }
 
 
+  console.log("cart order : ", order)
   return (
     <main className="main-content">
       <div className="container main-container">
@@ -336,13 +337,15 @@ export default function Cart() {
                                         حذف
                                       </button>
                                     </div>
-                                    <div className="item-price">
-                                      {item.price}
-                                      <span className="text-sm mr-1" style={{ margin: "0 10px" }}>تومان</span>
-                                      {item.discountPercent > 0 && (
-                                        <div className="original-price">
-                                          قیمت اصلی:{' '}
-                                          {(item.price * item.quantity).toLocaleString()}{' '}
+                                    <div className="item-price_container">
+                                      <del className='discount-price'>
+                                        {((item.price * (item.product.discountPercent / 100))* item.quantity).toLocaleString()}
+                                        <span className="text-sm mr-1" style={{ margin: "0 10px" }}>تومان</span>
+                                      </del>
+
+                                      {item.product.hasDiscount && (
+                                        <div className="payable-price">
+                                          {((item.price * item.quantity) - ((item.price * item.quantity * (item.product.discountPercent / 100)))).toLocaleString()}{' '}
                                           تومان
                                         </div>
                                       )}

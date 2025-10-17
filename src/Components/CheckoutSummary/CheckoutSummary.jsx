@@ -100,7 +100,7 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
       }
 
       const totalDiscount = order.items.reduce(
-        (sum, item) => sum + (parseInt(item.discount) || 0) * (parseInt(item.quantity) || 0),
+        (sum, item) => sum + (parseInt(item.price * item.product.discountPercent/100) || 0) * (parseInt(item.quantity) || 0),
         0
       );
       setTotalDiscount(totalDiscount);
@@ -113,6 +113,8 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
   // محاسبه payableAmount
   useEffect(() => {
     const calculatePayableAmount = () => {
+      console.log("total price :", totalPrice)
+      console.log("total discount :", totalDiscount)
       const finalAmount = totalPrice - totalDiscount - (offValue || 0);
       setPayableAmount(finalAmount < 0 ? 0 : finalAmount);
       console.log('Calculated payableAmount:', finalAmount);
@@ -265,7 +267,7 @@ return (
           <Typography variant="subtitle1" gutterBottom>
             سود شما از این خرید:
           </Typography>
-          <Typography variant="h6" color="primary">
+          <Typography variant="h6" color="error">
             {(totalDiscount + (parseInt(offValue) || 0)).toLocaleString('fa-IR', { minimumFractionDigits: 0 })} تومان
           </Typography>
         </Box>

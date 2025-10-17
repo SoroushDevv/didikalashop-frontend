@@ -89,6 +89,7 @@
 
 .cart-item {
   display: flex;
+  width: 100%;
   gap: 14px;
   align-items: flex-start;
   background: var(--card-bg);
@@ -259,15 +260,19 @@
   transition: all ease 250ms;
 }
 
-.item-price {
+.item-price_container {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
   font-weight: 800;
   font-size: 16px;
   color: var(--text);
 }
+.item-price_container .discount-price{
 
+  color: #d32f2f;
+}
 .item-price .text-sm {
   font-weight: 500;
   color: var(--muted);
@@ -354,6 +359,7 @@
 .small-ui {
   font-size: 13px;
 }
+
 @media (max-width: 991px) {
   .item-thumbnail {
     width: 92px;
