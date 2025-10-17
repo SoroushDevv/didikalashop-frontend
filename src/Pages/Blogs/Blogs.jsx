@@ -18,7 +18,8 @@ import {
 } from "@mui/material"
 import Grid from '@mui/material/Grid';
 import { NavLink } from "react-router-dom";
-
+import AOS from "aos";
+import "aos/dist/aos.css"; 
 
 
 
@@ -42,6 +43,15 @@ export default function BlogsPage() {
   const [activeTab, setActiveTab] = useState()
 
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,     
+      offset: 100,   
+    })
+  })
+
+ 
 
   useEffect(() => {
 
@@ -71,8 +81,7 @@ export default function BlogsPage() {
 
   }
   console.log("blogs : ", blogs)
-  const sortBlogsHandler = (category) => {
-  }
+  
 
   return (
   <Box component="section" className="blog-section">
@@ -116,9 +125,10 @@ export default function BlogsPage() {
     <Grid container spacing={3} justifyContent="center" className="blog-grid">
       {!loading &&
         !error &&
-        filteredBlogs.map((blog) => (
+        filteredBlogs.map((blog,index) => (
           <Grid item key={blog.id} xs={6} sm={4} md={2} className="blog-card-item">
-            <Card className="blog-card">
+            <Card className="blog-card"      data-aos={index % 2 === 0 ? "fade-up" : "fade-right"}
+>
               <CardMedia
                 component="img"
                 image={`/img/blogs/${blog.cover_image}`}

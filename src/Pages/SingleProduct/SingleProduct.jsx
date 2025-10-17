@@ -41,7 +41,7 @@ const ColorChip = ({ color, isSelected, onClick }) => {
   const lightColors = ['#FFFFFF', '#FFFF00', '#FF69B4', '#C0C0C0', 'transparent'];
 
   return (
-   <Box className="color-chip">
+    <Box className="color-chip">
       <div
         className={`color-circle ${isSelected ? "selected" : ""}`}
         style={{ backgroundColor: hexColor }}
@@ -193,6 +193,8 @@ export default function SingleProduct() {
     item => item.productID === product.id && item.color === selectedColor
   );
 
+
+  console.log("product :", product)
   return (
     <Box className="single-product-section dt-sl">
       <div className="single-product-container container">
@@ -205,9 +207,11 @@ export default function SingleProduct() {
           <Grid item xs={12} md={6}>
             <div className="product-details-card">
               <Typography variant="h4" className="product-title">{product.title}</Typography>
+              <Typography variant="h6" className="product-desc">{product.productDesc}</Typography>
               <Typography variant="h6" className="product-price">
                 قیمت: {product.price.toLocaleString()} تومان
               </Typography>
+             
 
               {product.colors?.length > 0 && (
                 <div className="product-color-selector">

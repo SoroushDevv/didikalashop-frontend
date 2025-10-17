@@ -93,11 +93,14 @@ export default function LocalOrders() {
     const discount = order.items.reduce(
       (sum, item) =>
         sum +
-        ((item.price || 0) * (item.product?.discount || 0) / 100) *
+        ((item.price || 0) * (item.product?.discountPercent || 0) / 100) *
         (item.quantity || 1),
       0
     );
-
+    console.log("order :", order)
+console.log("total:",total)
+console.log("discount:",discount)
+console.log("localOff:",localOff)
     const payable = total - (discount + localOff);
     setTotalPrice(total);
     setTotalDiscount(discount);
@@ -137,7 +140,7 @@ export default function LocalOrders() {
 
   if (userOrder == null) return;
 
-  console.log("user order :", userOrder)
+  console.log("payable price :", payableAmount)
   const items = userOrder?.items || []
 
 
@@ -175,10 +178,14 @@ export default function LocalOrders() {
                         <ColorChip color={item.color} />
                       </span>
                       <span className="cart-dropdown-item-prop">
-                        {(item.price || 0).toLocaleString()} تومان
+                        {(item.price * item.quantity|| 0).toLocaleString()} تومان
                       </span>
                       <span className="cart-dropdown-item-prop">
                         {item.quantity} ×
+                      </span>
+                       <span className="cart-dropdown-item-prop">
+                        <span className="discount-amount">تخفیف:</span>
+                        {((item.price * item.quantity) - (item.price * (item.product.discountPercent/100))    || 0).toLocaleString()} تومان
                       </span>
                     </div>
                   </div>

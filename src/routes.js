@@ -11,8 +11,6 @@ import Profile from "./Pages/Profile/Profile";
 import Products from "./Pages/Products/Products";
 import Shipping from "./Pages/Shipping/Shipping";
 import SingleProduct from "./Pages/SingleProduct/SingleProduct";
-import VerifyPhoneNumber from "./Pages/VerifyPhoneNumber/VerifyNumber";
-import Wellcome from "./Pages/Wellcome/Wellcome";
 import MainFAQ from "./Pages/FAQ/Main/MainFAQ";
 import CategoryFAQ from "./Pages/FAQ/Category/CategoryFAQ";
 import FAQQuestionPage from "./Pages/FAQ/Question/FAQQuestionPage";
@@ -87,8 +85,6 @@ let routes = [
     { path: "/complete-payment", element: <CompletePayment /> },
     { path: "/incredible-offers", element: <IncredibleOffers /> },
     { path: "/most-sales", element: <MostSales /> },
-    { path: "/verify-number", element: <VerifyPhoneNumber /> },
-    { path: "/welcome", element: <Wellcome /> },
     { path: "/faq", element: <MainFAQ /> },
     { path: "/faq-category", element: <CategoryFAQ /> },
     { path: "/fa-question", element: <FAQQuestionPage /> },
