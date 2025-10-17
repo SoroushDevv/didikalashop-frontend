@@ -155,3 +155,21 @@
   font-size: 0.9rem;
   color: #333;
 }
+.product-details-card {
+  position: relative;
+  overflow: hidden;
+}
+.product-details-card .product-discount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 3px;
+  left: -20px;
+  width: 80px;
+  height: 30px;
+  font-size: 15px;
+  background-color: red;
+  color: #fff;
+}

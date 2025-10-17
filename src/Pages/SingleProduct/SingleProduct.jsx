@@ -206,6 +206,11 @@ export default function SingleProduct() {
         <Grid container spacing={3} className="single-product_wrapper">
           <Grid item xs={12} md={6}>
             <div className="product-details-card">
+
+{
+  product.discountPercent && <Typography variant="h4" className="product-discount">{product.discountPercent}%</Typography>
+}
+              
               <Typography variant="h4" className="product-title">{product.title}</Typography>
               <Typography variant="h6" className="product-desc">{product.productDesc}</Typography>
               <Typography variant="h6" className="product-price">
