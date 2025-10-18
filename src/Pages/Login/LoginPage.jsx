@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import api from "../../api/axios";
 import { setAuthToken } from "../../Utils/AuthUtils";
 
 const LoginSchema = Yup.object().shape({
@@ -42,7 +43,7 @@ export default function LoginPage() {
                   validationSchema={LoginSchema}
                   onSubmit={async (values, { setSubmitting }) => {
                     try {
-                      const response = await axios.post("http://localhost:8000/api/users/login", {
+                      const response = await api.post("/api/users/login", {
                         username: values.username,
                         password: values.password,
                       });

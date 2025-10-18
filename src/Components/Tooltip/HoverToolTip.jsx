@@ -12,15 +12,15 @@ const CustomTooltip = styled(Tooltip)(({ theme }) => ({
 }));
 
 const HoverTooltip = ({
-  title = 'Tooltip', // متن پیش‌فرض تولتیپ
-  children, // المنت فرزند (مثل Button)
-  placement = 'bottom', // موقعیت تولتیپ
-  arrow = true, // نمایش پیکان
-  disableInteractive = false, // غیرفعال کردن تعامل
+  title = 'Tooltip', 
+  children, 
+  placement = 'bottom', 
+  arrow = true, 
+  disableInteractive = false, 
   sx = {
     marginTop:"0.2rem"
-  }, // استایل‌های اضافی
-  ...props // سایر پراپ‌های MUI Tooltip
+  },
+  ...props 
 }) => {
   return (
     <CustomTooltip

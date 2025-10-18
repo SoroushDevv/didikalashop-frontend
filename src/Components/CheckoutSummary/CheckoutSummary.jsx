@@ -21,6 +21,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { styled } from '@mui/material/styles';
 import { useCart } from './../../Contexts/CartContext';
 import axios from 'axios';
+import api from '../../api/axios';
 import { getAuthToken } from '../../Utils/AuthUtils';
 import ShowSwal from '../ShowSwal/ShowSwal';
 
@@ -132,8 +133,8 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
     console.log(" order being sent:", order);
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/orders",
+      const res = await api.post(
+        "/api/orders",
         order,
         {
           headers: {

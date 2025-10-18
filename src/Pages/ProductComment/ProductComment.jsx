@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../../api/axios";
 import Comments from "./Comments/Comments";
 import "./ProductComment.css"; // فرض بر وجود فایل CSS برای استایل‌دهی
 import ErrorMessage from "./../ErrorMessage/ErrorMessage"
@@ -19,7 +20,7 @@ export default function ProductComment({ product }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/comments");
+        const response = await api.get("/api/comments");
         // فیلتر کردن کامنت‌های مربوط به محصول فعلی و تأییدشده
         console.log(response.data)
         const productComments = response.data.filter(
@@ -64,7 +65,7 @@ export default function ProductComment({ product }) {
       };
 
       console.log(newComment)
-      const response = await axios.post("http://localhost:8000/api/comments", newComment);
+      const response = await api.post("/api/comments", newComment);
 
       console.log(response.status)
       if (response.status === 200 || response.status === 201) {

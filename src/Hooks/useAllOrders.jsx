@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const useAllOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -11,7 +12,7 @@ const useAllOrders = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await axios.get("http://localhost:8000/api/orders");
+        const response = await api.get("/api/orders");
         console.log("orders: ", response.data);
         
         setOrders(response.data);

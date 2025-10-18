@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useCurrentUser } from "./useCurrentUser";
+import api from "../api/axios";
 
 const useUserCards = () => {
   const { currentUser, loading: userLoading, error: userError } = useCurrentUser();
@@ -16,7 +17,7 @@ const useUserCards = () => {
       console.log("📌 fetching user cards for:", currentUser.id);
       setUserCardsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:8000/api/cards/user/${currentUser.id}`);
+        const response = await api.get(`/api/cards/user/${currentUser.id}`);
         console.log("✅ userCards:", response.data);
         setCurrentUserCards(response.data);
         setUserCardsError(null);

@@ -1,10 +1,11 @@
 import axios from "axios";
 import ShowSwal from "./../Components/ShowSwal/ShowSwal";
+import api from "../api/axios";
+
 
 const API_BASE_URL = "http://localhost:8000/api/";
 
-const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+const apiClient = api.create({
   headers: {
     "Content-Type": "application/json",
   },

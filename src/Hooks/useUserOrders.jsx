@@ -3,7 +3,8 @@ import axios from "axios";
 import ShowSwal from "../Components/ShowSwal/ShowSwal";
 import { getAuthToken } from "../Utils/AuthUtils";
 import { useCurrentUser } from "./useCurrentUser";
-const API_BASE_URL = "http://localhost:8000/api/";
+import api from "../api/axios";
+
 
 const useUserOrders = () => {
   const {currentUser} = useCurrentUser()
@@ -28,7 +29,7 @@ const useUserOrders = () => {
          const token = getAuthToken();
 
          console.log("user id", currentUser.id)
-        const ordersResponse = await axios.get(`http://localhost:8000/api/orders/user/${currentUser.id}`);
+        const ordersResponse = await api.get(`/api/orders/user/${currentUser.id}`);
 
         const orders = ordersResponse.data || [];
         console.log("useUserorders : ", orders);

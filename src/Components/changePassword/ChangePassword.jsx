@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import {
     Box,
@@ -60,8 +61,8 @@ const ChangePassword = ({ userID, token, onSuccess }) => {
 
         try {
             setLoading(true);
-            const res = await axios.put(
-                `http://localhost:8000/api/users/${currentUser.id}/password`,
+            const res = await api.put(
+                `/api/users/${currentUser.id}/password`,
                 {
                     currentPassword: formData.currentPassword,
                     newPassword: formData.newPassword,

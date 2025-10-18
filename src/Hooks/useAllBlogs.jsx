@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const useAllBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,7 +12,7 @@ const useAllBlogs = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await axios.get("http://localhost:8000/api/blogs");
+        const response = await api.get("/api/blogs");
         console.log("blogs: ", response.data);
         
         setBlogs(response.data);

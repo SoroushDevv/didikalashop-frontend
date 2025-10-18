@@ -7,7 +7,6 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import ErrorMessage from "../../../../Pages/ErrorMessage/ErrorMessage";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { removeAuthToken } from "../../../../Utils/AuthUtils";

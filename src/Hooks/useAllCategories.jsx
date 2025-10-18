@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const useAllCategories = () => {
   const [categories, setProductCategories] = useState([]);
@@ -11,7 +12,7 @@ const useAllCategories = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await axios.get("http://localhost:8000/api/categories");
+        const response = await api.get("/api/categories");
         console.log("categories: ", response.data);
         
         setProductCategories(response.data);

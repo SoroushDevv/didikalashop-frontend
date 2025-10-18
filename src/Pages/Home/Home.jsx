@@ -10,6 +10,7 @@ import SplideCategoryCarousel from "../../Components/CategoriesSlider/Categories
 import { LargeBanner, SmallBannerList } from "../../Components/Banners/Banners";
 import ProductCarousel from "./../../Components/ProductCarousel/ProductCarousel";
 import axios from "axios";
+import api from "./../../api/axios"
 import ErrorMessage from "./../ErrorMessage/ErrorMessage";
 import {
   images,
@@ -37,7 +38,7 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         setLoading(true)
-        const response = await axios.get("http://localhost:8000/api/products");
+        const response = await api.get("/api/products");
         console.log("products : ", response.data);
 
         // Filter products based on different criteria
@@ -66,7 +67,7 @@ export default function Home() {
     };
 
     const fetchOffs = async () => {
-      const response = await axios.get("http://localhost:8000/api/offs");
+      const response = await api.get("/api/offs");
       console.log(response)
       setOffs(response.data);
     };

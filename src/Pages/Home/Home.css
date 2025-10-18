@@ -70,13 +70,14 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
- 
+}
+.home-widget-suggestion .home-widget-suggestion-title {
+  padding: 10px;
 }
 
 .home-widget-suggestion-title img {
   max-width: 100%;
   display: block;
-  margin:1rem 0;
   
 }
 

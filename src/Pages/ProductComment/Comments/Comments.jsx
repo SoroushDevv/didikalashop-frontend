@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../../../api/axios";
 import "./Comments.css";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import useAllComments from "../../../Hooks/useAllComments";
@@ -59,7 +60,7 @@ const handleSubmit = async () => {
   console.log(commentId)
   if (replyText.trim()) {
     try {
-      const res = await axios.post("http://localhost:8000/api/comments", {
+      const res = await api.post("/api/comments", {
         body: replyText,             
         userID: 1,                 
         productID: product.id,     

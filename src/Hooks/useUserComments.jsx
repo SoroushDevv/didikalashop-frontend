@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getAuthToken } from "../Utils/AuthUtils";
+import api from "../api/axios";
 
 const useUserComments = () => {
   const [userComments, setUserComments] = useState([]);
@@ -23,7 +24,7 @@ const useUserComments = () => {
         }
 
         // دریافت کاربران و پیدا کردن کاربر جاری
-        const usersResponse = await axios.get("http://localhost:8000/api/users")
+        const usersResponse = await api.get("/api/users")
 
         const currentUser = usersResponse.data.find((user) => user.token === token);
 
@@ -34,10 +35,10 @@ const useUserComments = () => {
         setCurrentUser(currentUser);
 
         // دریافت محصولات (برای جزئیات محصول در کامنت‌ها)
-        const productsResponse = await axios.get("http://localhost:8000/api/products");
+        const productsResponse = await api.get("/api/products");
 
         // دریافت کامنت‌ها
-        const commentsResponse = await axios.get("http://localhost:8000/api/comments");
+        const commentsResponse = await api.get("/api/comments");
 
         // فیلتر کردن کامنت‌های کاربر جاری و افزودن جزئیات محصول
         const userComments = commentsResponse.data

@@ -11,6 +11,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography, List, ListIt
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCart } from '../../../../Contexts/CartContext';
 import axios from 'axios';
+import api from '../../../../api/axios';
 import showSwal from '../../../../Components/ShowSwal/ShowSwal';
 import useOffs from '../../../../Hooks/useAllOffs'
 import { Outlet } from 'react-router-dom';
@@ -90,7 +91,7 @@ function Payment() {
   const updateOffer = async (offId) => {
     try {
       console.log(offId);
-      const response = await axios.put(`http://localhost:8000/api/offs/active-off/${offId}/0`);
+      const response = await api.put(`/api/offs/active-off/${offId}/0`);
 
       if (response.status === 200) {
         showSwal({ title: 'تخفیف اعمال شد', text: '', icon: 'success' });

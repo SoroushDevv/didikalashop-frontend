@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import api from "../api/axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -21,8 +21,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/users/register",
+      const response = await api.post(
+        "/api/users/register",
         userData
       );
       if (response.status === 201) {
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/users/login", {
+      const response = await api.post("/api/users/login", {
         username,
         password,
       });
