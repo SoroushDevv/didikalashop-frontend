@@ -13,6 +13,7 @@ import { Home, Work, LocationOn } from "@mui/icons-material";
 import useUserAddresses from "../../../../Hooks/useUserAddresses";
 import { getAuthToken } from "../../../../Utils/AuthUtils";
 import axios from "axios";
+import api from "../../../../api/axios";
 import ErrorMessage from "./../../../ErrorMessage/ErrorMessage"
 import ShowSwal from "../../../../Components/ShowSwal/ShowSwal";
 import Portal from "../../../../Components/Portal/Portal";
@@ -50,7 +51,7 @@ export default function UserAddresses() {
       ShowSwal({
         title: "ایا از حذف ادرس اطمینان دارید؟", text: "", icon: "warning", showConfirmButton: true, showCancelButton: true, confirmButtonText: "بله", cancelButtonText: "کنسل", onConfirm: async () => {
 
-          const res = await axios.delete(`http://localhost:8000/api/addresses/${address.id}`, {
+          const res = await api.delete(`/api/addresses/${address.id}`, {
             headers: {
               "Content-Type": "application/json",
               "authorization": `Bearer ${token}`

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import api from "../../api/axios";
 import useProductCategories from "../../Hooks/useAllCategories";
 import {useCart} from "./../../Contexts/CartContext"
 
@@ -83,7 +84,7 @@ export default function SearchResults({ sorting }) {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/offs");
+        const response = await api.get("/api/offs");
         setOffers(response.data);
       } catch (err) {
         console.error("Error fetching offers:", err);

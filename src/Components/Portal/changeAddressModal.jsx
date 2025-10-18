@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ShowSwal from '../ShowSwal/ShowSwal';
 import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import axios from 'axios';
+import api from '../../api/axios';
 import { getAuthToken } from '../../Utils/AuthUtils';
 
 
@@ -200,7 +201,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
         const token = getAuthToken();
         if (!token) throw new Error('توکن یافت نشد، لطفاً دوباره وارد شوید');
 
-        const { data } = await axios.get('http://localhost:8000/api/addresses', {
+        const { data } = await api.get('/api/addresses', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -320,8 +321,8 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
       console.log("editing Address : ", editingAddress)
       let res;
       if (editingAddress && editingAddress.id) {
-        res = await axios.put(
-          `http://localhost:8000/api/addresses/${editingAddress.id}`,
+        res = await api.put(
+          `/api/addresses/${editingAddress.id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -344,7 +345,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
         }
 
       } else {
-        res = await axios.post('http://localhost:8000/api/addresses', payload, {
+        res = await api.post('/api/addresses', payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = res.data

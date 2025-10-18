@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const useAllComments = () => {
   const [comments, setComments] = useState([]);
@@ -11,7 +12,7 @@ const useAllComments = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await axios.get("http://localhost:8000/api/comments");
+        const response = await api.get("/api/comments");
         console.log("all comments: ", response.data);
         
         setComments(response.data);

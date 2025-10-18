@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AddressFormModal from '../../Components/Portal/changeAddressModal'
 import ShowSwal from '../../Components/ShowSwal/ShowSwal'
 import axios from 'axios'
+import api from '../../api/axios'
 import { getAuthToken } from '../../Utils/AuthUtils'
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -67,7 +68,7 @@ export default function Shipping() {
             try {
                 setFetchLoading(true)
 
-                const response = await axios.get("http://localhost:8000/api/addresses", {
+                const response = await api.get("/api/addresses", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

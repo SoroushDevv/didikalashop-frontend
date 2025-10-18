@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ShowSwal from "../Components/ShowSwal/ShowSwal";
 import { getAuthToken } from "../Utils/AuthUtils";
+import api from "../api/axios";
 
-const API_BASE_URL = "http://localhost:8000/api/";
 
 const useUserAddresses = () => {
   const [userAddresses, setUserAddresses] = useState([]);
@@ -24,7 +24,7 @@ const useUserAddresses = () => {
           },
         };
 
-        const addressesResponse = await axios.get(`${API_BASE_URL}addresses`, config);
+        const addressesResponse = await api.get(`/api/addresses`, config);
         const addresses = addressesResponse.data || [];
         console.log("useUserAddresses : ", addressesResponse);
         setUserAddresses(addresses);

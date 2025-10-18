@@ -5,7 +5,7 @@ import useAllBlogs from "../../../Hooks/useAllBlogs";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import axios from "axios";
 import moment from "moment-jalaali";
-
+import api from "./../../../../src/api/axios"
 
 export default function BlogDetail() {
 
@@ -26,7 +26,7 @@ export default function BlogDetail() {
 
 
       try {
-        const response = await axios.get(`http://localhost:8000/api/blogs/${id}`)
+        const response = await api.get(`/api/blogs/${id}`)
 
         setBlog(response.data)
       } catch (err) {
@@ -44,7 +44,7 @@ export default function BlogDetail() {
     const getAuthor = async () => {
 
       try {
-        const response = await axios.get("http://localhost:8000/api/users")
+        const response = await api.get("/api/users")
 
         const users = response.data
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./BankCard.css";
 import PropTypes from "prop-types";
 import axios from "axios";
+import api from "../../api/axios";
 import ShowSwal from "../ShowSwal/ShowSwal";
 import useUserCards from "../../Hooks/useUserCards";
 
@@ -25,7 +26,7 @@ const BankCard = ({
       title: "از حذف این کارت اطمینان دارید؟", text: "حذف کارت", icon: "warning", showConfirmButton: true, showCancelButton: true, confirmButtonText: "بله", cancelButtonText: "خیر", onConfirm: async () => {
 
         try {
-          const response = await axios.delete(`http://localhost:8000/api/cards/${cardId}`)
+          const response = await api.delete(`/api/cards/${cardId}`)
           if (response.status === 200) {
             ShowSwal({ title: "حذف شد", text: "", icon: "success" })
 

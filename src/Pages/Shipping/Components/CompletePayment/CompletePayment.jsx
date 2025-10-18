@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../../../../api/axios";
 import "./CompletePayment.css";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { useCart } from "../../../../Contexts/CartContext";
@@ -29,8 +30,8 @@ export default function CompletePayment() {
     const fetchOrder = async () => {
       setIsReady(false);
       try {
-        const res = await axios.get(
-          `http://localhost:8000/api/orders/user/${currentUser.id}`
+        const res = await api.get(
+          `/api/orders/user/${currentUser.id}`
         );
         console.log("response :", res.data);
 

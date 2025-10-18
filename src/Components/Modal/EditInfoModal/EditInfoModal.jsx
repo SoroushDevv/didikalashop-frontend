@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import api from "../../../api/axios";
 import {
     Card,
     CardContent,
@@ -33,8 +34,8 @@ export default function IdentityForm({ user, onClose, onUpdate }) {
         e.preventDefault();
 
         try {
-            const res = await axios.patch(
-                `http://localhost:8000/api/users/${user.id}`,
+            const res = await api.patch(
+                `/api/users/${user.id}`,
                 {
                     firstname: name,
                     lastname: lastName,

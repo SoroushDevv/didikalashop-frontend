@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import api from "../api/axios";
 
 const useAllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const useAllProducts = () => {
         setLoading(true);
         setError(null);
 
-        const response = await axios.get('http://localhost:8000/api/products');
+        const response = await api.get('/api/products');
 
         // نگهداری دقیق پراپرتی‌های دیتابیس
         const formattedProducts = response.data.map((item) => ({

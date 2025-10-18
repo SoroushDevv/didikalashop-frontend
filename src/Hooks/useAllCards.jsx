@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api/axios";
 
 const useCardsDetails = () => {
   const [cards, setCards] = useState([]);
@@ -11,7 +12,7 @@ const useCardsDetails = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await axios.get("http://localhost:8000/api/cards");
+        const response = await api.get("/api/cards");
         console.log("cards: ", response.data);
         
         setCards(response.data);

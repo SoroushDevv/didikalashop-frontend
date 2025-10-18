@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getAuthToken } from "../Utils/AuthUtils";
+import api from "../api/axios";
 
 export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -20,7 +21,7 @@ export const useCurrentUser = () => {
         }
 
         // 📌 گرفتن همه کاربران
-        const response = await axios.get("http://localhost:8000/api/users");
+        const response = await api.get("/api/users");
         console.log("response : ", response)
         const users = response.data;
 

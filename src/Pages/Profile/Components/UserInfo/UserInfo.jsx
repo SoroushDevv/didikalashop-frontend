@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./UserInfo.css";
 import ShowSwal from "./../../../../Components/ShowSwal/ShowSwal";
 import {
