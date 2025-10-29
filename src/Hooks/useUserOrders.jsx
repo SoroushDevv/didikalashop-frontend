@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import ShowSwal from "../Components/ShowSwal/ShowSwal";
 import { getAuthToken } from "../Utils/AuthUtils";
 import { useCurrentUser } from "./useCurrentUser";
 import api from "../api/axios";

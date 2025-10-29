@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { getAuthToken } from "../Utils/AuthUtils";
 import api from "../api/axios";
 

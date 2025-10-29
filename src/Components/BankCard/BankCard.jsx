@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./BankCard.css";
 import PropTypes from "prop-types";
-import axios from "axios";
 import api from "../../api/axios";
 import ShowSwal from "../ShowSwal/ShowSwal";
 import useUserCards from "../../Hooks/useUserCards";

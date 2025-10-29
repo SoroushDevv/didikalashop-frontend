@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {  Outlet } from "react-router-dom";
 import { useNavigate } from "react-router";
 import "./Profile.css";
-import SplideProductCarousel from "../../Components/ProductCarousel/ProductCarousel";
 import ProfileSidebar from "./Components/ProfileSidebar/ProfileSidebar";
-import { shopProducts } from "./../../datas";
 import { isAuthenticated } from "../../Utils/AuthUtils";
 import { useCurrentUser } from "../../Hooks/useCurrentUser";
 import ErrorMessage from "./../ErrorMessage/ErrorMessage"

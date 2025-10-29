@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import api from "../../../api/axios";
 import "./Comments.css";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";

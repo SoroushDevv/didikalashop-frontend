@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Payment.css';
 import CheckoutSummary from '../../../../Components/CheckoutSummary/CheckoutSummary';
-import PropTypes from 'prop-types';
 import PaymentIcon from '@mui/icons-material/Payment';
-import RedeemIcon from '@mui/icons-material/Redeem';
-import PaymentsIcon from '@mui/icons-material/Payments';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, ListItemText, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCart } from '../../../../Contexts/CartContext';
-import axios from 'axios';
 import api from '../../../../api/axios';
 import showSwal from '../../../../Components/ShowSwal/ShowSwal';
 import useOffs from '../../../../Hooks/useAllOffs'
-import { Outlet } from 'react-router-dom';
 
 const colorMap = {
   'مشکی': '#000000',

@@ -13,7 +13,6 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import axios from "axios";
 import api from "./../../api/axios"
 import { useCart } from "./../../Contexts/CartContext"
 import useAllCategories from "./../../Hooks/useAllCategories";

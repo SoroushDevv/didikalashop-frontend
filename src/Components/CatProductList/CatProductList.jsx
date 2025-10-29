@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "./CatProductList.css";
-import axios from "axios";
 import api from "../../api/axios";
 import ShowSwal from "./../ShowSwal/ShowSwal";
 import SnackBar from "./../SnackBar/SnackBar";

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import "./Shipping.css"
 import { useCurrentUser } from "../../Hooks/useCurrentUser"
-import apiUtils from "../../Utils/ApiUtils"
 import CheckoutTimes from './Components/CheckoutTimes/CheckoutTimes'
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
@@ -10,7 +9,6 @@ import CheckoutSummary from '../../Components/CheckoutSummary/CheckoutSummary'
 import AddIcon from '@mui/icons-material/Add';
 import AddressFormModal from '../../Components/Portal/changeAddressModal'
 import ShowSwal from '../../Components/ShowSwal/ShowSwal'
-import axios from 'axios'
 import api from '../../api/axios'
 import { getAuthToken } from '../../Utils/AuthUtils'
 

@@ -4,7 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import api from "../../api/axios";
 import { setAuthToken } from "../../Utils/AuthUtils";
 

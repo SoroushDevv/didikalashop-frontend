@@ -20,7 +20,6 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { styled } from '@mui/material/styles';
 import { useCart } from './../../Contexts/CartContext';
-import axios from 'axios';
 import api from '../../api/axios';
 import { getAuthToken } from '../../Utils/AuthUtils';
 import ShowSwal from '../ShowSwal/ShowSwal';

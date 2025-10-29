@@ -12,7 +12,6 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import axios from "axios";
 import api from "../../api/axios";
 import useProductCategories from "../../Hooks/useAllCategories";
 import {useCart} from "./../../Contexts/CartContext"

@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import "./UserComments.css"
-import StarRating from "../../../../Components/Rating/StarRating";
 import CommentBox from "../../../../Components/CommentBox/CommentBox";
 import useUserComments from "../../../../Hooks/useUserComments";
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";

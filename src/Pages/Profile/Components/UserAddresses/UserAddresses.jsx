@@ -12,7 +12,6 @@ import {
 import { Home, Work, LocationOn } from "@mui/icons-material";
 import useUserAddresses from "../../../../Hooks/useUserAddresses";
 import { getAuthToken } from "../../../../Utils/AuthUtils";
-import axios from "axios";
 import api from "../../../../api/axios";
 import ErrorMessage from "./../../../ErrorMessage/ErrorMessage"
 import ShowSwal from "../../../../Components/ShowSwal/ShowSwal";

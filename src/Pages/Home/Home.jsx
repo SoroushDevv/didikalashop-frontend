@@ -9,7 +9,6 @@ import Col from "react-bootstrap/Col";
 import SplideCategoryCarousel from "../../Components/CategoriesSlider/CategoriesSlider";
 import { LargeBanner, SmallBannerList } from "../../Components/Banners/Banners";
 import ProductCarousel from "./../../Components/ProductCarousel/ProductCarousel";
-import axios from "axios";
 import api from "./../../api/axios"
 import ErrorMessage from "./../ErrorMessage/ErrorMessage";
 import {

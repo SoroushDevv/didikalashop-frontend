@@ -16,7 +16,6 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ShowSwal from '../ShowSwal/ShowSwal';
 import { useCurrentUser } from '../../Hooks/useCurrentUser';
-import axios from 'axios';
 import api from '../../api/axios';
 import { getAuthToken } from '../../Utils/AuthUtils';
 

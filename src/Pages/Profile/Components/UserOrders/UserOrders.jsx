@@ -1,20 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./UserOrders.css"
-import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
-import {
-  Box,
-  Typography,
-  Tabs,
-  Tab,
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  Button,
-} from "@mui/material";
-import ShowSwal from "../../../../Components/ShowSwal/ShowSwal";
+
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
-import Products from "../../../Products/Products";
 import useUserOrders from "../../../../Hooks/useUserOrders";
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';

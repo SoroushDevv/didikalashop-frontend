@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import { useCurrentUser } from "./useCurrentUser";
 import api from "../api/axios";
 

@@ -1,8 +1,5 @@
-import React, { useState } from "react";
 import "./UserHistory.css"
-import ProfileMenu from "../ProfileMenuSection/ProfileMenu";
 import { historyProducts } from "../../../../datas";
-import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 import StarRating from "../../../../Components/Rating/StarRating";
 export default function UserHistory() {
   const [recentProducts, setRecentProducts] = useState(historyProducts);
