@@ -37,7 +37,7 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         setLoading(true)
-        const response = await api.get("/api/products");
+        const response = await api.get("/products");
         console.log("products : ", response.data);
 
         // Filter products based on different criteria
