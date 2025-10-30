@@ -11,7 +11,7 @@ const useAllBlogs = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/blogs");
+        const response = await api.get("/blogs");
         console.log("blogs: ", response.data);
         
         setBlogs(response.data);

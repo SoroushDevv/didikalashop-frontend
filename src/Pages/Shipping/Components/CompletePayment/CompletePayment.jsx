@@ -30,7 +30,7 @@ export default function CompletePayment() {
       setIsReady(false);
       try {
         const res = await api.get(
-          `/api/orders/user/${currentUser.id}`
+          `/orders/user/${currentUser.id}`
         );
         console.log("response :", res.data);
 

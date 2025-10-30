@@ -11,7 +11,7 @@ const useAllOrders = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/orders");
+        const response = await api.get("/orders");
         console.log("orders: ", response.data);
         
         setOrders(response.data);

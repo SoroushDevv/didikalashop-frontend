@@ -23,7 +23,7 @@ const useUserComments = () => {
         }
 
         // دریافت کاربران و پیدا کردن کاربر جاری
-        const usersResponse = await api.get("/api/users")
+        const usersResponse = await api.get("/users")
 
         const currentUser = usersResponse.data.find((user) => user.token === token);
 
@@ -34,10 +34,10 @@ const useUserComments = () => {
         setCurrentUser(currentUser);
 
         // دریافت محصولات (برای جزئیات محصول در کامنت‌ها)
-        const productsResponse = await api.get("/api/products");
+        const productsResponse = await api.get("/products");
 
         // دریافت کامنت‌ها
-        const commentsResponse = await api.get("/api/comments");
+        const commentsResponse = await api.get("/comments");
 
         // فیلتر کردن کامنت‌های کاربر جاری و افزودن جزئیات محصول
         const userComments = commentsResponse.data

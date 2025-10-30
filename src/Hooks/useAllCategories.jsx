@@ -11,7 +11,7 @@ const useAllCategories = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/categories");
+        const response = await api.get("/categories");
         console.log("categories: ", response.data);
         
         setProductCategories(response.data);

@@ -109,7 +109,7 @@ export default function CategoryResults({ sorting }) {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await api.get("/api/offs");
+        const response = await api.get("/offs");
         setOffers(response.data);
       } catch (err) {
         console.error("Error fetching offers:", err);

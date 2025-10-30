@@ -66,7 +66,7 @@ export default function Shipping() {
             try {
                 setFetchLoading(true)
 
-                const response = await api.get("/api/addresses", {
+                const response = await api.get("/addresses", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

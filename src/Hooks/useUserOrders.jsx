@@ -27,7 +27,7 @@ const useUserOrders = () => {
          const token = getAuthToken();
 
          console.log("user id", currentUser.id)
-        const ordersResponse = await api.get(`/api/orders/user/${currentUser.id}`);
+        const ordersResponse = await api.get(`/orders/user/${currentUser.id}`);
 
         const orders = ordersResponse.data || [];
         console.log("useUserorders : ", orders);

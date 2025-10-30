@@ -86,7 +86,7 @@ function Payment() {
   const updateOffer = async (offId) => {
     try {
       console.log(offId);
-      const response = await api.put(`/api/offs/active-off/${offId}/0`);
+      const response = await api.put(`/offs/active-off/${offId}/0`);
 
       if (response.status === 200) {
         showSwal({ title: 'تخفیف اعمال شد', text: '', icon: 'success' });

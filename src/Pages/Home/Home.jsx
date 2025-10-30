@@ -66,7 +66,7 @@ export default function Home() {
     };
 
     const fetchOffs = async () => {
-      const response = await api.get("/api/offs");
+      const response = await api.get("/offs");
       console.log(response)
       setOffs(response.data);
     };

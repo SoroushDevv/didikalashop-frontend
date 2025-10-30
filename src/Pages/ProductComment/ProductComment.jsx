@@ -19,7 +19,7 @@ export default function ProductComment({ product }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await api.get("/api/comments");
+        const response = await api.get("/comments");
         // فیلتر کردن کامنت‌های مربوط به محصول فعلی و تأییدشده
         console.log(response.data)
         const productComments = response.data.filter(
@@ -64,7 +64,7 @@ export default function ProductComment({ product }) {
       };
 
       console.log(newComment)
-      const response = await api.post("/api/comments", newComment);
+      const response = await api.post("/comments", newComment);
 
       console.log(response.status)
       if (response.status === 200 || response.status === 201) {

@@ -20,7 +20,7 @@ export const useCurrentUser = () => {
         }
 
         // 📌 گرفتن همه کاربران
-        const response = await api.get("/api/users");
+        const response = await api.get("/users");
         console.log("response : ", response)
         const users = response.data;
 

@@ -11,7 +11,7 @@ const useAllComments = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/comments");
+        const response = await api.get("/comments");
         console.log("all comments: ", response.data);
         
         setComments(response.data);

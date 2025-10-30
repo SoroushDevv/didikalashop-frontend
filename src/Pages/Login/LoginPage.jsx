@@ -42,7 +42,7 @@ export default function LoginPage() {
                   validationSchema={LoginSchema}
                   onSubmit={async (values, { setSubmitting }) => {
                     try {
-                      const response = await api.post("/api/users/login", {
+                      const response = await api.post("/users/login", {
                         username: values.username,
                         password: values.password,
                       });

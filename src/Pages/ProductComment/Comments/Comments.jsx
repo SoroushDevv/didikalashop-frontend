@@ -59,7 +59,7 @@ const handleSubmit = async () => {
   console.log(commentId)
   if (replyText.trim()) {
     try {
-      const res = await api.post("/api/comments", {
+      const res = await api.post("/comments", {
         body: replyText,             
         userID: 1,                 
         productID: product.id,     

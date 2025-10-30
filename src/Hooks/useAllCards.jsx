@@ -11,7 +11,7 @@ const useCardsDetails = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/cards");
+        const response = await api.get("/cards");
         console.log("cards: ", response.data);
         
         setCards(response.data);

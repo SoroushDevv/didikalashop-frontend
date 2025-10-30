@@ -12,7 +12,7 @@ const useAllProducts = () => {
         setLoading(true);
         setError(null);
 
-        const response = await api.get('/api/products');
+        const response = await api.get('/products');
 
         // نگهداری دقیق پراپرتی‌های دیتابیس
         const formattedProducts = response.data.map((item) => ({

@@ -23,7 +23,7 @@ const useUserAddresses = () => {
           },
         };
 
-        const addressesResponse = await api.get(`/api/addresses`, config);
+        const addressesResponse = await api.get(`/addresses`, config);
         const addresses = addressesResponse.data || [];
         console.log("useUserAddresses : ", addressesResponse);
         setUserAddresses(addresses);

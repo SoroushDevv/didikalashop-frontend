@@ -50,7 +50,7 @@ export default function UserAddresses() {
       ShowSwal({
         title: "ایا از حذف ادرس اطمینان دارید؟", text: "", icon: "warning", showConfirmButton: true, showCancelButton: true, confirmButtonText: "بله", cancelButtonText: "کنسل", onConfirm: async () => {
 
-          const res = await api.delete(`/api/addresses/${address.id}`, {
+          const res = await api.delete(`/addresses/${address.id}`, {
             headers: {
               "Content-Type": "application/json",
               "authorization": `Bearer ${token}`

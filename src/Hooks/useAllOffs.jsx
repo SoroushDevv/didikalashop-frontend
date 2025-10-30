@@ -11,7 +11,7 @@ const useOffs = () => {
       setLoading(true);
       try {
         // دریافت دسته‌بندی‌ها
-        const response = await api.get("/api/offs");
+        const response = await api.get("/offs");
         console.log("offs: ", response.data);
         
         setOffs(response.data);

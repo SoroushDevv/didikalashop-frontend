@@ -26,7 +26,7 @@ export default function BlogDetail() {
 
 
       try {
-        const response = await api.get(`/api/blogs/${id}`)
+        const response = await api.get(`/blogs/${id}`)
 
         setBlog(response.data)
       } catch (err) {
@@ -44,7 +44,7 @@ export default function BlogDetail() {
     const getAuthor = async () => {
 
       try {
-        const response = await api.get("/api/users")
+        const response = await api.get("/users")
 
         const users = response.data
 

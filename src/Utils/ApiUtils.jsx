@@ -2,8 +2,6 @@
 import api from "../api/axios";
 
 
-const API_BASE_URL = "http://localhost:8000/api/";
-
 const apiClient = api.create({
   headers: {
     "Content-Type": "application/json",

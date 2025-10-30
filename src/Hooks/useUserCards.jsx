@@ -16,7 +16,7 @@ const useUserCards = () => {
       console.log("📌 fetching user cards for:", currentUser.id);
       setUserCardsLoading(true);
       try {
-        const response = await api.get(`/api/cards/user/${currentUser.id}`);
+        const response = await api.get(`/cards/user/${currentUser.id}`);
         console.log("✅ userCards:", response.data);
         setCurrentUserCards(response.data);
         setUserCardsError(null);
