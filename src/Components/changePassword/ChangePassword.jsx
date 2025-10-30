@@ -61,7 +61,7 @@ const ChangePassword = ({ userID, token, onSuccess }) => {
         try {
             setLoading(true);
             const res = await api.put(
-                `/api/users/${currentUser.id}/password`,
+                `/users/${currentUser.id}/password`,
                 {
                     currentPassword: formData.currentPassword,
                     newPassword: formData.newPassword,

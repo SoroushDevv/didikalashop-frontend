@@ -200,7 +200,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
         const token = getAuthToken();
         if (!token) throw new Error('توکن یافت نشد، لطفاً دوباره وارد شوید');
 
-        const { data } = await api.get('/api/addresses', {
+        const { data } = await api.get('/addresses', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -321,7 +321,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
       let res;
       if (editingAddress && editingAddress.id) {
         res = await api.put(
-          `/api/addresses/${editingAddress.id}`,
+          `/addresses/${editingAddress.id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -344,7 +344,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave ,editingAddress}) => {
         }
 
       } else {
-        res = await api.post('/api/addresses', payload, {
+        res = await api.post('/addresses', payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = res.data

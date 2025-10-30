@@ -25,7 +25,7 @@ const BankCard = ({
       title: "از حذف این کارت اطمینان دارید؟", text: "حذف کارت", icon: "warning", showConfirmButton: true, showCancelButton: true, confirmButtonText: "بله", cancelButtonText: "خیر", onConfirm: async () => {
 
         try {
-          const response = await api.delete(`/api/cards/${cardId}`)
+          const response = await api.delete(`/cards/${cardId}`)
           if (response.status === 200) {
             ShowSwal({ title: "حذف شد", text: "", icon: "success" })
 

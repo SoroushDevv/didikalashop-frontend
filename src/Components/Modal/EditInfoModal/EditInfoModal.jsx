@@ -34,7 +34,7 @@ export default function IdentityForm({ user, onClose, onUpdate }) {
 
         try {
             const res = await api.patch(
-                `/api/users/${user.id}`,
+                `/users/${user.id}`,
                 {
                     firstname: name,
                     lastname: lastName,

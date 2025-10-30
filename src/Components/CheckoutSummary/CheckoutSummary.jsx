@@ -133,7 +133,7 @@ const CheckoutSummary = ({ submitButtonTitle = 'ادامه و ثبت سفارش'
 
     try {
       const res = await api.post(
-        "/api/orders",
+        "/orders",
         order,
         {
           headers: {
