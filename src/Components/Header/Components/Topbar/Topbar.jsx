@@ -70,8 +70,8 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
   };
 
   return (
-    <div className="container main-container">
-      <div className="nav-container">
+    <div className="container main-container header-main-container">
+      <div className="topbar-container">
         <div className="topbar" ref={topbarRef}>
           <div className="topbar-wrapper">
             {/* لوگو */}
