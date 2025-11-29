@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import "./Widgets.css";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -34,133 +33,101 @@ export default function Widgets() {
 
 
   return (
-    <div class="footer-widgets">
-      <div class="row widgets-wrapper">
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="widget-menu widget card">
-            <header class="card-header">
-              <h3 class="card-title">راهنمای خرید از تاپ کالا</h3>
-            </header>
-            <ul class="footer-menu">
-              <li>
-                <a href="#">نحوه ثبت سفارش</a>
-              </li>
-              <li>
-                <a href="#">رویه ارسال سفارش</a>
-              </li>
-              <li>
-                <a href="#">شیوه‌های پرداخت</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="widget-menu widget card">
-            <header class="card-header">
-              <h3 class="card-title">خدمات مشتریان</h3>
-            </header>
-            <ul class="footer-menu">
-              <li>
-                <a href="#">پاسخ به پرسش‌های متداول</a>
-              </li>
-              <li>
-                <a href="#">رویه‌های بازگرداندن کالا</a>
-              </li>
-              <li>
-                <a href="#">شرایط استفاده</a>
-              </li>
-              <li>
-                <a href="#">حریم خصوصی</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="widget-menu widget card">
-            <header class="card-header">
-              <h3 class="card-title">با تاپ کالا</h3>
-            </header>
-            <ul class="footer-menu">
-              <li>
-                <a href="#">فروش در تاپ کالا</a>
-              </li>
-              <li>
-                <a href="#">همکاری با سازمان‌ها</a>
-              </li>
-              <li>
-                <a href="#">فرصت‌های شغلی</a>
-              </li>
-              <li>
-                <a href="#">تماس با تاپ کالا</a>
-              </li>
-              <li>
-                <a href="#">درباره تاپ کالا</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 newsletter-wrapper">
-          <div class="newsletter">
-            <p>از تخفیف‌ها و جدیدترین‌های فروشگاه باخبر شوید:</p>
-            <form action="">
-              <input
-                type="email"
-                class="email-input"
-                value={email}
-                onChange={(e) => {
-                 setEmail(e.target.value)  
-                } }
-                placeholder="آدرس ایمیل خود را وارد کنید..."
-               
-              ></input>
-              <input
-                type="button"
-                class="btn btn-primary"
-                value="ارسال"
-                onClick={(e)=> mailSubscription(e)}
-              ></input>
-            </form>
-          </div>
-          <div class="socials">
-            <p>ما را در شبکه های اجتماعی دنبال کنید.</p>
-            <div class="footer-social">
-              <ul class="text-center social-icons">
-                <li className="instagram-icon">
-                  <a href="#">
-                    <HoverTooltip title="اینستاگرام">
-                      <InstagramIcon />
-                    </HoverTooltip>
-                  </a>
-                </li>
+<div class="py-10 bg-gray-50 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-                <li className="telegram-icon">
-                  <a href="#">
-                    <HoverTooltip title="تلگرام">
-                      <TelegramIcon />
-                    </HoverTooltip>
-                  </a>
-                </li>
-
-                <li className="facebook-icon">
-                  <a href="#">
-                    <HoverTooltip title="فیس‌بوک">
-                      <FacebookIcon />
-                    </HoverTooltip>
-                  </a>
-                </li>
-
-                <li className="x-icon">
-                  <a href="#">
-                    <HoverTooltip title="توییتر">
-                      <XIcon />
-                    </HoverTooltip>
-                  </a>
-                </li>
-              </ul>
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-4 h-full">
+                    <h3 class="text-lg font-bold mb-3 border-b pb-2 text-gray-700">راهنمای خرید از تاپ کالا</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">نحوه ثبت سفارش</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">رویه ارسال سفارش</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">شیوه‌های پرداخت</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
+
+            <div class="lg:col-span-1 ">
+                <div class="bg-white rounded-lg shadow-sm p-4  h-full">
+                    <h3 class="text-lg font-bold mb-3 border-b pb-2 text-gray-700">خدمات مشتریان</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">پاسخ به پرسش‌های متداول</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">رویه‌های بازگرداندن کالا</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">شرایط استفاده</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-4  h-full">
+                    <h3 class="text-lg font-bold mb-3 border-b pb-2 text-gray-700">با تاپ کالا</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">فروش در تاپ کالا</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">همکاری با سازمان‌ها</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">فرصت‌های شغلی</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">تماس با تاپ کالا</a></li>
+                        <li><a href="#" class="hover:text-blue-600 transition-colors">درباره تاپ کالا</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="mb-6">
+                    <p class="text-gray-700 mb-3">از تخفیف‌ها و جدیدترین‌های فروشگاه باخبر شوید:</p>
+                    <form action="" class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3 sm:space-x-reverse">
+                        <input
+                            type="email"
+                            class="email-input flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="آدرس ایمیل خود را وارد کنید..."
+                        />
+                        <button
+                            type="button"
+                            class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                            onClick={(e) => mailSubscription(e)}
+                        >
+                            ارسال
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="socials">
+                    <p class="text-gray-700 mb-3">ما را در شبکه های اجتماعی دنبال کنید.</p>
+                    <div class="footer-social">
+                        <ul class="flex justify-center md:justify-start space-x-4 space-x-reverse">
+                            <li class="instagram-icon">
+                                <a href="#" class="text-gray-500 hover:text-pink-600 transition-colors" title="اینستاگرام">
+                                    <InstagramIcon class="w-6 h-6"/>
+                                </a>
+                            </li>
+
+                            <li class="telegram-icon">
+                                <a href="#" class="text-gray-500 hover:text-blue-400 transition-colors" title="تلگرام">
+                                    <TelegramIcon class="w-6 h-6"/>
+                                </a>
+                            </li>
+
+                            <li class="facebook-icon">
+                                <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors" title="فیس‌بوک">
+                                    <FacebookIcon class="w-6 h-6"/>
+                                </a>
+                            </li>
+
+                            <li class="x-icon">
+                                <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors" title="توییتر">
+                                    <XIcon class="w-6 h-6"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </div>
     </div>
+</div>
   );
 }

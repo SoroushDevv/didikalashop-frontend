@@ -10,7 +10,6 @@ const useAllOrders = () => {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        // دریافت دسته‌بندی‌ها
         const response = await api.get("/orders");
         console.log("orders: ", response.data);
         

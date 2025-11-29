@@ -7,7 +7,6 @@ function useLocalStorage(key, initialValue) {
       if (!item) return initialValue;
 
       const parsed = JSON.parse(item);
-      // نوع داده باید مشابه مقدار پیش‌فرض باشد
       if (typeof parsed === typeof initialValue) {
         return parsed;
       }
@@ -22,7 +21,6 @@ function useLocalStorage(key, initialValue) {
   const [error, setError] = useState(null);
   const [trigger, setTrigger] = useState(0);
 
-  // خواندن دوباره از localStorage وقتی trigger تغییر می‌کند
   useEffect(() => {
     setLoading(true);
     try {
@@ -47,7 +45,6 @@ function useLocalStorage(key, initialValue) {
     }
   }, [trigger, key]);
 
-  // نوشتن در localStorage
   const setLocalValue = (newValue) => {
     setLoading(true);
     try {
@@ -68,7 +65,6 @@ function useLocalStorage(key, initialValue) {
     }
   };
 
-  // همگام‌سازی بین تب‌ها
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === key && event.newValue) {

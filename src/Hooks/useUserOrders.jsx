@@ -46,7 +46,7 @@ const useUserOrders = () => {
       }
     };
 
-    fetchOrders(); // صدا زدن تابع async
+    fetchOrders(); 
   }, [currentUser?.id,refreshKey]);
 
   const handleRefreshKey = () => {setRefreshKey(prev => prev+1)}

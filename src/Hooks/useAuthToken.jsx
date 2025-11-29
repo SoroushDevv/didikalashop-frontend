@@ -16,8 +16,8 @@ function useAuthToken() {
  
   
   return {
-    authTokenState, // مقدار توکن فعلی
-    isAuthenticated, // وضعیت احراز هویت (true اگر توکن وجود داشته باشد)
+    authTokenState,
+    isAuthenticated,
   };
 }
 

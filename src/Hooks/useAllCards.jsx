@@ -10,7 +10,6 @@ const useCardsDetails = () => {
     const fetchCards = async () => {
       setLoading(true);
       try {
-        // دریافت دسته‌بندی‌ها
         const response = await api.get("/cards");
         console.log("cards: ", response.data);
         

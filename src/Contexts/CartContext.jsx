@@ -4,7 +4,7 @@ import useLocalStorage from "../Hooks/useLocalStorage";
 const CartContext = createContext();
 
 const defaultOrder = {
-  orderId: null,
+  orderID: null,
   userID: null,
   date: "",
   hour: "",
@@ -25,9 +25,6 @@ export const CartProvider = ({ children }) => {
         ? newOrderPart.items
         : order.items,
     }
-
-
-
     setLocalValue(updatedOrder);
   };
 

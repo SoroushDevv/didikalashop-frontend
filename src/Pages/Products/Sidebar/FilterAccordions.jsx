@@ -32,12 +32,10 @@ const FilterAccordions = () => {
     yellow: false,
   });
 
-  // مدیریت تغییر آکاردیون
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  // مدیریت چک‌باکس‌های دسته‌بندی
   const handleCategoryCheck = (name) => (event) => {
     const checked = event.target.checked;
     if (name === 'all') {
@@ -56,7 +54,6 @@ const FilterAccordions = () => {
     }
   };
 
-  // مدیریت چک‌باکس‌های برند
   const handleBrandCheck = (name) => (event) => {
     const checked = event.target.checked;
     if (name === 'all') {
@@ -73,7 +70,6 @@ const FilterAccordions = () => {
     }
   };
 
-  // مدیریت چک‌باکس‌های فروشنده
   const handleSellerCheck = (name) => (event) => {
     const checked = event.target.checked;
     if (name === 'all') {
@@ -89,7 +85,6 @@ const FilterAccordions = () => {
     }
   };
 
-  // مدیریت چک‌باکس‌های رنگ
   const handleColorCheck = (name) => (event) => {
     const checked = event.target.checked;
     if (name === 'all') {
@@ -110,7 +105,6 @@ const FilterAccordions = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      {/* آکاردیون دسته‌بندی */}
       <Accordion
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
@@ -178,7 +172,6 @@ const FilterAccordions = () => {
         </AccordionDetails>
       </Accordion>
 
-      {/* آکاردیون برند */}
       <Accordion
         expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
@@ -236,7 +229,6 @@ const FilterAccordions = () => {
         </AccordionDetails>
       </Accordion>
 
-      {/* آکاردیون فروشنده */}
       <Accordion
         expanded={expanded === 'panel3'}
         onChange={handleChange('panel3')}
@@ -289,7 +281,6 @@ const FilterAccordions = () => {
         </AccordionDetails>
       </Accordion>
 
-      {/* آکاردیون رنگ‌ها */}
       <Accordion
         expanded={expanded === 'panel4'}
         onChange={handleChange('panel4')}

@@ -1,19 +1,7 @@
 import { useState } from "react";
 import api from "../../../api/axios";
-import {
-    Card,
-    CardContent,
-    Typography,
-    TextField,
-    Button,
-    MenuItem,
-    Box
-} from "@mui/material";
 import { getAuthToken } from "../../../Utils/AuthUtils";
 import ShowSwal from "../../ShowSwal/ShowSwal";
-import "./EditInfoModal.css"
-
-
 
 export default function IdentityForm({ user, onClose, onUpdate }) {
     const token = getAuthToken();
@@ -22,12 +10,9 @@ export default function IdentityForm({ user, onClose, onUpdate }) {
     const [lastName, setLastName] = useState(user?.lastname || "");
     const [phoneNumber, setPhoneNumber] = useState(user?.phone || "");
     const [city, setCity] = useState(user?.city || "")
-
     const [email, setEmail] = useState(user?.email || "")
 
-
-
-
+    const availableCities = ["تهران", "مشهد", "اصفهان", "شیراز", "تبریز"];
 
     const handleUpdateInfo = async (e) => {
         e.preventDefault();
@@ -57,7 +42,6 @@ export default function IdentityForm({ user, onClose, onUpdate }) {
                         onClose()
                     }
                 })
-                console.log("Update response:", res.data);
             }
 
         } catch (err) {
@@ -69,115 +53,93 @@ export default function IdentityForm({ user, onClose, onUpdate }) {
     return (
         <div
             onClick={onClose}
-            style={{
-                position: "fixed",
-                inset: 0,
-                background: "rgba(0,0,0,0.5)",
-                zIndex: 1000,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}>
-            <div onClick={(e) => e.stopPropagation()}>
-                <Card
-                    sx={{
-                        maxWidth: 600,
-                        margin: "20px auto",
-                        borderRadius: 3,
-                        boxShadow: 3,
-                        p: 3,
-                    }}
+            className="fixed inset-0 bg-black bg-opacity-50 z-[1000] flex justify-center items-center"
+            dir="rtl"
+        >
+            <div onClick={(e) => e.stopPropagation()} className="max-w-xl w-full p-4">
+                
+                <div
+                    className="bg-white rounded-xl shadow-2xl p-6 md:p-8"
                 >
-                    <CardContent>
-                        <Typography variant="h6" gutterBottom fontWeight="bold">
+                    <div>
+                        <h2 className="text-xl font-extrabold text-gray-800 mb-2">
                             لطفا اطلاعات شناسایی خود را وارد کنید.
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" mb={3}>
+                        </h2>
+                        <p className="text-sm text-gray-500 mb-6">
                             نام و نام خانوادگی شما باید با اطلاعاتی که وارد می‌کنید
                             همخوانی داشته باشند.
-                        </Typography>
+                        </p>
 
-                        <Box
-                            display="grid"
-                            gridTemplateColumns={{ xs: "1fr", sm: "1fr 1fr" }}
-                            gap={2}
-                            mb={2}
-                        >
-                            <TextField
-                                label="نام"
-                                variant="outlined"
-                                value={name}
-                                onChange={(e) => setName(e.target.value.trim())}
-                                required
-                            />
-                            <TextField
-                                label="نام خانوادگی"
-                                variant="outlined"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value.trim())}
-                                required
-                            />
-                        </Box>
+                        <form onSubmit={handleUpdateInfo}>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                
+                                <input
+                                    type="text"
+                                    placeholder="نام"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value.trim())}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                />
+                                
+                                <input
+                                    type="text"
+                                    placeholder="نام خانوادگی"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value.trim())}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                />
+                            </div>
 
-                        <Box mb={3}>
-                            <TextField
-                                label="شماره تماس"
-                                fullWidth
-                                variant="outlined"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value.trim())}
-                                required
-                            />
-                        </Box>
-                        <Box mb={3}>
-                            <TextField
-                                label="ایمیل"
-                                type="email"
-                                fullWidth
-                                variant="outlined"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </Box>
+                            <div className="mb-4">
+                                <input
+                                    type="tel"
+                                    placeholder="شماره تماس"
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value.trim())}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                />
+                            </div>
 
-                        <Box mb={3}>
+                            <div className="mb-4">
+                                <input
+                                    type="email"
+                                    placeholder="ایمیل"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                />
+                            </div>
 
-                            <TextField
-                                label="شهر"
-                                select
-                                fullWidth
-                                variant="outlined"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                                className="city-input-select"
-                                required
+                            <div className="mb-6">
+                                <select
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-indigo-500 focus:border-indigo-500 transition cursor-pointer"
+                                >
+                                    <option value="" disabled>شهر را انتخاب کنید</option>
+                                    {availableCities.map((c) => (
+                                        <option key={c} value={c}>
+                                            {c}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
                             >
-
-                                <MenuItem value="تهران">تهران</MenuItem>
-                                <MenuItem value="مشهد">مشهد</MenuItem>
-                                <MenuItem value="اصفهان">اصفهان</MenuItem>
-                                <MenuItem value="شیراز">شیراز</MenuItem>
-                                <MenuItem value="تبریز">تبریز</MenuItem>
-
-                            </TextField>
-                        </Box>
-
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            size="large"
-                            onClick={handleUpdateInfo}
-                        >
-                            آپدیت اطلاعات
-                        </Button>
-                    </CardContent>
-                </Card>
-
+                                آپدیت اطلاعات
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
         </div>
-
     );
 }

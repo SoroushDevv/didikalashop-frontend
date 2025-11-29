@@ -1,57 +1,72 @@
-import React,{useState} from "react";
-import "./UserHistory.css"
+import React, { useState } from "react";
 import { historyProducts } from "../../../../datas";
-
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 import StarRating from "../../../../Components/Rating/StarRating";
+
 export default function UserHistory() {
   const [recentProducts, setRecentProducts] = useState(historyProducts);
 
   return (
-    <div className="recent-products">
-      <div className="recent-products__header">
-        <h2>بازدیدهای اخیر</h2>
+    <div className="max-w-[1200px] mx-auto px-4 py-6 bg-[#f9fafb] font-sans">
+      <div className="mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-blue-600 pb-2">
+          بازدیدهای اخیر
+        </h2>
       </div>
 
-      <div className="recent-products__list">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recentProducts.length ? (
           recentProducts.map((product) => (
-            <div className="recent-products__item" key={product.id}>
-              <div className="recent-products__card">
-                <div className="recent-products__thumb">
+            <div
+              key={product.id}
+              className="flex items-start bg-white rounded-xl shadow-md p-4 transition-shadow duration-300 hover:shadow-lg"
+            >
+              <a href="#" className="flex-shrink-0">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-[120px] h-auto object-cover rounded-lg"
+                />
+              </a>
+
+              <div className="flex flex-col justify-between flex-1 mr-4">
+                <div>
                   <a href="#">
-                    <img src={product.image} alt={product.name} />
+                    <h3 className="text-base font-semibold text-gray-800 mb-2">
+                      {product.name}
+                    </h3>
                   </a>
-                </div>
 
-                <div className="recent-products__content">
-                  <div className="recent-products__title">
-                    <a href="#"><h3>{product.name}</h3></a>
-                  </div>
-
-                  <div className="recent-products__rating">
+                  <div className="mb-2">
                     <StarRating score={product.rating} />
                   </div>
 
-                  <div className="recent-products__price">
-                    <span>{product.price.toLocaleString()}</span>
+                  <div>
+                    <span className="text-green-600 font-bold text-sm md:text-base">
+                      {product.price.toLocaleString()}
+                    </span>
                   </div>
+                </div>
 
-                  <div className="recent-products__buttons">
-                    <a href="#" className="btn-similar">کالاهای مشابه</a>
-                    <button className="btn-remove">
-                      <i className="mdi mdi-trash-can-outline"></i>
-                    </button>
-                  </div>
+                <div className="flex gap-2 mt-3">
+                  <a
+                    href="#"
+                    className="px-3 py-1.5 border border-blue-600 text-blue-600 text-sm rounded-md font-medium transition-all duration-200 hover:bg-blue-600 hover:text-white"
+                  >
+                    کالاهای مشابه
+                  </a>
+
+                  <button className="text-red-500 text-lg hover:text-red-700 transition-colors duration-200">
+                    <i className="mdi mdi-trash-can-outline"></i>
+                  </button>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <ErrorMessage msg="تاریخچه ای موجود نیست" />
+          <ErrorMessage msg="تاریخچه‌ای موجود نیست" />
         )}
       </div>
     </div>
-
   );
 }

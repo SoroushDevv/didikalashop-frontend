@@ -1,168 +1,138 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Grid, Paper, Avatar, Button, Breadcrumbs, Link } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useAllBlogs from "../../../Hooks/useAllBlogs";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
-import axios from "axios";
+import api from "../../../../src/api/axios";
 import moment from "moment-jalaali";
-import api from "./../../../../src/api/axios"
 
 export default function BlogDetail() {
-
-  const { blogs, loading, error } = useAllBlogs()
-  const [blog, setBlog] = useState(null)
-  const [author, setAuthor] = useState(null)
-  const [recentBlogs,setRecentBlogs] = useState([])
-  const { id } = useParams()
-
+  const { blogs, loading, error } = useAllBlogs();
+  const [blog, setBlog] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [recentBlogs, setRecentBlogs] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
-
     const getBlog = async () => {
-      if (!blogs & loading) return;
-      if (error) {
-        console.log("get blog error : ", error)
-      }
-
-
+      if (!blogs || loading) return;
       try {
-        const response = await api.get(`/blogs/${id}`)
-
-        setBlog(response.data)
+        const response = await api.get(`/blogs/${id}`);
+        setBlog(response.data);
       } catch (err) {
-        console.error("error : ", err)
-      } finally {
-        console.log("done")
+        console.error("Error fetching blog:", err);
       }
-    }
-
-    getBlog()
-  }, [blogs, loading, error])
+    };
+    getBlog();
+  }, [blogs, loading, error, id]);
 
   useEffect(() => {
-
     const getAuthor = async () => {
-
       try {
-        const response = await api.get("/users")
-
-        const users = response.data
-
-        console.log("users", users)
-        const author = users.find((user) => user.id === blog.authorID)
-
-        setAuthor(author)
-
-
-
+        const response = await api.get("/users");
+        const users = response.data;
+        const foundAuthor = users.find((u) => u.id === blog?.authorID);
+        setAuthor(foundAuthor);
       } catch (err) {
-        console.log("get author error : ", err)
+        console.error("Error fetching author:", err);
       }
+    };
+
+    const getRecentBlogs = () => {
+      if (!blogs || blogs.length === 0) return;
+      const today = new Date();
+      const start = new Date("06/30/2025");
+      const filtered = blogs.filter((b) => {
+        const blogDate = new Date(b.published_at);
+        return blogDate <= today && blogDate >= start;
+      });
+      setRecentBlogs(filtered);
+    };
+
+    if (blog) {
+      getRecentBlogs();
+      getAuthor();
     }
+  }, [blog, blogs]);
 
-
-    const recentBlogs = () => {
-
-      const today = new Date()
-      const start = new Date("06/30/2025")
-
-
-   
-
-
-      
-      const filteredBlogs = blogs.filter((blog) => {
-
-        const blogDate = new Date(blog.published_at)
-        
-        if(blogDate <= today && start <= blogDate ){
-
-          return blog;
-        }
-      })
-
-      setRecentBlogs(filteredBlogs)
-    }
-
-
-    recentBlogs()
-    getAuthor()
-  }, [blogs, loading, error])
-
-
-
-
+  if (!blog) return <ErrorMessage msg={"بلاگی یافت نشد"} />;
 
   return (
-    blog ?
-      <Box sx={{ py: 8, px: { xs: 2, md: 4 }, bgcolor: "#f9f9f9", display: "flex", flexDirection: "column", gap: 4 }}>
-        {/* Breadcrumb */}
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">خانه</Link>
-            <Link underline="hover" color="inherit" href="/blogs/همه">مقالات</Link>
-            <Link underline="hover" color="inherit" href="#">{blog.excerpt}</Link>
-          </Breadcrumbs>
-          <Typography variant="h4" fontWeight={600}>{blog.title}</Typography>
-        </Box>
+    <div dir="rtl" className="bg-gray-50 py-8 px-4 md:px-8 flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <nav className="text-sm text-gray-500 flex gap-1">
+          <Link to="/" className="hover:text-blue-600">خانه</Link> /
+          <Link to="/blogs/همه" className="hover:text-blue-600">مقالات</Link> /
+          <span className="text-gray-600">{blog.excerpt}</span>
+        </nav>
+        <h1 className="text-2xl font-semibold text-gray-900">{blog.title}</h1>
+      </div>
 
-        {/* Main Grid */}
-        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4 }}>
-          {/* Main Content */}
-          <Box sx={{ flex: 3, display: "flex", flexDirection: "column", gap: 4 }}>
-            <Paper sx={{ p: 4, borderRadius: 3, boxShadow: 3, bgcolor: "#fff", display: "flex", flexDirection: "column", gap: 3 }}>
-              {/* Post Meta */}
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, color: "text.secondary", fontSize: 14 }}>
-                <Typography>📅 {moment(blog.published_at.split("T")[0]).format("jYYYY/jMM/jDD")}</Typography>
-                <Typography>👤 ارسال شده توسط <Box component="span" fontWeight={600}>{author ? `${author.firstname} ${author.lastname}` : "ادمین سایت"}</Box></Typography>
-                <Typography>📂 دسته‌بندی نشده</Typography>
-                <Typography>👁 {blog.views_count} بازدید</Typography>
-              </Box>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 bg-white p-6 rounded-2xl shadow-sm">
+          <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-4">
+            <span>📅 {moment(blog.published_at.split("T")[0]).format("jYYYY/jMM/jDD")}</span>
+            <span>
+              👤 ارسال شده توسط{" "}
+              <span className="font-semibold text-gray-800">
+                {author ? `${author.firstname} ${author.lastname}` : "ادمین سایت"}
+              </span>
+            </span>
+            <span>📂 دسته‌بندی نشده</span>
+            <span>👁 {blog.views_count} بازدید</span>
+          </div>
 
-              {/* Thumbnail */}
-              <Box sx={{ width: "100%", height: { xs: 200, md: 400 }, overflow: "hidden", borderRadius: 2 }}>
-                <img src={`/img/blogs/${blog.cover_image}`} alt="Post" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-              </Box>
+          <div className="w-full overflow-hidden rounded-xl mb-6">
+            <img
+              src={`/img/blogs/${blog.cover_image}`}
+              alt="Blog Cover"
+              className="w-full h-[300px] md:h-[400px] object-cover rounded-xl"
+            />
+          </div>
+          <div className="prose prose-sm md:prose-base prose-gray text-justify leading-8">
+            {blog.content}
+          </div>
+        </div>
 
-              {/* Content */}
-              <Box sx={{ typography: "body1", lineHeight: 1.8 }}>{blog.content}</Box>
-            </Paper>
-          </Box>
-
-          {/* Sidebar */}
-          <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
-            {/* Latest Posts */}
-            <Paper sx={{ p: 2, borderRadius: 2, boxShadow: 2, display: "flex", flexDirection: "column", gap: 2 }}>
-              <Typography variant="h6">جدیدترین نوشته‌ها</Typography>
-              {recentBlogs.map((blog,index) => (
-                <Box key={index} sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
-                <img src={`/img/blogs/${blog.cover_image}`} alt="Post" style={{ width: "60px", height: "auto", objectFit: "contain" }} />
-                  <Box>
-                    <Typography fontSize={14}>
-                      <Link href={`/blog-details/${blog.id}`} style={{textDecoration:"none", color:"inherit", cursor:"pointer"}}>{blog.title}</Link>
-                      
-                     
-                       
-                       
-                       </Typography>
-                    <Typography fontSize={12} color="text.secondary">{blog.published_at.split("T")[0]}</Typography>
-                  </Box>
-                </Box>
+        <aside className="w-full md:w-1/3 flex flex-col gap-6">
+          <div className="bg-white p-4 rounded-2xl shadow-sm">
+            <h3 className="text-lg font-semibold mb-3">جدیدترین نوشته‌ها</h3>
+            <div className="flex flex-col gap-3">
+              {recentBlogs.map((b, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <img
+                    src={`/img/blogs/${b.cover_image}`}
+                    alt={b.title}
+                    className="w-16 h-16 object-cover rounded-lg"
+                  />
+                  <div>
+                    <Link
+                      to={`/blog-details/${b.id}`}
+                      className="block text-sm font-medium text-gray-800 hover:text-blue-600"
+                    >
+                      {b.title}
+                    </Link>
+                    <span className="text-xs text-gray-500">{b.published_at.split("T")[0]}</span>
+                  </div>
+                </div>
               ))}
-            </Paper>
+            </div>
+          </div>
 
-            {/* Tags */}
-            <Paper sx={{ p: 2, borderRadius: 2, boxShadow: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
-              <Typography variant="h6" sx={{ width: "100%" }}>برچسب‌ها</Typography>
-              {[ "ابزار", "لوازم خانه", " قروشگاه", "لپتاپ"].map((tag, i) => (
-                <Button key={i} size="small" variant="outlined">{tag}</Button>
+          <div className="bg-white p-4 rounded-2xl shadow-sm">
+            <h3 className="text-lg font-semibold mb-3">برچسب‌ها</h3>
+            <div className="flex flex-wrap gap-2">
+              {["ابزار", "لوازم خانه", "فروشگاه", "لپتاپ"].map((tag, i) => (
+                <button
+                  key={i}
+                  className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
+                >
+                  {tag}
+                </button>
               ))}
-            </Paper>
-          </Box>
-        </Box>
-      </Box> : <ErrorMessage msg={"بلاگی یافت نشد"}/>
-      )
-
-
-
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
 }

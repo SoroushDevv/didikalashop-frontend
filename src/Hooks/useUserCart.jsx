@@ -10,7 +10,6 @@ function useUserCart() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // دریافت تخفیف‌ها از سرور
   const fetchDiscounts = useCallback(async () => {
     try {
       setLoading(true);
@@ -25,12 +24,10 @@ function useUserCart() {
     }
   }, []);
 
-  // فراخوانی اولیه تخفیف‌ها
   useEffect(() => {
     fetchDiscounts();
   }, [fetchDiscounts]);
 
-  // فرمت کردن سبد خرید
   const shoppingCart = useMemo(() => {
     try {
       const activeDiscounts = discounts.filter((discount) => discount.isActive);
@@ -68,7 +65,6 @@ function useUserCart() {
     }
   }, [localCart, discounts, products]);
 
-  // تابع برای افزودن یا به‌روزرسانی آیتم در سبد خرید
   const updateCart = useCallback(
     (newItem) => {
       setLocalCart((prevCart) => {
@@ -93,12 +89,11 @@ function useUserCart() {
           ];
         }
       });
-      triggerReload(); // ریلود بعد از افزودن/به‌روزرسانی
+      triggerReload(); 
     },
     [setLocalCart, triggerReload]
   );
 
-  // تابع برای تغییر تعداد آیتم
   const updateQuantity = useCallback(
     (productID, color, newQuantity) => {
       if (newQuantity <= 0) {
@@ -113,29 +108,26 @@ function useUserCart() {
         );
         return updatedCart;
       });
-      triggerReload(); // ریلود بعد از تغییر تعداد
+      triggerReload(); 
     },
     [setLocalCart, triggerReload]
   );
 
-  // تابع برای حذف آیتم از سبد خرید
   const removeFromCart = useCallback(
     (productID, color) => {
       setLocalCart((prevCart) =>
         prevCart.filter((item) => !(item.productID === productID && item.color === color))
       );
-      triggerReload(); // ریلود بعد از حذف
+      triggerReload(); 
     },
     [setLocalCart, triggerReload]
   );
 
-  // تابع برای پاک کردن سبد خرید
   const clearCart = useCallback(() => {
     setLocalCart([]);
-    triggerReload(); // ریلود بعد از پاک کردن
+    triggerReload(); 
   }, [setLocalCart, triggerReload]);
 
-  // تابع برای ارسال به API (فرضی)
   const submitCartToApi = useCallback(
     async (userID) => {
       try {
@@ -160,7 +152,7 @@ function useUserCart() {
     removeFromCart,
     clearCart,
     submitCartToApi,
-    triggerReload, // اضافه کردن تابع triggerReload به خروجی
+    triggerReload, 
     loading: loading || productLoading,
     error: error || productError,
   };

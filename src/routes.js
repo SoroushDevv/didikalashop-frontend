@@ -1,41 +1,48 @@
 import React from "react";
 
-import Home from "./Pages/Home/Home";
-import Blogs from "./Pages/Blogs/Blogs";
-import BlogDetail from "./Pages/Blogs/BlogDetail/BlogDetail";
-import Cart from "./Pages/Cart/Cart";
-import Login from "./Pages/Login/LoginPage";
-import Register from "./Pages/Register/Register";
-import Privacy from "./Pages/Privacy/Privacy";
-import Profile from "./Pages/Profile/Profile";
-import Products from "./Pages/Products/Products";
-import Shipping from "./Pages/Shipping/Shipping";
-import SingleProduct from "./Pages/SingleProduct/SingleProduct";
-import MainFAQ from "./Pages/FAQ/Main/MainFAQ";
-import CategoryFAQ from "./Pages/FAQ/Category/CategoryFAQ";
-import FAQQuestionPage from "./Pages/FAQ/Question/FAQQuestionPage";
-import ErrorPage from "./Pages/ErrorPage/ErrorPage";
-import UserAddresses from "./Pages/Profile/Components/UserAddresses/UserAddresses";
-import UserComments from "./Pages/Profile/Components/UserComments/UserComments";
-import UserFavorite from "./Pages/Profile/Components/UserFavorites/UserFavorites";
-import UserOrderDetails from "./Pages/Shipping/Components/UserOrderDetails/UserOrderDetails";
-import UserPersonalInfo from "./Pages/Profile/Components/UserInfo/UserInfo";
-import UserOrderReturns from "./Pages/Profile/Components/UserOrderReturns/UserOrderReturn";
-import UserHistory from "./Pages/Profile/Components/UserHistory/UserHistory";
-import UserOrders from "./Pages/Profile/Components/UserOrders/UserOrders";
-import ProfileFirstPageContent from "./Pages/Profile/Components/MainContent/ProfileFirstPageContent";
-import SearchResults from "./Pages/Search/SearchResults"
-import SingleProductSearch from "./Pages/SingleProductSearch/SingleProductSearch";
-import Payment from "./Pages/Shipping/Components/Payment/Payment"
-import CompletePayment from "./Pages/Shipping/Components/CompletePayment/CompletePayment"
-import ChangePassword from "./Components/changePassword/ChangePassword"
-import CategoryResults from "./Pages/CategoryResults/CategoryResults";
-import IncredibleOffers from "./Pages/IncredibleOffers/IncredibleOffers"
-import MostSales from "./Pages/MostSales/MostSales"
-import ProfileOrdersDetails from "./Pages/Profile/Components/ProfileOrdersDetails/ProfileOrdersDetails";
-
-
-
+import Home from "./Pages/Home/Home.jsx";
+import Blogs from "./Pages/Blogs/Blogs.jsx";
+import BlogDetail from "./Pages/Blogs/BlogDetail/BlogDetail.jsx";
+import Cart from "./Pages/Cart/Cart.jsx";
+import Login from "./Pages/Login/LoginPage.jsx";
+import Register from "./Pages/Register/Register.jsx";
+import Privacy from "./Pages/Privacy/Privacy.jsx";
+import Profile from "./Pages/Profile/Profile.jsx";
+import Products from "./Pages/Products/Products.jsx";
+import Shipping from "./Pages/Shipping/Shipping.jsx";
+import SingleProduct from "./Pages/SingleProduct/SingleProduct.jsx";
+import MainFAQ from "./Pages/FAQ/Main/MainFAQ.jsx";
+import CategoryFAQ from "./Pages/FAQ/Category/CategoryFAQ.jsx";
+import FAQQuestionPage from "./Pages/FAQ/Question/FAQQuestionPage.jsx";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
+import UserAddresses from "./Pages/Profile/Components/UserAddresses/UserAddresses.jsx";
+import UserComments from "./Pages/Profile/Components/UserComments/UserComments.jsx";
+import UserFavorite from "./Pages/Profile/Components/UserFavorites/UserFavorites.jsx";
+import UserOrderDetails from "./Pages/Shipping/Components/UserOrderDetails/UserOrderDetails.jsx";
+import UserPersonalInfo from "./Pages/Profile/Components/UserInfo/UserInfo.jsx";
+import UserOrderReturns from "./Pages/Profile/Components/UserOrderReturns/UserOrderReturn.jsx";
+import UserHistory from "./Pages/Profile/Components/UserHistory/UserHistory.jsx";
+import UserOrders from "./Pages/Profile/Components/UserOrders/UserOrders.jsx";
+import ProfileFirstPageContent from "./Pages/Profile/Components/MainContent/ProfileFirstPageContent.jsx";
+import SearchResults from "./Pages/Search/SearchResults.jsx"
+import SingleProductSearch from "./Pages/SingleProductSearch/SingleProductSearch.jsx";
+import Payment from "./Pages/Shipping/Components/Payment/Payment.jsx"
+import CompletePayment from "./Pages/Shipping/Components/CompletePayment/CompletePayment.jsx"
+import ChangePassword from "./Components/changePassword/ChangePassword.jsx"
+import CategoryResults from "./Pages/CategoryResults/CategoryResults.jsx";
+import IncredibleOffers from "./Pages/IncredibleOffers/IncredibleOffers.jsx"
+import MostSales from "./Pages/MostSales/MostSales.jsx"
+import ProfileOrdersDetails from "./Pages/Profile/Components/ProfileOrdersDetails/ProfileOrdersDetails.jsx";
+//mobile routes for user profile
+import MobileProfile from "./Pages/MobileProfile/MainPage/MobileProfile.jsx";
+import AddressesMobile from "./Pages/MobileProfile/Addresses/AddressesMobile.jsx";
+import CommentsMobile from "./Pages/MobileProfile/Comments/CommentsMobile.jsx";
+import FavoritesMobile from "./Pages/MobileProfile/Favorites/FavoritesMobile.jsx";
+import OrderReturnsMobile from "./Pages/MobileProfile/Returns/ReturnsMobile.jsx";
+import UserInfoMobile from "./Pages/MobileProfile/UserInfo/UserInfoMobile.jsx";
+import OrdersDetailsMobile from "./Pages/MobileProfile/OrdersDetails/OrdersDetailsMobile.jsx";
+import UserHistoryMobile from "./Pages/MobileProfile/History/HistoryMobile.jsx";
+import UserOrdersMobile from "./Pages/MobileProfile/Orders/OrdersMobile.jsx";
 
 
 
@@ -58,11 +65,25 @@ let routes = [
             { path: "user-info", element: <UserPersonalInfo /> },
             { path: "addresses", element: <UserAddresses /> },
             { path: "order-returns", element: <UserOrderReturns /> },
-            { path: "favorite", element: <UserFavorite /> },
+            { path: "favorites", element: <UserFavorite /> },
             { path: "history", element: <UserHistory /> },
             { path: "comments", element: <UserComments /> },
             { path: "orders", element: <UserOrders /> },
             { path: "orders/:orderId", element: <ProfileOrdersDetails /> },
+
+            { path: "change-pass", element: <ChangePassword /> },
+        ]
+    },
+     {
+        path: "/mobile-profile", element: <MobileProfile />, children: [
+            { path: "addresses", element: <AddressesMobile /> },
+            { path: "comments", element: <CommentsMobile /> },
+            { path: "favorites", element: <FavoritesMobile /> },
+            { path: "orders/:orderId", element: <OrdersDetailsMobile /> },
+            { path: "order-returns", element: <OrderReturnsMobile /> },
+            { path: "user-info", element: <UserInfoMobile /> },
+            { path: "history", element: <UserHistoryMobile /> },
+            { path: "orders", element: <UserOrdersMobile /> },
 
             { path: "change-pass", element: <ChangePassword /> },
         ]

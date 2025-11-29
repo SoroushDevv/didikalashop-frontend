@@ -8,19 +8,19 @@ const MySwal = withReactContent(Swal);
 const ShowSwal = ({
   title = " یک سوال",
   text = "موافقید؟ ",
-  icon = "info", // گزینه‌ها: success, error, warning, info, question
+  icon = "info", 
   showConfirmButton = true,
   confirmButtonText = "تأیید",
   confirmButtonColor = "#3085d6",
   showCancelButton = false,
   cancelButtonText = "لغو",
   cancelButtonColor = "#d33",
-  customIcon = null, // برای آیکون کاستوم (مثلاً تصویر)
+  customIcon = null, 
   onConfirm = () => {},
   onCancel = () => {},
-  customClass = {}, // برای کلاس‌های CSS کاستوم
-  htmlContent = null, // برای محتوای HTML کاستوم
-  timer = null, // تایمر برای بسته شدن خودکار (میلی‌ثانیه)
+  customClass = {}, 
+  htmlContent = null, 
+  timer = null, 
 }) => {
   MySwal.fire({
     title,

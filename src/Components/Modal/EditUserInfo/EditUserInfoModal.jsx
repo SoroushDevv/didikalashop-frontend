@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Portal from "../../Portal/Portal"; // پورتال شما
-import "./EditUserInfoModal.css";
+import Portal from "../../Portal/Portal"; 
 import CloseIcon from '@mui/icons-material/Close';
+
 export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
-  // مدیریت حالت‌های فرم
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -14,7 +13,6 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
   useEffect(() => {
     const handleCloseModal = (e) => {
       if (e.code === "Escape") {
-        console.log("escape key pressed");
         closeModal();
       }
     };
@@ -28,32 +26,42 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
     };
   }, [isOpen, closeModal]);
 
-  // مدیریت تغییرات ورودی‌ها
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // مدیریت ارسال فرم
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitModal(formData); // ارسال داده‌های فرم به تابع submitModal
-    closeModal(); // بستن مدال پس از ارسال
+    submitModal(formData); 
+    closeModal(); 
   };
 
   return (
     <Portal>
       {isOpen && (
-        <div className="modal-container">
-          <div className="modal-box edit-user-modal active">
-            <div className="close-icon" onClick={e => closeModal()}>
-            <CloseIcon />
-            </div>
-            <div className="edit-modal-container">
-              <h1>ویرایش اطلاعات </h1>
-              <form className="edit-modal-form" onSubmit={handleSubmit}>
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-60 z-[1000] flex justify-center items-center transition-opacity duration-300"
+          dir="rtl"
+          onClick={closeModal} 
+        >
+          <div 
+            className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg mx-4 relative transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()} // جلوگیری از بسته‌شدن با کلیک درون مدال
+          >
+            <button 
+              className="absolute top-4 left-4 p-1 text-gray-400 hover:text-gray-700 transition"
+              onClick={closeModal}
+            >
+              <CloseIcon className="w-6 h-6" />
+            </button>
+            
+            <div className="pt-4">
+              <h1 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">ویرایش اطلاعات </h1>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                
                 <div className="form-group">
-                  <label htmlFor="username">نام کاربری:</label>
+                  <label htmlFor="username" className="block text-sm font-medium text-gray-700">نام کاربری:</label>
                   <input
                     type="text"
                     id="username"
@@ -61,12 +69,12 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
                     value={formData.username}
                     onChange={handleChange}
                     required
-                    className="form-input"
+                    className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">رمز عبور:</label>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">رمز عبور:</label>
                   <input
                     type="password"
                     id="password"
@@ -74,12 +82,12 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="form-input"
+                    className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">شماره تلفن:</label>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">شماره تلفن:</label>
                   <input
                     type="tel"
                     id="phone"
@@ -87,12 +95,12 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="form-input"
+                    className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">ایمیل:</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">ایمیل:</label>
                   <input
                     type="email"
                     id="email"
@@ -100,12 +108,12 @@ export default function EditUserInfoModal({ isOpen, submitModal, closeModal }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="form-input"
+                    className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
                   />
                 </div>
 
-                <button
-                  className="edit-modal-submit modal-button"
+          <button
+                  className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 mt-6"
                   type="submit"
                 >
                   ذخیره اطلاعات

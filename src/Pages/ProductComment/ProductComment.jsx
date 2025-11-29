@@ -1,48 +1,37 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
 import Comments from "./Comments/Comments";
-import "./ProductComment.css"; // فرض بر وجود فایل CSS برای استایل‌دهی
-import ErrorMessage from "./../ErrorMessage/ErrorMessage"
-import { useCurrentUser } from "./../../Hooks/useCurrentUser"
-import ShowSwal from "./../../Components/ShowSwal/ShowSwal"
-import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import { useCurrentUser } from "../../Hooks/useCurrentUser";
+import ShowSwal from "../../Components/ShowSwal/ShowSwal";
+import { QuestionAnswerRounded } from "@mui/icons-material";
 
 export default function ProductComment({ product }) {
   const [comments, setComments] = useState([]);
   const [commentBody, setCommentBody] = useState("");
   const [commentTitle, setCommentTitle] = useState("");
   const [recommend, setRecommend] = useState(null);
-  const [replyTo, setReplyTo] = useState(null); // برای پاسخ به کامنت خاص
+  const [replyTo, setReplyTo] = useState(null);
   const [error, setError] = useState(null);
-  const { currentUser, loading, error: userError } = useCurrentUser()
-  // دریافت کامنت‌ها از API
+  const { currentUser } = useCurrentUser();
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const response = await api.get("/comments");
-        // فیلتر کردن کامنت‌های مربوط به محصول فعلی و تأییدشده
-        console.log(response.data)
         const productComments = response.data.filter(
           (comment) =>
             comment.productID === product.id && comment.status === 1
         );
-        console.log(productComments)
         setComments(productComments);
       } catch (err) {
-        console.error("Error fetching comments:", err);
+        console.error(err);
         setError("خطا در دریافت نظرات");
       }
     };
     fetchComments();
-  }, [product.title]);
+  }, [product.id]);
 
-  // مدیریت ارسال فرم
-  const handleSubmit = async (e, productID) => {
-
-    console.log("product id:", productID)
-    console.log("user id:", currentUser.id)
-
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!commentTitle.trim() || !commentBody.trim()) {
       setError("عنوان و متن نظر الزامی است");
@@ -54,23 +43,22 @@ export default function ProductComment({ product }) {
     }
 
     try {
-
       const newComment = {
         body: commentBody.trim(),
         userID: Number(currentUser.id),
-        productID: Number(productID),
+        productID: Number(product.id),
         is_reply: replyTo ? 1 : 0,
-        reply_id: replyTo ? Number(replyTo) : null
+        reply_id: replyTo ? Number(replyTo) : null,
       };
 
-      console.log(newComment)
       const response = await api.post("/comments", newComment);
 
-      console.log(response.status)
       if (response.status === 200 || response.status === 201) {
-
         ShowSwal({
-          title: "کامنت ثبت شد پس از تایید قابل نمایش میشود", text: "", icon: "success", showConfirmButton: true, onConfirm: () => {
+          title: "کامنت ثبت شد، پس از تایید نمایش داده می‌شود",
+          icon: "success",
+          showConfirmButton: true,
+          onConfirm: () => {
             setComments([
               ...comments,
               {
@@ -78,161 +66,123 @@ export default function ProductComment({ product }) {
                 id: response.data.commentID,
                 date: new Date().toISOString().split("T")[0],
                 hour: new Date().toTimeString().split(" ")[0],
-                status: 0
-              }
+                status: 0,
+              },
             ]);
             setCommentBody("");
             setCommentTitle("");
             setReplyTo(null);
             setError(null);
-            console.log("comments:", comments)
-          }
-        })
-
+          },
+        });
       }
-
-
     } catch (err) {
-      console.error("Error adding comment:", err);
+      console.error(err);
       setError("خطا در ثبت نظر");
     }
   };
 
-  // مدیریت کلیک روی دکمه پاسخ
-  const handleReply = (commentId) => {
-    console.log(commentId)
-    setReplyTo(commentId);
-  };
+  const handleReply = (commentId) => setReplyTo(commentId);
 
-  console.log(comments)
   return (
-    <main className="product-comment_section">
-      <div className="product-comment-section_container">
-        <div className="product-comment-content">
-          <div className="product-row">
-            {/* تصویر محصول */}
-            <div className="product-thumbnail">
-              <a href="#">
-                <img
-                  src={`/img/products/${product.img}`}
-                  alt={product.title}
-                />
-              </a>
-            </div>
-
-            {/* اطلاعات محصول */}
-            <div className="product-info">
-              <div className="product-title">
-                <h1>{product.title}</h1>
-              </div>
-            </div>
+    <main className="py-8 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row gap-6 mb-8 bg-white p-6 rounded-lg shadow">
+          <div className="w-full md:w-fit">
+            <img
+              src={`/img/products/${product.img}`}
+              alt={product.title}
+              className="w-24 h-auto rounded-lg"
+            />
           </div>
+          <div className="flex-1 flex flex-col justify-center">
+            <h1 className="text-2xl font-bold">{product.title}</h1>
+          </div>
+        </div>
 
-          {/* بخش افزودن نظر */}
-          <div className="comment-section">
-            <div className="comment-form">
-              {error && <div className="form-error">{error}</div>}
-              <form onSubmit={(e) => handleSubmit(e, product.id)}>
-                <div className="form-group">
-                  <label>عنوان نظر شما (اجباری)</label>
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          {error && (
+            <div className="text-red-600 bg-red-100 p-2 rounded mb-4">{error}</div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="inline-block font-medium mb-1 relative pl-4 pt-2">عنوان نظر شما  
+                <span className="absolute top-0 left-0 text-red-600 font-bold text-3xl " >*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="عنوان نظر خود را بنویسید"
+                value={commentTitle}
+                onChange={(e) => setCommentTitle(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+              />
+            </div>
+            <div>
+               <label className="inline-block font-medium mb-1 relative pl-4 pt-2">متن نظر شما
+                <span className="absolute top-0 left-0 text-red-600 font-bold text-3xl " >*</span>
+              </label>
+              <textarea
+                rows="5"
+                placeholder="متن خود را بنویسید"
+                value={commentBody}
+                onChange={(e) => setCommentBody(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+              ></textarea>
+            </div>
+
+            <div>
+              <h2 className="font-medium mb-2">آیا خرید این محصول را به دوستانتان پیشنهاد می‌کنید؟</h2>
+              <div className="flex flex-col gap-4">
+                <label className="flex items-center gap-2">
                   <input
-                    type="text"
-                    placeholder="عنوان نظر خود را بنویسید"
-                    value={commentTitle}
-                    onChange={(e) => setCommentTitle(e.target.value)}
+                    type="radio"
+                    name="recommend"
+                    checked={recommend === true}
+                    onChange={() => setRecommend(true)}
                   />
-                </div>
-
-                <div className="form-group">
-                  <label>متن نظر شما (اجباری)</label>
-                  <textarea
-                    rows="5"
-                    placeholder="متن خود را بنویسید"
-                    value={commentBody}
-                    onChange={(e) => setCommentBody(e.target.value)}
-                  ></textarea>
-                </div>
-
-                <div className="form-group">
-                  <h2>آیا خرید این محصول را به دوستانتان پیشنهاد می‌کنید؟</h2>
-                  <div className="radio-group">
-                    <label>
-                      <input
-                        type="radio"
-                        name="recommend"
-                        checked={recommend === true}
-                        onChange={() => setRecommend(true)}
-                      />
-                      پیشنهاد می‌کنم
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="recommend"
-                        checked={recommend === false}
-                        onChange={() => setRecommend(false)}
-                      />
-                      خیر، پیشنهاد نمی‌کنم
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-actions">
-                  <p>
-                    با “ثبت نظر” موافقت خود را با{" "}
-                    <a href="#" target="_blank">
-                      قوانین انتشار محتوا
-                    </a>{" "}
-                    اعلام می‌کنم.
-                  </p>
-                  <button type="submit" className="btn-primary">
-                    {replyTo ? "ارسال پاسخ" : "ثبت نظر"}
-                  </button>
-                  {replyTo && (
-                    <button
-                      type="button"
-                      className="btn-secondary"
-                      onClick={() => setReplyTo(null)}
-                    >
-                      لغو پاسخ
-                    </button>
-                  )}
-                </div>
-              </form>
-            </div>
-
-            {/* قوانین ثبت نظر */}
-            <div className="comment-rules">
-              <h3>
-                دیگران را با نوشتن نظرات خود، برای انتخاب این محصول راهنمایی کنید.
-              </h3>
-              <div className="desc-comment">
-                <p>لطفا پیش از ارسال نظر، خلاصه قوانین زیر را مطالعه کنید:</p>
-                <ol>
-                  <li>احترام به دیگران...</li>
-                  <li>مرتبط بودن...</li>
-                  <li>ممنوعیت تبلیغات...</li>
-                  <li>صداقت...</li>
-                  <li>رعایت حریم خصوصی...</li>
-                  <li>زبان مناسب...</li>
-                </ol>
+                  پیشنهاد می‌کنم
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="recommend"
+                    checked={recommend === false}
+                    onChange={() => setRecommend(false)}
+                  />
+                  خیر، پیشنهاد نمی‌کنم
+                </label>
               </div>
             </div>
-          </div>
 
-          {/* لیست نظرات */}
-          <div className="comments-list">
-            <div className="comments-header">
-              <QuestionAnswerRoundedIcon className="comments-icon" />
-              <div className="comments-title">نظرات</div>
+            <div className="flex flex-col md:flex-row gap-2 items-center">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              >
+                {replyTo ? "ارسال پاسخ" : "ثبت نظر"}
+              </button>
+              {replyTo && (
+                <button
+                  type="button"
+                  onClick={() => setReplyTo(null)}
+                  className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+                >
+                  لغو پاسخ
+                </button>
+              )}
             </div>
-            <div className="comments-body">
-              <Comments onReply={handleReply} product={product} />
-            </div>
+          </form>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <div className="flex items-center gap-2 mb-4 text-xl font-bold">
+            {currentUser && currentUser.role === "Admin" ? <QuestionAnswerRounded className="text-blue-600" />: ""}
+            
+            <span>نظرات</span>
           </div>
+          <Comments onReply={handleReply} product={product} />
         </div>
       </div>
     </main>
-
   );
 }

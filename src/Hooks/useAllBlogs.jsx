@@ -10,7 +10,6 @@ const useAllBlogs = () => {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        // دریافت دسته‌بندی‌ها
         const response = await api.get("/blogs");
         console.log("blogs: ", response.data);
         

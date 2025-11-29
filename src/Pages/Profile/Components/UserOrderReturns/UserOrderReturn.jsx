@@ -1,39 +1,43 @@
-import React,{ useState } from "react";
-import "./UserOrderReturn.css"
+import React, { useState } from "react";
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 
 export default function UserOrderReturn() {
   const [returnProducts, setReturnProducts] = useState([]);
-  const [returnHistory, setreturnHistory] = useState([]);
+  const [returnHistory, setReturnHistory] = useState([]);
 
   return (
-    <div className="return-section">
-      {/* درخواست مرجوعی */}
-      <div className="return-section__request">
-        <h2 className="return-section__title">درخواست مرجوعی</h2>
-        <div className="return-section__box">
+    <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 font-sans py-6">
+      <section className="flex flex-col gap-3">
+         <div className="w-full text-right mb-4">
+        <h2 className="w-full text-xl font-bold text-gray-800 border-b-2 border-[#fa256c] pb-2">
+        درخواست مرجوعی
+        </h2>
+      </div>
+        <>
           {returnProducts.length === 0 ? (
             <ErrorMessage msg="محصول مرجوعی یافت نشد" />
           ) : (
-            <p className="return-section__message">
+            <p className="text-sm text-gray-600 py-2">
               در حال حاضر کالایی برای مرجوع کردن ندارید.
             </p>
           )}
-        </div>
-      </div>
+        </>
+      </section>
 
-      {/* تاریخچه مرجوعی */}
-      <div className="return-section__history">
-        <h2 className="return-section__title">تاریخچه مرجوعی</h2>
-        <div className="return-section__box">
+      <section className="flex flex-col gap-3">
+           <div className="w-full text-right mb-4">
+        <h2 className="w-full text-xl font-bold text-gray-800 border-b-2 border-[#fa256c] pb-2">
+        تاریخچه مرجوعی
+        </h2>
+      </div>
+        <>
           {returnHistory.length === 0 ? (
             <ErrorMessage msg="خوشبختانه تا به حال کالایی را مرجوع نکرده‌اید و تاریخچه مرجوعی شما خالیست" />
           ) : (
-            <p className="return-section__message">محل قرار گیری محصول مرجوعی</p>
+            <p className="text-sm text-gray-600 py-2">محل قرارگیری محصول مرجوعی</p>
           )}
-        </div>
-      </div>
+        </>
+      </section>
     </div>
-
   );
 }

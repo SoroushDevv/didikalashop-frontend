@@ -37,7 +37,7 @@
   color: #000; 
   padding: 10px 12px;
   border-radius: 8px;
-  transition: all ease 0.25s, color 0.25s;
+  transition: all ease 0.25s;
 }
 
 .profile-menu-section .profile-menu ul li a svg {
@@ -60,3 +60,5 @@
 .profile-menu-section .profile-menu ul li a.active svg {
   color: #fff;
 }
+
+  

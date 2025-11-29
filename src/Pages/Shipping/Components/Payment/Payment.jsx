@@ -10,6 +10,7 @@ import { useCart } from '../../../../Contexts/CartContext';
 import api from '../../../../api/axios';
 import showSwal from '../../../../Components/ShowSwal/ShowSwal';
 import useOffs from '../../../../Hooks/useAllOffs'
+import { useNavigate } from 'react-router-dom';
 
 const colorMap = {
   'مشکی': '#000000',
@@ -62,6 +63,7 @@ const ColorChip = ({ color }) => {
 };
 
 function Payment() {
+  const Navigate = useNavigate()
   const { order, setOrder, loading, error, triggerUpdate: trigger } = useCart();
   const [isExpanded, setIsExpanded] = useState(false);
   const [total, setTotal] = useState(0);
@@ -70,11 +72,18 @@ function Payment() {
   const [codeValue, setCodeValue] = useState('');
   const [updateTrigger, setUpdateTrigger] = useState(0);
   const { offs } = useOffs();
-  const [paymentMethod, setPaymentMethod] = useState('credit-cart');
+  const [paymentMethod, setPaymentMethod] = useState(
+    localStorage.getItem("paymentMethod") || "credit-person"
+  );
 
   useEffect(() => {
 
+    if(order.items.length === 0) {
+      Navigate("/")
+    }
+  },[order])
 
+  useEffect(() => {
     const totalPrice = order.items.reduce((sum, item) => {
       const price = Number(item?.payablePrice) || 0;
       return sum + price;
@@ -151,70 +160,76 @@ function Payment() {
   return (
     <main className="main-content dt-sl mt-4 mb-3">
       <div className="container main-container">
-        <div className="row">
+        <div className="row flex ">
           <div className="cart-page-content col-xl-9 col-lg-8 col-12 px-0" >
-            <form class="checkout-payment-form">
-              <div class="checkout-payment-form__header">
-                <div class="checkout-payment-form__title">
-                  <h2>انتخاب روش پرداخت</h2>
-                </div>
+            <form className="checkout-payment-form w-full mt-4">
+              <div className="checkout-payment-form__header mb-4">
+                <h2 className="text-xl font-bold">انتخاب روش پرداخت</h2>
               </div>
 
-              <div class="checkout-payment-form__methods">
-                <div class="checkout-payment-form__method">
+              <div className="checkout-payment-form__methods flex flex-col gap-4">
+
+                <label
+                  htmlFor="payment-online"
+                  className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition 
+        ${paymentMethod === "credit-person" ? "border-blue-500 bg-blue-50" : "hover:bg-gray-50"}`}
+                >
                   <input
                     type="radio"
                     id="payment-online"
                     name="paymentOption"
                     value="credit-person"
-                    class="checkout-payment-form__radio"
+                    checked={paymentMethod === "credit-person"}
+                    onChange={(e) => {
+                      setPaymentMethod(e.target.value);
+                      localStorage.setItem("paymentMethod", e.target.value);
+                    }}
+                    className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
                   />
-                  <label for="payment-online" class="checkout-payment-form__label">
-                    <div class="checkout-payment-form__content">
-                      <div class="checkout-payment-form__method-title">
-                        <span class="checkout-payment-form__icon">
-                          <PaymentIcon />
-                        </span>
-                        <div>
-                          پرداخت اینترنتی
-                          <span class="checkout-payment-form__tooltip-icon mdi mdi-information-outline"></span>
-                        </div>
-                      </div>
-                      <ul class="checkout-payment-form__subtitle">
-                        <li>پرداخت آنلاین با تمامی کارت‌های بانکی</li>
-                      </ul>
-                    </div>
-                  </label>
-                </div>
 
-                <div class="checkout-payment-form__method">
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 font-semibold text-gray-800">
+                      <PaymentIcon />
+                      پرداخت اینترنتی
+                    </div>
+                    <ul className="text-sm text-gray-600">
+                      <li>پرداخت آنلاین با تمامی کارت‌های بانکی</li>
+                    </ul>
+                  </div>
+                </label>
+
+                <label
+                  htmlFor="payment-company"
+                  className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition 
+        ${paymentMethod === "credit-company" ? "border-blue-500 bg-blue-50" : "hover:bg-gray-50"}`}
+                >
                   <input
                     type="radio"
                     id="payment-company"
                     name="paymentOption"
                     value="credit-company"
-                    class="checkout-payment-form__radio"
-
+                    checked={paymentMethod === "credit-company"}
+                    onChange={(e) => {
+                      setPaymentMethod(e.target.value);
+                      localStorage.setItem("paymentMethod", e.target.value);
+                    }}
+                    className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
                   />
-                  <label for="payment-company" class="checkout-payment-form__label">
-                    <div class="checkout-payment-form__content">
-                      <div class="checkout-payment-form__method-title">
-                        <span class="checkout-payment-form__icon">
-                          <PaymentIcon />
-                        </span>
-                        <div>
-                          پرداخت با کارت اعتباری
-                          <span class="checkout-payment-form__tooltip-icon mdi mdi-information-outline"></span>
-                        </div>
-                      </div>
-                      <ul class="checkout-payment-form__subtitle">
-                        <li>ویژه بانک‌ها، سازمان‌ها و شرکت‌ها</li>
-                      </ul>
+
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 font-semibold text-gray-800">
+                      <PaymentIcon />
+                      پرداخت با کارت اعتباری
                     </div>
-                  </label>
-                </div>
+                    <ul className="text-sm text-gray-600">
+                      <li>ویژه بانک‌ها، سازمان‌ها و شرکت‌ها</li>
+                    </ul>
+                  </div>
+                </label>
+
               </div>
             </form>
+
 
             <div class="checkout-summary">
               <div class="checkout-summary__header">

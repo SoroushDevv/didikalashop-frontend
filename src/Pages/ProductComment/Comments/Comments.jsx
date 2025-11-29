@@ -1,218 +1,177 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import api from "../../../api/axios";
-import "./Comments.css";
-import ErrorMessage from "../../ErrorMessage/ErrorMessage";
-import useAllComments from "../../../Hooks/useAllComments";
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import ReplyCommentPortal from "../../../Components/ReplyCommentPortal/ReplyCommentPortal";
-import { Box, Button, TextField, Typography, Select, MenuItem, FormControl, InputLabel, Modal } from "@mui/material";
-import { useCurrentUser } from "../../../Hooks/useCurrentUser";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ReplyCommentPortal from "../../../Components/ReplyCommentPortal/ReplyCommentPortal";
+import { useCurrentUser } from "../../../Hooks/useCurrentUser";
 import ShowSwal from "../../../Components/ShowSwal/ShowSwal";
+import useAllComments from "../../../Hooks/useAllComments";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import moment from "jalali-moment";
 
 const Comments = ({ product }) => {
-  const { comments, loading, error } = useAllComments()
-  const [open, setOpen] = useState(null)
-  const [commentId, setCommentId] = useState(null)
-  const moment = require('jalali-moment');
-  const { currentUser, loading: userLoading, error: userError } = useCurrentUser();
-  const [replyText, setReplyText] = useState(null)
-  const [showName, setShowName] = useState(null)
+  const { comments } = useAllComments();
+  const { currentUser } = useCurrentUser();
+  const [open, setOpen] = useState(false);
+  const [commentId, setCommentId] = useState(null);
+  const [replyText, setReplyText] = useState("");
+  const [showName, setShowName] = useState(currentUser?.username || "");
 
+  const productComments = comments.filter(
+    (c) => !c.is_reply && c.status === "approved" && c.productID === product.id
+  );
 
-  console.log(currentUser)
-  const productComments = comments.filter((comment) =>
-    !comment.is_reply &&
-    comment.status === "approved" &&
-    comment.productID === product.id
-  )
-
-  console.log("product comments:", productComments)
-
-  const getReplies = (commentId) => {
-    console.log(productComments)
-    console.log(commentId)
-    const reply = comments.filter(
-      (comment) =>
-        comment.is_reply &&
-        comment.reply_id === commentId &&
-        comment.status === "approved"
+  const getReplies = (id) =>
+    comments.filter(
+      (c) => c.is_reply && c.reply_id === id && c.status === "approved"
     );
-    return reply;
+
+  const onReply = (id) => {
+    setCommentId(id);
+    setOpen(true);
   };
 
+  const onClose = () => setOpen(false);
 
-  const onReply = (commentId) => {
-    console.log(commentId)
-    setCommentId(commentId)
-    setOpen(true)
+  const handleSubmit = async () => {
+    if (!replyText.trim()) return alert("لطفاً متن پیام را وارد کنید!");
 
-  }
-
-  const onClose = () => {
-    setOpen(false)
-  }
-
-
-
-const handleSubmit = async () => {
-  console.log(commentId)
-  if (replyText.trim()) {
     try {
       const res = await api.post("/comments", {
-        body: replyText,             
-        userID: 1,                 
-        productID: product.id,     
-        is_reply: 1,               
-        reply_id: commentId 
+        body: replyText,
+        userID: 1,
+        productID: product.id,
+        is_reply: 1,
+        reply_id: commentId,
       });
-
-      if(res.status === 200 || res.status === 201) {
-        ShowSwal({title:"پاسخ شما ثبت شد پس از بررسی نمایش داده میشود",text:"",icon:"success",showConfirmButton : true,onConfirm:() => onClose()})
-       console.log("ریپلای ثبت شد:", res.data); 
+      if (res.status === 200 || res.status === 201) {
+        ShowSwal({
+          title: "پاسخ شما ثبت شد پس از بررسی نمایش داده میشود",
+          icon: "success",
+          showConfirmButton: true,
+          onConfirm: onClose,
+        });
       }
-    
     } catch (err) {
-      if (err.response) {
-        alert("خطا: " + err.response.data.error);
-      } else {
-        alert("مشکل در اتصال به سرور");
-      }
+      alert(err.response?.data?.error || "مشکل در اتصال به سرور");
       console.error(err);
     }
-  } else {
-    alert("لطفاً متن پیام را وارد کنید!");
-  }
-};
-
-
-
+  };
 
   return (
-    <div className="comments-container">
+    <div className="space-y-6">
       {productComments.length === 0 ? (
         <ErrorMessage msg="هنوز نظری برای این محصول ثبت نشده است" />
       ) : (
         productComments.map((comment) => (
-          <div key={comment.id} className="comment-container">
-            <div className="comment-header">
-              <div className="user-info">
-                <div className="user-avatar-container hidden sm:block">
-                  <div className="avatar-badge">
-                    <svg className="icon">
-                      <use href="#academic-cap-mini" />
-                    </svg>
+          <div key={comment.id} className="border rounded-lg p-4 bg-white shadow-sm">
+            <div className="flex justify-between items-start">
+              <div className="flex items-center space-x-4">
+                <img
+                  src="/img/profile-pic/1.png"
+                  alt="User"
+                  className="w-12 h-12 rounded-full"
+                />
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="font-bold">{comment.userName}</span>
+                    <span className="text-gray-500 text-sm">
+                      | {comment.userRole === "admin" ? "ادمین" : "کاربر"}
+                    </span>
                   </div>
-                  <img
-                    src={"/img/profile-pic/1.png"}
-                    className="user-avatar"
-                    alt="User Avatar"
-                  />
-                </div>
-                <div className="user-details">
-                  <div className="user-name-container">
-                    <span className="user-name">{comment.userName}</span>
-                    <strong className="user-role">| {comment.userRole === "admin" ? "ادمین" : "کاربر"}</strong>
-                  </div>
-                  <span className="comment-date">
-                    {moment(comment.created_at).locale('fa').format('YYYY/MM/DD')}
+                  <span className="text-gray-400 text-sm">
+                    {moment(comment.created_at).locale("fa").format("YYYY/MM/DD")}
                   </span>
                 </div>
               </div>
               <button
-                type="button"
-                data-pid={comment.id}
-                data-author={comment.userName}
-                className="reply-btn"
                 onClick={() => onReply(comment.id)}
+                className="text-blue-600 hover:text-blue-800"
               >
-                <ReplyOutlinedIcon className="reply-icon" color="primary" />
+                <ReplyOutlinedIcon />
               </button>
             </div>
-            <p className="comment-text">{comment.body}</p>
-            <div className="replies-container">
+            <p className="mt-2 text-gray-700">{comment.body}</p>
+
+            <div className="ml-16 mt-4 space-y-3">
               {getReplies(comment.id).map((reply) => (
-                <div key={reply.id} className="reply-container">
-                  <div className="reply-header">
-                    <div className="user-info">
-                      <div className="user-avatar-container hidden sm:block">
-                        <div className="avatar-badge reply-badge">
-                          <svg className="icon">
-                            <use href="#check-mini" />
-                          </svg>
-                        </div>
-                        <img
-                          src="/img/profile-pic/1.png"
-                          className="user-avatar"
-                          alt="User Avatar"
-                        />
-                      </div>
-                      <div className="user-details">
-                        <div className="user-name-container">
-                          <span className="user-name">{reply.userName}</span>
-                          <strong className="user-role">| {reply.userRole === "admin" ? "ادمین" : "کاربر"}</strong>
-                        </div>
-                        <span className="comment-date">
-                          {moment(reply.created_at).locale('fa').format('YYYY/MM/DD')}
-                        </span>
-                      </div>
-                    </div>
+                <div key={reply.id} className="border-l-2 border-blue-200 pl-4">
+                  <div className="flex items-center space-x-2">
+                    <span className="font-bold">{reply.userName}</span>
+                    <span className="text-gray-500 text-sm">
+                      | {reply.userRole === "admin" ? "ادمین" : "کاربر"}
+                    </span>
+                    <span className="text-gray-400 text-sm">
+                      {moment(reply.created_at).locale("fa").format("YYYY/MM/DD")}
+                    </span>
                   </div>
-                  <p className="comment-text">{reply.body}</p>
+                  <p className="text-gray-700">{reply.body}</p>
                 </div>
               ))}
             </div>
           </div>
         ))
       )}
+
       <ReplyCommentPortal open={open}>
-
-        <div class="modal-header">
-          <div class="reply-title_container">
-            <ArrowForwardIcon className="reply-title_icon" onClick={onClose} />
-            <span class="reply-title">ثبت پاسخ</span>
+        <div className="space-y-4 p-4">
+          <div className="flex items-center space-x-2">
+            <ArrowForwardIcon onClick={onClose} className="cursor-pointer" />
+            <h3 className="text-lg font-bold">ثبت پاسخ</h3>
           </div>
-        </div>
 
-        <div class="product-info">
-          <img src={`/img/products/${product.img}`} alt="product" class="product-img" />
-          <p class="product-desc">{product.productDesc}</p>
-        </div>
+          <div className="flex space-x-4 items-center">
+            <img
+              src={`/img/products/${product.img}`}
+              alt="Product"
+              className="w-20 h-20 rounded-lg"
+            />
+            <p className="text-gray-700">{product.productDesc}</p>
+          </div>
 
-        <div class="comment-field">
-          <label for="comment" class="comment-label">متن پاسخ</label>
           <textarea
-            id="comment"
-            class="comment-input"
+            className="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
             placeholder="نظر خود را در مورد این کالا با کاربران دیگر به اشتراک بگذارید..."
-            onChange={(e) => {
-              setReplyText(e.target.value)
-            }}
-          ></textarea>
-        </div>
-        <div class="user-select-container">
-          <span class="user-name">{showName}</span>
-          <select class="user-select" onChange={(e) => {
-            setShowName(e.target.value)
-          }}>
-            <option value={`${currentUser ? currentUser.username : " "}`} selected>ارسال با نام شما</option>
-            <option value="کاربر سایت">ارسال ناشناس</option>
-          </select>
-        </div>
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+          />
 
-        <div class="comment-buttons">
-          <button class="btn-submit" onClick={() => handleSubmit()}>ثبت </button>
-          <button class="close-modal-btn" onClick={onClose}>بستن</button>
-        </div>
+          <div className="flex items-center space-x-2">
+            <span>ارسال با نام:</span>
+            <select
+              value={showName}
+              onChange={(e) => setShowName(e.target.value)}
+              className="border rounded-lg p-1"
+            >
+              <option value={currentUser?.username}>{currentUser?.username}</option>
+              <option value="کاربر سایت">ارسال ناشناس</option>
+            </select>
+          </div>
 
-        <div class="comment-footer">
-          ثبت دیدگاه به معنی موافقت با
-          <a href="#" class="comment-link">قوانین انتشار دیجی‌کالا</a>
-          است.
-        </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={handleSubmit}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            >
+              ثبت
+            </button>
+            <button
+              onClick={onClose}
+              className="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400"
+            >
+              بستن
+            </button>
+          </div>
 
+          <p className="text-gray-400 text-sm">
+            ثبت دیدگاه به معنی موافقت با{" "}
+            <a href="#" className="text-blue-600 hover:underline">
+              قوانین انتشار دیجی‌کالا
+            </a>{" "}
+            است.
+          </p>
+        </div>
       </ReplyCommentPortal>
-
     </div>
   );
 };

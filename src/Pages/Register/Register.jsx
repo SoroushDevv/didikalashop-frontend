@@ -1,10 +1,9 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ShowSwal from "../../Components/ShowSwal/ShowSwal";
 import apiUtils from "../../Utils/ApiUtils";
-import "./Register.css";
 
 export default function Register() {
   const [apiError, setApiError] = useState(null);
@@ -83,130 +82,112 @@ export default function Register() {
   };
 
   return (
-    <main className="register-page">
-      <div className="register-container">
-        <div className="register-card">
-          {/* --- Header --- */}
-          <div className="header">
-            <div className="logo">
-              <img src="/img/logo.png" alt="logo" />
-            </div>
-            <h2 className="title">ثبت نام</h2>
-            <p className="subtitle">
+    <main className="min-h-screen bg-gray-100 flex items-center justify-center py-8">
+      <div className="max-w-md w-full px-4">
+        <div className="bg-white rounded-2xl p-8 shadow-lg">
+          <div className="text-center mb-6">
+            <img src="/img/logo.png" alt="logo" className="mx-auto w-36 drop-shadow-md" />
+            <h2 className="text-2xl font-semibold text-gray-800 mt-4">ثبت نام</h2>
+            <p className="text-gray-500 text-sm mt-1">
               اگر قبلا با ایمیل ثبت‌نام کرده‌اید، نیاز به ثبت‌نام مجدد با شماره همراه ندارید.
             </p>
           </div>
 
-          {/* --- Alerts --- */}
-          <div className="alerts">
-            {apiSuccess && <div className="alert alert-success">{apiSuccess}</div>}
-            {apiError && <div className="alert alert-danger">{apiError}</div>}
-          </div>
+          {apiSuccess && (
+            <div className="bg-green-100 border border-green-300 text-green-700 rounded-md px-4 py-2 mb-4 text-sm">
+              {apiSuccess}
+            </div>
+          )}
+          {apiError && (
+            <div className="bg-red-100 border border-red-300 text-red-700 rounded-md px-4 py-2 mb-4 text-sm">
+              {apiError}
+            </div>
+          )}
 
-          {/* --- Form --- */}
-          <div className="form-wrapper">
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ isSubmitting, isValid }) => (
-                <Form>
-                  {/* نام کاربری */}
-                  <div className="form-group">
-                    <label className="label" htmlFor="username">نام کاربری</label>
-                    <div className="input-box">
-                      <Field
-                        type="text"
-                        name="username"
-                        id="username"
-                        className="input-ui"
-                        placeholder="نام کاربری خود را وارد نمایید"
-                      />
-                      <i className="mdi mdi-account-circle-outline"></i>
-                    </div>
-                    <ErrorMessage name="username" component="div" className="error-msg" />
-                  </div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting, isValid }) => (
+              <Form className="space-y-4">
+                <div>
+                  <label htmlFor="username" className="block text-gray-600 font-medium mb-1">
+                    نام کاربری
+                  </label>
+                  <Field
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="نام کاربری خود را وارد نمایید"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                  />
+                  <ErrorMessage name="username" component="div" className="text-red-600 text-sm mt-1" />
+                </div>
 
-                  {/* ایمیل */}
-                  <div className="form-group">
-                    <label className="label" htmlFor="email">ایمیل</label>
-                    <div className="input-box">
-                      <Field
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="input-ui"
-                        placeholder="ایمیل خود را وارد نمایید"
-                      />
-                      <i className="mdi mdi-email-outline"></i>
-                    </div>
-                    <ErrorMessage name="email" component="div" className="error-msg" />
-                  </div>
+                <div>
+                  <label htmlFor="email" className="block text-gray-600 font-medium mb-1">
+                    ایمیل
+                  </label>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="ایمیل خود را وارد نمایید"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                  />
+                  <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
+                </div>
 
-                  {/* شماره موبایل */}
-                  <div className="form-group">
-                    <label className="label" htmlFor="phone">شماره موبایل</label>
-                    <div className="input-box">
-                      <Field
-                        type="text"
-                        name="phone"
-                        id="phone"
-                        className="input-ui"
-                        placeholder="شماره موبایل خود را وارد نمایید"
-                      />
-                      <i className="mdi mdi-phone-outline"></i>
-                    </div>
-                    <ErrorMessage name="phone" component="div" className="error-msg" />
-                  </div>
+                <div>
+                  <label htmlFor="phone" className="block text-gray-600 font-medium mb-1">
+                    شماره موبایل
+                  </label>
+                  <Field
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    placeholder="شماره موبایل خود را وارد نمایید"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                  />
+                  <ErrorMessage name="phone" component="div" className="text-red-600 text-sm mt-1" />
+                </div>
 
-                  {/* رمز عبور */}
-                  <div className="form-group">
-                    <label className="label" htmlFor="password">رمز عبور</label>
-                    <div className="input-box">
-                      <Field
-                        type="password"
-                        name="password"
-                        id="password"
-                        className="input-ui"
-                        placeholder="رمز عبور خود را وارد نمایید"
-                      />
-                      <i className="mdi mdi-lock-open-variant-outline"></i>
-                    </div>
-                    <ErrorMessage name="password" component="div" className="error-msg" />
-                  </div>
+                <div>
+                  <label htmlFor="password" className="block text-gray-600 font-medium mb-1">
+                    رمز عبور
+                  </label>
+                  <Field
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="رمز عبور خود را وارد نمایید"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                  />
+                  <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
+                </div>
 
-                  {/* قوانین */}
-                  <div className="form-check">
-                    <Field
-                      type="checkbox"
-                      name="laws"
-                      id="laws"
-                      className="law-check-input"
-                    />
-                    <label className="custom-control-label" htmlFor="laws">
-                      <a href="#">حریم خصوصی</a> و <a href="#">شرایط و قوانین</a> را خوانده‌ام و می‌پذیرم.
-                    </label>
-                    <ErrorMessage name="laws" component="div" className="error-msg" />
-                  </div>
+                <div className="flex items-center text-gray-600 text-sm">
+                  <Field type="checkbox" name="laws" id="laws" className="mr-2" />
+                  <label htmlFor="laws">
+                    <a href="#" className="text-pink-600 hover:underline">حریم خصوصی</a> و <a href="#" className="text-pink-600 hover:underline">شرایط و قوانین</a> را خوانده‌ام و می‌پذیرم.
+                  </label>
+                </div>
+                <ErrorMessage name="laws" component="div" className="text-red-600 text-sm mt-1" />
 
-                  {/* دکمه ارسال */}
-                  <button
-                    className="submit-btn"
-                    type="submit"
-                    disabled={isSubmitting || !isValid}
-                  >
-                    {isSubmitting ? "در حال ثبت..." : "ثبت نام"}
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !isValid}
+                  className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-pink-600 to-pink-400 hover:from-pink-700 hover:to-pink-500 text-white py-2 rounded-lg font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "در حال ثبت..." : "ثبت نام"}
+                </button>
+              </Form>
+            )}
+          </Formik>
 
-          {/* --- Footer --- */}
-          <div className="footer">
-            قبلا ثبت نام کرده‌اید؟
-            <Link to="/login" className="ml-2 mr-2">ورود</Link>
+          <div className="text-center text-gray-600 text-sm mt-4">
+            قبلا ثبت نام کرده‌اید؟ <Link to="/login" className="text-pink-600 font-medium hover:underline">ورود</Link>
           </div>
         </div>
       </div>

@@ -1,166 +1,122 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import useAllBlogs from "../../Hooks/useAllBlogs"
-import { styled } from '@mui/material/styles';
-import "./Blogs.css"
-// MUI Components
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  CardMedia,
-  Typography,
-  Container,
-  Button,
-  Box,
-  Paper,
-} from "@mui/material"
-import Grid from '@mui/material/Grid';
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import useAllBlogs from "../../Hooks/useAllBlogs";
 import AOS from "aos";
-import "aos/dist/aos.css"; 
-
-
-
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
-
+import "aos/dist/aos.css";
 
 export default function BlogsPage() {
-  const { blogs, loading, error } = useAllBlogs()
-  const [filteredBlogs, setFilteredBlogs] = useState(blogs)
+  const { blogs, loading, error } = useAllBlogs();
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
   const categories = ["بررسی", "راهنما", "مقایسه", "معرفی"];
-  const [activeTab, setActiveTab] = useState()
-
 
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true,     
-      offset: 100,   
-    })
-  })
-
- 
+      once: true,
+      offset: 100,
+    });
+  }, []);
 
   useEffect(() => {
-
-    const handleBlogs = () => {
-
-      if (!blogs || blogs.length === 0 || loading) return;
-
-
-      setFilteredBlogs(blogs)
-
-    }
-
-    handleBlogs()
-  }, [blogs, loading, error])
-
+    if (!blogs || loading) return;
+    setFilteredBlogs(blogs);
+  }, [blogs, loading]);
 
   const handleFilterBlogs = (cat) => {
-
-    const filteredItems = blogs.filter((blog) => {
-      if (cat === "همه") {
-        return blog;
-      }
-      return JSON.parse(blog.category).label === cat
-    })
-
-    setFilteredBlogs(filteredItems)
-
-  }
-  console.log("blogs : ", blogs)
-  
+    if (cat === "all") {
+      setFilteredBlogs(blogs);
+    } else {
+      const filteredItems = blogs.filter(
+        (blog) => JSON.parse(blog.category).label === cat
+      );
+      setFilteredBlogs(filteredItems);
+    }
+  };
 
   return (
-  <Box component="section" className="blog-section">
-  <Container>
-    {/* متن بالا */}
-    <Box className="blog-header">
-      <Typography variant="h4" component="h2" className="blog-title">
-        آخرین مقالات وبلاگ
-      </Typography>
-      <Typography variant="body1" className="blog-subtitle">
-        اینجا می‌تونی جدیدترین مطالب درمورد محصولات فروشگاه رو بخونی و همیشه بروز باشی.
-      </Typography>
-    </Box>
+    <section className="bg-gray-50 py-20 font-vazir" dir="rtl">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+            آخرین مقالات وبلاگ
+          </h2>
+          <p className="text-gray-600 leading-7">
+            اینجا می‌تونی جدیدترین مطالب درمورد محصولات فروشگاه رو بخونی و همیشه بروز باشی.
+          </p>
+        </div>
 
-    {/* تب‌های فیلتر */}
-    <Grid container spacing={2} mb={4} className="blog-tabs">
-      <Grid item xs={2} className="blog-tab-item">
-        <NavLink
-          onClick={() => handleFilterBlogs("همه")}
-          to={`/blogs/همه`}
-          className={({ isActive }) => (isActive ? "tab active" : "tab")}
-        >
-          همه
-        </NavLink>
-      </Grid>
-
-      {categories.map((cat, idx) => (
-        <Grid item xs={2} key={idx} className="blog-tab-item">
+        <div className="flex justify-center flex-wrap gap-3 mb-10">
           <NavLink
-            onClick={() => handleFilterBlogs(cat)}
-            to={`/blogs/${cat}`}
-            className={({ isActive }) => (isActive ? "tab active" : "tab")}
+            onClick={() => handleFilterBlogs("all")}
+            to={`/blogs/all`}
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                isActive
+                  ? "bg-pink-500 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800"
+              }`
+            }
           >
-            {cat}
+            همه
           </NavLink>
-        </Grid>
-      ))}
-    </Grid>
 
-    {/* گرید کارت‌ها */}
-    <Grid container spacing={3} justifyContent="center" className="blog-grid">
-      {!loading &&
-        !error &&
-        filteredBlogs.map((blog,index) => (
-          <Grid item key={blog.id} xs={6} sm={4} md={2} className="blog-card-item">
-            <Card className="blog-card"      data-aos={index % 2 === 0 ? "fade-up" : "fade-right"}
->
-              <CardMedia
-                component="img"
-                image={`/img/blogs/${blog.cover_image}`}
-                alt={blog.title}
-                className="blog-card-image"
-              />
+          {categories.map((cat, idx) => (
+            <NavLink
+              key={idx}
+              onClick={() => handleFilterBlogs(cat)}
+              to={`/blogs/${cat}`}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  isActive
+                    ? "bg-pink-500 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800"
+                }`
+              }
+            >
+              {cat}
+            </NavLink>
+          ))}
+        </div>
 
-              <CardHeader
-                title={
-                  <Typography component={Link} to={`/blogs/${blog.slug}`} className="blog-card-title">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
+          {!loading &&
+            !error &&
+            filteredBlogs.map((blog, index) => (
+              <div
+                key={blog.id}
+                className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-transform duration-300 hover:-translate-y-1 flex flex-col"
+                data-aos={"fade-up"}
+              >
+                <img
+                  src={`/img/blogs/${blog.cover_image}`}
+                  alt={blog.title}
+                  className="w-full h-52 object-cover rounded-t-2xl"
+                />
+
+                <div className="p-4 flex flex-col flex-grow">
+                  <Link
+                    to={`/blogs/${blog.slug}`}
+                    className="text-gray-800 font-semibold text-base mb-2 hover:text-pink-500 transition-colors"
+                  >
                     {blog.title}
-                  </Typography>
-                }
-              />
+                  </Link>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
+                    {blog.summary ||
+                      blog.content?.slice(0, 120) + "..." ||
+                      "بدون توضیحات"}
+                  </p>
 
-              <CardContent className="blog-card-content">
-                <Typography variant="body2" className="blog-card-summary">
-                  {blog.summary || blog.content?.slice(0, 120) + "..." || "بدون توضیحات"}
-                </Typography>
-              </CardContent>
-
-              <CardActions className="blog-card-footer">
-                <NavLink to={`/blog-details/${blog.id}`} className="blog-detail-link">
-                  ادامه مطلب
-                </NavLink>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-    </Grid>
-  </Container>
-</Box>
-
-  )
+                  <Link
+                    to={`/blog-details/${blog.id}`}
+                    className="text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors self-start"
+                  >
+                    ادامه مطلب
+                  </Link>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </section>
+  );
 }

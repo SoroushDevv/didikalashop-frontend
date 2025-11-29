@@ -26,7 +26,6 @@ export default function EmptyCart() {
                 </div>
                 <div class="dt-sn dt-sn--box mt-4">
                     <div class="row">
-                        {/* <!-- Start Product-Slider --> */}
                         <div class="col-12">
                             <div class="features-checkout-slider carousel-md owl-carousel owl-theme">
                                 <div class="item">
@@ -61,10 +60,8 @@ export default function EmptyCart() {
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- End Product-Slider --> */}
                     </div>
                 </div>
-                {/* <!-- Start Banner --> */}
                 <div class="row mt-3 mt-5 mb-4">
                     <div class="col-sm-3 col-6 mb-2">
                         <div class="widget-banner">
@@ -95,8 +92,7 @@ export default function EmptyCart() {
                         </div>
                     </div>
                 </div>
-                {/* <!-- End Banner --> */}
-                {/* <!-- Start Product-Slider --> */}
+        
                 <section class="slider-section dt-sl mb-5">
                     <div class="row mb-3">
                         <div class="col-12">
@@ -106,7 +102,6 @@ export default function EmptyCart() {
                             </div>
                         </div>
 
-                        {/* <!-- Start Product-Slider --> */}
                         <div class="col-12">
                             <div class="product-carousel carousel-lg owl-carousel owl-theme">
                                 <div class="item">
@@ -278,12 +273,10 @@ export default function EmptyCart() {
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- End Product-Slider --> */}
 
                     </div>
                 </section>
-                {/* <!-- End Product-Slider --> */}
-                {/* <!-- Start Product-Slider --> */}
+            
                 <section class="slider-section dt-sl mb-5">
                     <div class="row mb-3">
                         <div class="col-12">
@@ -293,7 +286,6 @@ export default function EmptyCart() {
                             </div>
                         </div>
 
-                        {/* <!-- Start Product-Slider --> */}
                         <div class="col-12">
                             <div class="product-carousel carousel-lg owl-carousel owl-theme">
                                 <div class="item">
@@ -465,11 +457,9 @@ export default function EmptyCart() {
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- End Product-Slider --> */}
 
                     </div>
                 </section>
-                {/* <!-- End Product-Slider --> */}
             </div>
         </main>
     </div>

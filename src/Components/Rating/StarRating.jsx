@@ -18,19 +18,19 @@ const StarRating = ({ score = 5, size = 'medium' }) => {
   const emptyStars = 5 - fullStars;
 
   return (
-    <RatingContainer>
+    <RatingContainer className='mb-2'>
       {[...Array(fullStars)].map((_, index) => (
         <StarIcon
           key={`full-${index}`}
           fontSize={size}
-          sx={{ color: 'gold', fontSize: 'smaller' }} // Use 'gold' for full stars
+          sx={{ color: 'gold', fontSize: 'smaller' }}
         />
       ))}
       {[...Array(emptyStars)].map((_, index) => (
         <StarBorderIcon
           key={`empty-${index}`}
           fontSize={size}
-          sx={{ color: 'grey.500', fontSize: 'smaller' }} // Use 'grey.500' for empty stars
+          sx={{ color: 'grey.500', fontSize: 'smaller' }} 
         />
       ))}
     </RatingContainer>

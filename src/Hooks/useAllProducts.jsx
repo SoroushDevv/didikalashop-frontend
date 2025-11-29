@@ -14,7 +14,6 @@ const useAllProducts = () => {
 
         const response = await api.get('/products');
 
-        // نگهداری دقیق پراپرتی‌های دیتابیس
         const formattedProducts = response.data.map((item) => ({
           id: item.id,
           title: item.title,

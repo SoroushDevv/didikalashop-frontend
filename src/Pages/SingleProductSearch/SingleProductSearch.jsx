@@ -19,7 +19,6 @@ import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import { useCart } from './../../Contexts/CartContext';
 import { v4 as uuidv4 } from 'uuid';
 
-// 🎨 رنگ‌ها
 const colorMap = {
   'مشکی': '#000000',
   'سفید': '#FFFFFF',
@@ -82,7 +81,6 @@ export default function SingleProduct() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [localQuantity, setLocalQuantity] = useState(1);
 
-  // 🟢 دریافت محصول بر اساس عنوان
   useEffect(() => {
     if (!products?.length) return;
 
@@ -101,7 +99,6 @@ export default function SingleProduct() {
     }
   }, [encodedTitle, products]);
 
-  // 🟡 اگر محصول در سبد بود، مقدار quantity رو از order بگیر
   useEffect(() => {
     if (!order || !product || !selectedColor) return;
     const existingItem = order.items?.find(
@@ -194,25 +191,25 @@ export default function SingleProduct() {
   );
 
   return (
-    <Box className="single-product-section dt-sl">
-      <div className="single-product-container container">
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+    <div className="bg-white py-8">
+      <div className="flex flex-col max-w-[1200px] my-0 mx-auto">
+        <Breadcrumbs aria-label="breadcrumb" className='mb-1'>
           <Link underline="hover" color="inherit" href="/">خانه</Link>
           <Typography color="text.primary">{product.title}</Typography>
         </Breadcrumbs>
 
-        <Grid container spacing={3} className="single-product_wrapper">
-          <Grid item xs={12} md={6}>
-            <div className="product-details-card">
-              <Typography variant="h4" className="product-title">{product.title}</Typography>
-              <Typography variant="h6" className="product-price">
+        <div spacing={3} className="flex flex-nowrap justify-between gap-8">
+          <div className='grid '>
+            <div className="bg-white p-8 border rounded-md shadow-md min-w-96">
+              <h4  className="font-bold mb-4 text-[#222]">{product.title}</h4>
+              <h6  className="font-semibold mb-4 text-[#d32f2f]">
                 قیمت: {product.price.toLocaleString()} تومان
-              </Typography>
+              </h6>
 
               {product.colors?.length > 0 && (
-                <div className="product-color-selector">
-                  <Typography variant="body2" className="color-label">انتخاب رنگ:</Typography>
-                  <div className="color-options">
+                <div className="mb-1">
+                  <p variant="body2" className="mb-2 font-semibold">انتخاب رنگ:</p>
+                  <div className="flex flex-wrap gap-6">
                     {product.colors.map((color, i) => (
                       <ColorChip
                         key={i}
@@ -225,36 +222,35 @@ export default function SingleProduct() {
                 </div>
               )}
 
-              <div className="quantity-control">
-                <Button onClick={() => handleQuantityChange('increase')}>+</Button>
-                <Typography>{localQuantity}</Typography>
-                <Button onClick={() => handleQuantityChange('decrease')}>-</Button>
+              <div className="flex items-center gap-6 mb-4">
+                <button className='min-w-9 h-9 text-base border rounded-lg border-solid border-[#ccc] bg-[#f5f5f5] transition-all ease-in-out duration-200 hover:bg-[#eee]' onClick={() => handleQuantityChange('increase')}>+</button>
+                <h3>{localQuantity}</h3>
+                <button className='min-w-9 h-9 text-base border rounded-lg border-solid border-[#ccc] bg-[#f5f5f5] transition-all ease-in-out duration-200 hover:bg-[#eee]' onClick={() => handleQuantityChange('decrease')}>-</button>
               </div>
 
-              <Button
-                variant="contained"
-                color="error"
-                className="add-to-cart-button"
+              <button
+            
+                className="w-full border rounded-lg font-bold py-7 px-0 text-red-500"
                 disabled={product.count === 0}
                 onClick={handleAddToCart}
               >
                 {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
-              </Button>
+              </button>
             </div>
-          </Grid>
+          </div>
 
-          <Grid item xs={12} md={6}>
-            <div className="product-image-wrapper">
-              <ProductImage src={`/img/products/${product.img}`} alt={product.title} />
+          <div item xs={12} md={6}>
+            <div className="flex justify-center items-center w-96 h-full">
+              <img src={`/img/products/${product.img}`} alt={product.title} className='max-w-full h-full border rounded-2xl object-cover'/>
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
 
-      <div className="product-comment-section">
+      <div className="mt-12 pt-4 border-t border-solid border-[#eee]">
         <ProductComment product={product} />
       </div>
-    </Box>
+    </div>
 
   );
 }

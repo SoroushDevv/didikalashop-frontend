@@ -1,5 +1,4 @@
-import React from 'react'
-import "./ProfileMenu.css"
+import React, { useEffect,useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -16,6 +15,25 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function ProfileMenu() {
 
+  const [windowWidth,setWindowWidth] = useState(window.innerWidth)
+
+
+  useEffect(()=>{
+
+   const handleResizeWindowWidth = () => {
+        setWindowWidth(window.innerWidth)
+   }
+
+   window.addEventListener("resize",handleResizeWindowWidth)
+
+
+   return () => {
+     window.removeEventListener("resize", handleResizeWindowWidth)
+   }
+
+
+  },[windowWidth])
+
   const activeElemHandler = (e) => {
     e.preventDefault()
     let sideItems = document.querySelectorAll(".profile-side-menu__item")
@@ -28,58 +46,57 @@ export default function ProfileMenu() {
 
 
   return (
-    <div className="profile-menu-section">
-      <div className="menu-label">
-        <span>حساب کاربری شما</span>
-      </div>
 
+    <div className="bg-white border border-solid border-[#e0e0e0] rounded-2xl shadow-md font-sans text-[#333] p-4">
+      <div className="font-semibold text-base mb-3">
+        <span className='inline-block text-[#444]'>حساب کاربری شما</span>
+      </div>
       <div className="profile-menu">
-        <ul>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile" end>
-              <AccountCircleIcon />
+        <ul className='list-none m-0 p-0'>
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink to={"/profile"} className={`profile-menu-tab`} end>
+              <AccountCircleIcon className="profile-menu-icon" />
               <span>پروفایل</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/orders">
-              <ShoppingCartOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/orders" : "/profile/orders" }`} className="profile-menu-tab">
+              <ShoppingCartOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>همه سفارش ها</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/order-returns">
-              <KeyboardReturnOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/order-returns" : "/profile/order-returns" }`} className="profile-menu-tab">
+              <KeyboardReturnOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>درخواست مرجوعی</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/favorite">
-              <FavoriteBorderOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/favorites" : "/profile/favorites" }`} className="profile-menu-tab">
+              <FavoriteBorderOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>لیست علاقمندی ها</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/comments">
-              <ReplyAllOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/comments" : "/profile/comments" }`} className="profile-menu-tab">
+              <ReplyAllOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>نقد و نظرات</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/addresses">
-              <LocationOnOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/addresses" : "/profile/addresses" }`} className="profile-menu-tab">
+              <LocationOnOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>آدرس ها</span>
             </NavLink>
           </li>
-          <li onClick={e => activeElemHandler(e)}>
-            <NavLink to="/profile/user-info">
-              <EditOutlinedIcon />
+          <li className="mb-2" onClick={e => activeElemHandler(e)}>
+            <NavLink  to={`${windowWidth < 771 ? "/mobile-profile/user-info" : "/profile/user-info" }`} className="profile-menu-tab">
+              <EditOutlinedIcon className="profile-menu-icon group-hover:text-white" />
               <span>اطلاعات شخصی</span>
             </NavLink>
           </li>
         </ul>
       </div>
     </div>
-
   )
 }

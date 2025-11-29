@@ -1,27 +1,26 @@
-import React from 'react'
-import "./ErrorPage.css"
+import React from 'react';
 
-
-
-export default function ErrorPage ()  {
-
-
-
+export default function ErrorPage() {
   return (
-    <main class="main-content dt-sl mb-3">
-    <div class="container main-container">
-        <div class="row">
-            <div class="col-12">
-                <div class="dt-sl pt-3 pb-5">
-                    <div class="error-page text-center">
-                        <h1>صفحه‌ای که دنبال آن بودید پیدا نشد!</h1>
-                        <a href="/test" class="btn-primary-cm">ادامه خرید در دیدیکالا</a>
-                        <img src="./assets/img/theme/404.png" class="img-fluid" width="60%" alt="" />
-                    </div>
-                </div>
-            </div>
+    <main className="w-full min-h-screen bg-gray-50 flex items-center justify-center py-12">
+      <div className="container mx-auto px-4">
+        <div className="bg-white rounded-2xl shadow-md py-12 text-center flex flex-col items-center gap-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            صفحه‌ای که دنبال آن بودید پیدا نشد!
+          </h1>
+          <a
+            href="/test"
+            className="bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition"
+          >
+            ادامه خرید در دیدیکالا
+          </a>
+          <img
+            src="./assets/img/theme/404.png"
+            alt="404"
+            className="w-full max-w-md mt-4"
+          />
         </div>
-    </div>
-</main>
-  )
+      </div>
+    </main>
+  );
 }

@@ -12,11 +12,12 @@ import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { removeAuthToken } from "../../../../Utils/AuthUtils";
 import { removeLocalStorage, setLocalStorage } from "../../../../Utils/StorageUtils";
 import useAllProducts from "../../../../Hooks/useAllProducts";
-
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 export default function Topbar({ isAuth, onTopbarHeightChange }) {
 
   const { currentUser } = useCurrentUser();
+  const [windowWidth,setWindowWidth] = useState(window.innerWidth)
   const { products, loading, error } = useAllProducts();
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -24,19 +25,42 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
   const [offsetHeight, setOffsetHeight] = useState(0)
   const [showDropdownMenu, setShowDropDownMenu] = useState(false)
   const topbarRef = useRef(null)
+  const searchAreaRef = useRef(null)
   const navigate = useNavigate();
 
 
+useEffect(() => {
 
+  const handleClickOutside = (event) => {
+    if(searchAreaRef.current && !searchAreaRef.current.contains(event.target)) {
+      setShowResults(false)
+      setSearchValue("")
+    }
+  } 
+  document.addEventListener("mousedown", handleClickOutside)
+ return () => {
+  document.removeEventListener("mousedown", handleClickOutside)
+ }
+},[searchAreaRef])
 
-
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener("resize",handleResize)
+    return () => {
+      window.removeEventListener("resize",handleResize)
+    }
+  },[])
 
   useEffect(() => {
     if (topbarRef.current) {
       setOffsetHeight(topbarRef.current.offsetHeight)
       onTopbarHeightChange(topbarRef.current.offsetHeight)
     }
-  }, [offsetHeight])
+  }, [offsetHeight,windowWidth])
+
+
   useEffect(() => {
     if (searchValue.length >= 3) {
       const results = products.filter((product) =>
@@ -65,59 +89,53 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
   };
 
   const handleResultClick = (product) => {
-    navigate(`/search/${product.title}`);
+    navigate(`/productDetail/${product.title}`);
     setShowResults(false);
   };
 
   return (
-    <div className="container main-container header-main-container">
-      <div className="topbar-container">
-        <div className="topbar" ref={topbarRef}>
-          <div className="topbar-wrapper">
-            {/* لوگو */}
-            <div className="logo-area">
+   
+
+        <div className="hidden md:block md:sticky md:top-0 md:bg-white md:max-w-[1280px] md:w-full md:z-50" ref={topbarRef}>
+          <div className="flex flex-row justify-between items-center py-2.5  w-full h-16 ">
+            <div className="block h-auto w-50 object-contain ">
               <Link to="/">
-                <img src="/img/logo.png" alt="didikala" />
+                <img className="w-full h-full" src="/img/logo.png" alt="didikalalogo" />
               </Link>
             </div>
 
-            {/* سرچ */}
-            <div className="search-area">
-              <form className="search" onSubmit={handleSearchSubmit}>
+            <div className=" w-3/5 h-fit content-center " ref={searchAreaRef}>
+              <form className="relative w-full h-full flex justify-between items-center" onSubmit={handleSearchSubmit}>
                 <input
+                 className="input-style"
                   type="text"
                   placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…"
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <i className="far fa-search search-icon"></i>
 
-                {searchValue && (
-                  <button
-                    className="close-search"
-                    type="button"
-                    onClick={handleClearSearch}
-                  >
-                    <SearchOutlinedIcon />
-                  </button>
-                )}
+                   {searchValue ? (
+                <button
+                 className="absolute left-0 p-1 fill-[#eee]" style={{ width: "30px", height: "30px" }}
+                  type="button"
+                  onClick={handleClearSearch}
+                >
+                  <ClearOutlinedIcon />
+                </button>
+              ) : <SearchOutlinedIcon className="absolute left-0 p-1 fill-[#eee]" style={{ width: "30px", height: "30px" }} />}
+
 
                 {showResults && (
                   <>
-                    <div
-                      className="backdrop"
-                      onClick={() => setShowResults(false)} // کلیک بکنی، لیست بسته میشه
-                    ></div>
-
-                    <div className="search-result">
+                    <div className="search-result absolute top-full right-0 left-0 bg-white border border-solid border-gray-500 rounded-md mt-1 py-1 px-2 z-50">
                       {loading ? (
                         <p className="text-center">در حال بارگذاری...</p>
                       ) : error ? (
                         <p className="text-center text-danger">{error}</p>
                       ) : searchResults.length > 0 ? (
-                        <ul className="search-result-list">
+                        <ul className="list-none p-0 m-0 divide-y-2">
                           {searchResults.map((product) => (
-                            <li className="search-result-item" key={product.id}>
+                            <li className="py-2 px-2 rounded-md hover:bg-red-400 hover:text-white hover:text-bold " key={product.id}>
                               <Link
                                 to="#"
                                 onClick={(e) => {
@@ -139,7 +157,6 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
               </form>
             </div>
 
-            {/* منو حساب کاربری */}
             <div
               className="topbar-account_area"
               onMouseEnter={() => setShowDropDownMenu(true)}
@@ -172,12 +189,13 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
 
                     <Link
                       to="/profile/comments"
-                      className="topbar-account_item topbar-account_message"
+                      className="topbar-account_item topbar-account_message "
                     >
-                      <div className="message-icon">
+                      <div className="relative pt-3 pl-3  message-icon">
                         <EmailOutlinedIcon />
+
+                      <span className="absolute top-1 left-1 size-4  rounded-full message-badge flex justify-center items-center">0</span>
                       </div>
-                      <span className="message-badge">0</span>
                       پیغام‌ها
                     </Link>
 
@@ -204,13 +222,7 @@ export default function Topbar({ isAuth, onTopbarHeightChange }) {
                 </div>
               )}
             </div>
-
           </div>
         </div>
-      </div>
-    </div>
-
-
-
   );
 }

@@ -4,10 +4,8 @@ import "./src/main.css"
 
 export default function NotAvailble() {
   return (
-    // <!-- Start main-content -->
     <main class="main-content dt-sl mb-3">
         <div class="container main-container">
-            {/* <!-- Start Product-Slider --> */}
             <section class="slider-section dt-sl mb-5">
                 <div class="row mb-3">
                     <div class="col-12">
@@ -17,7 +15,6 @@ export default function NotAvailble() {
                         </div>
                     </div>
 
-                    {/* <!-- Start Product-Slider --> */}
                     <div class="col-12 px-res-0">
                         <div class="product-carousel carousel-lg owl-carousel owl-theme">
                             <div class="item">
@@ -189,17 +186,13 @@ export default function NotAvailble() {
                             </div>
                         </div>
                     </div>
-                    {/* <!-- End Product-Slider --> */}
 
                 </div>
             </section>
-            {/* <!-- End Product-Slider --> */}
-            {/* <!-- Start Product --> */}
+
             <div class="dt-sn mb-5 dt-sl">
                 <div class="row">
-                    {/* <!-- Product Gallery--> */}
                     <div class="col-lg-4 col-md-6 ps-relative">
-                        {/* <!-- Product Options--> */}
                         <ul class="gallery-options">
                             <li>
                                 <button class="add-favorites"><i class="mdi mdi-heart"></i></button>
@@ -273,7 +266,6 @@ export default function NotAvailble() {
                             </div>
                         </div>
                     </div>
-                    {/* <!-- Product Info --> */}
                     <div class="col-lg-8 col-md-6 py-2">
                         <div class="product-info dt-sl">
                             <div class="product-title dt-sl">
@@ -364,7 +356,6 @@ export default function NotAvailble() {
                 </div>
             </div>
             <div class="dt-sn mb-5 px-0 dt-sl pt-0">
-                {/* <!-- Start tabs --> */}
                 <section class="tabs-product-info mb-3 dt-sl">
                     <div class="ah-tab-wrapper border-bottom dt-sl">
                         <div class="ah-tab dt-sl">

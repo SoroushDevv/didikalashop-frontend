@@ -2,13 +2,11 @@ import React from "react";
 import { CircularProgress } from "@mui/material";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import useUserOrders from "./../../../../Hooks/useUserOrders";
-import "./ProfileFirstPageContent.css";
 
 export default function ProfileFirstPageContent() {
   const { currentUser } = useCurrentUser();
   const { userOrders = [], loading: ordersLoading, error: ordersError } = useUserOrders();
 
-  console.log("orders :" , userOrders)
   const inProgressCount = Array.isArray(userOrders)
     ? userOrders.filter((o) => o.isActive).length
     : 0;
@@ -17,10 +15,10 @@ export default function ProfileFirstPageContent() {
     : 0;
 
   return (
-    <div className="profile-summary">
-      <div className="profile-summary__header">
-        <h2 className="profile-summary__title">سفارش‌های من</h2>
-        <span className="profile-summary__status">
+    <div className="w-full max-w-2xl mx-auto bg-base-white rounded-2xl shadow-sm p-6">
+      <div className="flex items-center justify-between border-b border-gray-light pb-3 mb-5">
+        <h2 className="text-lg font-semibold text-brand-secondary">سفارش‌های من</h2>
+        <span className="text-sm text-gray-medium">
           {ordersLoading
             ? "در حال بارگذاری..."
             : ordersError
@@ -29,37 +27,35 @@ export default function ProfileFirstPageContent() {
         </span>
       </div>
 
-      <div className="profile-summary__boxes">
-        {/* در حال انجام */}
-        <div className="order-box order-box--progress">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex items-center gap-4 bg-gray-bg rounded-xl p-4 border border-gray-light hover:shadow-md transition">
           <img
-            className="order-box__icon"
             src="/img/png/proccessing.png"
             alt="in-progress"
+            className="w-10 h-10"
           />
           <div>
-            <p className="order-box__label">در حال انجام</p>
+            <p className="text-sm text-gray-text mb-1">در حال انجام</p>
             {ordersLoading ? (
               <CircularProgress size={20} />
             ) : (
-              <p className="order-box__count">{inProgressCount}</p>
+              <p className="text-xl font-bold text-brand-primary">{inProgressCount}</p>
             )}
           </div>
         </div>
 
-        {/* تحویل شده */}
-        <div className="order-box order-box--delivered">
+        <div className="flex items-center gap-4 bg-gray-bg rounded-xl p-4 border border-gray-light hover:shadow-md transition">
           <img
-            className="order-box__icon"
             src="/img/png/delivered.png"
             alt="delivered"
+            className="w-10 h-10"
           />
           <div>
-            <p className="order-box__label">تحویل شده</p>
+            <p className="text-sm text-gray-text mb-1">تحویل شده</p>
             {ordersLoading ? (
               <CircularProgress size={20} />
             ) : (
-              <p className="order-box__count">{deliveredCount}</p>
+              <p className="text-xl font-bold text-success">{deliveredCount}</p>
             )}
           </div>
         </div>

@@ -10,7 +10,6 @@ const useAllCategories = () => {
     const fetchCategories = async () => {
       setLoading(true);
       try {
-        // دریافت دسته‌بندی‌ها
         const response = await api.get("/categories");
         console.log("categories: ", response.data);
         

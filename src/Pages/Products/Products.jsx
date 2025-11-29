@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Products.css";
 import Sidebar from "./Sidebar/Sidebar";
 import SwapVertOutlinedIcon from "@mui/icons-material/SwapVertOutlined";
 import SearchResults from "../Search/SearchResults";
@@ -15,46 +14,42 @@ export default function Products() {
     { label: "گران‌ترین", value: "most-expensive" },
   ];
 
-  const sortHandler = (value) => {
-    setSort(value);
-  };
-
   return (
-    <div className="row products-main-content">
-      <Sidebar />
-      <div className="col-lg-9 col-md-12 col-sm-12 products-card-res">
-        <div className="d-md-none">
-          <button className="btn-filter-sidebar">
-            جستجوی پیشرفته <i className="fad fa-sliders-h"></i>
+    <div className="flex flex-col md:flex-row gap-4">
+      <aside className="w-full md:w-1/4">
+        <Sidebar />
+      </aside>
+
+      <div className="flex-1">
+        <div className="md:hidden mb-4">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition w-full">
+            جستجوی پیشرفته
           </button>
         </div>
-        <div className="dt-sl dt-sn px-0 products-amazing-tab">
-          <div className="ah-tab-wrapper dt-sl">
-            <div className="ah-tab dt-sl">
-              <div className="products-tabs dt-sl">
-                <span>
-                  <SwapVertOutlinedIcon />
-                  مرتب‌سازی بر اساس:
-                </span>
-                {sortOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    className={`ah-tab-item ${sort === option.value ? "active" : ""}`}
-                    onClick={() => sortHandler(option.value)}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+
+        <div className="bg-white p-4 rounded-lg shadow mb-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="flex items-center gap-1 font-medium text-gray-700">
+              <SwapVertOutlinedIcon /> مرتب‌سازی بر اساس:
+            </span>
+            {sortOptions.map((option) => (
+              <button
+                key={option.value}
+                className={`px-3 py-1 rounded-full border transition ${
+                  sort === option.value
+                    ? "bg-blue-600 text-white border-blue-600"
+                    : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200"
+                }`}
+                onClick={() => setSort(option.value)}
+              >
+                {option.label}
+              </button>
+            ))}
           </div>
-          <div className="ah-tab-content-wrapper dt-sl px-res-0">
-            <div className="ah-tab-content dt-sl" data-ah-tab-active="true">
-              <div className="row mb-3 mx-0 px-res-0">
-                <SearchResults sorting={sort} />
-              </div>
-            </div>
-          </div>
+        </div>
+
+        <div>
+          <SearchResults sorting={sort} />
         </div>
       </div>
     </div>

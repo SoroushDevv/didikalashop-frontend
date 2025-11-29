@@ -13,15 +13,15 @@ const useUserCards = () => {
     if (!currentUser || !currentUser.id) return;
 
     const fetchUserCards = async () => {
-      console.log("📌 fetching user cards for:", currentUser.id);
+      console.log(" fetching user cards for:", currentUser.id);
       setUserCardsLoading(true);
       try {
         const response = await api.get(`/cards/user/${currentUser.id}`);
-        console.log("✅ userCards:", response.data);
+        console.log(" userCards:", response.data);
         setCurrentUserCards(response.data);
         setUserCardsError(null);
       } catch (err) {
-        console.error("❌ Error fetching user cards:", err.message);
+        console.error(" Error fetching user cards:", err.message);
         setUserCardsError(err.message || "Failed to fetch user cards");
         setCurrentUserCards([]);
       } finally {
@@ -30,7 +30,7 @@ const useUserCards = () => {
     };
 
     fetchUserCards();
-  }, [currentUser, refreshKey]);  // 👈 userLoading حذف شد
+  }, [currentUser, refreshKey]); 
 
   const refreshCards = useCallback(() => setRefreshKey(prev => prev + 1), []);
 

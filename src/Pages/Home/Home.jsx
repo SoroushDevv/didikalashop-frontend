@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
-
 import BrandSlider from "../../Components/BrandSlider/BrandSlider";
 import CustomCarousel from "../../Components/Slider/SplideSlider";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import SplideCategoryCarousel from "../../Components/CategoriesSlider/CategoriesSlider";
 import { LargeBanner, SmallBannerList } from "../../Components/Banners/Banners";
 import ProductCarousel from "./../../Components/ProductCarousel/ProductCarousel";
@@ -22,16 +17,17 @@ import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [offs, setOffs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [mostSaleProducts, setMostSaleProducts] = useState([]);
   const [suggestionProducts, setSuggestionProducts] = useState([]);
-  const [mostFavoriteProducts, setMostFavoriteProducts] = useState([]);
+  const [mostFavoriteProducts, setMostFavoriteProducts] = useState([]); 
   const [fairPriceProducts, setfairPriceProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,8 +36,8 @@ export default function Home() {
         const response = await api.get("/products");
         console.log("products : ", response.data);
 
-        // Filter products based on different criteria
         const mostSale = response.data.filter((product) => product.count > 60);
+
         const suggestion = response.data.filter(
           (product) => 4000000 < product.price < 10000000
         );
@@ -53,22 +49,26 @@ export default function Home() {
         );
 
 
-        // Set the filtered products to state
         setMostSaleProducts(mostSale);
         setSuggestionProducts(suggestion);
         setMostFavoriteProducts(mostFavorite);
         setfairPriceProducts(fairPrice);
       } catch (error) {
         console.error("Fetching Error : ", error);
+        setError("Error fetching products.");
       } finally {
         setLoading(false)
       }
     };
 
     const fetchOffs = async () => {
-      const response = await api.get("/offs");
-      console.log(response)
-      setOffs(response.data);
+      try {
+        const response = await api.get("/offs");
+        console.log(response)
+        setOffs(response.data);
+      } catch (error) {
+        console.error("Fetching Offs Error : ", error);
+      }
     };
 
 
@@ -79,139 +79,146 @@ export default function Home() {
   }, []);
 
   if (loading) {
-
-    return <CircularProgress size={"3rem"}/>;
-
+    return (
+      <div className="loading-container">
+        <CircularProgress size={"3rem"} />
+      </div>
+    );
   }
 
   if (error) {
-    return <ErrorMessage msg="خطا در بارگذاری سبد خرید" />;
+    return <ErrorMessage msg="خطا در بارگذاری اطلاعات" />;
   }
 
 
   return (
- <main className="main-content">
-  <div className="main-container">
-    <Container>
-      <div className="home-top-slider">
-        <aside className="home-sidebar">
-          <div className="home-sidebar-banner">
+
+    <main className="mx-auto">
+      <div className="w-full">
+        <div className="flex justify-center gap-4 mb-7">
+
+          <aside className="w-1/4">
+            <div className="w-full">
+              <CustomCarousel
+                items={topSliderAsideImages}
+                options={{
+                  type: "loop",
+                  pagination: false,
+                  arrows: false,
+                  direction: "rtl",
+                }}
+              />
+            </div>
+          </aside>
+
+
+          <section className="flex justify-center items-center flex-grow-1 max-w-3/4">
             <CustomCarousel
-              items={topSliderAsideImages}
+              items={images}
               options={{
                 type: "loop",
-                pagination: false,
-                arrows: false,
+                pagination: true,
+                arrows: true,
+                autoplay: true,
                 direction: "rtl",
               }}
             />
-          </div>
-        </aside>
+          </section>
+        </div>
 
-        <section id="main-slider" className="home-main-slider">
-          <CustomCarousel
-            items={images}
-            options={{
-              type: "loop",
-              pagination: true,
-              arrows: true,
-              autoplay: true,
-              direction: "rtl",
-            }}
-          />
-        </section>
-      </div>
 
-      <Row className="home-products-row">
-        <Col sm={10} className="home-grid-item">
-          <Row className="home-title-item">
-            <div className="home-section-title">
-              <h2>پر فروش ترینها</h2>
-              <Link to="/most-sales">مشاهده همه</Link>
+        <div className="flex flex-row-reverse gap-4 mb-7 justify-start px-4 sm:px-0">
+          <div className="flex flex-col w-full md:w-full py-3">
+            <div className="w-full">
+              <div className="flex justify-between items-center border-b border-solid border-[#eee] pb-2 mb-4">
+                <h2 className="title-style mb-0 font-bold text-xl md:text-2xl">پر فروش ترینها</h2>
+                <Link
+                  to="/category/most-sales"
+                  className="btn-info "
+                >
+                  مشاهده همه
+                </Link>
+              </div>
             </div>
-          </Row>
-          <Row className="home-product-carousel home-most-sell">
-            <ProductCarousel
-              offers={offs}
-              categorires={categories}
-              products={mostSaleProducts}
-              cardWidth="100%"
-            />
-          </Row>
-        </Col>
 
-        <Col sm={2} className="home-grid-item">
-          <div className="home-widget-suggestion">
-            <div className="home-widget-suggestion-title">
-              <img src="./img/theme/suggestion-title.png" alt="" />
-            </div>
-            <div className="home-progress-bar">
-              <div className="home-slide-progress"></div>
-            </div>
-            <div className="home-suggestion-slider">
+            <div>
               <ProductCarousel
                 offers={offs}
                 categorires={categories}
-                products={suggestionProducts}
-                itemsPerPage={1}
-                autoplaySpeed={3000}
-                showPagination={false}
-                showArrows={false}
+                products={mostSaleProducts}
+                cardWidth="100%"
               />
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
 
-      <Col className="home-slider-section">
-        <Row className="home-title-item">
-          <div className="home-section-title">
-            <h2>خوش قیمت ترین ها</h2>
-            <Link to="/incredible-offers">مشاهده همه</Link>
+        <div className="w-full py-3">
+          <div className="home-title-row">
+            <div className="flex justify-between items-center border-b border-solid border-[#eee] pb-2">
+              <h2 className="title-style mb-0">خوش قیمت ترین ها</h2>
+              <Link to="/category/incredible-offers" className="btn-info" >مشاهده همه</Link>
+            </div>
           </div>
-        </Row>
-        <Row className="home-product-carousel home-most-sell">
-          <ProductCarousel
-            offers={offs}
-            categorires={categories}
-            products={fairPriceProducts}
-            cardWidth="100%"
-          />
-        </Row>
-      </Col>
+          <div>
+            <ProductCarousel
+              offers={offs}
+              categorires={categories}
+              products={fairPriceProducts}
+              cardWidth="100%"
+            />
+          </div>
+        </div>
 
-      <div className="home-section-banner">
-        <SmallBannerList banners={banners} />
-      </div>
+        <div className="py-3">
+          <SmallBannerList banners={banners} />
+        </div>
 
-      <SplideCategoryCarousel items={categoryItems} />
+        <div className="w-full py-3">
+          <div className="home-title-row">
+            <div className="flex justify-between items-center border-b border-solid border-[#eee] pb-2">
+              <h2 className="title-style mb-0"> بیش از ۱،۵۰۰،۰۰۰ کالا در دسته‌بندی‌های مختلف </h2>
+            </div>
+          </div>
+          <div>
+            <SplideCategoryCarousel items={categoryItems} />
+          </div>
+        </div>
 
-      <div className="row mt-3 mb-5">
-        <div className="col-12">
-          <div className="home-large-banner">
+        <div className="mx-5 py-3">
+          <div className="w-full">
             <LargeBanner banners={banners} />
           </div>
         </div>
-      </div>
 
-      <section className="home-team-suggestion">
-        <Row className="home-title-item">
-          <div className="home-section-title">
-            <h2>پیشنهاد ما برای شما</h2>
+        <section className="w-full py-3">
+          <div className="mb-4">
+            <div className="flex justify-center items-center border-b border-solid border-[#eee] pb-2">
+              <h2 className="title-style mb-0">پیشنهاد ما برای شما</h2>
+            </div>
           </div>
-        </Row>
-        <ProductCarousel products={suggestionProducts} />
-      </section>
+          <ProductCarousel products={suggestionProducts} />
+        </section>
 
-      <section className="home-slider-section home-brand-slider">
-        <Typography className="home-brand-slider-title">
-          محبوبترین برند ها
-        </Typography>
-        <BrandSlider items={brandImages} arrows={false} />
-        <BrandSlider items={brandImages} arrows={false} direction="ltr" />
-      </section>
-    </Container>
-  </div>
-</main>
+        <section className="hidden md:block py-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div className="flex justify-center items-center border-b border-solid border-[#eee] pb-2">
+              <h3 className="title-style mb-0 text-center">
+                محبوبترین برند ها
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              <BrandSlider items={brandImages} arrows={false} />
+
+              <BrandSlider items={brandImages} arrows={false} direction="ltr" />
+            </div>
+
+          </div>
+        </section>
+
+     
+      </div>
+    </main>
   );
 }

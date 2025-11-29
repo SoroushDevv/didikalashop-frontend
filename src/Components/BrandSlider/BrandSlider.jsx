@@ -1,11 +1,10 @@
 import React from 'react';
-import { Splide,SplideSlide } from '@splidejs/react-splide';
-import './BrandSlider.css';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 const BrandSlider = ({
   items,
   options = {},
-  slideClassName = 'brand-carousel-container',
+  slideClassName = 'flex items-center justify-center p-2',
   renderItem,
   arrows = false,
   direction = 'rtl',
@@ -21,7 +20,7 @@ const BrandSlider = ({
     interval: 0,
     speed: 30000,
     easing: 'ease',
-    pauseOnHover: false, // فعال کردن توقف هنگام هاور
+    pauseOnHover: false,
     pauseOnFocus: false,
     drag: false,
     direction,
@@ -36,25 +35,24 @@ const BrandSlider = ({
   };
 
   return (
-    <div className="row" dir={direction}>
-      <div className="col-12">
+    <div className={`w-full ${direction === 'rtl' ? 'rtl' : 'ltr'}`} dir={direction}>
+      <div className="w-full">
         <Splide
           options={defaultOptions}
           aria-label="Brand Carousel"
-          className="brand-carousel-slider"
+          className="w-full"
         >
           {items.map((item, index) => (
             <SplideSlide key={index} className={slideClassName}>
               {renderItem ? (
                 renderItem(item, index)
               ) : (
-                <div className="brand-carousel-item">
+                <div className="flex items-center justify-center p-4 bg-white rounded-lg shadow transition duration-300 hover:shadow-lg">
                   {typeof item === 'string' ? (
                     <img
                       src={item}
                       alt={`Brand ${index + 1}`}
-                      className="brand-carousel-image"
-                      
+                      className="max-h-12 w-auto filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition duration-500"
                     />
                   ) : (
                     item

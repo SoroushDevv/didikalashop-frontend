@@ -42,7 +42,7 @@ const useUserAddresses = () => {
       }
     };
 
-    fetchAddresses(); // صدا زدن تابع async
+    fetchAddresses(); 
   }, [refreshKey]);
 
   const handleRefreshKey = () => {setRefreshKey(prev => prev+1)}

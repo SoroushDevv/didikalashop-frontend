@@ -82,7 +82,6 @@ export default function SingleProduct() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [localQuantity, setLocalQuantity] = useState(1);
 
-  // 🟢 دریافت محصول بر اساس عنوان
   useEffect(() => {
     if (!products?.length) return;
 
@@ -101,9 +100,10 @@ export default function SingleProduct() {
     }
   }, [encodedTitle, products]);
 
-  // 🟡 اگر محصول در سبد بود، مقدار quantity رو از order بگیر
   useEffect(() => {
     if (!order || !product || !selectedColor) return;
+
+
     const existingItem = order.items?.find(
       item => item.productID === product.id && item.color === selectedColor
     );
@@ -130,7 +130,7 @@ export default function SingleProduct() {
     const activeOrder = order?.isActive && order?.userID === currentUser.id
       ? { ...order }
       : {
-        orderId: uuidv4(),
+        tempID: uuidv4(),
         userID: currentUser.id,
         date: new Date().toISOString().split('T')[0],
         hour: new Date().toTimeString().split(' ')[0],
@@ -153,6 +153,7 @@ export default function SingleProduct() {
         payablePrice,
       };
 
+      console.log("active order:", activeOrder)
       localStorage.setItem("order", JSON.stringify(activeOrder))
       triggerUpdate();
 
@@ -198,7 +199,7 @@ export default function SingleProduct() {
   return (
     <Box className="single-product-section dt-sl">
       <div className="single-product-container container">
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3,mt:3 }}>
           <Link underline="hover" color="inherit" href="/">خانه</Link>
           <Typography color="text.primary">{product.title}</Typography>
         </Breadcrumbs>
@@ -207,16 +208,16 @@ export default function SingleProduct() {
           <Grid item xs={12} md={6}>
             <div className="product-details-card">
 
-{
-  product.discountPercent && <Typography variant="h4" className="product-discount">{product.discountPercent}%</Typography>
-}
-              
+              {
+                product.discountPercent && <Typography variant="h4" className="product-discount">{product.discountPercent}%</Typography>
+              }
+
               <Typography variant="h4" className="product-title">{product.title}</Typography>
               <Typography variant="h6" className="product-desc">{product.productDesc}</Typography>
               <Typography variant="h6" className="product-price">
-                قیمت: {product.price.toLocaleString()} تومان
+                قیمت: {Number(product.price).toLocaleString("fa")} تومان
               </Typography>
-             
+
 
               {product.colors?.length > 0 && (
                 <div className="product-color-selector">

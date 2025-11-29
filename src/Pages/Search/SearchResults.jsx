@@ -145,7 +145,7 @@ export default function SearchResults({ sorting }) {
 
   return (
     <div className="search-results dt">
-      <div className="container">
+ 
         <Typography variant="h5" className="search-title">
           نتایج جستجو برای: {searchValue ? decodeURIComponent(searchValue) : "همه"}
           {category && category !== "all" ? `، دسته‌بندی: ${category}` : ""}
@@ -285,7 +285,6 @@ export default function SearchResults({ sorting }) {
             </Typography>
           </Box>
         )}
-      </div>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./LocalOrders.css";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../Pages/ErrorMessage/ErrorMessage";
 import { useCart } from "../../Contexts/CartContext";
@@ -97,10 +96,7 @@ export default function LocalOrders() {
         (item.quantity || 1),
       0
     );
-    console.log("order :", order)
-    console.log("total:", total)
-    console.log("discount:", discount)
-    console.log("localOff:", localOff)
+
     const payable = total - (discount + localOff);
     setTotalPrice(total);
     setTotalDiscount(discount);
@@ -144,74 +140,87 @@ export default function LocalOrders() {
   const items = userOrder?.items || []
 
 
-
+console.log("items:",items)
 
   return (
-    <div className="cart-dropdown">
-      <div className="cart-dropdown-header">
-        <div className="cart-dropdown-header-link-container">
-          <Link to="/cart" className="cart-dropdown-link">
-            <span>مشاهده سبد خرید</span>
+
+    <div className="flex flex-col justify-between transition-all duration-300 ease-in-out py-3 px-2 absolute left-0 top-full bg-white rounded-md shadow-md overflow-hidden w-80 min-h-64">
+      <div className="py-1 px-2 border-b-2 gray-light">
+        <div className="flex justify-between items-center">
+          <Link to="/cart" className="btn-info text-white">
+            <span className="text-white">مشاهده سبد خرید</span>
           </Link>
-          <div className="cart-dropdown-count">{items.length} کالا</div>
+          <div className="bg-brand-primary text-white text-xs font-bold 
+                 w-9 h-9 flex items-center justify-center 
+                 rounded-full">{items?.length} کالا</div>
         </div>
       </div>
 
-      <ul className="cart-dropdown-list" tabIndex="1">
+      <ul className="max-h-80 overflow-y-auto list-none py-2 px-0 m-0" tabIndex="1">
         {items.length === 0 ? (
           <ErrorMessage msg="سبد خرید شما خالی است" />
         ) : (
           items.map((item) => (
-            <li className="cart-dropdown-item" key={item.productID}>
-              <div className="cart-dropdown-item-wrapper">
+            <li
+              className="flex items-start transition duration-200 ease-in-out py-3 px-4 
+                   border-b border-gray-light last:border-b-0"
+              key={item.productID}
+            >
 
-                <div className="cart-dropdown-item-content">
-                  <div className="cart-dropdown-top">
-                    <div className="cart-dropdown-item-image">
+              <div className="flex justify-between w-full gap-4">
+
+                <div className="flex flex-col flex-1 gap-2">
+
+                  <div className="flex justify-start gap-4 w-full">
+
+                    <div className="w-20 h-20 flex-shrink-0">
                       <img
+                        className="w-full h-full object-contain"
                         src={`/img/products/${item.product.img || "test"}`}
                         alt={item.title || "عنوان محصول"}
                       />
                     </div>
-                    <div className="cart-dropdown-item-props">
+
+                    <div className="flex flex-col justify-center items-start gap-1 flex-grow pr-4">
                       <Link
                         to={`/productDetail/${item.product.title}`}
-                        className="cart-dropdown-item-title"
+                        className="title-style text-base font-semibold mb-1 hover:text-brand-primary"
                       >
                         {item.product.productDesc || "عنوان محصول"}
                       </Link>
-                      
-                      <span className="cart-dropdown-item-prop">
+                      <span className="inline-block mt-1">
                         <ColorChip color={item.color} />
                       </span>
                     </div>
 
                   </div>
-                  <div className="cart-dropdown-item-footer">
-                    <div className="delete-button_container">
-                      <button
-                        className="cart-dropdown-item-remove"
-                        onClick={() => handleRemoveItem(item.productID)}
-                      >
-                        <DeleteOutlinedIcon />
-                      </button>
-                    </div>
-                    <div className="item-price_container">
-                       <span className="cart-dropdown-item-prop discount-amount">
-                        {(item.price * (item.product.discountPercent / 100) || 0).toLocaleString()}<span>تومان</span>
-                        <span className="discount-title">تخفیف</span>
+
+                  <div className="flex justify-between items-end pt-2 border-t border-dashed border-gray-light">
+
+                    <div className="flex flex-col gap-1 items-start">
+
+                      <span className="bg-amber-100 text-amber-700 text-xs font-semibold px-2 py-0.5 rounded">
+                        {(item.price * (item.product.discountPercent / 100) || 0).toLocaleString()} تومان <span className="text-gray-text">تخفیف</span>
                       </span>
-                      
-                      <span className="cart-dropdown-item-prop">
+
+                      <span className="text-gray-medium text-sm">
                         {item.quantity} ×
                       </span>
-                     <span className="cart-dropdown-item-prop payable-amount">
+
+                      <span className="text-gray-text font-bold text-base">
                         {(((item.price * item.quantity) - (item.price * (item.product.discountPercent / 100))) || 0).toLocaleString()} تومان
                       </span>
                     </div>
 
+                    <button
+                      className="text-gray-medium hover:text-red-600 transition p-1"
+                      onClick={() => handleRemoveItem(item.productID)}
+                    >
+                      <DeleteOutlinedIcon className="text-xl" />
+                    </button>
 
                   </div>
+
                 </div>
               </div>
             </li>
@@ -219,22 +228,23 @@ export default function LocalOrders() {
         )}
       </ul>
 
-      <div className="cart-dropdown-footer">
-        <div className="cart-dropdown-total">
-          <span className="cart-dropdown-total-text">مبلغ قابل پرداخت:</span>
-          <p className="cart-dropdown-total-amount">
-            <span className="cart-dropdown-total-number">
+      <div className=" bg-white">
+        <div className="flex justify-between items-center mb-4">
+
+          <span className="text-base gray-medium">مبلغ قابل پرداخت:</span>
+          <p className="m-0">
+            <span className="text-base font-bold text-black">
               {payableAmount.toLocaleString()} <span>تومان</span>
             </span>
           </p>
         </div>
 
-        <div className="cart-dropdown-actions">
-          <button className="cart-dropdown-btn submit-cart">
-            <Link to={items.length ? "/cart" : "#"}>ثبت سفارش</Link>
+        <div className="flex justify-between gap-4">
+          <button className=" btn-primary">
+            <Link to={items.length ? "/cart" : "#"} >ثبت سفارش</Link>
           </button>
           <button
-            className="cart-dropdown-btn clear-cart"
+            className="btn-secondary"
             onClick={handleClearCart}
           >
             خالی کردن سبد

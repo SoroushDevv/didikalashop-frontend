@@ -1,5 +1,4 @@
 import React from "react";
-import "./LoginPage.css";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -21,168 +20,126 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="wrapper">
-      <main className="main-content dt-sl mt-4 mb-3">
-        <div className="container main-container">
-          <div className="row">
-            <div className="col-xl-4 col-lg-5 col-md-7 col-12 mx-auto">
-              <div className="logo-area text-center mb-3">
-                <Link to="#">
-                  <img src="./img/logo.png" className="img-fluid" alt="logo" />
-                </Link>
-              </div>
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12">
+      <div className="container mx-auto px-4">
+        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-md p-8">
+          <div className="text-center mb-6">
+            <Link to="#">
+              <img src="./img/logo.png" alt="logo" className="mx-auto w-32" />
+            </Link>
+          </div>
 
-              <div className="auth-wrapper form-ui border pt-4">
-                <div className="section-title title-wide mb-1 no-after-title-wide">
-                  <h2 className="font-weight-bold">ورود</h2>
-                </div>
+          <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">ورود</h2>
 
-                <Formik
-                  initialValues={{ username: "", password: "", rememberMe: false }}
-                  validationSchema={LoginSchema}
-                  onSubmit={async (values, { setSubmitting }) => {
-                    try {
-                      const response = await api.post("/users/login", {
-                        username: values.username,
-                        password: values.password,
-                      });
+          <Formik
+            initialValues={{ username: "", password: "", rememberMe: false }}
+            validationSchema={LoginSchema}
+            onSubmit={async (values, { setSubmitting }) => {
+              try {
+                const response = await api.post("/users/login", {
+                  username: values.username,
+                  password: values.password,
+                });
+                const { user, token } = response.data;
 
-                      const { user, token } = response.data;
-
-                      if (user && token) {
-                        Swal.fire({
-                          position: "top-start",
-                          icon: "success",
-                          title: "ورود با موفقیت انجام شد",
-                          showConfirmButton: false,
-                          timer: 1500,
-                        });
-
-                        setAuthToken(token);
-                        navigate("/");
-                      } else {
-                        Swal.fire({
-                          icon: "error",
-                          title: "خطا در احراز هویت",
-                          text: "اطلاعات ورود نادرست است",
-                        });
-                      }
-                    } catch (err) {
-                      console.error(err);
-                      Swal.fire({
-                        icon: "error",
-                        title: "خطا در ورود",
-                        text: err.response?.data?.message || "مشکلی در سرور رخ داده است",
-                      });
-                    } finally {
-                      setSubmitting(false);
-                    }
-                  }}
-                >
-                  {({ isSubmitting }) => (
-                    <Form>
-                      <div className="form-row-title">
-                        <h3>نام کاربری</h3>
-                      </div>
-                      <div className="form-row with-icon">
-                        <Field
-                          type="text"
-                          name="username"
-                          className="input-ui pr-2"
-                          placeholder="نام کاربری خود را وارد نمایید"
-                        />
-                        <i className="mdi mdi-account-circle-outline"></i>
-                        <ErrorMessage name="username" component="div" className="text-danger" />
-                      </div>
-
-                      <div className="form-row-title">
-                        <h3>رمز عبور</h3>
-                      </div>
-                      <div className="form-row with-icon">
-                        <Field
-                          type="password"
-                          name="password"
-                          className="input-ui pr-2"
-                          placeholder="رمز عبور خود را وارد نمایید"
-                        />
-                        <i className="mdi mdi-lock-open-variant-outline"></i>
-                        <ErrorMessage name="password" component="div" className="text-danger" />
-                      </div>
-
-                      <div className="form-row mt-2">
-                        <div className="custom-control custom-checkbox float-right mt-2">
-                          <Field
-                            type="checkbox"
-                            name="rememberMe"
-                            className="custom-control-input"
-                            id="customCheck3"
-                          />
-                          <label className="custom-control-label" htmlFor="customCheck3" style={{margin:"0 10px"}}>
-                            مرا به خاطر بسپار
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="form-row mt-3">
-                        <button
-                          type="submit"
-                          className="btn-primary-cm btn-with-icon mx-auto w-100"
-                          disabled={isSubmitting}
-                        >
-                          <i className="mdi mdi-login-variant"></i>
-                          {isSubmitting ? "در حال ورود..." : "ورود به دیدیکالا"}
-                        </button>
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
-
-                <div className="form-footer mt-3">
-                  <div>
-                    <span className="font-weight-bold">کاربر جدید هستید؟</span>
-                    <Link to="/register" className="mr-3 mt-2" style={{margin:"0 10px"}}>
-                      ثبت نام در دیدیکالا
-                    </Link>
+                if (user && token) {
+                  Swal.fire({
+                    position: "top-start",
+                    icon: "success",
+                    title: "ورود با موفقیت انجام شد",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  setAuthToken(token);
+                  navigate("/");
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "خطا در احراز هویت",
+                    text: "اطلاعات ورود نادرست است",
+                  });
+                }
+              } catch (err) {
+                Swal.fire({
+                  icon: "error",
+                  title: "خطا در ورود",
+                  text: err.response?.data?.message || "مشکلی در سرور رخ داده است",
+                });
+              } finally {
+                setSubmitting(false);
+              }
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
+                <div>
+                  <label className="block mb-1 font-medium text-gray-700">نام کاربری</label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      name="username"
+                      placeholder="نام کاربری خود را وارد نمایید"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+                    />
+                    <i className="mdi mdi-account-circle-outline absolute right-3 top-3 text-gray-400"></i>
                   </div>
+                  <ErrorMessage name="username" component="div" className="text-red-500 text-sm mt-1" />
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
 
-      <footer className="mini-footer dt-sl">
-        <div className="container main-container">
-          <div className="row">
-            <div className="col-12">
-              <ul className="mini-footer-menu">
-                <li>
-                  <a href="#">درباره دیدیکالا</a>
-                </li>
-                <li>
-                  <a href="#">فرصت های شغلی</a>
-                </li>
-                <li>
-                  <a href="#">تماس با ما</a>
-                </li>
-                <li>
-                  <a href="#">همکاری با سازمان ها</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-12 mt-2 mb-3">
-              <div className="footer-light-text">
-                استفاده از مطالب فروشگاه اینترنتی دیدیکالا فقط برای مقاصد غیرتجاری و با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به (فروشگاه آنلاین دیدیکالا) می‌باشد.
-              </div>
-            </div>
-            <div className="col-12 text-center">
-              <div className="copy-right-mini-footer">
-                Copyright © 2019 Didikala
-              </div>
-            </div>
+                <div>
+                  <label className="block mb-1 font-medium text-gray-700">رمز عبور</label>
+                  <div className="relative">
+                    <Field
+                      type="password"
+                      name="password"
+                      placeholder="رمز عبور خود را وارد نمایید"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+                    />
+                    <i className="mdi mdi-lock-open-variant-outline absolute right-3 top-3 text-gray-400"></i>
+                  </div>
+                  <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                </div>
+
+                <div className="flex items-center">
+                  <Field
+                    type="checkbox"
+                    name="rememberMe"
+                    id="rememberMe"
+                    className="h-4 w-4 text-blue-600 rounded"
+                  />
+                  <label htmlFor="rememberMe" className="mr-2 text-gray-700">مرا به خاطر بسپار</label>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                >
+                  {isSubmitting ? "در حال ورود..." : "ورود به دیدیکالا"}
+                </button>
+              </Form>
+            )}
+          </Formik>
+
+          <div className="mt-4 text-center text-gray-600">
+            <span>کاربر جدید هستید؟ </span>
+            <Link to="/register" className="text-blue-600 hover:underline">ثبت نام در دیدیکالا</Link>
           </div>
         </div>
-      </footer>
+
+        <footer className="mt-8 text-center text-gray-500 text-sm space-y-2">
+          <ul className="flex justify-center gap-4">
+            <li><a href="#" className="hover:underline">درباره دیدیکالا</a></li>
+            <li><a href="#" className="hover:underline">فرصت های شغلی</a></li>
+            <li><a href="#" className="hover:underline">تماس با ما</a></li>
+            <li><a href="#" className="hover:underline">همکاری با سازمان ها</a></li>
+          </ul>
+          <div>
+            استفاده از مطالب فروشگاه اینترنتی دیدیکالا فقط برای مقاصد غیرتجاری و با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به فروشگاه آنلاین دیدیکالا می‌باشد.
+          </div>
+          <div>Copyright © 2019 Didikala</div>
+        </footer>
+      </div>
     </div>
   );
 }

@@ -10,7 +10,6 @@ const useAllComments = () => {
     const fetchComments = async () => {
       setLoading(true);
       try {
-        // دریافت دسته‌بندی‌ها
         const response = await api.get("/comments");
         console.log("all comments: ", response.data);
         
