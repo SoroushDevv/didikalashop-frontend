@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+
+@layer components {
+  /* ===== Inputs ===== */
+  .input-style {
+    @apply w-full h-12 px-4 py-2 border text-gray-text border-gray-light rounded-lg 
+           transition duration-150 ease-in-out focus:outline-none 
+           focus:border-brand-primary focus:ring-1 focus:ring-brand-primary;
+  }
+
+  /* ===== Navigation ===== */
+  .nav-list-item {
+    @apply text-gray-text font-medium px-3 py-1.5 transition duration-150;
+  }
+
+  .nav-list-item:hover {
+    @apply text-brand-primary;
+  }
+
+  /* ===== Buttons ===== */
+  .btn-primary {
+    @apply inline-flex items-center justify-center h-10 px-5 py-2 bg-brand-primary text-base-white 
+           font-semibold text-base rounded-lg shadow-md transition duration-150 ease-in-out 
+           focus:outline-none focus:ring-2 focus:ring-brand-primary/50 hover:bg-red-700;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center h-10 px-5 py-2 bg-base-white text-gray-medium 
+           border border-gray-medium font-semibold text-base rounded-lg transition duration-150 
+           ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-medium/50 
+           hover:border-brand-secondary hover:text-brand-secondary;
+  }
+
+  .btn-info {
+    @apply inline-flex items-center justify-center h-10 px-5 py-2 bg-brand-secondary text-base-white 
+           font-semibold text-base rounded-lg shadow-md transition duration-150 ease-in-out 
+           focus:outline-none focus:ring-2 focus:ring-blue-500/50 hover:bg-blue-800;
+  }
+
+  /* ===== Titles ===== */
+  .title-style {
+    @apply text-gray-text font-bold text-2xl mb-6;
+  }
+
+  /* ===== Category Tabs ===== */
+  .category-filter-tab {
+    @apply text-black py-1 px-2 transition-all duration-200 cursor-pointer border rounded-md;
+  }
+
+  .category-filter-tab:hover {
+    @apply bg-brand-primary text-white;
+  }
+
+  .category-filter-tab:active {
+    @apply bg-brand-primary text-white transition-all duration-200;
+  }
+
+  /* ===== Profile Menu Tabs ===== */
+  .profile-menu-tab {
+    @apply flex items-center gap-2 no-underline text-black py-2 px-3 border rounded-md 
+           transition-all ease-in-out duration-200 cursor-pointer;
+  }
+
+  .profile-menu-tab:hover {
+    @apply bg-brand-primary text-white;
+  }
+
+  .profile-menu-tab:active {
+    @apply bg-brand-primary text-white;
+  }
+
+  .profile-menu-icon {
+    @apply text-base text-brand-primary transition-all duration-200;
+  }
+
+  .profile-menu-tab:hover .profile-menu-icon,
+  .profile-menu-tab:active .profile-menu-icon {
+    @apply text-white;
+  }
+
+  .isActive {
+    @apply border-b border-brand-primary transition-all ease-in-out duration-200
+  }
+}
+
+@tailwind utilities;
