@@ -4,11 +4,8 @@ import useAllProducts from "./../../Hooks/useAllProducts";
 import { useCart } from "./../../Contexts/CartContext"
 import useAllCategories from "./../../Hooks/useAllCategories";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-// حذف import های MUI و استایل‌های محلی
 
-// کامپوننت ساده Rating (جایگزین MUI Rating) - فرض شده که یک StarRating سفارشی دارید
 const ProductRating = ({ value }) => {
-  // این یک جایگزین ساده و نمایشی برای ستاره‌ها است
   const fullStars = Math.floor(value);
   const emptyStars = 5 - fullStars;
 
@@ -30,19 +27,15 @@ const ProductRating = ({ value }) => {
 
 export default function MostSales({ sorting }) {
   const Navigate = useNavigate();
-  // hooks استفاده شده اما خروجی آن در منطق فعلی استفاده نشده است.
   const { categories } = useAllCategories(); 
   const { category } = useParams();
   const { products, loading, error } = useAllProducts();
-  // const [filteredProducts, setFilteredProducts] = useState([]) // این استیت حذف شد چون استفاده نشده بود
 
-  // منطق فیلتر کردن محصولات پرفروش (count >= 50)
   const filteredItems = useMemo(() => {
     if (!products || products.length === 0) return [];
     return products.filter((product) => product.count >= 50);
   }, [products]);
 
-  // منطق انتخاب ۱۰ محصول برتر (براساس count)
   const topSellingItems = useMemo(() => {
     return [...filteredItems]
       .sort((a, b) => (b.count || 0) - (a.count || 0))
@@ -52,9 +45,7 @@ export default function MostSales({ sorting }) {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* most-sale_results */}
       <div className="w-full">
-        {/* search-title most-sale_title */}
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
           {category && category !== "all" ? `دسته بندی: ${category}` : "پرفروش‌ترین‌ها"}
         </h2>
@@ -64,14 +55,11 @@ export default function MostSales({ sorting }) {
         ) : error ? (
           <div className="text-center text-red-500">{error}</div>
         ) : topSellingItems.length > 0 ? (
-          /* Products Grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {topSellingItems.map((product) => (
               <div key={product.id}>
-                {/* ProductCard className="product-card_container" */}
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full overflow-hidden relative border border-gray-100 p-2">
                   
-                  {/* mui-card-top-content (Rating and Discount Chip) */}
                   <div className="flex justify-between items-center px-2 pt-2 absolute top-0 left-0 right-0 z-10">
                     <div className="mt-1">
                        <ProductRating value={product.popularity || 0} />
@@ -83,7 +71,6 @@ export default function MostSales({ sorting }) {
                     )}
                   </div>
 
-                  {/* CardMedia (Image) */}
                   <div className="pt-10 pb-4 h-48 flex justify-center items-center">
                     <img
                       src={product.img ? `/img/products/${product.img}` : "/img/products/default-product-pic.png"}
@@ -93,10 +80,8 @@ export default function MostSales({ sorting }) {
                     />
                   </div>
 
-                  {/* CardContent (Details) */}
                   <div className="flex flex-col flex-grow justify-between p-2 pt-1 min-h-[10rem]">
                     
-                    {/* Product Title */}
                     <h3 className="text-base font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[3rem]">
                       <a 
                         href={`/productDetail/${product.title}`} 
@@ -106,13 +91,11 @@ export default function MostSales({ sorting }) {
                       </a>
                     </h3>
 
-                    {/* Price Section */}
                     <div className="flex flex-col items-end mb-3">
                       {product.discountedPrice ? (
                         <>
                           <div className="flex flex-col w-full text-right mb-1">
                             <span className="text-xs text-gray-600">قیمت:</span>
-                            {/* StrikethroughPrice */}
                             <span className="text-sm text-gray-400 line-through">
                               {product.price.toLocaleString("fa-IR")} تومان
                             </span>
@@ -120,7 +103,6 @@ export default function MostSales({ sorting }) {
 
                           <div className="flex flex-col w-full text-right">
                             <span className="text-xs text-red-600 font-bold">قیمت با تخفیف:</span>
-                            {/* DiscountedPrice */}
                             <span className="text-lg font-extrabold text-red-600">
                               {product.discountedPrice.toLocaleString("fa-IR")} <span className="text-sm font-normal mr-1">تومان</span>
                             </span>
@@ -135,7 +117,6 @@ export default function MostSales({ sorting }) {
                       )}
                     </div>
 
-                    {/* Button */}
                     <button
                       className="w-full py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition duration-150"
                       onClick={() => Navigate(`/productDetail/${product.title}`)}
