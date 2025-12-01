@@ -65,19 +65,19 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
 
   console.log("orders:", orders)
   console.log("products:", products)
-  const payablePrice = useMemo(()=> {
+  // const payablePrice = useMemo(()=> {
 
-  return orders.reduce((sum , item) =>  sum + item.price,0) 
+  // return orders.reduce((sum , item) =>  sum + item.price,0) 
    
 
-  },[orders])
+  // },[orders])
 
 
   if (!orders.length) {
     return <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"} />;
   }
 
-  console.log("payable price orders :",payablePrice)
+  // console.log("payable price orders :",payablePrice)
   return (
     <ul className="list-none p-0 m-0 space-y-4">
       {orders.map((order) => (
@@ -102,7 +102,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
               <div className="flex items-center">
                 مبلغ کل سفارش:
                 <span className="font-bold mr-1 text-black">
-                  {Number(payablePrice).toLocaleString("fa-IR")}
+                  {""}
                 </span>
                 <span className="text-xs text-black mr-1">تومان</span>
               </div>
