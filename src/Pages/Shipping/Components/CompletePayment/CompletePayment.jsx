@@ -111,7 +111,7 @@ export default function CompletePayment() {
               <p className="flex justify-between items-center md:justify-start">
                 <span className="font-medium text-gray-800 min-w-max ml-4">نام تحویل گیرنده:</span>
                 <span className="text-gray-700 font-semibold text-right">
-                  {currentUser?.firstname + " " + currentUser?.lastname}
+                  {currentUser ? currentUser?.firstname + " " + currentUser?.lastname : "کاربر"}
                 </span>
               </p>
 
