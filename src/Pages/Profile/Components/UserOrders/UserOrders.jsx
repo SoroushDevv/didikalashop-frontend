@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 import useUserOrders from "../../../../Hooks/useUserOrders";
 import useAllProducts from "../../../../Hooks/useAllProducts";
@@ -62,6 +62,15 @@ export default function OrdersPage() {
 }
 
 function OrderList({ orders, products, statusIcon, statusText, color }) {
+
+  const payablePrice = useMemo(()=> {
+
+  return orders.reduce((sum , item) =>  sum + item.price,0) 
+   
+
+  },[orders])
+
+
   if (!orders.length) {
     return <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"} />;
   }
@@ -90,7 +99,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
               <div className="flex items-center">
                 مبلغ کل سفارش:
                 <span className="font-bold mr-1 text-black">
-                  {(order.items.reduce((sum, item) => sum + item.price, 0)).toLocaleString()}
+                  {Number(payablePrice).toLocaleString()}
                 </span>
                 <span className="text-xs text-black mr-1">تومان</span>
               </div>

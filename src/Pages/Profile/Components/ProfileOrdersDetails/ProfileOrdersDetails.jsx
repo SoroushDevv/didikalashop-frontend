@@ -112,7 +112,7 @@ export default function ProfileOrdersDetails() {
         <div className="flex justify-between text-sm">
           <span className="text-gray-medium">مبلغ کل سفارش:</span>
           <span className="font-semibold text-brand-secondary">
-            {Number(payablePrice) ? Number(payablePrice).toLocaleString() : "--"} تومان
+            {Number(payablePrice) ? Number(payablePrice).toLocaleString("fa-IR") : "--"} تومان
           </span>
         </div>
         <div className="flex justify-between text-sm">
@@ -162,7 +162,7 @@ export default function ProfileOrdersDetails() {
             </div>
 
             <div className="text-sm font-semibold text-brand-primary whitespace-nowrap">
-              {Number(item.price) ? Number(item.price).toLocaleString() : "-"} تومان
+              {Number(item.price) ? Number(item.price).toLocaleString("fa-IR") : "-"} تومان
             </div>
           </div>
         ))}
