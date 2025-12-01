@@ -67,7 +67,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
   console.log("products:", products)
   const payablePrice = useMemo(()=> {
 
-  return orders.items.reduce((sum , item) =>  sum + item.price,0) 
+  return orders.reduce((sum , item) =>  sum + item.price,0) 
    
 
   },[orders])
