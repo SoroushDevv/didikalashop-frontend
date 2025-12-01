@@ -107,8 +107,8 @@ export default function UserAddresses() {
             >
               <div className="flex flex-col gap-2 p-4 text-right">
                 <div className="inline-flex items-center gap-1 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full w-fit">
-                  {getAddressTypeIcon(address.address_type)}
-                  {addressTypeLabel[address.address_type]}
+                  {getAddressTypeIcon(address.addressType)}
+                  {addressTypeLabel[address.addressType]}
                 </div>
 
                 <div className="font-semibold text-gray-800 text-base">
@@ -116,11 +116,11 @@ export default function UserAddresses() {
                 </div>
 
                 <div className="text-sm text-gray-700">
-                  {address.city}، {address.address}
+                 {address.province}, {address.address}
                 </div>
 
                 <div className="text-sm text-gray-500">
-                  کد پستی: {address.postal_code}
+                  کد پستی: {address.postalCode}
                 </div>
 
                 <div className="text-xs text-gray-400 mt-1">
