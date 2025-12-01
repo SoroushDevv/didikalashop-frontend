@@ -123,7 +123,6 @@ export default function SingleProduct() {
       return ShowSwal({ title: 'خطا', text: 'رنگ را انتخاب کنید', icon: 'error' });
     }
 
-    console.log("order  befor check:", order)
     const activeOrder = order?.isActive && order?.userID === currentUser.id
       ? { ...order }
       : {
@@ -135,7 +134,6 @@ export default function SingleProduct() {
         items: [],
       };
 
-    console.log("active order :", activeOrder)
     const existingIndex = activeOrder.items.findIndex(
       item => item.productID === product.id && item.color === selectedColor
     );
@@ -169,7 +167,6 @@ export default function SingleProduct() {
       ShowSwal({ title: 'افزوده شد', text: 'محصول به سبد خرید اضافه شد', icon: 'success' });
     }
 
-    console.log("active order in else :", activeOrder)
     setOrder(activeOrder);
     triggerUpdate();
   };

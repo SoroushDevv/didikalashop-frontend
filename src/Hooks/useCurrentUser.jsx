@@ -12,7 +12,6 @@ export const useCurrentUser = () => {
       setLoading(true);
       try {
         const token = getAuthToken();
-        console.log("token:", token);
 
         if (!token) {
           setCurrentUser(null);
@@ -20,15 +19,12 @@ export const useCurrentUser = () => {
         }
 
         const response = await api.get("/users");
-        console.log("response : ", response)
         const users = response.data;
 
 
         const user = users.find((u) => u.token === token);
-        console.log("user : ", user)
         setCurrentUser(user || null);
       } catch (err) {
-        console.error("erooor:", err);
         setError(err.message || "Failed to fetch user");
         setCurrentUser(null);
       } finally {
@@ -40,10 +36,6 @@ export const useCurrentUser = () => {
   }, [refreshKey]);
 
   const refreshData = () => setRefreshKey((prev) => prev + 1)
-
-
-
-  console.log("current user current : ", currentUser)
 
   return { currentUser, loading, error, refreshData };
 };

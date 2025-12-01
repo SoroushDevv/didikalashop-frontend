@@ -34,7 +34,6 @@ export default function Home() {
       try {
         setLoading(true)
         const response = await api.get("/products");
-        console.log("products : ", response.data);
 
         const mostSale = response.data.filter((product) => product.count > 60);
 
@@ -64,7 +63,6 @@ export default function Home() {
     const fetchOffs = async () => {
       try {
         const response = await api.get("/offs");
-        console.log(response)
         setOffs(response.data);
       } catch (error) {
         console.error("Fetching Offs Error : ", error);

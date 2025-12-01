@@ -63,21 +63,10 @@ export default function OrdersPage() {
 
 function OrderList({ orders, products, statusIcon, statusText, color }) {
 
-  console.log("orders:", orders)
-  console.log("products:", products)
-  // const payablePrice = useMemo(()=> {
-
-  // return orders.reduce((sum , item) =>  sum + item.price,0) 
-   
-
-  // },[orders])
-
-
   if (!orders.length) {
     return <ErrorMessage msg={"سفارشی در این بخش وجود ندارد"} />;
   }
 
-  // console.log("payable price orders :",payablePrice)
   return (
     <ul className="list-none p-0 m-0 space-y-4">
       {orders.map((order) => (

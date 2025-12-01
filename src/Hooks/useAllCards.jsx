@@ -10,12 +10,9 @@ const useCardsDetails = () => {
     const fetchCards = async () => {
       setLoading(true);
       try {
-        const response = await api.get("/cards");
-        console.log("cards: ", response.data);
-        
+        const response = await api.get("/cards");        
         setCards(response.data);
       } catch (err) {
-        console.error("Error fetching categories:", err.message);
         setError(err.message || "Failed to fetch categories");
         setCards([]);
       } finally {

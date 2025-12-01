@@ -10,12 +10,9 @@ const useAllBlogs = () => {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        const response = await api.get("/blogs");
-        console.log("blogs: ", response.data);
-        
+        const response = await api.get("/blogs");        
         setBlogs(response.data);
       } catch (err) {
-        console.error("Error fetching blogs:", err.message);
         setError(err.message || "Failed to fetch blogs");
         setBlogs([]);
       } finally {

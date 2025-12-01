@@ -13,7 +13,6 @@ export default function ProfileSidebar() {
   const { currentUser, loading, error } = useCurrentUser();
 
   const Navigate = useNavigate()
-  console.log(currentUser)
   if (loading) {
     return <div>در حال بارگذاری...</div>;
   }

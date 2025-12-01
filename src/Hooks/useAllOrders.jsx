@@ -10,12 +10,9 @@ const useAllOrders = () => {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const response = await api.get("/orders");
-        console.log("orders: ", response.data);
-        
+        const response = await api.get("/orders");        
         setOrders(response.data);
       } catch (err) {
-        console.error("Error fetching categories:", err.message);
         setError(err.message || "Failed to fetch categories");
         setOrders([]);
       } finally {

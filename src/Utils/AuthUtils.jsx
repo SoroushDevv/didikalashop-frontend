@@ -20,7 +20,6 @@ export const getAuthToken = () => {
     if (!token || token === "null" || token === "") {
       return null;
     }
-    console.log("token : " , token)
     return token;
   } catch (error) {
     console.error("Error getting auth token:", error);

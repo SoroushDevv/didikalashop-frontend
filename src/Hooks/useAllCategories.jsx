@@ -11,11 +11,9 @@ const useAllCategories = () => {
       setLoading(true);
       try {
         const response = await api.get("/categories");
-        console.log("categories: ", response.data);
         
         setProductCategories(response.data);
       } catch (err) {
-        console.error("Error fetching categories:", err.message);
         setError(err.message || "Failed to fetch categories");
         setProductCategories([]);
       } finally {

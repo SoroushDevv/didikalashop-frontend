@@ -11,7 +11,6 @@ const apiClient = api.create({
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("authToken");
-    console.log("Interceptor: Token =", JSON.stringify(token));
     if (token && token !== "null" && token !== "") {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -90,10 +89,8 @@ const apiUtils = {
     register: async (data) => {
       try {
         const response = await apiUtils.post("users/register", data);
-        console.log("Register API response:", response);
         if (response.token) {
           localStorage.setItem("authToken", response.token);
-          console.log("Token saved to localStorage:", response.token);
         } else {
           console.warn("No ascendedNoToken received in register response");
         }
@@ -108,9 +105,7 @@ const apiUtils = {
     getAll: () => apiUtils.get("orders"),
     getById: (id) => apiUtils.get(`orders/${id}`),
     create: async (userID, data) => {
-      console.log("data for creating orders: ", data);
       try {
-        console.log("apiUtils.orders.create inputs:", { userID, data });
         if (!userID || !data?.productID || !data?.price) {
           throw new Error("شناسه کاربر و اطلاعات محصول (شناسه و قیمت) اجباری هستند");
         }
@@ -125,10 +120,7 @@ const apiUtils = {
           color: data.color || null,
         };
 
-        console.log("order item that send to api: ", orderItem);
-        console.log("Final payload sent to API:", JSON.stringify(orderItem, null, 2));
         const response = await apiUtils.post("orders", orderItem);
-        console.log("response for sending order to api: ", response);
         return response;
       } catch (error) {
         handleError(error);
@@ -136,7 +128,6 @@ const apiUtils = {
     },
     update: async (id, data) => {
       try {
-        console.log("apiUtils.orders.update inputs:", { id, data });
 
         if (!id || isNaN(id)) {
           throw new Error("شناسه سفارش نامعتبر است");
@@ -155,10 +146,8 @@ const apiUtils = {
         if (data.color !== undefined && data.color !== null && data.color !== "") updateData.color = data.color;
         if (data.quantity !== undefined) updateData.quantity = data.quantity;
 
-        console.log("update payload sent to API:", JSON.stringify(updateData, null, 2));
 
         const response = await apiUtils.put(`/orders/active-order/${id}`, updateData);
-        console.log("response for updating order:", response);
         return response;
       } catch (error) {
         if (error.response) {

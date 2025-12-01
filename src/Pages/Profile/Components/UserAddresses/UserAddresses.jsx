@@ -81,7 +81,6 @@ export default function UserAddresses() {
     if (formData.isSuccess) handleRefreshKey();
   };
 
-  console.log("user addresses:", userAddresses)
   return (
     <div className="flex flex-col flex-1 gap-6 p-6 bg-white rounded-xl shadow-sm font-sans">
       <div className="flex justify-start">

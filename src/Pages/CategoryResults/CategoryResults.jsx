@@ -105,7 +105,6 @@ export default function CategoryResults({ sorting }) {
 
   }, [category, products, categories])
 
-  console.log("filterd items:", filteredProducts)
 
   useEffect(() => {
     const fetchOffers = async () => {

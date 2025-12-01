@@ -126,7 +126,6 @@ export default function Cart() {
   if (error)
     return <div className="text-center text-red-600 py-6">خطا: {error}</div>;
 
-  console.log("order : ", order)
   return (
     <main className="container mx-auto p-4">
       <nav className="flex gap-2 mb-4">

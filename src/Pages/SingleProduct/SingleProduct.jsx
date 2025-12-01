@@ -126,7 +126,6 @@ export default function SingleProduct() {
       return ShowSwal({ title: 'خطا', text: 'رنگ را انتخاب کنید', icon: 'error' });
     }
 
-    console.log("order  befor check:", order)
     const activeOrder = order?.isActive && order?.userID === currentUser.id
       ? { ...order }
       : {
@@ -138,7 +137,6 @@ export default function SingleProduct() {
         items: [],
       };
 
-    console.log("active order :", activeOrder)
     const existingIndex = activeOrder.items.findIndex(
       item => item.productID === product.id && item.color === selectedColor
     );
@@ -153,7 +151,6 @@ export default function SingleProduct() {
         payablePrice,
       };
 
-      console.log("active order:", activeOrder)
       localStorage.setItem("order", JSON.stringify(activeOrder))
       triggerUpdate();
 
@@ -173,7 +170,6 @@ export default function SingleProduct() {
       ShowSwal({ title: 'افزوده شد', text: 'محصول به سبد خرید اضافه شد', icon: 'success' });
     }
 
-    console.log("active order in else :", activeOrder)
     setOrder(activeOrder);
     triggerUpdate();
   };
@@ -195,7 +191,6 @@ export default function SingleProduct() {
   );
 
 
-  console.log("product :", product)
   return (
     <Box className="single-product-section dt-sl">
       <div className="single-product-container container">

@@ -11,11 +11,9 @@ const useOffs = () => {
       setLoading(true);
       try {
         const response = await api.get("/offs");
-        console.log("offs: ", response.data);
         
         setOffs(response.data);
       } catch (err) {
-        console.error("Error fetching categories:", err.message);
         setError(err.message || "Failed to fetch categories");
         setOffs([]);
       } finally {

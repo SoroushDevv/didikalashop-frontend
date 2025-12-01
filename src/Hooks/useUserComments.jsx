@@ -15,7 +15,6 @@ const useUserComments = () => {
         const token = getAuthToken();
 
         if (!token) {
-          console.log("No token found in localStorage");
           setError("No token provided");
           setUserComments([]);
           return;
@@ -26,7 +25,6 @@ const useUserComments = () => {
         const currentUser = usersResponse.data.find((user) => user.token === token);
 
         if (!currentUser) {
-          console.log("No user found with matching token");
           throw new Error("User not found");
         }
         setCurrentUser(currentUser);

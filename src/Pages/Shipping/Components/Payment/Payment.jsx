@@ -94,7 +94,6 @@ function Payment() {
 
   const updateOffer = async (offId) => {
     try {
-      console.log(offId);
       const response = await api.put(`/offs/active-off/${offId}/0`);
 
       if (response.status === 200) {
@@ -116,11 +115,8 @@ function Payment() {
   const checkCode = (e) => {
     e.preventDefault();
     if (codeValue !== '') {
-      console.log('input value :', codeValue);
-      console.log(isCodeUsed);
       if (!isCodeUsed) {
         const codeDetails = offs.find((off) => off.code === codeValue);
-        console.log(codeDetails);
 
         if (!codeDetails) {
           showSwal({ title: 'اطلاعاتی برای این کد وجود ندارد', text: '', icon: 'info' });

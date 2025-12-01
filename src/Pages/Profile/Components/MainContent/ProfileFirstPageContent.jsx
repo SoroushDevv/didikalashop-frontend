@@ -15,7 +15,6 @@ export default function ProfileFirstPageContent() {
     ? userOrders.filter((o) => !o.isActive).length
     : 0;
 
-    console.log("user orders :", userOrders)
   return (
     <div className="w-full max-w-2xl mx-auto bg-base-white rounded-2xl shadow-sm p-6">
       <div className="flex items-center justify-between border-b border-gray-light pb-3 mb-5">

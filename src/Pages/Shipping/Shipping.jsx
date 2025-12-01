@@ -66,7 +66,6 @@ export default function Shipping() {
     useEffect(() => {
         if (!currentUser) return;
 
-        console.log("current user : ", currentUser)
         const token = getAuthToken();
 
         const fetchUserAddresses = async () => {
@@ -83,7 +82,6 @@ export default function Shipping() {
                 });
 
                 if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-                    console.log("response.data", response.data[0])
                     setUserAddresses(response.data.map(addr => ({
                         id: addr.id,
                         address: addr.address,
@@ -185,7 +183,6 @@ export default function Shipping() {
 
                             <div className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg py-2 px-4 inline-block shadow-lg transition duration-200">
                                 <button onClick={() => {
-                                    console.log(isModalOpen)
                                     setIsModalOpen(true)
                                 }}
                                     className="flex items-center justify-center space-x-2 rtl:space-x-reverse 

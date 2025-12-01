@@ -35,7 +35,6 @@ export default function CompletePayment() {
         const res = await api.get(
           `/orders/user/${currentUser.id}`
         );
-        console.log("response :", res.data);
 
         const latestOrder = Array.isArray(res.data)
           ? res.data[res.data.length - 1]

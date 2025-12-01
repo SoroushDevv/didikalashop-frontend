@@ -11,11 +11,9 @@ const useAllComments = () => {
       setLoading(true);
       try {
         const response = await api.get("/comments");
-        console.log("all comments: ", response.data);
         
         setComments(response.data);
       } catch (err) {
-        console.error("Error fetching categories:", err.message);
         setError(err.message || "Failed to fetch categories");
         setComments([]);
       } finally {
