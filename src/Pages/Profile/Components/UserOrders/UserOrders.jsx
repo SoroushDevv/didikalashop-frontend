@@ -63,6 +63,8 @@ export default function OrdersPage() {
 
 function OrderList({ orders, products, statusIcon, statusText, color }) {
 
+  console.log("orders:", orders)
+  console.log("products:", products)
   const payablePrice = useMemo(()=> {
 
   return orders.items.reduce((sum , item) =>  sum + item.price,0) 
