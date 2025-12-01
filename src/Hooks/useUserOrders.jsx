@@ -10,6 +10,7 @@ const useUserOrders = () => {
   const [userOrdersloading, setOrdersLoading] = useState(true);
   const [userOrdersError, setOrdersError] = useState(null);
   const [refreshKey,setRefreshKey] = useState(0)
+  
  console.log("curr user:", currentUser)
 
 
@@ -27,7 +28,12 @@ const useUserOrders = () => {
          const token = getAuthToken();
 
          console.log("user id", currentUser.id)
-        const ordersResponse = await api.get(`/orders/user/${currentUser.id}`);
+        const ordersResponse = await api.get(`/orders/user/${currentUser.id}`,{
+          headers:{
+            Authorization : `bearer ${token}`,
+            "content/type" : "application/json",
+          }
+        });
 
         const orders = ordersResponse.data || [];
         console.log("useUserorders : ", orders);
