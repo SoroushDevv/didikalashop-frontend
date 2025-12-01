@@ -80,7 +80,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="loading-container">
+      <div className="loading-container w-full h-dvh">
         <CircularProgress size={"3rem"} />
       </div>
     );

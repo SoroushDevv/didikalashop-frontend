@@ -56,8 +56,8 @@ export default function Header({ handleHeight, onSendData }) {
   }
 
   return (
-    <header className="container absolute top-0 w-full z-50">
-      <div className=" w-full px-0 mx-0 md:max-w-7xl md:mx-auto md:px-4 ">
+    <header className="container absolute top-0 w-full z-50 bg-white">
+      <div className=" w-full px-0 mx-0 md:max-w-7xl md:mx-auto ">
         <Topbar isAuth={isAuth} onTopbarHeightChange={handleTopbarHeightChange} />
         <Navbar isAuth={isAuth} topbarHeight={topbarHeight} onNavbarHeightChange={handleNavbarHeightChange} />
       </div>

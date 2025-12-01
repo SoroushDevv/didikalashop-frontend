@@ -102,7 +102,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
 
   return (
     <div
-      className={` absolute left-0 right-0 bg-base-white shadow-md z-40 w-full h-50 transition-all duration-200 ease-in-out px-2 border rounded-md bg-transparent`} ref={navContainerRef} style={{ top: isScrolled ? '-40px' : `${topbarHeight}px` }} onClick={() => setShowResults(false)}
+      className={` absolute left-0 right-0 bg-base-white shadow-md z-40 w-full h-50 transition-all duration-200 ease-in-out border rounded-md bg-transparent`} ref={navContainerRef} style={{ top: isScrolled ? '-40px' : `${topbarHeight}px` }} onClick={() => setShowResults(false)}
     >
 
       <div className="w-full mx-0 px-0 md:max-w-7xl md:px-4 md:mx-auto">
