@@ -102,7 +102,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
               <div className="flex items-center">
                 مبلغ کل سفارش:
                 <span className="font-bold mr-1 text-black">
-                  {order.items.reduce((sum,item) => sum + Number(item.price)).toLocaleString("fa-IR")}
+                  {order.items.reduce((sum,item) => sum + Number(item.price),0).toLocaleString("fa-IR")}
                 </span>
                 <span className="text-xs text-black mr-1">تومان</span>
               </div>
