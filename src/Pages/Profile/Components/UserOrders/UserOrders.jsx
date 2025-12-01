@@ -90,7 +90,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
               <div className="flex items-center">
                 مبلغ کل سفارش:
                 <span className="font-bold mr-1 text-black">
-                  {order.items.reduce((sum, item) => sum + item.price, 0)}
+                  {(order.items.reduce((sum, item) => sum + item.price, 0)).toLocaleString()}
                 </span>
                 <span className="text-xs text-black mr-1">تومان</span>
               </div>
@@ -120,7 +120,7 @@ function OrderList({ orders, products, statusIcon, statusText, color }) {
 
             <div className="border-t border-gray-200 mt-3 pt-3 flex justify-end">
               <a
-                href="/profile/orders/invoice/order/284805123/"
+                href={`/profile/orders/${order.orderID}`}
                 className="flex items-center gap-1 text-blue-600 font-medium hover:text-blue-800 transition-all"
               >
                 <svg className="w-5 h-5 fill-blue-600"></svg>

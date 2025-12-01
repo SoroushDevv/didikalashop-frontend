@@ -41,6 +41,7 @@ export default function ProfileOrdersDetails() {
     setOrderProducts(mainProducts);
   }, [order, products]);
 
+  console.log("products", orderProducts)
   return (
     <div className="w-full max-w-3xl mx-auto bg-base-white rounded-2xl shadow-sm p-6 space-y-8">
       <div className="flex items-center justify-between border-b border-gray-light pb-4">
@@ -160,7 +161,7 @@ export default function ProfileOrdersDetails() {
             </div>
 
             <div className="text-sm font-semibold text-brand-primary whitespace-nowrap">
-              {item.price?.toLocaleString()} تومان
+              {item.price ? item.price.toLocaleString() : "-"} تومان
             </div>
           </div>
         ))}
