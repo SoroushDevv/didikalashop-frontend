@@ -31,7 +31,7 @@ const useUserOrders = () => {
         const ordersResponse = await api.get(`/orders/user/${currentUser.id}`,{
           headers:{
             Authorization : `bearer ${token}`,
-            "content/type" : "application/json",
+            "content-type" : "application/json",
           }
         });
 
