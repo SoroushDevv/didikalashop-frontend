@@ -42,7 +42,7 @@ export default function ProfileOrdersDetails() {
   }, [order, products]);
 
   console.log("products", orderProducts)
-  console.log("payable price:", payablePrice)
+  console.log("payable price:", payablePrice.toLocaleString())
   return (
     <div className="w-full max-w-3xl mx-auto bg-base-white rounded-2xl shadow-sm p-6 space-y-8">
       <div className="flex items-center justify-between border-b border-gray-light pb-4">
