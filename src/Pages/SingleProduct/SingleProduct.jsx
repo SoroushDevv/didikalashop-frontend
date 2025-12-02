@@ -173,7 +173,7 @@ export default function SingleProduct() {
           <span className="font-semibold text-gray-800">{product.title}</span>
         </div>
 
-        <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+        <div className="flex flex-col md:flex-row space-y-6 md:space-x-1">
           <div className="flex-1 bg-white p-4 rounded shadow">
             {product.discountPercent && (
               <div className="text-red-500 font-bold text-xl mb-2">
@@ -202,14 +202,14 @@ export default function SingleProduct() {
               </div>
             )}
 
-            <div className="flex items-center space-x-4 mb-4">
+            <div className="flex items-center mb-4">
               <button
                 onClick={() => handleQuantityChange('decrease')}
                 className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
               >
                 -
               </button>
-              <span className="text-lg">{localQuantity}</span>
+              <span className="text-lg text-center p-1">{localQuantity}</span>
               <button
                 onClick={() => handleQuantityChange('increase')}
                 className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
