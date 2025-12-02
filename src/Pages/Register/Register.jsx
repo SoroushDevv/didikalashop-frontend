@@ -120,7 +120,7 @@ export default function Register() {
                     name="username"
                     id="username"
                     placeholder="نام کاربری خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary-hover bg-gray-50"
                   />
                   <ErrorMessage name="username" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -134,7 +134,7 @@ export default function Register() {
                     name="email"
                     id="email"
                     placeholder="ایمیل خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary-hover bg-gray-50"
                   />
                   <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -148,7 +148,7 @@ export default function Register() {
                     name="phone"
                     id="phone"
                     placeholder="شماره موبایل خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary-hover bg-gray-50"
                   />
                   <ErrorMessage name="phone" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -162,7 +162,7 @@ export default function Register() {
                     name="password"
                     id="password"
                     placeholder="رمز عبور خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary-hover bg-gray-50"
                   />
                   <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
