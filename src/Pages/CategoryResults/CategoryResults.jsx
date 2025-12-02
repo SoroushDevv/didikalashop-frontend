@@ -185,7 +185,7 @@ export default function CategoryResults({ sorting }) {
           {"همه محصولات"}
         </h5>
       ) : (<h5 className="text-lg font-semibold text-gray-800 mb-4">
-        {category} 
+        {activeFilter} 
       </h5>)}
 
       {loading ? (

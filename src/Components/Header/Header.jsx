@@ -9,7 +9,6 @@ export default function Header({ handleHeight, onSendData }) {
   const [navbarHeight, setNavbarHeight] = useState(0)
   const [isAuth, setIsAuth] = useState(() => {
     const authStatus = isAuthenticated();
-    console.log("Initial auth status:", authStatus, "Token:", localStorage.getItem("authToken"));
     return authStatus;
   });
 
@@ -18,18 +17,14 @@ export default function Header({ handleHeight, onSendData }) {
 
 
    useMemo(() => {
-    console.log("topbar height + navbarHeight :", topbarHeight + " " + navbarHeight)
     const sum = topbarHeight + navbarHeight
-    console.log("sum of heights :", sum)
     onSendData(sum)
-    console.log("sum :", sum)
   }, [topbarHeight, navbarHeight])
 
   useEffect(() => {
     const checkAuth = () => {
       const authStatus = isAuthenticated();
       const token = localStorage.getItem("authToken");
-      console.log("Checking auth status:", authStatus, "Token:", token);
       setIsAuth(authStatus);
     };
 
