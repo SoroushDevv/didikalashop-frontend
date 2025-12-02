@@ -173,7 +173,7 @@ export default function SingleProduct() {
         </div>
 
         <div className="flex flex-wrap gap-2 justify-between items-start">
-          <div className="flex-1 bg-white p-4 rounded shadow">
+          <div className="w-96 h-96 bg-white p-4 rounded shadow">
             <div className='w-full'>
               {product.discountPercent && (
                 <div className="text-red-500 font-bold text-xl mb-2">
@@ -237,11 +237,11 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="w-96 h-96">
+          <div className="w-96 h-96 rounded shadow">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
-              className="w-full h-full object-contain rounded shadow"
+              className="w-full h-full object-contain "
             />
           </div>
         </div>
