@@ -13,7 +13,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import useAllProducts from "../../../../Hooks/useAllProducts";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-
+import { LogIn } from 'lucide-react';
 
 
 export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
@@ -33,7 +33,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
   const [showResults, setShowResults] = useState(false);
   const [showDropdownMenu, setShowDropDownMenu] = useState(false)
   const { products, loading, error } = useAllProducts();
-  const {isActive, setIsActive} = useState(false)
+  const { isActive, setIsActive } = useState(false)
 
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
     >
 
       <div className="w-full mx-0 px-0 md:max-w-7xl md:px-4 md:mx-auto">
-        <nav className="h-16 flex justify-between items-center" ref={mainMenuRef}>
+        <nav className="h-16 px-2 flex justify-between items-center" ref={mainMenuRef}>
           <div className="hidden  md:flex md:justify-start md:items-center md:gap-1 md:w-fit md:h-full">
 
             <Link to="#" className="relative nav-list-item category-list flex items-center gap-1 h-full "
@@ -115,7 +115,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
               }}
               onMouseLeave={() => {
                 setIsCategoryHovered(false)
-              } }>
+              }}>
               <MenuOutlinedIcon className="text-xl" />
               <span className={`category-name`}    >دسته‌بندی کالاها
 
@@ -125,14 +125,14 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
               </span>
 
 
-            <MegaMenu isCategoryHovered={isCategoryHovered}  topHeight={offsetHeight} />
+              <MegaMenu isCategoryHovered={isCategoryHovered} topHeight={offsetHeight} />
             </Link>
-            <Link to="/blogs/all" className="nav-list-item "> 
-            <span >مقالات</span>
-             </Link>
-            <Link className="nav-list-item"> 
-            <span >سوال داری؟</span>
-             </Link>
+            <Link to="/blogs/all" className="nav-list-item ">
+              <span >مقالات</span>
+            </Link>
+            <Link className="nav-list-item">
+              <span >سوال داری؟</span>
+            </Link>
           </div>
 
           <div className="visible w-3/5 h-fit content-center md:hidden">
@@ -198,6 +198,7 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
                 <>
 
                   <div className="relative flex items-center space-x-2 space-x-reverse h-full cursor-pointer group">
+
                     <span className="btn-info">سبد خرید
                       <ShoppingCartIcon className="text-2xl text-white transition" />
                     </span>
@@ -212,10 +213,17 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
                   )}
                 </>
               ) : (
-                <div className="flex items-center space-x-2 space-x-reverse h-full">
-                  <Link to="/cart" className="btn-info">سبد خرید</Link>
-                  <ShoppingCartIcon className="text-2xl text-gray-medium" />
-                </div>
+                <>
+                  <div className="hidden md:flex md:items-center md:space-x-2 md:space-x-reverse md:h-full">
+                    <Link to="/cart" className="btn-info">سبد خرید</Link>
+                    <ShoppingCartIcon className="text-2xl text-gray-medium" />
+                  </div>
+                  <div className="flex items-center space-x-2 space-x-reverse h-full md:hidden">
+                    <Link to="/login" className="btn-info">ورود/ثبت نام </Link>
+                        <LogIn className="text-2xl text-gray-medium"/>
+                  </div>
+                </>
+
               )}
             </div>
           </div>

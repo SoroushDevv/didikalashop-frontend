@@ -93,7 +93,7 @@ export default function Home() {
 
     <main className="mx-auto">
       <div className="w-full">
-        <div className="flex justify-center gap-4 mb-7">
+        <div className="flex flex-wrap justify-center gap-4 mb-7">
 
           <aside className="w-1/4">
             <div className="w-full">
