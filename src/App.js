@@ -60,7 +60,6 @@ function AppContent() {
         )}
 
         <div className={`w-full mx-0 px-0 md:max-w-7xl md:mx-auto md:px-4 ${isScrolled ? ' scrolled' : ''} z-10 `} ref={mainContentRef} style={{ paddingTop: `${value}px` }}>
-          {/* <div className={`sticky w-full mx-0 px-0 md:max-w-7xl md:mx-auto md:px-4 ${isScrolled ? ' scrolled' : ''} z-10`} ref={mainContentRef} style={{top:`${value}px`}}> */}
           {React.cloneElement(router, { isAuthenticatedState })}
         </div>
 
@@ -70,7 +69,7 @@ function AppContent() {
         <div className="container bg-brand-primary mx-auto px-4 ">
 
           <ul className="flex justify-around items-center w-full">
-            <li className="flex flex-col items-center text-gray-700 text-sm hover:text-blue-600 transition-colors duration-200">
+            <li className="flex flex-col items-center text-white text-sm hover:text-blue-600 transition-colors duration-200">
               <a className="text-inherit flex flex-col justify-between items-center" href="/" >
                 <OtherHousesOutlinedIcon />
                 <span>خانه</span>
@@ -79,7 +78,7 @@ function AppContent() {
 
             </li>
 
-            <li className="flex flex-col items-center text-gray-700 text-sm hover:text-blue-600 transition-colors duration-200">
+            <li className="flex flex-col items-center text-white text-sm hover:text-blue-600 transition-colors duration-200">
               <a className="text-inherit flex flex-col justify-between items-center" href="/" >
                 <MenuOutlinedIcon />
                 <span>دسته بندی ها</span>
@@ -87,7 +86,7 @@ function AppContent() {
               </a>
 
             </li>
-            <li className="flex flex-col items-center text-gray-700 text-sm hover:text-blue-600 transition-colors duration-200">
+            <li className="flex flex-col items-center text-white text-sm hover:text-blue-600 transition-colors duration-200">
               <a className="text-inherit flex flex-col justify-between items-center" href="/cart" >
                 <ShoppingBagOutlinedIcon />
                 <span> سبد خرید </span>
@@ -95,7 +94,7 @@ function AppContent() {
               </a>
 
             </li>
-            <li className="flex flex-col items-center text-gray-700 text-sm hover:text-blue-600 transition-colors duration-200">
+            <li className="flex flex-col items-center text-white text-sm hover:text-blue-600 transition-colors duration-200">
               <a className="text-inherit flex flex-col justify-between items-center" href="/profile" >
                 <PersonOutlinedIcon />
                 <span>پروفایل</span>

@@ -1,17 +1,8 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './SingleProduct.css';
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Typography,
-  Breadcrumbs,
-  Link,
-  Button,
-  Grid,
-} from '@mui/material';
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import { Check } from 'lucide-react';
 import StarRating from '../../Components/Rating/StarRating';
-import { styled } from '@mui/material/styles';
 import useAllProducts from '../../Hooks/useAllProducts';
 import ProductComment from '../ProductComment/ProductComment';
 import ShowSwal from '../../Components/ShowSwal/ShowSwal';
@@ -19,7 +10,6 @@ import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import { useCart } from './../../Contexts/CartContext';
 import { v4 as uuidv4 } from 'uuid';
 
-// 🎨 رنگ‌ها
 const colorMap = {
   'مشکی': '#000000',
   'سفید': '#FFFFFF',
@@ -41,37 +31,23 @@ const ColorChip = ({ color, isSelected, onClick }) => {
   const lightColors = ['#FFFFFF', '#FFFF00', '#FF69B4', '#C0C0C0', 'transparent'];
 
   return (
-    <Box className="color-chip">
+    <div className="flex flex-col items-center cursor-pointer">
       <div
-        className={`color-circle ${isSelected ? "selected" : ""}`}
+        className={`w-8 h-8 rounded-full border flex items-center justify-center ${
+          isSelected ? 'ring-2 ring-red-500' : ''
+        }`}
         style={{ backgroundColor: hexColor }}
         onClick={onClick}
         title={color}
       >
         {isSelected && (
-          <CheckOutlinedIcon
-            className={`check-icon ${lightColors.includes(hexColor) ? "dark" : "light"}`}
-          />
+          <Check size={16} className={lightColors.includes(hexColor) ? 'text-black' : 'text-white'} />
         )}
       </div>
-      <Typography variant="body2" className="color-name">
-        {color}
-      </Typography>
-    </Box>
+      <span className="text-sm mt-1">{color}</span>
+    </div>
   );
 };
-
-const ProductImage = styled('img')(({ theme }) => ({
-  width: '100%',
-  minHeight: '100%',
-  objectFit: 'cover',
-}));
-
-const ProductCard = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(3),
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-}));
 
 export default function SingleProduct() {
   const { order, setOrder, loading, error, triggerUpdate } = useCart();
@@ -103,13 +79,11 @@ export default function SingleProduct() {
   useEffect(() => {
     if (!order || !product || !selectedColor) return;
 
-
     const existingItem = order.items?.find(
       item => item.productID === product.id && item.color === selectedColor
     );
     setLocalQuantity(existingItem ? existingItem.quantity : 1);
   }, [product, selectedColor, order]);
-
 
   const handleAddToCart = () => {
     if (!currentUser?.id) {
@@ -151,7 +125,7 @@ export default function SingleProduct() {
         payablePrice,
       };
 
-      localStorage.setItem("order", JSON.stringify(activeOrder))
+      localStorage.setItem('order', JSON.stringify(activeOrder));
       triggerUpdate();
 
       ShowSwal({ title: 'به‌روزرسانی شد', text: 'محصول به‌روزرسانی شد', icon: 'success' });
@@ -164,7 +138,7 @@ export default function SingleProduct() {
         payablePrice,
         product,
       });
-      localStorage.setItem("order", JSON.stringify(activeOrder))
+      localStorage.setItem('order', JSON.stringify(activeOrder));
       triggerUpdate();
 
       ShowSwal({ title: 'افزوده شد', text: 'محصول به سبد خرید اضافه شد', icon: 'success' });
@@ -183,83 +157,93 @@ export default function SingleProduct() {
     }
   };
 
-  if (loading || productsLoading) return <Typography>در حال بارگذاری...</Typography>;
-  if (!product) return <Typography>محصول یافت نشد</Typography>;
+  if (loading || productsLoading) return <div className="p-4 text-center">در حال بارگذاری...</div>;
+  if (!product) return <div className="p-4 text-center">محصول یافت نشد</div>;
 
   const isInCart = order?.items?.some(
     item => item.productID === product.id && item.color === selectedColor
   );
 
-
   return (
-    <Box className="single-product-section dt-sl">
-      <div className="single-product-container container">
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3,mt:3 }}>
-          <Link underline="hover" color="inherit" href="/">خانه</Link>
-          <Typography color="text.primary">{product.title}</Typography>
-        </Breadcrumbs>
+    <div className="single-product-section px-4 py-6">
+      <div className="container mx-auto">
+        <div className="flex space-x-2 text-gray-600 mb-4 mt-3">
+          <a href="/" className="hover:underline">خانه</a>
+          <span>/</span>
+          <span className="font-semibold text-gray-800">{product.title}</span>
+        </div>
 
-        <Grid container spacing={3} className="single-product_wrapper">
-          <Grid item xs={12} md={6}>
-            <div className="product-details-card">
-
-              {
-                product.discountPercent && <Typography variant="h4" className="product-discount">{product.discountPercent}%</Typography>
-              }
-
-              <Typography variant="h4" className="product-title">{product.title}</Typography>
-              <Typography variant="h6" className="product-desc">{product.productDesc}</Typography>
-              <Typography variant="h6" className="product-price">
-                قیمت: {Number(product.price).toLocaleString("fa")} تومان
-              </Typography>
-
-
-              {product.colors?.length > 0 && (
-                <div className="product-color-selector">
-                  <Typography variant="body2" className="color-label">انتخاب رنگ:</Typography>
-                  <div className="color-options">
-                    {product.colors.map((color, i) => (
-                      <ColorChip
-                        key={i}
-                        color={color}
-                        isSelected={selectedColor === color}
-                        onClick={() => setSelectedColor(color)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="quantity-control">
-                <Button onClick={() => handleQuantityChange('increase')}>+</Button>
-                <Typography>{localQuantity}</Typography>
-                <Button onClick={() => handleQuantityChange('decrease')}>-</Button>
+        <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+          <div className="flex-1 bg-white p-4 rounded shadow">
+            {product.discountPercent && (
+              <div className="text-red-500 font-bold text-xl mb-2">
+                {product.discountPercent}%
               </div>
+            )}
+            <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
+            <p className="text-gray-700 mb-2">{product.productDesc}</p>
+            <p className="text-lg font-semibold mb-4">
+              قیمت: {Number(product.price).toLocaleString("fa")} تومان
+            </p>
 
-              <Button
-                variant="contained"
-                color="error"
-                className="add-to-cart-button"
-                disabled={product.count === 0}
-                onClick={handleAddToCart}
+            {product.colors?.length > 0 && (
+              <div className="mb-4">
+                <p className="text-sm font-medium mb-2">انتخاب رنگ:</p>
+                <div className="flex space-x-2">
+                  {product.colors.map((color, i) => (
+                    <ColorChip
+                      key={i}
+                      color={color}
+                      isSelected={selectedColor === color}
+                      onClick={() => setSelectedColor(color)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center space-x-4 mb-4">
+              <button
+                onClick={() => handleQuantityChange('decrease')}
+                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
               >
-                {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
-              </Button>
+                -
+              </button>
+              <span className="text-lg">{localQuantity}</span>
+              <button
+                onClick={() => handleQuantityChange('increase')}
+                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              >
+                +
+              </button>
             </div>
-          </Grid>
 
-          <Grid item xs={12} md={6}>
-            <div className="product-image-wrapper">
-              <ProductImage src={`/img/products/${product.img}`} alt={product.title} />
-            </div>
-          </Grid>
-        </Grid>
+            <button
+              onClick={handleAddToCart}
+              disabled={product.count === 0}
+              className={`w-full py-2 rounded text-white font-semibold ${
+                product.count === 0
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-red-500 hover:bg-red-600'
+              }`}
+            >
+              {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
+            </button>
+          </div>
+
+          <div className="flex-1">
+            <img
+              src={`/img/products/${product.img}`}
+              alt={product.title}
+              className="w-full h-full object-cover rounded shadow"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="product-comment-section">
+      <div className="mt-6">
         <ProductComment product={product} />
       </div>
-    </Box>
-
+    </div>
   );
 }
