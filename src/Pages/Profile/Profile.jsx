@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import "./Profile.css";
 import ProfileSidebar from "./Components/ProfileSidebar/ProfileSidebar";
 import { isAuthenticated } from "../../Utils/AuthUtils";
@@ -15,14 +15,14 @@ export default function Profile() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isLogedIn === false) {
+    if (!isLogedIn) {
       navigate("/")
     }
-  }, isLogedIn)
+  }, [isLogedIn])
 
   return (
 <main className="w-full text-[#333] font-sans py-8">
-  {currentUser ? (
+  {currentUser &&
     <div className="w-full flex flex-col  md:flex-row-reverse gap-4">
       <div className="bg-white border rounded-2xl shadow-md p-5 mb-5 md:hidden">
         <div className="flex flex-col justify-center">
@@ -51,9 +51,7 @@ export default function Profile() {
       </aside>
 
     </div>
-  ) : (
-    <ErrorMessage msg={"برای دیدن داشبورد ابتدا لاگین کنید"} />
-  )}
+  }
 </main>
 
   );
