@@ -172,8 +172,8 @@ export default function SingleProduct() {
           <span className="font-semibold text-gray-800">{product.title}</span>
         </div>
 
-        <div className="flex flex-wrap gap-2 justify-between items-start">
-          <div className="w-96 h-96 bg-white p-4 rounded shadow">
+        <div className="flex flex-wrap gap-2 justify-between items-start shadow">
+          <div className="w-96 h-96 bg-white p-4 rounded ">
             <div className='w-full'>
               {product.discountPercent && (
                 <div className="text-red-500 font-bold text-xl mb-2">
@@ -237,7 +237,7 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="w-96 h-96 rounded shadow">
+          <div className="w-96 h-96 rounded">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
