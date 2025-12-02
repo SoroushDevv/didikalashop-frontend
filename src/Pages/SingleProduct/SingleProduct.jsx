@@ -172,9 +172,9 @@ export default function SingleProduct() {
           <span className="font-semibold text-gray-800">{product.title}</span>
         </div>
 
-        <div className="flex flex-col space-y-6 lg:space-x-1 md:flex-row ">
-          <div className="flex-1 md:h-[400px] bg-white p-4 rounded shadow">
-            <div className='h-fit w-full'>
+        <div className="flex flex-wrap gap-2 justify-between items-center">
+          <div className="flex-1 bg-white p-4 rounded shadow">
+            <div className='w-full'>
               {product.discountPercent && (
                 <div className="text-red-500 font-bold text-xl mb-2">
                   {product.discountPercent}%
@@ -204,14 +204,15 @@ export default function SingleProduct() {
 
               <div className="flex items-center mb-4">
                 <button
-                  onClick={() => handleQuantityChange('decrease')}
+                  onClick={() => handleQuantityChange('increase')}
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                 >
                   -
                 </button>
                 <span className="text-lg text-center p-1">{localQuantity}</span>
                 <button
-                  onClick={() => handleQuantityChange('increase')}
+                  onClick={() => handleQuantityChange('decrease')}
+
                   className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
                 >
                   +
@@ -225,7 +226,7 @@ export default function SingleProduct() {
               <button
                 onClick={handleAddToCart}
                 disabled={product.count === 0}
-                className={` py-2 rounded text-white font-semibold ${product.count === 0
+                className={` p-2 rounded text-white font-semibold ${product.count === 0
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-red-500 hover:bg-red-600'
                   }`}
@@ -236,7 +237,7 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="flex-1 md:size-[400px]">
+          <div className="size-96">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
