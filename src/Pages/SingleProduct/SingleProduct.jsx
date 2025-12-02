@@ -33,9 +33,8 @@ const ColorChip = ({ color, isSelected, onClick }) => {
   return (
     <div className="flex flex-col items-center cursor-pointer">
       <div
-        className={`w-8 h-8 rounded-full border flex items-center justify-center ${
-          isSelected ? 'ring-2 ring-red-500' : ''
-        }`}
+        className={`w-8 h-8 rounded-full border flex items-center justify-center ${isSelected ? 'ring-2 ring-red-500' : ''
+          }`}
         style={{ backgroundColor: hexColor }}
         onClick={onClick}
         title={color}
@@ -218,17 +217,19 @@ export default function SingleProduct() {
               </button>
             </div>
 
-            <button
-              onClick={handleAddToCart}
-              disabled={product.count === 0}
-              className={`w-full py-2 rounded text-white font-semibold ${
-                product.count === 0
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-red-500 hover:bg-red-600'
-              }`}
-            >
-              {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
-            </button>
+            <div className='w-full py-2 flex justify-center items-center'>
+              <button
+                onClick={handleAddToCart}
+                disabled={product.count === 0}
+                className={`rounded text-white font-semibold ${product.count === 0
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-red-500 hover:bg-red-600'
+                  }`}
+              >
+                {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
+              </button>
+            </div>
+
           </div>
 
           <div className="flex-1">
