@@ -180,15 +180,6 @@ export default function CategoryResults({ sorting }) {
         </ul>
       </div>
 
-      {category && category == "all" ? (
-        <h5 className="text-lg font-semibold text-gray-800 mb-4">
-          {"همه محصولات"}
-        </h5>
-      ) : (<h5 className="text-lg font-semibold text-gray-800 mb-4">
-        {sort.map((sort) => activeFilter === sort.value ? sort.label
-         : "")} 
-      </h5>)}
-
       {loading ? (
         <p className="text-center text-gray-600">در حال بارگذاری...</p>
       ) : error ? (
