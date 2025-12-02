@@ -66,8 +66,8 @@ function AppContent() {
 
       </div>
       <Footer isAuthenticated={isAuthenticatedState} top={mainContentHeight ? mainContentHeight + value : "100vh"} />
-      <section className="fixed bottom-0 left-0 right-0 w-full h-16 bg-brand-primary shadow-lg flex items-center justify-center z-50 md:hidde lg:hidden backdrop-blur-lg bg-opacity-90">
-        <div className="container mx-auto px-4 ">
+      <section className="fixed bottom-0 left-0 right-0 w-full h-16 bg-white shadow-lg flex items-center justify-center z-50 md:hidde lg:hidden backdrop-blur-lg bg-opacity-90">
+        <div className="container bg-brand-primary mx-auto px-4 ">
 
           <ul className="flex justify-around items-center w-full">
             <li className="flex flex-col items-center text-gray-700 text-sm hover:text-blue-600 transition-colors duration-200">
