@@ -105,7 +105,7 @@ export default function LoginPage() {
                     type="checkbox"
                     name="rememberMe"
                     id="rememberMe"
-                    className="h-4 w-4 text-blue-600 rounded"
+                    className="h-4 w-4 text-brand-primary rounded"
                   />
                   <label htmlFor="rememberMe" className="mr-2 text-gray-700">مرا به خاطر بسپار</label>
                 </div>
@@ -113,7 +113,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                  className="w-full bg-brand-primary text-white py-2 rounded-lg hover:bg-brand-primary-hover transition"
                 >
                   {isSubmitting ? "در حال ورود..." : "ورود به دیدیکالا"}
                 </button>
@@ -123,7 +123,7 @@ export default function LoginPage() {
 
           <div className="mt-4 text-center text-gray-600">
             <span>کاربر جدید هستید؟ </span>
-            <Link to="/register" className="text-blue-600 hover:underline">ثبت نام در دیدیکالا</Link>
+            <Link to="/register" className="text-brand-primary hover:underline">ثبت نام در دیدیکالا</Link>
           </div>
         </div>
 

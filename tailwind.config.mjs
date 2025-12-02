@@ -21,6 +21,7 @@ module.exports = {
     extend: {
       colors: {
         'brand-primary': '#FF4D4F', // (sell,action)
+        'brand-primary-hover': '#E04345',
         'brand-secondary': '#1D3557', // (dark blue, reliability)
         'neutral-text': '#4A4A4A',  // (gray for texts)
         'success': '#52B788',       // (confirm green)

@@ -216,11 +216,10 @@ export default function Navbar({ isAuth, topbarHeight, onNavbarHeightChange }) {
                 <>
                   <div className="hidden md:flex md:items-center md:space-x-2 md:space-x-reverse md:h-full">
                     <Link to="/cart" className="btn-info">سبد خرید</Link>
-                    <ShoppingCartIcon className="text-2xl text-gray-medium" />
                   </div>
                   <div className="flex items-center space-x-2 space-x-reverse h-full md:hidden">
-                    <Link to="/login" className="btn-info">ورود/ثبت نام </Link>
-                        <LogIn className="text-2xl text-gray-medium"/>
+                    <Link to="/login" className="btn-info">ورود/ثبت نام
+                    </Link>
                   </div>
                 </>
 

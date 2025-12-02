@@ -120,7 +120,7 @@ export default function Register() {
                     name="username"
                     id="username"
                     placeholder="نام کاربری خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
                   />
                   <ErrorMessage name="username" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -134,7 +134,7 @@ export default function Register() {
                     name="email"
                     id="email"
                     placeholder="ایمیل خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
                   />
                   <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -148,7 +148,7 @@ export default function Register() {
                     name="phone"
                     id="phone"
                     placeholder="شماره موبایل خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
                   />
                   <ErrorMessage name="phone" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -162,7 +162,7 @@ export default function Register() {
                     name="password"
                     id="password"
                     placeholder="رمز عبور خود را وارد نمایید"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-600 focus:ring-1 focus:ring-pink-300 bg-gray-50"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-pink-300 bg-gray-50"
                   />
                   <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
                 </div>
@@ -170,7 +170,7 @@ export default function Register() {
                 <div className="flex items-center text-gray-600 text-sm">
                   <Field type="checkbox" name="laws" id="laws" className="mr-2" />
                   <label htmlFor="laws">
-                    <a href="#" className="text-pink-600 hover:underline">حریم خصوصی</a> و <a href="#" className="text-pink-600 hover:underline">شرایط و قوانین</a> را خوانده‌ام و می‌پذیرم.
+                    <a href="#" className="text-brand-primary hover:underline">حریم خصوصی</a> و <a href="#" className="text-brand-primary hover:underline">شرایط و قوانین</a> را خوانده‌ام و می‌پذیرم.
                   </label>
                 </div>
                 <ErrorMessage name="laws" component="div" className="text-red-600 text-sm mt-1" />
@@ -178,7 +178,7 @@ export default function Register() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !isValid}
-                  className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-pink-600 to-pink-400 hover:from-pink-700 hover:to-pink-500 text-white py-2 rounded-lg font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-brand-primary to-brand-primary-hover hover:from-brand-primary hover:to-brand-primary-hover text-white py-2 rounded-lg font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "در حال ثبت..." : "ثبت نام"}
                 </button>
@@ -187,7 +187,7 @@ export default function Register() {
           </Formik>
 
           <div className="text-center text-gray-600 text-sm mt-4">
-            قبلا ثبت نام کرده‌اید؟ <Link to="/login" className="text-pink-600 font-medium hover:underline">ورود</Link>
+            قبلا ثبت نام کرده‌اید؟ <Link to="/login" className="text-brand-primary font-medium hover:underline">ورود</Link>
           </div>
         </div>
       </div>

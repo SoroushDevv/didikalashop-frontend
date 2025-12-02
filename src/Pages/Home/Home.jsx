@@ -95,7 +95,7 @@ export default function Home() {
       <div className="w-full">
         <div className="flex flex-wrap justify-center gap-4 mb-7">
 
-          <aside className="w-1/4">
+          <aside className="hidden md:w-1/4">
             <div className="w-full">
               <CustomCarousel
                 items={topSliderAsideImages}
