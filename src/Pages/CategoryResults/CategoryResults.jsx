@@ -185,7 +185,8 @@ export default function CategoryResults({ sorting }) {
           {"همه محصولات"}
         </h5>
       ) : (<h5 className="text-lg font-semibold text-gray-800 mb-4">
-        {activeFilter} 
+        {sort.map((sort) => activeFilter === sort.value ? sort.label
+         : "")} 
       </h5>)}
 
       {loading ? (
