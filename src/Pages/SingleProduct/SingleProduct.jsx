@@ -237,11 +237,11 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="size-96">
+          <div className="w-fit h-auto">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
-              className="w-full h-full object-contain rounded shadow"
+              className="size-96 object-contain rounded shadow"
             />
           </div>
         </div>
