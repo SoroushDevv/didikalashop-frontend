@@ -172,7 +172,7 @@ export default function SingleProduct() {
           <span className="font-semibold text-gray-800">{product.title}</span>
         </div>
 
-        <div className="flex flex-wrap gap-2 justify-between items-center">
+        <div className="flex flex-wrap gap-2 justify-between items-start">
           <div className="flex-1 bg-white p-4 rounded shadow">
             <div className='w-full'>
               {product.discountPercent && (
@@ -237,11 +237,11 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="w-fit h-auto">
+          <div className="w-96 h-96">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
-              className="size-96 object-contain rounded shadow"
+              className="w-full h-full object-contain rounded shadow"
             />
           </div>
         </div>
