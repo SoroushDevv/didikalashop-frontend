@@ -156,7 +156,7 @@ export default function SingleProduct() {
     }
   };
 
-  if (loading || productsLoading) return <div className="p-4 text-center">در حال بارگذاری...</div>;
+  if (loading || productsLoading) return <div className="p-4 text-center w-full h-svh">در حال بارگذاری...</div>;
   if (!product) return <div className="p-4 text-center">محصول یافت نشد</div>;
 
   const isInCart = order?.items?.some(
@@ -172,58 +172,62 @@ export default function SingleProduct() {
           <span className="font-semibold text-gray-800">{product.title}</span>
         </div>
 
-        <div className="flex flex-col md:flex-row space-y-6 md:space-x-1">
-          <div className="flex-1 bg-white p-4 rounded shadow">
-            {product.discountPercent && (
-              <div className="text-red-500 font-bold text-xl mb-2">
-                {product.discountPercent}%
-              </div>
-            )}
-            <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
-            <p className="text-gray-700 mb-2">{product.productDesc}</p>
-            <p className="text-lg font-semibold mb-4">
-              قیمت: {Number(product.price).toLocaleString("fa")} تومان
-            </p>
-
-            {product.colors?.length > 0 && (
-              <div className="mb-4">
-                <p className="text-sm font-medium mb-2">انتخاب رنگ:</p>
-                <div className="flex space-x-2">
-                  {product.colors.map((color, i) => (
-                    <ColorChip
-                      key={i}
-                      color={color}
-                      isSelected={selectedColor === color}
-                      onClick={() => setSelectedColor(color)}
-                    />
-                  ))}
+        <div className="flex flex-col space-y-6 lg:space-x-1 md:flex-row ">
+          <div className="flex-1 md:h-[400px] bg-white p-4 rounded shadow">
+            <div className='h-fit w-full'>
+              {product.discountPercent && (
+                <div className="text-red-500 font-bold text-xl mb-2">
+                  {product.discountPercent}%
                 </div>
-              </div>
-            )}
+              )}
+              <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
+              <p className="text-gray-700 mb-2">{product.productDesc}</p>
+              <p className="text-lg font-semibold mb-4">
+                قیمت: {Number(product.price).toLocaleString("fa")} تومان
+              </p>
 
-            <div className="flex items-center mb-4">
-              <button
-                onClick={() => handleQuantityChange('decrease')}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-              >
-                -
-              </button>
-              <span className="text-lg text-center p-1">{localQuantity}</span>
-              <button
-                onClick={() => handleQuantityChange('increase')}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-              >
-                +
-              </button>
+              {product.colors?.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-sm font-medium mb-2">انتخاب رنگ:</p>
+                  <div className="flex space-x-2">
+                    {product.colors.map((color, i) => (
+                      <ColorChip
+                        key={i}
+                        color={color}
+                        isSelected={selectedColor === color}
+                        onClick={() => setSelectedColor(color)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-center mb-4">
+                <button
+                  onClick={() => handleQuantityChange('decrease')}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  -
+                </button>
+                <span className="text-lg text-center p-1">{localQuantity}</span>
+                <button
+                  onClick={() => handleQuantityChange('increase')}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  +
+                </button>
+              </div>
+
             </div>
 
-            <div className='w-full py-2 flex justify-center items-center'>
+
+            <div className=' py-2 flex justify-center items-center'>
               <button
                 onClick={handleAddToCart}
                 disabled={product.count === 0}
-                className={`rounded text-white font-semibold ${product.count === 0
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-red-500 hover:bg-red-600'
+                className={` py-2 rounded text-white font-semibold ${product.count === 0
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-red-500 hover:bg-red-600'
                   }`}
               >
                 {isInCart ? 'به‌روزرسانی سبد' : 'افزودن به سبد خرید'}
@@ -232,11 +236,11 @@ export default function SingleProduct() {
 
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1 md:size-[400px]">
             <img
               src={`/img/products/${product.img}`}
               alt={product.title}
-              className="w-full h-full object-cover rounded shadow"
+              className="w-full h-full object-contain rounded shadow"
             />
           </div>
         </div>
