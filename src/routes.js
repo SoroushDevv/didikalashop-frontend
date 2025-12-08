@@ -43,6 +43,7 @@ import UserInfoMobile from "./Pages/MobileProfile/UserInfo/UserInfoMobile.jsx";
 import OrdersDetailsMobile from "./Pages/MobileProfile/OrdersDetails/OrdersDetailsMobile.jsx";
 import UserHistoryMobile from "./Pages/MobileProfile/History/HistoryMobile.jsx";
 import UserOrdersMobile from "./Pages/MobileProfile/Orders/OrdersMobile.jsx";
+import AccordionMobileMenu from "./Components/AccordionMobileMenu/AccordionMobileMenu.jsx"
 
 
 
@@ -53,6 +54,9 @@ let routes = [
         path: "/blogs", element: <Blogs />, children: [
             { path: "/blogs/:category", element: <Blogs /> }
         ]
+    },
+     {
+        path:"/mobile-menu",element:<AccordionMobileMenu />
     },
     { path: "/blog-details/:id", element: <BlogDetail /> },
     { path: "/cart", element: <Cart /> },
