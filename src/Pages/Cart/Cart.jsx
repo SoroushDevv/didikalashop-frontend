@@ -6,8 +6,7 @@ import ShowSwal from "../../Components/ShowSwal/ShowSwal";
 import CheckoutSummary from "../../Components/CheckoutSummary/CheckoutSummary";
 import { useCart } from "../../Contexts/CartContext";
 import ErrorMessage from "./../ErrorMessage/ErrorMessage";
-import Loader from "../../Components/Loader/Loader";
-
+import Loader from "./../../Components/Loader/Loader";
 const colorMap = {
   مشکی: "#000000",
   سفید: "#FFFFFF",
@@ -57,10 +56,10 @@ export default function Cart() {
 
   useEffect(() => {
 
-    if(order.items.length === 0) {
+    if (order.items.length === 0) {
       Navigate("/")
     }
-  },[order])
+  }, [order])
 
   const totalAmount = order.items.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -122,20 +121,24 @@ export default function Cart() {
     });
   };
 
-  if (loading)
-    return <Loader/>;
-  if (error)
-    return <div className="text-center text-red-600 py-6">خطا: {error}</div>;
+  if (loading || !order) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (error) return <div className="text-center text-red-600 py-6">خطا: {error}</div>;
 
   return (
     <main className="container mx-auto p-4">
       <nav className="flex gap-2 mb-4">
         <button
-          className={`px-4 py-2 border rounded-md font-medium transition ${
-            activeTab === "orders"
-              ? "bg-blue-600 text-white border-blue-600 shadow-md"
-              : "bg-gray-50 text-gray-600 border-gray-300 hover:bg-blue-100"
-          }`}
+          className={`px-4 py-2 border rounded-md font-medium transition ${activeTab === "orders"
+            ? "bg-blue-600 text-white border-blue-600 shadow-md"
+            : "bg-gray-50 text-gray-600 border-gray-300 hover:bg-blue-100"
+            }`}
           onClick={() => setActiveTab("orders")}
         >
           سبد خرید
@@ -208,11 +211,10 @@ export default function Cart() {
                           />
                           <button
                             disabled={item.quantity === 1}
-                            className={`px-3 py-1 ${
-                              item.quantity === 1
-                                ? "text-gray-400 cursor-not-allowed"
-                                : "hover:bg-gray-100"
-                            }`}
+                            className={`px-3 py-1 ${item.quantity === 1
+                              ? "text-gray-400 cursor-not-allowed"
+                              : "hover:bg-gray-100"
+                              }`}
                             onClick={() =>
                               decreaseQuantity(item.productID, item.color)
                             }
@@ -246,8 +248,8 @@ export default function Cart() {
                             {(
                               item.price * item.quantity -
                               item.price *
-                                item.quantity *
-                                (item.product.discountPercent / 100)
+                              item.quantity *
+                              (item.product.discountPercent / 100)
                             ).toLocaleString()}{" "}
                             تومان
                           </span>
