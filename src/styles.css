@@ -2289,6 +2289,16 @@ video {
   background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
+.bg-blue-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity, 1));
+}
+
+.bg-blue-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 197 253 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
 }
@@ -2341,6 +2351,14 @@ video {
 
 .fill-blue-600 {
   fill: #2563eb;
+}
+
+.fill-blue-950 {
+  fill: #172554;
+}
+
+.stroke-blue-950 {
+  stroke: #172554;
 }
 
 .object-contain {
