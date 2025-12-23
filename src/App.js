@@ -72,7 +72,7 @@ function AppContent() {
 
           <ul className="flex justify-around items-center w-full p-2">
             <li className="flex flex-col items-center text-white text-sm hover:text-blue-600 transition-colors duration-200" onClick={() => setIsOpen(false)}>
-              <a className="text-inherit flex flex-col justify-between items-center" href="#" >
+              <a className="text-inherit flex flex-col justify-between items-center" href="/" >
                 <OtherHousesOutlinedIcon />
                 <span>خانه</span>
 
