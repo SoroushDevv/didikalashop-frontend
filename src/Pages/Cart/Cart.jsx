@@ -6,7 +6,7 @@ import ShowSwal from "../../Components/ShowSwal/ShowSwal";
 import CheckoutSummary from "../../Components/CheckoutSummary/CheckoutSummary";
 import { useCart } from "../../Contexts/CartContext";
 import ErrorMessage from "./../ErrorMessage/ErrorMessage";
-import Loader from "./../../Components/Loader/Loader";
+
 const colorMap = {
   مشکی: "#000000",
   سفید: "#FFFFFF",
@@ -124,7 +124,7 @@ export default function Cart() {
   if (loading || !order) {
     return (
       <div className="w-full h-screen flex justify-center items-center">
-        <Loader />
+        <div>در حال بارگذاری...</div>
       </div>
     );
   }
