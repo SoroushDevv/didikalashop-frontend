@@ -6,7 +6,7 @@ import api from "../../../api/axios";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import ShowSwal from "../../../Components/ShowSwal/ShowSwal";
 import ChangeAddressModal from "../../../Components/Portal/AddressFormModal";
-
+import Loader from "../../../Components/Loader/Loader";
 export default function AddressesMobile() {
   const { userAddresses, loading, error, handleRefreshKey } = useUserAddresses();
   const token = getAuthToken();
@@ -15,7 +15,7 @@ export default function AddressesMobile() {
 
   if (loading)
     return (
-      <p className="text-center text-gray-600 font-medium">در حال بارگذاری...</p>
+      <Loader/>
     );
   if (error)
     return (

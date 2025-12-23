@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "./../../Pages/ErrorMessage/ErrorMessage";
 import useUserCart from "../../Hooks/useUserCart";
+import Loader from "../Loader/Loader";
 
 export default function ShoppingCart() {
 
@@ -34,7 +35,7 @@ export default function ShoppingCart() {
         className="max-h-64 overflow-y-auto divide-y divide-gray-100"
       >
         {loading ? (
-          <div className="p-4 text-center text-gray-500">در حال بارگذاری...</div>
+          <Loader/>
         ) : cartItems.length === 0 ? (
           <ErrorMessage msg="آیتمی وجود ندارد" />
         ) : (

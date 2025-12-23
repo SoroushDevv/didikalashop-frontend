@@ -6,7 +6,7 @@ import { removeAuthToken } from "../../../../Utils/AuthUtils";
 import { removeLocalStorage } from "../../../../Utils/StorageUtils";
 import LogoutIcon from '@mui/icons-material/Logout';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
-
+import Loader from "../../../../Components/Loader/Loader";
 
 
 export default function ProfileSidebar() {
@@ -14,7 +14,7 @@ export default function ProfileSidebar() {
 
   const Navigate = useNavigate()
   if (loading) {
-    return <div>در حال بارگذاری...</div>;
+    return <Loader/>;
   }
   if (error) {
     return <div>خطا: {error}</div>;

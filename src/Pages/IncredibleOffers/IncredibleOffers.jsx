@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAllProducts from "./../../Hooks/useAllProducts";
 import useOffs from "../../Hooks/useAllOffs";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Loader from "../../Components/Loader/Loader";
 
 const ProductRating = ({ value }) => {
   const fullStars = Math.floor(value);
@@ -40,7 +41,7 @@ export default function IncredibleOffers() {
     <div className="container mx-auto px-4 py-8">
       <div className="w-full">
         {loading ? (
-          <div className="text-center text-indigo-600 font-semibold">در حال بارگذاری...</div>
+          <Loader/>
         ) : error ? (
           <div className="text-center text-red-500">{error}</div>
         ) : filteredItems.length > 0 ? (

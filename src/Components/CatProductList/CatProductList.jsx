@@ -6,6 +6,7 @@ import useAllProducts from "../../Hooks/useAllProducts";
 import api from "../../api/axios";
 import ShowSwal from "./../ShowSwal/ShowSwal";
 import SnackBar from "./../SnackBar/SnackBar";
+import Loader from "../Loader/Loader";
 
 
 export default function CatProductList({ sort }) {
@@ -110,7 +111,7 @@ export default function CatProductList({ sort }) {
           {searchValue && `، جستجو: ${decodeURIComponent(searchValue)}`}
         </h2>
         {loading ? (
-          <p className="text-center text-lg text-gray-600">در حال بارگذاری...</p>
+          <Loader/>
         ) : error ? (
           <p className="text-center text-lg text-red-500">{error}</p>
         ) : filteredProducts.length > 0 ? (

@@ -7,6 +7,7 @@ import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 import ShowSwal from "../../../../Components/ShowSwal/ShowSwal";
 import AddressFormModal from "../../../../Components/Portal/AddressFormModal";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
+import Loader from "../../../../Components/Loader/Loader";
 
 export default function UserAddresses() {
   const { userAddresses, loading, error, handleRefreshKey } = useUserAddresses();
@@ -17,7 +18,7 @@ export default function UserAddresses() {
 
   if (loading)
     return (
-      <p className="text-center text-gray-600 font-medium">در حال بارگذاری...</p>
+      <Loader/>
     );
 
   if (error)

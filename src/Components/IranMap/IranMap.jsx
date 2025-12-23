@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Map, Marker, Popup } from 'react-map-gl';
 import '@fontsource/vazirmatn'; 
-
+import Loader from '../Loader/Loader';
 function MapPicker({ onAddressChange }) {
   const [viewport, setViewport] = useState({
     latitude: 35.6892,
@@ -84,7 +84,7 @@ function MapPicker({ onAddressChange }) {
       {address && (
         <div style={{ marginTop: '10px' }}>
           <h3>آدرس انتخاب‌شده:</h3>
-          <p>{address || 'در حال بارگذاری...'}</p>
+          <p>{address || <Loader/>}</p>
           <button
             onClick={() => {
               alert(`آدرس ذخیره شد: ${address}`);

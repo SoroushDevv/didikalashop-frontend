@@ -15,6 +15,7 @@ import { styled } from "@mui/material/styles";
 import api from "../../api/axios";
 import useProductCategories from "../../Hooks/useAllCategories";
 import {useCart} from "./../../Contexts/CartContext"
+import Loader from "../../Components/Loader/Loader";
 
 
 
@@ -151,7 +152,7 @@ export default function SearchResults({ sorting }) {
           {category && category !== "all" ? `، دسته‌بندی: ${category}` : ""}
         </Typography>
         {loading ? (
-          <Typography className="text-center">در حال بارگذاری...</Typography>
+          <Loader/>
         ) : error ? (
           <Typography className="text-center text-danger">{error}</Typography>
         ) : filteredProducts.length > 0 ? (

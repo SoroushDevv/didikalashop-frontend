@@ -5,6 +5,7 @@ import { CheckCircle } from 'lucide-react';
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import { useCart } from "../../../../Contexts/CartContext";
 import useUserAddresses from "./../../../../Hooks/useUserAddresses"
+import Loader from "../../../../Components/Loader/Loader";
 
 
 export default function CompletePayment() {
@@ -64,7 +65,7 @@ export default function CompletePayment() {
     }
   }, [order]);
 
-  if (loading || !isReady) return <p className="text-center p-8 text-lg font-bold text-gray-700">در حال بارگذاری...</p>;
+  if (loading || !isReady) return <Loader/>;
   if (error) return <p className="text-center p-8 text-red-600 font-bold">خطا در دریافت اطلاعات کاربر</p>;
 
   return (

@@ -2,6 +2,7 @@ import React from "react";
 import { CircularProgress } from "@mui/material";
 import { useCurrentUser } from "../../../../Hooks/useCurrentUser";
 import useUserOrders from "./../../../../Hooks/useUserOrders";
+import Loader from "../../../../Components/Loader/Loader";
 
 export default function ProfileFirstPageContent() {
   const { currentUser } = useCurrentUser();
@@ -21,7 +22,7 @@ export default function ProfileFirstPageContent() {
         <h2 className="text-lg font-semibold text-brand-secondary">سفارش‌های من</h2>
         <span className="text-sm text-gray-medium">
           {ordersLoading
-            ? "در حال بارگذاری..."
+            ? (<Loader />)
             : ordersError
             ? "خطا در دریافت سفارش‌ها"
             : `${userOrders.length} سفارش`}

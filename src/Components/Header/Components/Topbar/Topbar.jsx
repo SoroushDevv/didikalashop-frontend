@@ -13,6 +13,7 @@ import { removeAuthToken } from "../../../../Utils/AuthUtils";
 import { removeLocalStorage, setLocalStorage } from "../../../../Utils/StorageUtils";
 import useAllProducts from "../../../../Hooks/useAllProducts";
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import Loader from "../../../Loader/Loader";
 
 export default function Topbar({ isAuth, onTopbarHeightChange }) {
 
@@ -129,7 +130,7 @@ useEffect(() => {
                   <>
                     <div className="search-result absolute top-full right-0 left-0 bg-white border border-solid border-gray-500 rounded-md mt-1 py-1 px-2 z-50">
                       {loading ? (
-                        <p className="text-center">در حال بارگذاری...</p>
+                        <Loader/>
                       ) : error ? (
                         <p className="text-center text-danger">{error}</p>
                       ) : searchResults.length > 0 ? (

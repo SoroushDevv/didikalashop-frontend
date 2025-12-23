@@ -6,6 +6,7 @@ import ShowSwal from "../../Components/ShowSwal/ShowSwal";
 import CheckoutSummary from "../../Components/CheckoutSummary/CheckoutSummary";
 import { useCart } from "../../Contexts/CartContext";
 import ErrorMessage from "./../ErrorMessage/ErrorMessage";
+import Loader from "../../Components/Loader/Loader";
 
 const colorMap = {
   مشکی: "#000000",
@@ -122,7 +123,7 @@ export default function Cart() {
   };
 
   if (loading)
-    return <div className="text-center py-6 text-gray-500">در حال بارگذاری...</div>;
+    return <Loader/>;
   if (error)
     return <div className="text-center text-red-600 py-6">خطا: {error}</div>;
 

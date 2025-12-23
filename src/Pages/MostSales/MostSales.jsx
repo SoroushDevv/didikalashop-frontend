@@ -4,7 +4,7 @@ import useAllProducts from "./../../Hooks/useAllProducts";
 import { useCart } from "./../../Contexts/CartContext"
 import useAllCategories from "./../../Hooks/useAllCategories";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-
+import Loader from "../../Components/Loader/Loader";
 const ProductRating = ({ value }) => {
   const fullStars = Math.floor(value);
   const emptyStars = 5 - fullStars;
@@ -51,7 +51,7 @@ export default function MostSales({ sorting }) {
         </h2>
 
         {loading ? (
-          <div className="text-center text-indigo-600 font-semibold">در حال بارگذاری...</div>
+          <Loader />
         ) : error ? (
           <div className="text-center text-red-500">{error}</div>
         ) : topSellingItems.length > 0 ? (

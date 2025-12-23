@@ -1,4 +1,5 @@
 import CommentBox from "../../../../Components/CommentBox/CommentBox";
+import Loader from "../../../../Components/Loader/Loader";
 import useUserComments from "../../../../Hooks/useUserComments";
 import ErrorMessage from "../../../ErrorMessage/ErrorMessage";
 
@@ -6,7 +7,7 @@ export default function UserComments() {
   const { userComments, loading, error } = useUserComments();
 
   if (loading)
-    return <p className="text-center text-gray-600">در حال بارگذاری...</p>;
+    return <Loader/>;
   if (error)
     return <p className="text-center text-red-500">خطا در بارگذاری: {error}</p>;
 

@@ -4,6 +4,7 @@ import useUserCart from "./../../../../Hooks/useUserCart";
 import Portal from "../../../../Components/Portal/Portal";
 import EditInfoModal from "./../../../../Components/Modal/EditInfoModal/EditInfoModal";
 import { Pencil } from "lucide-react";
+import Loader from "../../../../Components/Loader/Loader";
 
 export default function UserInfo() {
   const { currentUser, loading, error, refreshData } = useCurrentUser();
@@ -11,7 +12,7 @@ export default function UserInfo() {
 
   const [showModal, setShowModal] = useState(false);
 
-  if (loading) return <p className="text-gray-500">در حال بارگذاری...</p>;
+  if (loading) return <Loader/>;
   if (error) return <p className="text-red-500">خطا در دریافت اطلاعات کاربر</p>;
   if (!currentUser) return <p className="text-gray-600">کاربر یافت نشد</p>;
 

@@ -9,6 +9,7 @@ import ShowSwal from '../../Components/ShowSwal/ShowSwal';
 import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import { useCart } from './../../Contexts/CartContext';
 import { v4 as uuidv4 } from 'uuid';
+import Loader from '../../Components/Loader/Loader';
 
 const colorMap = {
   'مشکی': '#000000',
@@ -156,7 +157,7 @@ export default function SingleProduct() {
     }
   };
 
-  if (loading || productsLoading) return <div className="p-4 text-center w-full h-svh">در حال بارگذاری...</div>;
+  if (loading || productsLoading) return <Loader/>;
   if (!product) return <div className="p-4 text-center">محصول یافت نشد</div>;
 
   const isInCart = order?.items?.some(

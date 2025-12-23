@@ -13,6 +13,7 @@ import ShowSwal from '../../Components/ShowSwal/ShowSwal'
 import api from '../../api/axios'
 import { getAuthToken } from '../../Utils/AuthUtils'
 import { useCart } from '../../Contexts/CartContext';
+import Loader from '../../Components/Loader/Loader'
 
 const StyledButton = styled(Button)(({ theme }) => ({
     borderBottom: `2px solid ${theme.palette.primary.main}`,
@@ -114,7 +115,7 @@ export default function Shipping() {
     }
 
     if (loading) {
-        return <div>در حال بارگذاری اطلاعات کاربر...</div>;
+        return <Loader/>;
     }
 
     if (error) {

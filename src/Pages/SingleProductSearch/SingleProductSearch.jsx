@@ -18,6 +18,7 @@ import ShowSwal from '../../Components/ShowSwal/ShowSwal';
 import { useCurrentUser } from '../../Hooks/useCurrentUser';
 import { useCart } from './../../Contexts/CartContext';
 import { v4 as uuidv4 } from 'uuid';
+import Loader from '../../Components/Loader/Loader';
 
 const colorMap = {
   'مشکی': '#000000',
@@ -180,7 +181,7 @@ export default function SingleProduct() {
     }
   };
 
-  if (loading || productsLoading) return <Typography>در حال بارگذاری...</Typography>;
+  if (loading || productsLoading) return <Loader/>;
   if (!product) return <Typography>محصول یافت نشد</Typography>;
 
   const isInCart = order?.items?.some(

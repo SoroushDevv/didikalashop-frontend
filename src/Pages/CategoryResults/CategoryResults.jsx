@@ -12,6 +12,7 @@ import { useCart } from "./../../Contexts/CartContext"
 import useAllCategories from "./../../Hooks/useAllCategories";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import StarRating from "./../../Components/Rating/StarRating"
+import Loader from "../../Components/Loader/Loader";
 
 const ProductCard = styled(Card)(({ theme }) => ({
   minWidth: 200,
@@ -181,7 +182,7 @@ export default function CategoryResults({ sorting }) {
       </div>
 
       {loading ? (
-        <p className="text-center text-gray-600">در حال بارگذاری...</p>
+        <Loader/>
       ) : error ? (
         <p className="text-center text-red-600">{error}</p>
       ) : filteredProducts.length > 0 ? (
